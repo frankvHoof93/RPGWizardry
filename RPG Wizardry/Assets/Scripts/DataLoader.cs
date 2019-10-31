@@ -44,10 +44,7 @@ public class DataLoader : MonoBehaviour
             float[] imgData = data.GetRow(i);
             
             Texture2D imgTex = (Texture2D)img.mainTexture;
-            // Clear Image
-            for (int x = 0; x < imgTex.width; x++)
-                for (int y = 0; y < imgTex.height; y++)
-                    imgTex.SetPixel(x, y, Color.white);
+            ClearTexture(imgTex);
 
             // Loop across data for chromosome
             for (int j = 0; j < imgData.Length; j++)
@@ -57,5 +54,19 @@ public class DataLoader : MonoBehaviour
             }
             imgTex.Apply();
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        for (int i = 0; i < images.Count; i++)
+            ClearTexture((Texture2D)images[i].mainTexture);
+    }
+
+    private void ClearTexture(Texture2D tex)
+    {
+        for (int x = 0; x < tex.width; x++)
+            for (int y = 0; y < tex.height; y++)
+                tex.SetPixel(x, y, Color.white);
+        tex.Apply();
     }
 }
