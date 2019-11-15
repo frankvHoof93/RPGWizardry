@@ -41,7 +41,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    ///collects unity input while in gameplay state
+    /// <summary>
+    /// collects unity input while in gameplay state
+    /// </summary>
     private void MovementInputs()
     {
         //collect movement input, multiply for effectiveness
@@ -88,7 +90,9 @@ public class InputManager : MonoBehaviour
     }
 }
 
-///enum for facing the right direction
+/// <summary>
+/// enum for facing the right direction
+/// </summary>
 public enum WalkDirection
 {
     East = 0,
@@ -97,7 +101,9 @@ public enum WalkDirection
     South = 3
 }
 
-///enum for switching game modes easily
+/// <summary>
+/// enum for switching game modes easily
+/// </summary>
 public enum GameState
 {
     menu,

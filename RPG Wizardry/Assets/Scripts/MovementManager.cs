@@ -24,7 +24,10 @@ public class MovementManager : MonoBehaviour
         Movement(inputMovement);
     }
 
-    ///move character
+    /// <summary>
+    /// move character based on vector 3 input
+    /// </summary>
+    /// <param name="movement">Movement input data in vector3 format</param>
     private void Movement(Vector3 movement)
     {
         //send values to the animator so it can decide what animation to show
