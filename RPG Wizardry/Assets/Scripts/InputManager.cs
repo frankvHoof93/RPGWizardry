@@ -5,13 +5,53 @@ using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
-    Image draggedImage;
-    Vector3 mousePos;
+    private MovementManager movementManager;
 
-    public GraphicRaycaster caster;
-    public EventSystem eventSystem;
+    //serialized for easy inspector switching
+    [SerializeField]
+    private GameState gameState = GameState.gameplay;
+    public int MovementMultiplier = 1;
 
+    private Image draggedImage;
+    private Vector3 mousePos;
+
+    [SerializeField]
+    private GraphicRaycaster caster;
+    [SerializeField]
+    private EventSystem eventSystem;
+
+    //public delegate void OnMovement(Vector3 movement);
+    //public static OnMovement onMovement; 
+
+    private void Start()
+    {
+        movementManager = GetComponent<MovementManager>();
+    }
+
+    //checks inputs based on gamestate
     private void Update()
+    {
+        if (gameState == GameState.gameplay)
+        {
+            MovementInputs();
+        }
+        else if (gameState == GameState.menu)
+        {
+            MouseInputs();
+        }
+    }
+
+    //collects unity input while in gameplay state
+    private void MovementInputs()
+    {
+        //collect movement input, multiply for effectiveness
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
+            Input.GetAxis("Vertical") * MovementMultiplier, 0.0f);
+        //send to movementmanager
+        movementManager.inputMovement = movement;
+    }
+
+    private void MouseInputs()
     {
         // Click
         if (Input.GetMouseButtonDown(0))
@@ -46,4 +86,20 @@ public class InputManager : MonoBehaviour
             draggedImage = null;
         }
     }
+}
+
+//enum for facing the right direction
+public enum WalkDirection
+{
+    East = 0,
+    North = 1,
+    West = 2,
+    South = 3
+}
+
+//enum for switching game modes easily
+public enum GameState
+{
+    menu,
+    gameplay
 }
