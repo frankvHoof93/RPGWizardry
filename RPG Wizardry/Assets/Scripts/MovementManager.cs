@@ -24,7 +24,7 @@ public class MovementManager : MonoBehaviour
         Movement(inputMovement);
     }
 
-    //move character
+    ///move character
     private void Movement(Vector3 movement)
     {
         //send values to the animator so it can decide what animation to show
