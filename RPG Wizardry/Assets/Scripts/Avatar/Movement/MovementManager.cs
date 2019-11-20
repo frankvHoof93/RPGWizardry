@@ -33,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(inputManager.InputMovement);
+            Movement(inputManager.MovementData);
         }
         #endregion
 
