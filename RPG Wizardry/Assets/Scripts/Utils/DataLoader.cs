@@ -73,4 +73,4 @@ namespace nl.SWEG.RPGWizardry.Utils
             tex.Apply();
         }
     }
-}
+};
