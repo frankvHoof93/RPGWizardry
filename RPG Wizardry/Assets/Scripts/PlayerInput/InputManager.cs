@@ -8,6 +8,12 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
     {
         #region Variables
         #region Public
+
+        //outgoing movement values
+        public Vector3 InputMovement { get; private set; }
+        //outgoing aiming values
+        public Vector3 InputAiming { get; private set; }
+
         public int MovementMultiplier = 1;
         #endregion
 
@@ -15,20 +21,16 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         //serialized for easy inspector switching (DEBUG)
         [SerializeField]
         private GameState gameState = GameState.GamePlay;
-        private MovementManager movementManager;
+        /// <summary>
+        /// ControlScheme for Input
+        /// </summary>
+        [SerializeField]
+        private ControlScheme controlScheme;
         #endregion
         #endregion
 
         #region Methods
         #region Unity
-        /// <summary>
-        /// Grabs reference to MovementManager
-        /// </summary>
-        private void Start()
-        {
-            movementManager = GetComponent<MovementManager>();
-        }
-
         /// <summary>
         /// Checks inputs based on gamestate
         /// </summary>
@@ -38,6 +40,7 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
             {
                 case GameState.GamePlay:
                     MovementInputs();
+                    AimingInputs();
                     break;
                 default:
                     break;
@@ -52,10 +55,16 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         private void MovementInputs()
         {
             //collect movement input, multiply for effectiveness
-            Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
+            InputMovement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
                 Input.GetAxis("Vertical") * MovementMultiplier, 0.0f);
-            //send to movementmanager
-            movementManager.movementInput = movement;
+        }
+
+
+        private void AimingInputs()
+        {
+            //collect aiming input
+            InputAiming = new Vector3(Input.GetAxis("RightX"),
+                Input.GetAxis("RightY"), 0.0f);
         }
         #endregion
         #endregion

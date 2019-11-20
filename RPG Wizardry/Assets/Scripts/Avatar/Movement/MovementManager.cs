@@ -1,19 +1,20 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.RPGWizardry.PlayerInput;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Movement
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Animator), typeof(InputManager))]
     public class MovementManager : MonoBehaviour
     {
         #region Variables
         /// <summary>
-        /// Incoming movement values from the inputmanager
-        /// </summary>
-        public Vector3 movementInput;
-        /// <summary>
         /// Animator for Avatar
         /// </summary>
         private Animator animator;
+        /// <summary>
+        /// InputManager for Movement
+        /// </summary>
+        private InputManager inputManager;
         #endregion
 
         #region Methods
@@ -24,6 +25,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Movement
         private void Start()
         {
             animator = GetComponent<Animator>();
+            inputManager = GetComponent<InputManager>();
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(movementInput);
+            Movement(inputManager.InputMovement);
         }
         #endregion
 
