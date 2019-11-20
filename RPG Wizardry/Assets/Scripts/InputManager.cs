@@ -10,7 +10,15 @@ public class InputManager : MonoBehaviour
     //serialized for easy inspector switching
     [SerializeField]
     private GameState gameState = GameState.gameplay;
+    [SerializeField]
+    private ControlScheme controlScheme;
     public int MovementMultiplier = 1;
+
+    //outgoing movement values
+    public Vector3 InputMovement { get; private set; }
+    //outgoing aiming values
+    public Vector3 InputAiming { get; private set; }
+    public bool Abutton;
 
     private Image draggedImage;
     private Vector3 mousePos;
@@ -34,6 +42,7 @@ public class InputManager : MonoBehaviour
         if (gameState == GameState.gameplay)
         {
             MovementInputs();
+            AimingInputs();
         }
         else if (gameState == GameState.menu)
         {
@@ -46,11 +55,17 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private void MovementInputs()
     {
-        //collect movement input, multiply for effectiveness
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
+        //collect movement input, multiply for effectiveness,  save for movementmanager
+        InputMovement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
             Input.GetAxis("Vertical") * MovementMultiplier, 0.0f);
-        //send to movementmanager
-        movementManager.inputMovement = movement;
+    }
+
+    private void AimingInputs()
+    {
+        //collect aiming input
+        InputAiming = new Vector3(Input.GetAxis("RightX"),
+            Input.GetAxis("RightY"), 0.0f);
+        Abutton = Input.GetButton("Fire1");
     }
 
     private void MouseInputs()
@@ -108,4 +123,10 @@ public enum GameState
 {
     menu,
     gameplay
+}
+
+public enum ControlScheme
+{
+    controller,
+    keyboard
 }

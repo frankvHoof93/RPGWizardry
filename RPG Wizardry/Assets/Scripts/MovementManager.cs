@@ -7,21 +7,21 @@ public class MovementManager : MonoBehaviour
     [SerializeField]
     private WalkDirection lastDirection;
     private Animator animator;
-
-    //incoming movement values from the inputmanager
-    public Vector3 inputMovement;
+    private InputManager inputManager;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        inputManager = GetComponent<InputManager>();
         //InputManager.onMovement += Movement;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement(inputMovement);
+        Movement(inputManager.InputMovement);
     }
 
     /// <summary>
