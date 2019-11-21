@@ -4,17 +4,21 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.PlayerInput
 {
+    
     public class InputManager : MonoBehaviour
     {
         #region Variables
         #region Public
+        
 
         //outgoing movement values
-        public Vector3 InputMovement { get; private set; }
+        public Vector3 MovementData { get; private set; }
         //outgoing aiming values
-        public Vector3 InputAiming { get; private set; }
+        public Vector3 AimingData { get; private set; }
 
-        public int MovementMultiplier = 1;
+        //setting to increase movement speed
+        [SerializeField]
+        private int MovementMultiplier = 1;
         #endregion
 
         #region Private
@@ -50,21 +54,35 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
 
         #region Private
         /// <summary>
-        /// collects unity input while in gameplay state
+        /// collects unity movement input while in gameplay state
         /// </summary>
         private void MovementInputs()
         {
             //collect movement input, multiply for effectiveness
-            InputMovement = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
+            //same for keyboard and controller
+            MovementData = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
                 Input.GetAxis("Vertical") * MovementMultiplier, 0.0f);
         }
 
-
+        /// <summary>
+        /// collects unity aiming input while in gameplay state
+        /// </summary>
         private void AimingInputs()
         {
-            //collect aiming input
-            InputAiming = new Vector3(Input.GetAxis("RightX"),
-                Input.GetAxis("RightY"), 0.0f);
+            //on controller, use the right stick
+            if (controlScheme == ControlScheme.Controller)
+            {
+                AimingData = new Vector3(Input.GetAxis("RightX"),
+                    Input.GetAxis("RightY"), 0.0f);
+
+            }
+            //on keyboard, use the mouse
+            else if (controlScheme == ControlScheme.Keyboard)
+            {
+                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+                Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                AimingData = lookPos - transform.position;
+            }
         }
         #endregion
         #endregion
