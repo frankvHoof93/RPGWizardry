@@ -24,7 +24,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// Called when Collectable is Collected
         /// </summary>
         /// <param name="target">Inventory-Target for Collection</param>
-        protected abstract void OnCollect(PlayerInventory target);
+        protected abstract bool OnCollect(PlayerInventory target);
 
         /// <summary>
         /// Checks collision. Calls OnCollect, then Destroys GameObject if collision was valid
@@ -37,8 +37,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
                 PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
                 if (inv == null)
                     throw new InvalidOperationException("Target has no Inventory");
-                OnCollect(inv);
-                Destroy(gameObject);
+                if (OnCollect(inv))
+                    Destroy(gameObject);
             }
         }
         #endregion

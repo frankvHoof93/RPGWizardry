@@ -38,11 +38,14 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// Heals Player
         /// </summary>
         /// <param name="amount">Amount of Healing to inflict</param>
-        public void Heal(ushort amount)
+        public bool Heal(ushort amount)
         {
+            if (Health == maxHealth)
+                return false;
             Health += amount;
             if (Health > maxHealth)
                 Health = maxHealth;
+            return true;
         }
         #endregion
         #endregion

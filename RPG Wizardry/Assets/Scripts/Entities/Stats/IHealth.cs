@@ -3,7 +3,7 @@
     public interface IHealth
     {
         ushort Health { get; }
-        void Heal(ushort amount);
+        bool Heal(ushort amount);
         void Damage(ushort amount);
     }
 }
