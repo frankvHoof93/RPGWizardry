@@ -16,7 +16,9 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         //outgoing aiming values
         public Vector3 AimingData { get; private set; }
 
-        public int MovementMultiplier = 1;
+        //setting to increase movement speed
+        [SerializeField]
+        private int MovementMultiplier = 1;
         #endregion
 
         #region Private

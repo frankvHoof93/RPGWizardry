@@ -12,7 +12,8 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// Transform of the book's pivot
         /// </summary>
-        public Transform BookPivot;
+        [SerializeField]
+        private Transform BookPivot;
         /// <summary>
         /// InputManager for Aiming
         /// </summary>
