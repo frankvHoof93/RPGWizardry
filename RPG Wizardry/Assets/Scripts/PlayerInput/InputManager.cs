@@ -1,5 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar.Movement;
-using nl.SWEG.RPGWizardry.GameLogic;
+﻿using nl.SWEG.RPGWizardry.GameLogic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.PlayerInput
