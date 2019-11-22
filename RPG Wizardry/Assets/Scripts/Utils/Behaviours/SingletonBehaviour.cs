@@ -50,7 +50,8 @@ namespace nl.SWEG.RPGWizardry.Utils.Behaviours
         #endregion
         #endregion
 
-        #region Instance/// <summary>
+        #region Instance
+        /// <summary>
         /// Whether this Singleton has a Root-Object. If true, root-Object will be added to DontDestroyOnLoad instead
         /// </summary>
         [SerializeField]
