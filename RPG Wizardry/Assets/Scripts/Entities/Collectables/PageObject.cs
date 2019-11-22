@@ -20,10 +20,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// Adds Page to the Inventory, then Destroys this Object
         /// </summary>
         /// <param name="target">Inventory to Add to</param>
-        protected override void OnCollect(PlayerInventory target)
+        protected override bool OnCollect(PlayerInventory target)
         {
-            target.AddPage(page);
-            Destroy(gameObject);
+            return target.AddPage(page);
         }
         #endregion
     }
