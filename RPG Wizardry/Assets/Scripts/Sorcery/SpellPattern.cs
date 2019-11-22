@@ -8,7 +8,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
     {
         line,
         cone,
-        self
+        circle
     }
 }
 
