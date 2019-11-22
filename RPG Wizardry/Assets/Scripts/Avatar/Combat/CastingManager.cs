@@ -73,7 +73,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// </summary>
         /// <param name="coolSeconds">Seconds the cooldown should remain active</param>
         /// <returns></returns>
-        IEnumerator Cooldown(int coolSeconds)
+        IEnumerator Cooldown(float coolSeconds)
         {
             cooldown = true;
             yield return new WaitForSeconds(coolSeconds);
