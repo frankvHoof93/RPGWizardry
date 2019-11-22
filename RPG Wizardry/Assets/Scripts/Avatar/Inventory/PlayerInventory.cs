@@ -14,11 +14,11 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// <summary>
         /// Amount of Dust in Inventory
         /// </summary>
-        public int Dust { get; private set; }
+        public uint Dust { get; private set; }
         /// <summary>
         /// Amount of Gold in Inventory
         /// </summary>
-        public int Gold { get; private set; }
+        public uint Gold { get; private set; }
         /// <summary>
         /// Pages in Inventory
         /// </summary>
@@ -89,20 +89,16 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// Adds Dust to Inventory
         /// </summary>
         /// <param name="amount">Amount of Dust to add (> 0)</param>
-        public void AddDust(int amount)
+        public void AddDust(uint amount)
         {
-            if (amount < 0)
-                throw new ArgumentException("Invalid amount", "amount");
             Dust += amount;
         }
         /// <summary>
         /// Adds Gold to Inventory
         /// </summary>
         /// <param name="amount">Amount of Gold to add (> 0)</param>
-        public void AddGold(int amount)
+        public void AddGold(uint amount)
         {
-            if (amount < 0)
-                throw new ArgumentException("Invalid amount", "amount");
             Gold += amount;
         }
         #endregion
