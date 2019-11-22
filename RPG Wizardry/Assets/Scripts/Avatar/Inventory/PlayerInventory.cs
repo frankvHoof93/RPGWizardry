@@ -76,10 +76,14 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// Adds Page to Inventory, if it does not exist in Inventory yet
         /// </summary>
         /// <param name="page">Page to add</param>
-        public void AddPage(SpellPage page)
+        public bool AddPage(SpellPage page)
         {
             if (page != null && !pages.Contains(page))
+            {
                 pages.Add(page);
+                return true;
+            }
+            else return false;
         }
         /// <summary>
         /// Adds Dust to Inventory

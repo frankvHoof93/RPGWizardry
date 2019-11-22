@@ -1,9 +1,11 @@
 ﻿namespace nl.SWEG.RPGWizardry.Entities.Stats
 {
+    public delegate void OnHealthChange(ushort newHealth, ushort maxHealth, short change);
+
     public interface IHealth
     {
         ushort Health { get; }
-        void Heal(ushort amount);
+        bool Heal(ushort amount);
         void Damage(ushort amount);
     }
 }
