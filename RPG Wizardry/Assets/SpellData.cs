@@ -6,10 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SpellData", menuName = "ScriptableObjects/SpellData", order = 1)]
 public class SpellData : ScriptableObject
 {
-    public string spellName;
-    public SpellPattern spellPattern;
-    public int spellRange;
-    public int spellDamage;
-    public Element spellElement;
-    public int spellCooldown;
+    public string Name => spellName;
+    public SpellPattern Pattern => spellPattern;
+    public int Range => spellRange;
+    public int Damage => spellDamage;
+    public Element Element => spellElement;
+    public int Cooldown => spellCooldown;
+
+    [SerializeField]
+    private string spellName;
+    [SerializeField]
+    private SpellPattern spellPattern;
+    [SerializeField]
+    private int spellRange;
+    [SerializeField]
+    private int spellDamage;
+    [SerializeField]
+    private Element spellElement;
+    [SerializeField]
+    private int spellCooldown;
 }
