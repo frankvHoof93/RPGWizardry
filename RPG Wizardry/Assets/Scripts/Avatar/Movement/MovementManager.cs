@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Movement
 {
-    [RequireComponent(typeof(Animator), typeof(InputManager))]
+    [RequireComponent(typeof(Animator), typeof(InputState))]
     public class MovementManager : MonoBehaviour
     {
         #region Variables
@@ -14,18 +14,18 @@ namespace nl.SWEG.RPGWizardry.Avatar.Movement
         /// <summary>
         /// InputManager for Movement
         /// </summary>
-        private InputManager inputManager;
+        private InputState inputState;
         #endregion
 
         #region Methods
         #region Unity
         /// <summary>
-        /// Grabs Reference to Animator
+        /// Grabs Reference to Animator and InputState
         /// </summary>
         private void Start()
         {
             animator = GetComponent<Animator>();
-            inputManager = GetComponent<InputManager>();
+            inputState = GetComponent<InputState>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(inputManager.MovementData);
+            Movement(inputState.MovementData);
         }
         #endregion
 

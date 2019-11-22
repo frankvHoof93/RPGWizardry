@@ -3,24 +3,18 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.PlayerInput
 {
-    
+    [RequireComponent(typeof(InputState))]
     public class InputManager : MonoBehaviour
     {
         #region Variables
-        #region Public
-        
 
-        //outgoing movement values
-        public Vector3 MovementData { get; private set; }
-        //outgoing aiming values
-        public Vector3 AimingData { get; private set; }
+        #region Private
+        private InputState inputState;
 
         //setting to increase movement speed
         [SerializeField]
-        private int MovementMultiplier = 1;
-        #endregion
+        private int movementMultiplier = 1;
 
-        #region Private
         //serialized for easy inspector switching (DEBUG)
         [SerializeField]
         private GameState gameState = GameState.GamePlay;
@@ -34,6 +28,14 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
 
         #region Methods
         #region Unity
+        /// <summary>
+        /// Gets inputstate component reference
+        /// </summary>
+        private void Start()
+        {
+            inputState = GetComponent<InputState>();
+        }
+
         /// <summary>
         /// Checks inputs based on gamestate
         /// </summary>
@@ -53,25 +55,25 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
 
         #region Private
         /// <summary>
-        /// collects unity movement input while in gameplay state
+        /// collects unity movement input while in gameplay state and saves in inputstate
         /// </summary>
         private void MovementInputs()
         {
             //collect movement input, multiply for effectiveness
             //same for keyboard and controller
-            MovementData = new Vector3(Input.GetAxis("Horizontal") * MovementMultiplier,
-                Input.GetAxis("Vertical") * MovementMultiplier, 0.0f);
+            inputState.MovementData = new Vector3(Input.GetAxis("Horizontal") * movementMultiplier,
+                Input.GetAxis("Vertical") * movementMultiplier, 0.0f);
         }
 
         /// <summary>
-        /// collects unity aiming input while in gameplay state
+        /// collects unity aiming input while in gameplay state and saves in inputstate
         /// </summary>
         private void AimingInputs()
         {
             //on controller, use the right stick
             if (controlScheme == ControlScheme.Controller)
             {
-                AimingData = new Vector3(Input.GetAxis("RightX"),
+                inputState.AimingData = new Vector3(Input.GetAxis("RightX"),
                     Input.GetAxis("RightY"), 0.0f);
 
             }
@@ -80,7 +82,7 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
             {
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-                AimingData = lookPos - transform.position;
+                inputState.AimingData = lookPos - transform.position;
             }
         }
         #endregion
