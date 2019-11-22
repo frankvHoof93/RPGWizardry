@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Combat
 {
-    [RequireComponent(typeof(InputManager))]
+    [RequireComponent(typeof(InputState))]
     public class AimingManager : MonoBehaviour
     {
         #region Variables
@@ -17,17 +17,17 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// InputManager for Aiming
         /// </summary>
-        private InputManager inputManager;
+        private InputState inputState;
         #endregion
 
         #region Methods
         #region Unity
         /// <summary>
-        /// Grabs inputmanager for aiming
+        /// Grabs inputstate reference for aiming
         /// </summary>
         void Start()
         {
-            inputManager = GetComponent<InputManager>();
+            inputState = GetComponent<InputState>();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// </summary>
         void PivotToMouse()
         {
-            Vector3 lookPos = inputManager.AimingData;
+            Vector3 lookPos = inputState.AimingData;
             float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
             BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
