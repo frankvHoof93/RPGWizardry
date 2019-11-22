@@ -14,6 +14,8 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         public Vector3 MovementData;
         //outgoing aiming values
         public Vector3 AimingData;
+        //outgoing button values
+        public bool Cast1;
 
         #endregion
         #endregion
