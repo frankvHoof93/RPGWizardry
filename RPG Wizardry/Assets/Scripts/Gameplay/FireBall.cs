@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FireBall : Projectile
 {
-    protected override void Effect(Collision collision)
+    protected override void Effect(Collider2D collision)
     {
         //EXPLODE
+        Debug.Log("Fireball explode");
         base.Effect(collision);
     }
 }

@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour {
     /// When the spell comes in contact with something
     /// </summary>
     /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Effect(collision);
     }
@@ -47,9 +47,10 @@ public class Projectile : MonoBehaviour {
     /// Applies the spell's effect to the colliding object (usually damage)
     /// </summary>
     /// <param name="collision"></param>
-    protected virtual void Effect(Collision collision)
+    protected virtual void Effect(Collider2D collision)
     {
         //oh man i can feel the effect
+        Destroy(gameObject);
     }
     #endregion
     #endregion
