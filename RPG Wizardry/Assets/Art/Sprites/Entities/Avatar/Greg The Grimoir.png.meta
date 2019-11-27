@@ -20,6 +20,24 @@ TextureImporter:
   - first:
       213: -4417360173158902809
     second: BookSouth2
+  - first:
+      213: 6654431361293529925
+    second: BookEast0
+  - first:
+      213: 9081833873447560677
+    second: BookEast1
+  - first:
+      213: -4910348102943750720
+    second: BookEast2
+  - first:
+      213: -2646672659511584251
+    second: BookWest0
+  - first:
+      213: -7393522079747286245
+    second: BookWest1
+  - first:
+      213: 2303076361904473994
+    second: BookWest2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -108,7 +126,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 36
+        y: 107
         width: 32
         height: 35
       alignment: 2
@@ -129,7 +147,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 38
-        y: 36
+        y: 107
         width: 32
         height: 35
       alignment: 2
@@ -150,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 74
-        y: 36
+        y: 107
         width: 32
         height: 35
       alignment: 2
@@ -171,7 +189,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 2
+        y: 72
         width: 32
         height: 33
       alignment: 2
@@ -192,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 38
-        y: 2
+        y: 72
         width: 32
         height: 33
       alignment: 2
@@ -213,7 +231,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 74
-        y: 2
+        y: 72
         width: 32
         height: 33
       alignment: 2
@@ -225,6 +243,132 @@ TextureImporter:
       bones: []
       spriteID: 0a46c77d233894747a1f49d49a45c4e3
       internalID: -4417360173158902809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookEast0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 43
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c082d11096c894c9ccaf65e6cfdb52
+      internalID: 6654431361293529925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookEast1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 43
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b051e38c184214f97746c9daed74f8
+      internalID: 9081833873447560677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookEast2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 43
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2ef58ab3f8eae4fbbb3c18b9fbee3d
+      internalID: -4910348102943750720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookWest0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 7
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddbf6a8904ac3314eb5fbd072c9202a9
+      internalID: -2646672659511584251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookWest1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 7
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cfcfc96bf8fe394a8f443707475d998
+      internalID: -7393522079747286245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookWest2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 7
+        width: 34
+        height: 21
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14458c73b94dc4c4b84b58a59e908a19
+      internalID: 2303076361904473994
       vertices: []
       indices: 
       edges: []
