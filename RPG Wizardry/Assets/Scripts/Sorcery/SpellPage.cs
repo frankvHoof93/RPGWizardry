@@ -25,6 +25,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         {
             Unlocked = true;
         }
+
+        internal uint GetDustCost()
+        {
+            return spell.DustCost;
+        }
         #endregion
     }
 }
