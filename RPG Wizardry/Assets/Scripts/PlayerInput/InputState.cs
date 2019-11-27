@@ -19,7 +19,7 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         /// </summary>
         public Vector3 AimingData;
         /// <summary>
-        /// Outgoing button values: Cast1: left mouse / A button
+        /// Outgoing button values: left mouse / A button
         /// </summary>
         public bool Cast1;
 
