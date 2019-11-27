@@ -11,18 +11,23 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// </summary>
         [SerializeField]
         [Tooltip("Amount of Dust in Pile")]
-        private int Amount = 0;
+        private uint Amount = 0;
         #endregion
 
         #region Methods
+        internal void SetAmount(uint amount)
+        {
+            Amount = amount;
+        }
+
         /// <summary>
         /// Adds Dust to Inventory, then Destroys this Object
         /// </summary>
         /// <param name="target">Inventory to Add to</param>
-        protected override void OnCollect(PlayerInventory target)
+        protected override bool OnCollect(PlayerInventory target)
         {
             target.AddDust(Amount);
-            Destroy(gameObject);
+            return true;
         }
         #endregion
     }

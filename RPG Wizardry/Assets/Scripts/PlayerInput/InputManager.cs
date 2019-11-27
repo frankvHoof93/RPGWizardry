@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.GameLogic;
+﻿using nl.SWEG.RPGWizardry.GameWorld.GameLogic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.PlayerInput

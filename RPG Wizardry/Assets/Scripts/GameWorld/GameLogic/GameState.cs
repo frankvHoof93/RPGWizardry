@@ -1,4 +1,4 @@
-﻿namespace nl.SWEG.RPGWizardry.GameLogic
+﻿namespace nl.SWEG.RPGWizardry.GameWorld.GameLogic
 {
     public enum GameState
     {
