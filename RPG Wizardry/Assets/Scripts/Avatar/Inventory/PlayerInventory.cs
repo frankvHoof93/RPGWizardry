@@ -104,19 +104,22 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         #endregion
         #region Unlock
         /// <summary>
-        /// Unlocks a Page in the Inventory, only if you can pay the costs needed for it.
+        /// Unlocks a Page in the Inventory
         /// </summary>
         /// <param name="page">Page to unlock</param>
         /// <returns></returns>
         public bool UnlockSpell(SpellPage page)
         {
-            if (Dust >= page.GetDustCost())
+             page.UnlockSpell();
+            return page.Unlocked;
+        }
+
+        public void ConsumeDust(SpellPage page)
+        {
+            if(Dust >= page.GetDustCost())
             {
-                page.UnlockSpell();
                 Dust -= page.GetDustCost();
             }
-
-            return page.Unlocked;
         }
         #endregion
         #endregion

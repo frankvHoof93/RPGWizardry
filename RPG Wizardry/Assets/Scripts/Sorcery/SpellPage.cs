@@ -9,6 +9,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// Whether the Spell on this Page has been Unlocked
         /// </summary>
         public bool Unlocked { get; private set; }
+
+        /// <summary>
+        /// The dust cost for the spell to unlock.
+        /// </summary>
+        public uint DustCost { get; private set; }
         /// <summary>
         /// Data for Spell
         /// </summary>
@@ -26,6 +31,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             Unlocked = true;
         }
 
+
+
+        /// <summary>
+        /// Retrievies the Dust cost from the Spell on this Page
+        /// </summary>
+        /// <returns>The Dust cost of the spell</returns>
         internal uint GetDustCost()
         {
             return spell.DustCost;
