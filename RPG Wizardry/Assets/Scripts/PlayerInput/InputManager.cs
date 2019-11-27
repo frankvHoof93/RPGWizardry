@@ -46,6 +46,7 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
                 case GameState.GamePlay:
                     MovementInputs();
                     AimingInputs();
+                    ButtonInputs();
                     break;
                 default:
                     break;
@@ -75,7 +76,7 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
             {
                 inputState.AimingData = new Vector3(Input.GetAxis("RightX"),
                     Input.GetAxis("RightY"), 0.0f);
-
+                
             }
             //on keyboard, use the mouse
             else if (controlScheme == ControlScheme.Keyboard)
@@ -84,6 +85,13 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 inputState.AimingData = lookPos - transform.position;
             }
+        }
+
+        private void ButtonInputs()
+        {
+            //collect button states
+            //same for keyboard and controller
+            inputState.Cast1 = Input.GetButton("Fire1");
         }
         #endregion
         #endregion

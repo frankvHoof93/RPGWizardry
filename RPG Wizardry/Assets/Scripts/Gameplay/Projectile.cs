@@ -4,22 +4,53 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+    #region Variables
+    /// <summary>
+    /// Stats (to be set by a scriptableobject?)
+    /// </summary>
     [SerializeField]
-    GameObject Player;
-    public float horizontal, vertical;
-    private Rigidbody2D rb;
+    private int movementSpeed = 2;
+    [SerializeField]
+    private int range = 2;
+    public float Cooldown = 0.5f;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        Player = transform.parent.gameObject;
-    }
-
-    // Update is called once per frame
+    #region Methods
+    #region Unity
+    /// <summary>
+    /// Move forward based on the subclass' instantiation of Move
+    /// </summary>
     void FixedUpdate()
     {
-        //float angle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg - 90f;
-        //rb.rotation = angle;
+        Move();
     }
+
+    /// <summary>
+    /// When the spell comes in contact with something
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter(Collision collision)
+    {
+        Effect(collision);
+    }
+    #endregion
+    #region Virtual
+    /// <summary>
+    /// Basic movement that can be edited by a subclass
+    /// </summary>
+    protected virtual void Move()
+    {
+        transform.position += transform.up * Time.deltaTime * movementSpeed;
+    }
+
+    /// <summary>
+    /// Applies the spell's effect to the colliding object (usually damage)
+    /// </summary>
+    /// <param name="collision"></param>
+    protected virtual void Effect(Collision collision)
+    {
+        //oh man i can feel the effect
+    }
+    #endregion
+    #endregion
 }
