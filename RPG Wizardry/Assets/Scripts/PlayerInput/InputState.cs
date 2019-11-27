@@ -10,11 +10,17 @@ namespace nl.SWEG.RPGWizardry.PlayerInput
         #region Variables
         #region Public
 
-        //outgoing movement values
+        /// <summary>
+        /// Outgoing movement values: X horizontal, Y vertical, Z depth (render order)
+        /// </summary>
         public Vector3 MovementData;
-        //outgoing aiming values
+        /// <summary>
+        /// Outgoing movement values: essentially location vector 3 of look target
+        /// </summary>
         public Vector3 AimingData;
-        //outgoing button values
+        /// <summary>
+        /// Outgoing button values: Cast1: left mouse / A button
+        /// </summary>
         public bool Cast1;
 
         #endregion

@@ -64,7 +64,10 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <param name="projectile">Projectile of the spell to cast; contains cooldown value</param>
         void SpawnProjectile(Projectile projectile)
         {
+            //spawn projectile at book's location, book's rotation
             Instantiate(projectile.gameObject, spawnLocation.position, spawnLocation.rotation);
+            //start cooldown
+            cooldown = true;
             StartCoroutine(Cooldown(projectile.Cooldown));
         }
 
@@ -75,7 +78,6 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <returns></returns>
         IEnumerator Cooldown(float coolSeconds)
         {
-            cooldown = true;
             yield return new WaitForSeconds(coolSeconds);
             cooldown = false;
 
