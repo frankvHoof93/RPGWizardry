@@ -17,7 +17,6 @@ public class FireBall : Projectile
     protected override void Effect(Collider2D collision)
     {
         //EXPLODE
-        Debug.Log("Fireball explode");
         Instantiate(SplashObject,transform.position,transform.rotation);
         base.Effect(collision);
     }
