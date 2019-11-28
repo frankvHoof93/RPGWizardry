@@ -139,6 +139,8 @@ MonoBehaviour:
   movementSpeed: 5
   range: 2
   Cooldown: 0.5
+  SplashObject: {fileID: 6031568290108856524, guid: b0a893c8b2ed1214c9fcb9380b28e388,
+    type: 3}
 --- !u!61 &-3479705552709553751
 BoxCollider2D:
   m_ObjectHideFlags: 0
