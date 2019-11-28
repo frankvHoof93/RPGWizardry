@@ -48,9 +48,13 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
-            Health -= amount;
-            if (Health <= 0)
+            if (amount >= Health)
                 Die();
+            else
+            {
+                Health -= amount;
+                Debug.Log("Hit By Player. New Health: " + Health);
+            }
         }
         #endregion
 

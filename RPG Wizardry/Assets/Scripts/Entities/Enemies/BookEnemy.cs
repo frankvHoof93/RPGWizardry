@@ -16,6 +16,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         [SerializeField]
         private SpellData spell;
+        [SerializeField]
+        private LayerMask spellCollisionMask;
 
         [SerializeField]
         private float attackAngleMargin = 5f;
@@ -58,6 +60,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         {
             Vector2 fireDir = transform.right;
             Debug.Log("FIRING AT PLAYER");
+            spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
         }
     }
 }

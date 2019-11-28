@@ -13,14 +13,18 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// Prototype projectile; fill this with selected spell later
         /// </summary>
-        public Projectile projectilePrefab;
+        public SpellData CurrentSpell;
         #endregion
+
         #region Private
         /// <summary>
         /// Transform of the object the projectiles need to spawn from
         /// </summary>
         [SerializeField]
         private Transform spawnLocation;
+
+        [SerializeField]
+        private LayerMask targetingMask;
         /// <summary>
         /// Inputstate for getting button states
         /// </summary>
@@ -28,7 +32,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// Cooldown state during which you cannot cast spells
         /// </summary>
-        private bool cooldown = false;
+        private bool cooldown;
         #endregion
         #endregion
 
@@ -51,24 +55,25 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
             {
                 if (!cooldown)
                 {
-                    SpawnProjectile(projectilePrefab);
+                    SpawnProjectile();
                 }
             }
         }
         #endregion
+
         #region Private
 
         /// <summary>
         /// Spawns a projectile, then puts the casting system on cooldown based on the spell
         /// </summary>
         /// <param name="projectile">Projectile of the spell to cast; contains cooldown value</param>
-        void SpawnProjectile(Projectile projectile)
+        private void SpawnProjectile()
         {
-            //spawn projectile at book's location, book's rotation
-            Instantiate(projectile.gameObject, spawnLocation.position, spawnLocation.rotation);
+            //spawn projectile at book's location
+            CurrentSpell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
             //start cooldown
             cooldown = true;
-            StartCoroutine(Cooldown(projectile.Cooldown));
+            StartCoroutine(Cooldown(1f));
         }
 
         /// <summary>

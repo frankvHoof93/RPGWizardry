@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: FireBall
   spellPattern: 0
-  spellRange: 3
-  spellDamage: 3
-  spellElement: 1
+  spellDamage: 25
+  projectileSpeed: 2
+  projectileLifeTime: 2.5
+  spellElement: 0
   spellCooldown: 2
+  projectilePrefab: {fileID: 4998689496432118957, guid: bbbbc478b0354b94a8cd103e117e4f99,
+    type: 3}
