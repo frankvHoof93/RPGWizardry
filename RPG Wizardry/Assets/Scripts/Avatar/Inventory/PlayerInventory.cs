@@ -116,11 +116,12 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
 
         public void ConsumeDust(SpellPage page)
         {
-            if(Dust >= page.GetDustCost())
+            if(Dust >= page.DustCost)
             {
-                Dust -= page.GetDustCost();
+                Dust -= page.DustCost;
             }
         }
+
         #endregion
         #endregion
         #endregion

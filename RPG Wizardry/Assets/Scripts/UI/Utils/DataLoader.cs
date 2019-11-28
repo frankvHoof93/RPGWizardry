@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using nl.SWEG.RPGWizardry.ResearchData;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace nl.SWEG.RPGWizardry.Utils
 
         [SerializeField]
         private List<Image> images;
+
+        private DataSet dataSet;
 
         private readonly float[,] data = new float[,]
         {
@@ -34,6 +37,8 @@ namespace nl.SWEG.RPGWizardry.Utils
 
         private void Start()
         {
+            dataSet = new DataSet();
+            dataSet.Chromosomes = new List<Chromosome>();
             if (data.GetLength(0) != images.Count)
             {
                 Debug.LogError("Invalid Format");
@@ -41,23 +46,36 @@ namespace nl.SWEG.RPGWizardry.Utils
             }
 
             // Loop across chromosomes
-            for (int i = 0; i < data.GetLength(0); i++)
+            for (int i = 0; i < data.GetLength(0) -1; i++)
             {
-                Image img = images[i];
-                float[] imgData = data.GetRow(i);
+                Chromosome chromosome = new Chromosome(images[i], images[i].transform);
+                
+                chromosome.imgData = data.GetRow(i);
 
-                Texture2D imgTex = (Texture2D)img.mainTexture;
+                Texture2D imgTex = (Texture2D)chromosome.image.mainTexture;
                 ClearTexture(imgTex);
 
                 // Loop across data for chromosome
-                for (int j = 0; j < imgData.Length; j++)
+                for (int j = 0; j < chromosome.imgData.Length -1; j++)
                 {
                     // Add Pixel to Img
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(imgData[j] * imgTex.height), Color.black);
+                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(chromosome.imgData[j] * imgTex.height), Color.black);
                 }
                 imgTex.Apply();
+                dataSet.Chromosomes.Add(chromosome);    
+            }
+            ControlChromosome control = new ControlChromosome(images[14], images[14].transform, -20, 10);
+            dataSet.Chromosomes.Add(control);
+        }
+
+        private void Update()
+        {
+            if(dataSet.CheckDataSolved())
+            {
+                Debug.Log("Yo you won");
             }
         }
+
 
         private void OnApplicationQuit()
         {

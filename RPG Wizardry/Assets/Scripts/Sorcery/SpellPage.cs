@@ -11,7 +11,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         public bool Unlocked { get; private set; }
 
         /// <summary>
-        /// The dust cost for the spell to unlock.
+        /// The dust cost for the spell to unlock.  
         /// </summary>
         public uint DustCost { get; private set; }
         /// <summary>
@@ -29,18 +29,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         internal void UnlockSpell()
         {
             Unlocked = true;
-        }
-
-
-
-        /// <summary>
-        /// Retrievies the Dust cost from the Spell on this Page
-        /// </summary>
-        /// <returns>The Dust cost of the spell</returns>
-        internal uint GetDustCost()
-        {
-            return spell.DustCost;
-        }
+        }   
         #endregion
     }
 }
