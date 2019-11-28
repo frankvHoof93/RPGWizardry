@@ -16,15 +16,25 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         public SpellData CurrentSpell;
         #endregion
 
-        #region Private
+        #region Editor
         /// <summary>
         /// Transform of the object the projectiles need to spawn from
         /// </summary>
         [SerializeField]
         private Transform spawnLocation;
-
+        /// <summary>
+        /// LayerMask for Entities that can be hit by cast objects
+        /// </summary>
         [SerializeField]
         private LayerMask targetingMask;
+        /// <summary>
+        /// Animator for the book
+        /// </summary>
+        [SerializeField]
+        private Animator bookAnimator;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Inputstate for getting button states
         /// </summary>
@@ -33,12 +43,6 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Cooldown state during which you cannot cast spells
         /// </summary>
         private bool cooldown;
-
-        /// <summary>
-        /// Animator for the book
-        /// </summary>
-        [SerializeField]
-        private Animator bookAnimator;
         #endregion
         #endregion
 
@@ -47,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// Grabs inputstate reference for button presses
         /// </summary>
-        void Start()
+        private void Start()
         {
             inputState = GetComponent<InputState>();
         }
@@ -55,7 +59,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// If the button is pressed and there's no cooldown, fire the spell
         /// </summary>
-        void Update()
+        private void Update()
         {
             if (inputState.Cast1)
             {
@@ -88,8 +92,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Cooldown state during which no spells may be cast
         /// </summary>
         /// <param name="coolSeconds">Seconds the cooldown should remain active</param>
-        /// <returns></returns>
-        IEnumerator Cooldown(float coolSeconds)
+        private IEnumerator Cooldown(float coolSeconds)
         {
             yield return new WaitForSeconds(0.1f);
             //turn off animation so it only plays once

@@ -53,7 +53,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             else
             {
                 Health -= amount;
-                Debug.Log("Hit By Player. New Health: " + Health);
+                // TODO: Animation?
             }
         }
         #endregion

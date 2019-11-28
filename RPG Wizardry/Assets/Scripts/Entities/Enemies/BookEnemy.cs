@@ -14,17 +14,41 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private const float cooldownModifier = .5f;
         #endregion
 
+        #region Editor
+        /// <summary>
+        /// Spell to use when Attacking
+        /// </summary>
         [SerializeField]
+        [Tooltip("Spell to use when Attacking")]
         private SpellData spell;
+        /// <summary>
+        /// LayerMask for Attacks
+        /// </summary>
         [SerializeField]
+        [Tooltip("LayerMask for Attacks")]
         private LayerMask spellCollisionMask;
-
+        /// <summary>
+        /// Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)
+        /// </summary>
         [SerializeField]
+        [Tooltip("Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)")]
         private float attackAngleMargin = 5f;
-
-        private float attackTimer = 0;
         #endregion
 
+        #region Private
+        /// <summary>
+        /// Cooldown-Timer for Attacking
+        /// </summary>
+        private float attackTimer;
+        #endregion
+        #endregion
+
+        #region Methods
+        #region Protected
+        /// <summary>
+        /// Runs AI for BookEnemy
+        /// </summary>
+        /// <param name="player">Reference to Player</param>
         protected override void UpdateEnemy(AvatarManager player)
         {
             // Run Cooldown-Timer
@@ -55,11 +79,17 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
                 Attack();
             }
         }
+        #endregion
 
+        #region Private
+        /// <summary>
+        /// Performs attack
+        /// </summary>
         private void Attack()
         {
-            Vector2 fireDir = transform.right;
             spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
         }
+        #endregion
+        #endregion
     }
 }
