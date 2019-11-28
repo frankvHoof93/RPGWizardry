@@ -1,11 +1,12 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Avatar;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
 using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
-    public /* abstract */ class Enemy : MonoBehaviour, IHealth
+    public abstract class AEnemy : MonoBehaviour, IHealth
     {
         #region Variables
         #region Public
@@ -15,12 +16,19 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         public ushort Health { get; private set; }
         #endregion
 
-        #region Private
+        #region Protected
         /// <summary>
         /// Default values for this Enemy
         /// </summary>
         [SerializeField]
-        private EnemyData data;
+        protected EnemyData data;
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Time at which Updates are enabled for this Enemy. This time is determined at Start by grabbing a random Cooldown-Value from the EnemyData
+        /// </summary>
+        private float enableTime;
         #endregion
         #endregion
 
@@ -53,7 +61,21 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Start()
         {
             Health = data.Health;
+            enableTime = Time.time + data.SpawnCooldown.Random;
         }
+
+        /// <summary>
+        /// Runs Update-Implementation if Player Exists
+        /// </summary>
+        private void Update()
+        {
+            if (AvatarManager.Exists && Time.time >= enableTime)
+                UpdateEnemy(AvatarManager.Instance);
+        }
+        #endregion
+
+        #region Protected
+        protected abstract void UpdateEnemy(AvatarManager player);
         #endregion
 
         #region Private
