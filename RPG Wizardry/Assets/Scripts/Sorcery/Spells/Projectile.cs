@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
-
         #region Variables
         /// <summary>
         /// Stats (to be set by a scriptableobject?)
@@ -30,7 +31,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// When the spell comes in contact with something
         /// </summary>
         /// <param name="collision"></param>
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             Effect(collision);
         }
@@ -48,9 +49,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Applies the spell's effect to the colliding object (usually damage)
         /// </summary>
         /// <param name="collision"></param>
-        protected virtual void Effect(Collision collision)
+        protected virtual void Effect(Collider2D collision)
         {
             //oh man i can feel the effect
+            Destroy(gameObject);
         }
         #endregion
         #endregion
