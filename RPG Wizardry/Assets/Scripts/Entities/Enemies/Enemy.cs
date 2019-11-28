@@ -1,36 +1,12 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
-using System;
 using UnityEngine;
+using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
     public /* abstract */ class Enemy : MonoBehaviour, IHealth
     {
-        #region InnerTypes
-        [Serializable]
-        private struct LootTable
-        {
-            [SerializeField]
-            public LootSpawn dust;
-            [SerializeField]
-            public LootSpawn gold;
-            [SerializeField]
-            public LootSpawn page;
-            [SerializeField]
-            public LootSpawn potion;
-        }
-        [Serializable]
-        private struct LootSpawn
-        {
-            [SerializeField]
-            public uint amount;
-            [SerializeField]
-            [Range(0,1)]
-            public float chance;
-        }
-        #endregion
-
         #region Variables
         #region Public
         /// <summary>
@@ -41,17 +17,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         #region Private
         /// <summary>
-        /// Max (default) Health for this Enemy
-        /// TODO: use ScriptableObject
+        /// Default values for this Enemy
         /// </summary>
         [SerializeField]
-        private ushort maxHealth;
-        /// <summary>
-        /// Loot Dropped by this Enemy
-        /// TODO: use ScriptableObject
-        /// </summary>
-        [SerializeField]
-        private LootTable loot;
+        private EnemyData data;
         #endregion
         #endregion
 
@@ -80,11 +49,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         #region Unity
         /// <summary>
         /// Sets default values
-        /// TODO: Use ScriptableObject
         /// </summary>
         private void Start()
         {
-            Health = maxHealth;
+            Health = data.Health;
         }
         #endregion
 
@@ -94,18 +62,19 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Die()
         {
-            float rng = UnityEngine.Random.Range(0f, 1f);
+            float rng = Random.Range(0f, 1f);
+            LootTable loot = data.Loot;
             LootSpawn spawn = loot.dust;
-            if (spawn.amount != 0 && spawn.chance >= rng)
+            if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.amount);
             spawn = loot.gold;
-            if (spawn.amount != 0 && spawn.chance >= rng)
+            if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
             spawn = loot.page;
-            if (spawn.amount != 0 && spawn.chance >= rng)
+            if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Page, transform.position, spawn.amount);
             spawn = loot.potion;
-            if (spawn.amount != 0 && spawn.chance >= rng)
+            if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
 
 
