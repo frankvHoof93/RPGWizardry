@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
         #region Variables
         /// <summary>

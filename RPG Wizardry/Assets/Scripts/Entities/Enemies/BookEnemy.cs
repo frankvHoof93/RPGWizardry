@@ -59,7 +59,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Attack()
         {
             Vector2 fireDir = transform.right;
-            Debug.Log("FIRING AT PLAYER");
             spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
         }
     }

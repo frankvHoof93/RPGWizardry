@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1649351625540714799}
   - component: {fileID: 1649351625540714792}
-  m_Layer: 0
+  - component: {fileID: 4558486416647510740}
+  m_Layer: 11
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649351625540714798}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1649351625646304831}
   m_RootOrder: 0
@@ -67,8 +68,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -5133401982745170632, guid: c903a4a9374378d44b2116a7f24bfc03,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -79,6 +81,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4558486416647510740
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625540714798}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fdcba8c64d21bb74ab09348a9196685e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1649351625646304830
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649351625646304831}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,14 +123,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649351625646304830}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649351625540714799}
   m_Father: {fileID: 1649351625787668030}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
 --- !u!1 &1649351625787668028
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,9 +147,9 @@ GameObject:
   - component: {fileID: 1649351625787668026}
   - component: {fileID: 1649351625787668027}
   - component: {fileID: 1649351625787668004}
-  - component: {fileID: 512520424}
-  - component: {fileID: 5723656149061132832}
-  m_Layer: 8
+  - component: {fileID: 506691715}
+  - component: {fileID: 506691714}
+  m_Layer: 11
   m_Name: Willow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +207,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2724944495550030736, guid: 65139f1d0ee48eb469cdf1187e32cf82,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -258,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BookPivot: {fileID: 1649351625646304831}
+  bookAnimator: {fileID: 4558486416647510740}
 --- !u!114 &1649351625787668027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,22 +311,30 @@ MonoBehaviour:
   spawnLocation: {fileID: 1649351625540714799}
   targetingMask:
     serializedVersion: 2
-    m_Bits: 0
---- !u!114 &512520424
-MonoBehaviour:
+    m_Bits: 4096
+  bookAnimator: {fileID: 4558486416647510740}
+--- !u!50 &506691715
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasRootObject: 0
-  maxHealth: 100
---- !u!61 &5723656149061132832
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &506691714
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,7 +347,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0036717653, y: -0.46631217}
+  m_Offset: {x: 0, y: -0.62906915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -328,5 +358,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40517664, y: 0.7442622}
+  m_Size: {x: 0.8, y: 0.78186166}
   m_EdgeRadius: 0

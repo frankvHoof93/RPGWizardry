@@ -33,6 +33,12 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Cooldown state during which you cannot cast spells
         /// </summary>
         private bool cooldown;
+
+        /// <summary>
+        /// Animator for the book
+        /// </summary>
+        [SerializeField]
+        private Animator bookAnimator;
         #endregion
         #endregion
 
@@ -71,9 +77,11 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         {
             //spawn projectile at book's location
             CurrentSpell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
+            //start animation
+            bookAnimator.SetBool("Cast", true);
             //start cooldown
             cooldown = true;
-            StartCoroutine(Cooldown(1f));
+            StartCoroutine(Cooldown(CurrentSpell.Cooldown));
         }
 
         /// <summary>
@@ -83,7 +91,10 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <returns></returns>
         IEnumerator Cooldown(float coolSeconds)
         {
-            yield return new WaitForSeconds(coolSeconds);
+            yield return new WaitForSeconds(0.1f);
+            //turn off animation so it only plays once
+            bookAnimator.SetBool("Cast", false);
+            yield return new WaitForSeconds(coolSeconds - 0.1f);
             cooldown = false;
 
         }
