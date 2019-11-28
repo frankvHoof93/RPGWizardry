@@ -124,14 +124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649351625646304830}
-  m_LocalRotation: {x: 0, y: 0, z: 0.51899695, w: 0.8547761}
+  m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649351625540714799}
   m_Father: {fileID: 1649351625787668030}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 62.53}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
 --- !u!1 &1649351625787668028
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BookPivot: {fileID: 1649351625646304831}
-  playerPosition: {fileID: 1649351625787668030}
   bookAnimator: {fileID: 4558486416647510740}
 --- !u!114 &1649351625787668027
 MonoBehaviour:
@@ -313,6 +312,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6746551060393561873, guid: bbbbc478b0354b94a8cd103e117e4f99,
     type: 3}
   spawnLocation: {fileID: 1649351625540714799}
+  bookAnimator: {fileID: 4558486416647510740}
 --- !u!50 &506691715
 Rigidbody2D:
   serializedVersion: 4

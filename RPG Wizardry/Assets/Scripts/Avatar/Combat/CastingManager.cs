@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using nl.SWEG.RPGWizardry.PlayerInput;
+﻿using nl.SWEG.RPGWizardry.PlayerInput;
+using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Combat
