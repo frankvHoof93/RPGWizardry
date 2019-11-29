@@ -374,5 +374,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasRootObject: 0
-  BookRenderer: {fileID: 1649351625540714792}
+  bookRenderer: {fileID: 1649351625540714792}
   maxHealth: 100

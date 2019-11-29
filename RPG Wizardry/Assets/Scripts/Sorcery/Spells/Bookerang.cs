@@ -7,14 +7,21 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
     public class Bookerang : Projectile
     {
         #region Variables
+        #region Public
+        /// <summary>
+        /// Speed at which the book rotates in flight
+        /// </summary>
+        public int SpinSpeed;
+        #endregion
+        #region Private
         /// <summary>
         /// Bool for whether the book is moving forwards (false) or returning (true)
         /// </summary>
-        private bool back = false;
+        private bool back;
         /// <summary>
         /// Bool to make the book pause in mid-air
         /// </summary>
-        private bool pause = false;
+        private bool pause;
         /// <summary>
         /// Float to keep track of how far we've moved
         /// </summary>
@@ -38,7 +45,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         private Vector3 savedPosition;
         #endregion
-
+        #endregion
         #region Methods
         #region Unity
         /// <summary>
@@ -64,7 +71,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected override void Move()
         {
             //SPIN TO WIN
-            spriteTransform.Rotate(Vector3.forward,1500 * Time.deltaTime,Space.World);
+            spriteTransform.Rotate(Vector3.forward, SpinSpeed * Time.deltaTime,Space.World);
 
             //If not paused in mid-air
             if (!pause)

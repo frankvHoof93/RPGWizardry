@@ -17,7 +17,9 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// <summary>
         /// Renderer of the "crosshair" book, necessary for bookerang spell
         /// </summary>
-        public SpriteRenderer BookRenderer;
+        public SpriteRenderer BookRenderer => bookRenderer;
+        [SerializeField]
+        private SpriteRenderer bookRenderer;
         #endregion
 
         #region Editor

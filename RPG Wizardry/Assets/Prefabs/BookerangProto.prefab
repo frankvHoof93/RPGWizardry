@@ -197,4 +197,5 @@ MonoBehaviour:
   movementSpeed: 10
   range: 4
   Cooldown: 1
+  SpinSpeed: 1500
   spriteTransform: {fileID: 2378370442992230203}
