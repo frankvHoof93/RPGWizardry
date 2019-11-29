@@ -1,4 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using Assets.Scripts.Utils.Functions;
+using nl.SWEG.RPGWizardry.Avatar;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using UnityEngine;
 
@@ -81,13 +82,38 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
         #endregion
 
+        #region Unity
+        /// <summary>
+        /// Sets ElementType to Animator
+        /// </summary>
+        protected override void Start()
+        {
+            base.Start();
+            animator.SetInteger("ElementType", (int)spell.Element);
+            animator.SetBool("Attacking", false);
+            AnimateEnemy();
+        }
+
+        /// <summary>
+        /// Sets Rotation to Animator
+        /// </summary>
+        protected override void AnimateEnemy()
+        {
+            // Rotation from 0-3 where 0 => right & 1 => up
+            int rotation = Mathf.RoundToInt(transform.rotation.eulerAngles.z / 90f) % 4;
+            animator.SetInteger("Rotation", rotation);
+        }
+        #endregion
+
         #region Private
         /// <summary>
         /// Performs attack
         /// </summary>
         private void Attack()
         {
+            animator.SetBool("Attacking", true);
             spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            StartCoroutine(CoroutineMethods.RunDelayed(() => {animator.SetBool("Attacking", false);}, .75f));
         }
         #endregion
         #endregion
