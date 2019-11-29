@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Utils.Functions
+namespace nl.SWEG.RPGWizardry.Utils.Functions
 {
     public static class CoroutineMethods
     {
@@ -10,6 +10,12 @@ namespace Assets.Scripts.Utils.Functions
         {
             yield return new WaitForSeconds(delay);
             action.Invoke();
+        }
+
+        public static IEnumerator RunDelayed<T>(Action<T> action, T param, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action.Invoke(param);
         }
     }
 }

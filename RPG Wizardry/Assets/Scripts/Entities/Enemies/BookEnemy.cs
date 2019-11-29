@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Utils.Functions;
-using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Avatar;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
