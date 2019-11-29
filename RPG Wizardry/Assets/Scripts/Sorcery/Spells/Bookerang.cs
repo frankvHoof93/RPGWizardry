@@ -77,11 +77,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                 if (!back)
                 {
                     //If we haven't flown our full range yet
-                    if (movedSpace < range)
+                    if (movedSpace < data.LifeTime)
                     {
                         //Fly in a straight line
                         base.Move();
-                        movedSpace += Time.deltaTime * movementSpeed;
+                        movedSpace += Time.deltaTime * data.ProjectileSpeed;
                         
                     }
                     else
