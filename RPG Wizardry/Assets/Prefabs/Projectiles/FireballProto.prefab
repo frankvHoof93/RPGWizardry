@@ -114,6 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c245d0d7aadb34d9fec475bded2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   SplashObject: {fileID: 6031568290108856524, guid: b0a893c8b2ed1214c9fcb9380b28e388,
     type: 3}
 --- !u!58 &5857493217555144017

@@ -12,9 +12,18 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         protected SpellData data;
         /// <summary>
-        /// Mask of layers to collide with
+        /// Mask of layer containing enemies
         /// </summary>
         protected LayerMask targetLayer;
+        /// <summary>
+        /// Mask of layer containing walls and other obstructions
+        /// </summary>
+        [SerializeField]
+        private LayerMask wallLayer;
+        /// <summary>
+        /// Combined layermask for all things to collide with
+        /// </summary>
+        private LayerMask collisionLayer;
         #endregion
 
         #region Methods
@@ -34,6 +43,14 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 
         #region Unity
         /// <summary>
+        /// Combines layermasks
+        /// </summary>
+        private void Start()
+        {
+            collisionLayer = targetLayer | wallLayer;
+        }
+
+        /// <summary>
         /// Move forward based on the subclass' instantiation of Move
         /// </summary>
         private void FixedUpdate()
@@ -47,7 +64,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targetLayer.HasLayer(collision.gameObject.layer))
+            if (collisionLayer.HasLayer(collision.gameObject.layer))
                 Effect(collision);
         }
         #endregion

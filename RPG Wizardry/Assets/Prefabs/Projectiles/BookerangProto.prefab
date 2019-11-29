@@ -172,5 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec3dfa4deffca7548b9afa58a7ad7425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   SpinSpeed: 1500
   spriteTransform: {fileID: 2378370442992230203}
