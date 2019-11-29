@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Utils.Functions;
 using nl.SWEG.RPGWizardry.Avatar;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
@@ -112,7 +113,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Attack()
         {
             animator.SetBool("Attacking", true);
-            spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            List<Projectile> projectiles = spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            for (int i = 0; i < projectiles.Count; i++)
+                projectiles[i].transform.localScale *= .75f; // Fire Small-Scale objects (compared to what the Player fires)
             StartCoroutine(CoroutineMethods.RunDelayed(() => {animator.SetBool("Attacking", false);}, .75f));
         }
         #endregion
