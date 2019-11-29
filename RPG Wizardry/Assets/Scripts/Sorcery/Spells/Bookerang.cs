@@ -7,13 +7,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
     public class Bookerang : Projectile
     {
         #region Variables
-        #region Public
         /// <summary>
         /// Speed at which the book rotates in flight
         /// </summary>
-        public int SpinSpeed;
-        #endregion
-        #region Private
+        [SerializeField]
+        private int SpinSpeed;
         /// <summary>
         /// Bool for whether the book is moving forwards (false) or returning (true)
         /// </summary>
@@ -44,7 +42,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Position where we ended the forward movement
         /// </summary>
         private Vector3 savedPosition;
-        #endregion
         #endregion
         #region Methods
         #region Unity
