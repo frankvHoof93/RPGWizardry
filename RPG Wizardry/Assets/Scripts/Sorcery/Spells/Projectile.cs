@@ -11,9 +11,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Stats (to be set by a scriptableobject?)
         /// </summary>
         [SerializeField]
-        private int movementSpeed = 2;
+        protected int movementSpeed = 2;
         [SerializeField]
-        private int range = 2;
+        protected int range = 2;
         public float Cooldown = 0.5f;
         #endregion
 

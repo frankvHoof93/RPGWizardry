@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 1649351625787668004}
   - component: {fileID: 506691715}
   - component: {fileID: 506691714}
+  - component: {fileID: 1257007501}
   m_Layer: 11
   m_Name: Willow
   m_TagString: Untagged
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6746551060393561873, guid: bbbbc478b0354b94a8cd103e117e4f99,
+  projectilePrefab: {fileID: -3923724322693545260, guid: 3f471dcd9ee44244d8d258644eef966e,
     type: 3}
   spawnLocation: {fileID: 1649351625540714799}
   bookAnimator: {fileID: 4558486416647510740}
@@ -360,3 +361,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &1257007501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625787668028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRootObject: 0
+  BookRenderer: {fileID: 1649351625540714792}
+  maxHealth: 100

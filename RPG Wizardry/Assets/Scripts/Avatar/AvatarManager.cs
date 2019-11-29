@@ -13,6 +13,11 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// Player Health
         /// </summary>
         public ushort Health { get; private set; }
+
+        /// <summary>
+        /// Renderer of the "crosshair" book, necessary for bookerang spell
+        /// </summary>
+        public SpriteRenderer BookRenderer;
         #endregion
 
         #region Editor
