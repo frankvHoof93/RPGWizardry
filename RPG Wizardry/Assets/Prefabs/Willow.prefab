@@ -57,7 +57,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -197,7 +196,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -309,9 +307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6746551060393561873, guid: bbbbc478b0354b94a8cd103e117e4f99,
-    type: 3}
+  CurrentSpell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
   spawnLocation: {fileID: 1649351625540714799}
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 4096
   bookAnimator: {fileID: 4558486416647510740}
 --- !u!50 &506691715
 Rigidbody2D:
@@ -347,7 +347,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.82}
+  m_Offset: {x: 0, y: -0.62906915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -358,5 +358,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.4}
+  m_Size: {x: 0.8, y: 0.78186166}
   m_EdgeRadius: 0

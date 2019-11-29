@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using nl.SWEG.RPGWizardry.Entities.Stats;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
@@ -8,21 +8,35 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
     {
         #region Variables
         /// <summary>
-        /// Stats (to be set by a scriptableobject?)
+        /// Data for Spell
         /// </summary>
-        [SerializeField]
-        private int movementSpeed = 2;
-        [SerializeField]
-        private int range = 2;
-        public float Cooldown = 0.5f;
+        protected SpellData data;
+        /// <summary>
+        /// Mask of layers to collide with
+        /// </summary>
+        protected LayerMask targetLayer;
         #endregion
 
         #region Methods
+        #region Internal
+        /// <summary>
+        /// Sets Speed and TargetingLayer
+        /// </summary>
+        /// <param name="speed">Speed for Projectile</param>
+        /// <param name="dmg">Amount of daamage inflicted by Projectile</param>
+        /// <param name="targetingLayer">TargetingLayer(s) for Projectile</param>
+        internal void SetData(SpellData spellData, LayerMask targetingLayer)
+        {
+            data = spellData;
+            targetLayer = targetingLayer;
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Move forward based on the subclass' instantiation of Move
         /// </summary>
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             Move();
         }
@@ -33,16 +47,18 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Effect(collision);
+            if (targetLayer.HasLayer(collision.gameObject.layer))
+                Effect(collision);
         }
         #endregion
-        #region Virtual
+
+        #region Protected
         /// <summary>
         /// Basic movement that can be edited by a subclass
         /// </summary>
         protected virtual void Move()
         {
-            transform.position += transform.up * Time.deltaTime * movementSpeed;
+            transform.position += transform.up * Time.deltaTime * data.ProjectileSpeed;
         }
 
         /// <summary>
@@ -52,7 +68,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected virtual void Effect(Collider2D collision)
         {
             //oh man i can feel the effect
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
+            Destroy(gameObject); // TODO: Animation?
         }
         #endregion
         #endregion

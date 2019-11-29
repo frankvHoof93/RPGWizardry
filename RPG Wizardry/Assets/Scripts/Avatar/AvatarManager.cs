@@ -41,10 +41,13 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
-            Health -= amount;
-            healthChangeEvent(Health, maxHealth, (short)-amount);
-            if (Health <= 0)
+            if (amount >= Health)
                 Die();
+            else
+            {
+                Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+                healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+            }
         }
 
         /// <summary>
@@ -55,10 +58,8 @@ namespace nl.SWEG.RPGWizardry.Avatar
         {
             if (Health == maxHealth)
                 return false;
-            Health += amount;
-            healthChangeEvent(Health, maxHealth, (short)amount);
-            if (Health > maxHealth)
-                Health = maxHealth;
+            Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
+            healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
             return true;
         }
         #endregion
