@@ -58,10 +58,19 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
                 attackTimer -= Time.deltaTime;
             // Look At Player
             Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
+            toPlayer.Normalize();
             float rotationAngle = Vector2.SignedAngle(transform.right, toPlayer);
             float maxAngle = data.Speed * Time.deltaTime;
+
             if (Mathf.Abs(rotationAngle) <= maxAngle) // Full rotation
-                transform.right = toPlayer;
+            {
+                // angle for Fwd
+                float absAngle = Vector2.SignedAngle(Vector2.up, toPlayer);
+                // Get up from fwd
+                absAngle += 90f;
+                // Set up to transform
+                transform.rotation = Quaternion.Euler(0, 0, absAngle);
+            }                
             else // Partial rotation
             {
                 if (rotationAngle < 0)
