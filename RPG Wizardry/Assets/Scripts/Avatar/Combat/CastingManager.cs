@@ -1,5 +1,8 @@
 ﻿using nl.SWEG.RPGWizardry.PlayerInput;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using nl.SWEG.RPGWizardry.Utils.Functions;
+using nl.SWEG.RPGWizardry.Utils.Storage;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +12,10 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
     public class CastingManager : MonoBehaviour
     {
         #region Variables
+        #region Constants
+        private const int SelectableSpellAmount = 4;
+        #endregion
+
         #region Public
         /// <summary>
         /// Prototype projectile; fill this with selected spell later
@@ -21,16 +28,19 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Transform of the object the projectiles need to spawn from
         /// </summary>
         [SerializeField]
+        [Tooltip("Transform of the object the projectiles need to spawn from")]
         private Transform spawnLocation;
         /// <summary>
         /// LayerMask for Entities that can be hit by cast objects
         /// </summary>
         [SerializeField]
+        [Tooltip("LayerMask for Entities that can be hit by cast objects")]
         private LayerMask targetingMask;
         /// <summary>
-        /// Animator for the book
+        /// Animator for Greg
         /// </summary>
         [SerializeField]
+        [Tooltip("Animator for Greg")]
         private Animator bookAnimator;
         #endregion
 
@@ -43,10 +53,48 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Cooldown state during which you cannot cast spells
         /// </summary>
         private bool cooldown;
+
+        private readonly SpellData[] selectedSpells = new SpellData[SelectableSpellAmount];
+
+        private int selectedSpellIndex = 0;
         #endregion
         #endregion
 
         #region Methods
+        #region Public
+        public void SelectNextSpell()
+        {
+            int newIndex = MathFunctions.Wrap(selectedSpellIndex + 1, 0, SelectableSpellAmount);
+            while (selectedSpells[newIndex] == null) // No Spell in Slot
+                newIndex = MathFunctions.Wrap(newIndex + 1, 0, SelectableSpellAmount); // Try next slot
+            SelectSpell(newIndex);
+        }
+
+        public void SelectPreviousSpell()
+        {
+            int newIndex = MathFunctions.Wrap(selectedSpellIndex - 1, 0, SelectableSpellAmount);
+            while (selectedSpells[newIndex] == null) // No Spell in Slot
+                newIndex = MathFunctions.Wrap(newIndex - 1, 0, SelectableSpellAmount); // Try next slot
+            SelectSpell(newIndex);
+        }
+
+        public void SelectSpell(int index)
+        {
+            if (index == selectedSpellIndex)
+                return; // Already selected
+            if (selectedSpells[index] == null)
+                return; // No Spell in slot
+            selectedSpellIndex = index;
+        }
+        #endregion
+
+        #region Internal
+        internal void SetSpell(SpellData spell, int index)
+        {
+            selectedSpells[index] = spell;
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Grabs inputstate reference for button presses
