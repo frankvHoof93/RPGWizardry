@@ -49,13 +49,8 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Inputstate for getting button states
         /// </summary>
         private InputState inputState;
-        /// <summary>
-        /// Cooldown state during which you cannot cast spells
-        /// </summary>
-        private bool cooldown;
-
         private readonly SpellData[] selectedSpells = new SpellData[SelectableSpellAmount];
-
+        private readonly float[] spellCooldown = new float[SelectableSpellAmount];
         private int selectedSpellIndex = 0;
         #endregion
         #endregion
@@ -89,9 +84,15 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         #endregion
 
         #region Internal
+        /// <summary>
+        /// Sets Spell to SelectedSpells
+        /// </summary>
+        /// <param name="spell">Spell to set</param>
+        /// <param name="index">Index to set Spell to</param>
         internal void SetSpell(SpellData spell, int index)
         {
             selectedSpells[index] = spell;
+            spellCooldown[index] = 0;
         }
         #endregion
 
@@ -102,52 +103,37 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         private void Start()
         {
             inputState = GetComponent<InputState>();
+            //DEBUG (Set serialized spell to position 0 in SelectedSpells)
+            SetSpell(CurrentSpell, 0);
         }
 
         /// <summary>
-        /// If the button is pressed and there's no cooldown, fire the spell
+        /// Handles Input and Spell-Cooldowns
         /// </summary>
         private void Update()
         {
-            if (inputState.Cast1)
-            {
-                if (!cooldown)
-                {
-                    SpawnProjectile();
-                }
-            }
+            for (int i = 0; i < spellCooldown.Length; i++)
+                spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
+            if (inputState.Cast1 && spellCooldown[selectedSpellIndex] == 0)
+                CastSpell();
         }
         #endregion
 
         #region Private
-
         /// <summary>
-        /// Spawns a projectile, then puts the casting system on cooldown based on the spell
+        /// Casts currently selected Spell
         /// </summary>
-        /// <param name="projectile">Projectile of the spell to cast; contains cooldown value</param>
-        private void SpawnProjectile()
+        private void CastSpell()
         {
-            //spawn projectile at book's location
-            CurrentSpell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
-            //start animation
+            SpellData spell = selectedSpells[selectedSpellIndex];
+            // Spawn Spell
+            spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
+            // Set animation
             bookAnimator.SetBool("Cast", true);
-            //start cooldown
-            cooldown = true;
-            StartCoroutine(Cooldown(CurrentSpell.Cooldown));
-        }
-
-        /// <summary>
-        /// Cooldown state during which no spells may be cast
-        /// </summary>
-        /// <param name="coolSeconds">Seconds the cooldown should remain active</param>
-        private IEnumerator Cooldown(float coolSeconds)
-        {
-            yield return new WaitForSeconds(0.1f);
-            //turn off animation so it only plays once
-            bookAnimator.SetBool("Cast", false);
-            yield return new WaitForSeconds(coolSeconds - 0.1f);
-            cooldown = false;
-
+            // TODO: Check if this coroutine might need to be cancelled at some point (e.g. cast->switch spell->cast)
+            StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
+            // Set cooldown
+            spellCooldown[selectedSpellIndex] = spell.Cooldown;
         }
         #endregion
         #endregion
