@@ -1,5 +1,4 @@
-﻿using System;
-using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using UnityEngine;
 
