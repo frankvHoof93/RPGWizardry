@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,11 +49,13 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// Text-UI for Dust-Amount
         /// </summary>
         [SerializeField]
+        [Tooltip("Text-UI for Dust-Amount")]
         private Text dustText;
         /// <summary>
         /// Text-UI for Gold-Amount
         /// </summary>
         [SerializeField]
+        [Tooltip("Text-UI for Gold-Amount")]
         private Text goldText;
         #endregion
         #endregion

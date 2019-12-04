@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using nl.SWEG.RPGWizardry.Avatar;
+using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells

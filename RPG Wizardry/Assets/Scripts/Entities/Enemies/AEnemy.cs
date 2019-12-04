@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;

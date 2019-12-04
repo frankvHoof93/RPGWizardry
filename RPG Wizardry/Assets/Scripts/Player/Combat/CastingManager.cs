@@ -1,9 +1,9 @@
-﻿using nl.SWEG.RPGWizardry.PlayerInput;
+﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using System.Collections;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Avatar.Combat
+namespace nl.SWEG.RPGWizardry.Player.Combat
 {
     [RequireComponent(typeof(InputState))]
     public class CastingManager : MonoBehaviour

@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.GameWorld.GameLogic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.PlayerInput
+namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
     [RequireComponent(typeof(InputState))]
     public class InputManager : MonoBehaviour

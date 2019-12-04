@@ -1,4 +1,4 @@
-﻿namespace nl.SWEG.RPGWizardry.PlayerInput
+﻿namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
     public enum ControlScheme
     {

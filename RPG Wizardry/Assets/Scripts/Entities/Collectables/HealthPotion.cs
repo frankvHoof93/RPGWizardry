@@ -1,5 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
-using nl.SWEG.RPGWizardry.Avatar.Inventory;
+﻿using nl.SWEG.RPGWizardry.Player;
+using nl.SWEG.RPGWizardry.Player.Inventory;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Collectables

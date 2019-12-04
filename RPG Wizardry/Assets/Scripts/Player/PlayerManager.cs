@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Avatar.Inventory;
+﻿using nl.SWEG.RPGWizardry.Player.Inventory;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Avatar
+namespace nl.SWEG.RPGWizardry.Player
 {
     [RequireComponent(typeof(PlayerInventory))]
     public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth
@@ -23,6 +23,9 @@ namespace nl.SWEG.RPGWizardry.Avatar
         #endregion
 
         #region Internal
+        /// <summary>
+        /// Inventory for Player
+        /// </summary>
         internal PlayerInventory Inventory { get; private set; }
         #endregion
 
@@ -37,6 +40,7 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// Renderer for Greg
         /// </summary>
         [SerializeField]
+        [Tooltip("Renderer for Greg")]
         private SpriteRenderer bookRenderer;
         #endregion
 
@@ -104,7 +108,7 @@ namespace nl.SWEG.RPGWizardry.Avatar
 
         #region Unity
         /// <summary>
-        /// Grabs reference to Inventory
+        /// Grabs reference to Inventory and sets Health
         /// </summary>
         protected override void Awake()
         {
