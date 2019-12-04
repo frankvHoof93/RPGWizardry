@@ -76,6 +76,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected virtual void Move()
         {
             transform.position += transform.up * Time.deltaTime * data.ProjectileSpeed;
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
         }
 
         /// <summary>
