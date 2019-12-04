@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace nl.SWEG.RPGWizardry.Sorcery
+﻿namespace nl.SWEG.RPGWizardry.Sorcery
 {
-    public enum Element
+    public enum Element : int
     {
-        none,
-        fire,
-        water,
-        electricity,
-        earth
+        None = 0,
+        Fire = 1,
+        Water = 2,
+        Electricity = 3,
+        Earth = 4
     }
 }

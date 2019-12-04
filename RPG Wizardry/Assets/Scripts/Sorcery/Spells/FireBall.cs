@@ -17,7 +17,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected override void Effect(Collider2D collision)
         {
             //EXPLODE
-            Instantiate(SplashObject, transform.position, transform.rotation);
+            GameObject splash = Instantiate(SplashObject, transform.position, transform.rotation);
+            splash.transform.localScale = transform.localScale; // Scale relative to Fireball-size
             base.Effect(collision);
         }
     }
