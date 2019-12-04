@@ -72,7 +72,7 @@ namespace nl.SWEG.RPGWizardry.Utils
         {
             if(dataSet.CheckDataSolved())
             {
-                Debug.Log("Yo you won");
+                Debug.Log("DataSet done!");
             }
         }
 

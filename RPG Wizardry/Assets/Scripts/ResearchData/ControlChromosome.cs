@@ -11,6 +11,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
     {
 
         public float CorrectPosition { get; set; }
+        public bool Solved { get; private set; }
         private float range;
 
         public ControlChromosome(Image image, Transform transform, float correctPosition, float range) : base(image, transform)
@@ -19,9 +20,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             Solved = false;
             this.range = range;
         }
-
-        public bool Solved { get; private set; }
-        
 
         public override void CheckIfSolved()
         {

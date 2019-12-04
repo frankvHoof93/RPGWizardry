@@ -11,31 +11,22 @@ namespace nl.SWEG.RPGWizardry.ResearchData
     {
 
         public Image image;
-        public bool HasMoved { get; private set; }
-
-        private float oldposition;
+        public bool HasMoved { get; private set; }  
 
         public float[] imgData { get; set; }
 
+        public int OriginalRow { get; set; }
         public Transform transform { get; set; }
 
+        private int OriginalPositionInDataSet;
+
+        private float ImagePosition;
         public Chromosome(Image image, Transform transform)
         {
             this.image = image;
             this.transform = transform;
         }
 
-
-
-        public bool CheckPosition()
-        {
-            if (transform.localPosition.y != oldposition)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
         
         public virtual void CheckIfSolved()
         {

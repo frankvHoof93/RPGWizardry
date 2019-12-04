@@ -19,7 +19,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
-        private Spell spell;
+        private SpellData spell;
         #endregion
 
         #region Methods
