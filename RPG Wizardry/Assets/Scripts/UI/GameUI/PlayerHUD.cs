@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace nl.SWEG.RPGWizardry.UI.GameUI
 {
-    public class HealthUI : MonoBehaviour
+    public class PlayerHUD : MonoBehaviour
     {
         #region InnerTypes
         /// <summary>
@@ -21,6 +21,8 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         #endregion
 
         #region Variables
+        #region Health
+        [Header("Health")]
         /// <summary>
         /// Fill-UI for HealthBar
         /// </summary>
@@ -41,6 +43,16 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         private HealthColors colors;
         #endregion
 
+        #region Items
+        [Header("Items")]
+        /// <summary>
+        /// Text-UI for Dust-Amount
+        /// </summary>
+        [SerializeField]
+        private Text dustText;
+        #endregion
+        #endregion
+
         #region Methods
         #region Unity
         /// <summary>
@@ -58,6 +70,18 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         {
             if (AvatarManager.Exists)
                 AvatarManager.Instance.RemoveHealthChangeListener(UpdateHealthBar);
+        }
+        /// <summary>
+        /// Sets default values
+        /// </summary>
+        private void Reset()
+        {
+            colors = new HealthColors
+            {
+                fullHealth = Color.green,
+                mediumHealth = Color.yellow,
+                lowHealth = Color.red
+            };
         }
         #endregion
 
@@ -80,6 +104,16 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 healthFillBar.color = colors.mediumHealth;
             else
                 healthFillBar.color = colors.lowHealth;
+        }
+        /// <summary>
+        /// Updates Dust-Amount
+        /// </summary>
+        /// <param name="newAmount">New amount for Dust</param>
+        /// <param name="change">Change in amount</param>
+        private void UpdateDustAmount(uint newAmount, int change)
+        {
+            // TODO: Change-Popup/Effect?
+            dustText.text = newAmount.ToString();
         }
         #endregion
         #endregion

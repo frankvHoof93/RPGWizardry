@@ -9,7 +9,11 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
 {
     public class PlayerInventory : MonoBehaviour, IStorable, IJSON<PlayerInventory>
     {
-        #region Methods
+        #region InnerTypes
+        public delegate void OnInventoryChange(uint newAmount, int change);
+        #endregion
+
+        #region Variables
         #region Public
         /// <summary>
         /// Amount of Dust in Inventory
@@ -30,11 +34,27 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// Pages in Inventory
         /// </summary>
         private readonly List<SpellPage> pages = new List<SpellPage>();
+
+        private event OnInventoryChange dustChangeEvent;
+        private event OnInventoryChange goldChangeEvent;
+        private event OnInventoryChange pageChangeEvent;
         #endregion
         #endregion
 
         #region Methods
         #region Public
+        #region EventListeners
+        public void AddDustListener(OnInventoryChange listener)
+        {
+            dustChangeEvent += listener;
+        }
+
+        public void RemoveDustListener(OnInventoryChange listener)
+        {
+            dustChangeEvent -= listener;
+        }
+        #endregion
+
         #region Storage
         /// <summary>
         /// Loads Inventory from File
@@ -45,6 +65,7 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
             string json = File.ReadAllText(path);
             PlayerInventory toLoad = FromJSON(json);
             // TODO: Load variables
+            dustChangeEvent?.Invoke(Dust, 0); // Called with 0 to not perform animation
         }
         /// <summary>
         /// Saves Inventory to File

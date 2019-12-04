@@ -71,7 +71,7 @@ namespace nl.SWEG.RPGWizardry.Avatar
         }
         #endregion
 
-        #region Events
+        #region EventListeners
         /// <summary>
         /// Adds a Listener to the HealthChangeEvent
         /// </summary>
