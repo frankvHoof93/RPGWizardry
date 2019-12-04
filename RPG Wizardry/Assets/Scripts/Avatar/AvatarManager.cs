@@ -13,6 +13,13 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// Player Health
         /// </summary>
         public ushort Health { get; private set; }
+
+        /// <summary>
+        /// Renderer of the "crosshair" book, necessary for bookerang spell
+        /// </summary>
+        public SpriteRenderer BookRenderer => bookRenderer;
+        [SerializeField]
+        private SpriteRenderer bookRenderer;
         #endregion
 
         #region Editor
@@ -41,10 +48,13 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
-            Health -= amount;
-            healthChangeEvent(Health, maxHealth, (short)-amount);
-            if (Health <= 0)
+            if (amount >= Health)
                 Die();
+            else
+            {
+                Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+                healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+            }
         }
 
         /// <summary>
@@ -55,10 +65,8 @@ namespace nl.SWEG.RPGWizardry.Avatar
         {
             if (Health == maxHealth)
                 return false;
-            Health += amount;
-            healthChangeEvent(Health, maxHealth, (short)amount);
-            if (Health > maxHealth)
-                Health = maxHealth;
+            Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
+            healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
             return true;
         }
         #endregion

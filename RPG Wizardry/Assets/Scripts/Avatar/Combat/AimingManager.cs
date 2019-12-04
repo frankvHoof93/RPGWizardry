@@ -1,6 +1,4 @@
 ﻿using nl.SWEG.RPGWizardry.PlayerInput;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Combat
@@ -81,4 +79,3 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         #endregion
     }
 }
-
