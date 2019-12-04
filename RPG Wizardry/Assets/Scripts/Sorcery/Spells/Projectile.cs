@@ -45,7 +45,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Combines layermasks
         /// </summary>
-        private void Start()
+        protected virtual void Start()
         {
             collisionLayer = targetLayer | wallLayer;
         }
@@ -64,6 +64,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log(1);
             if (collisionLayer.HasLayer(collision.gameObject.layer))
                 Effect(collision);
         }
