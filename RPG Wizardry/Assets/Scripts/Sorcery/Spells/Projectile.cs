@@ -64,7 +64,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log(1);
             if (collisionLayer.HasLayer(collision.gameObject.layer))
                 Effect(collision);
         }
