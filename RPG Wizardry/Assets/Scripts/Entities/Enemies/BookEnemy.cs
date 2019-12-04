@@ -51,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Runs AI for BookEnemy
         /// </summary>
         /// <param name="player">Reference to Player</param>
-        protected override void UpdateEnemy(AvatarManager player)
+        protected override void UpdateEnemy(PlayerManager player)
         {
             // Run Cooldown-Timer
             if (attackTimer > 0)

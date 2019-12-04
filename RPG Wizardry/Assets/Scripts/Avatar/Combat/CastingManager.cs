@@ -99,7 +99,6 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
             bookAnimator.SetBool("Cast", false);
             yield return new WaitForSeconds(coolSeconds - 0.1f);
             cooldown = false;
-
         }
         #endregion
         #endregion

@@ -50,26 +50,41 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         [SerializeField]
         private Text dustText;
+        /// <summary>
+        /// Text-UI for Gold-Amount
+        /// </summary>
+        [SerializeField]
+        private Text goldText;
         #endregion
         #endregion
 
         #region Methods
         #region Unity
         /// <summary>
-        /// Registers this UI to the Health-Event
+        /// Registers this UI to Events
         /// </summary>
         private void OnEnable()
         {
-            if (AvatarManager.Exists)
-                AvatarManager.Instance.AddHealthChangeListener(UpdateHealthBar);
+            if (PlayerManager.Exists)
+            {
+                PlayerManager player = PlayerManager.Instance;
+                player.AddHealthChangeListener(UpdateHealthBar);
+                player.Inventory?.AddDustListener(UpdateDustAmount);
+                player.Inventory?.AddGoldListener(UpdateGoldAmount);
+            }
         }
         /// <summary>
-        /// Unregisters this UI from the Health-Event
+        /// Unregisters this UI from Events
         /// </summary>
         private void OnDisable()
         {
-            if (AvatarManager.Exists)
-                AvatarManager.Instance.RemoveHealthChangeListener(UpdateHealthBar);
+            if (PlayerManager.Exists)
+            {
+                PlayerManager player = PlayerManager.Instance;
+                player.RemoveHealthChangeListener(UpdateHealthBar);
+                player.Inventory?.RemoveDustListener(UpdateDustAmount);
+                player.Inventory?.RemoveGoldListener(UpdateGoldAmount);
+            }
         }
         /// <summary>
         /// Sets default values
@@ -94,7 +109,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="change">Change in Value from previous</param>
         private void UpdateHealthBar(ushort newHealth, ushort maxHealth, short change)
         {
-            // TODO: Change-Popup/Effect?
             healthText.text = newHealth + "/" + maxHealth;
             float healthPercentage = (float)newHealth / (float)maxHealth;
             healthFillBar.fillAmount = healthPercentage;
@@ -103,7 +117,11 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
             else if (healthPercentage < 0.67f)
                 healthFillBar.color = colors.mediumHealth;
             else
-                healthFillBar.color = colors.lowHealth;
+                healthFillBar.color = colors.fullHealth;
+            if (change != 0)
+            {
+                // TODO: Change-Popup/Effect?
+            }
         }
         /// <summary>
         /// Updates Dust-Amount
@@ -112,8 +130,24 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="change">Change in amount</param>
         private void UpdateDustAmount(uint newAmount, int change)
         {
-            // TODO: Change-Popup/Effect?
             dustText.text = newAmount.ToString();
+            if (change != 0)
+            {
+                // TODO: Change-Popup/Effect?
+            }
+        }
+        /// <summary>
+        /// Updates Gold-Amount
+        /// </summary>
+        /// <param name="newAmount">New amount for Gold</param>
+        /// <param name="change">Change in amount</param>
+        private void UpdateGoldAmount(uint newAmount, int change)
+        {
+            goldText.text = newAmount.ToString();
+            if (change != 0)
+            {
+                // TODO: Change-Popup/Effect?
+            }
         }
         #endregion
         #endregion

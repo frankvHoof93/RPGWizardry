@@ -35,9 +35,11 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// </summary>
         private readonly List<SpellPage> pages = new List<SpellPage>();
 
+        #region Events
         private event OnInventoryChange dustChangeEvent;
         private event OnInventoryChange goldChangeEvent;
         private event OnInventoryChange pageChangeEvent;
+        #endregion
         #endregion
         #endregion
 
@@ -47,11 +49,25 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         public void AddDustListener(OnInventoryChange listener)
         {
             dustChangeEvent += listener;
+            // Set Initial Value
+            listener.Invoke(Dust, 0);
         }
 
         public void RemoveDustListener(OnInventoryChange listener)
         {
             dustChangeEvent -= listener;
+        }
+
+        public void AddGoldListener(OnInventoryChange listener)
+        {
+            goldChangeEvent += listener;
+            // Set Initial Value
+            listener.Invoke(Gold, 0);
+        }
+
+        public void RemoveGoldListener(OnInventoryChange listener)
+        {
+            goldChangeEvent -= listener;
         }
         #endregion
 
@@ -65,7 +81,10 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
             string json = File.ReadAllText(path);
             PlayerInventory toLoad = FromJSON(json);
             // TODO: Load variables
-            dustChangeEvent?.Invoke(Dust, 0); // Called with 0 to not perform animation
+            // Called with 0 to not perform animation
+            dustChangeEvent?.Invoke(Dust, 0);
+            goldChangeEvent?.Invoke(Gold, 0);
+
         }
         /// <summary>
         /// Saves Inventory to File
@@ -109,18 +128,20 @@ namespace nl.SWEG.RPGWizardry.Avatar.Inventory
         /// <summary>
         /// Adds Dust to Inventory
         /// </summary>
-        /// <param name="amount">Amount of Dust to add (> 0)</param>
+        /// <param name="amount">Amount of Dust to add (>= 0)</param>
         public void AddDust(uint amount)
         {
             Dust += amount;
+            dustChangeEvent.Invoke(Dust, (int)amount);
         }
         /// <summary>
         /// Adds Gold to Inventory
         /// </summary>
-        /// <param name="amount">Amount of Gold to add (> 0)</param>
+        /// <param name="amount">Amount of Gold to add (>= 0)</param>
         public void AddGold(uint amount)
         {
             Gold += amount;
+            goldChangeEvent.Invoke(Gold, (int)amount);
         }
         #endregion
         #endregion

@@ -86,14 +86,14 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Update()
         {
-            if (AvatarManager.Exists && Time.time >= enableTime)
-                UpdateEnemy(AvatarManager.Instance);
+            if (PlayerManager.Exists && Time.time >= enableTime)
+                UpdateEnemy(PlayerManager.Instance);
             AnimateEnemy();
         }
         #endregion
 
         #region Protected
-        protected abstract void UpdateEnemy(AvatarManager player);
+        protected abstract void UpdateEnemy(PlayerManager player);
         protected abstract void AnimateEnemy();
         #endregion
 
