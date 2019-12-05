@@ -38,7 +38,7 @@ namespace nl.SWEG.RPGWizardry.Utils
         private void Start()
         {
             dataSet = new DataSet();
-            dataSet.Chromosomes = new List<Chromosome>();
+            dataSet.Fragments = new List<Fragment>();
             if (data.GetLength(0) != images.Count)
             {
                 Debug.LogError("Invalid Format");
@@ -48,24 +48,24 @@ namespace nl.SWEG.RPGWizardry.Utils
             // Loop across chromosomes
             for (int i = 0; i < data.GetLength(0) -1; i++)
             {
-                Chromosome chromosome = new Chromosome(images[i], images[i].transform);
+                Fragment chromosome = new Fragment(images[i], images[i].transform);
                 
-                chromosome.imgData = data.GetRow(i);
+                chromosome.ImgData = data.GetRow(i);
 
-                Texture2D imgTex = (Texture2D)chromosome.image.mainTexture;
+                Texture2D imgTex = (Texture2D)chromosome.FragmentImage.mainTexture;
                 ClearTexture(imgTex);
 
                 // Loop across data for chromosome
-                for (int j = 0; j < chromosome.imgData.Length -1; j++)
+                for (int j = 0; j < chromosome.ImgData.Length -1; j++)
                 {
                     // Add Pixel to Img
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(chromosome.imgData[j] * imgTex.height), Color.black);
+                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(chromosome.ImgData[j] * imgTex.height), Color.black);
                 }
                 imgTex.Apply();
-                dataSet.Chromosomes.Add(chromosome);    
+                dataSet.Fragments.Add(chromosome);    
             }
-            ControlChromosome control = new ControlChromosome(images[14], images[14].transform, -20, 10);
-            dataSet.Chromosomes.Add(control);
+            ControlFragment control = new ControlFragment(images[14], images[14].transform, -20, 10);
+            dataSet.Fragments.Add(control);
         }
 
         private void Update()

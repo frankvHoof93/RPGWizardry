@@ -7,31 +7,55 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataBin
     {
-        private List<Chromosome> Bin;
+        #region Methods
+        #region Public
+        /// <summary>
+        /// List of all fragments in supplied Research Bin
+        /// </summary>
+        public List<Fragment> Bin { get; private set; }
+        #endregion
+        #region Private
+        /// <summary>
+        /// Datasets after splitting the bin into managable pieces
+        /// </summary>
         private List<DataSet> DataSets;
-        private int SetSize;
 
-        public DataBin()
+        /// <summary>
+        /// Definition of how bin will be divided into DataSets
+        /// </summary>
+        private int setSize;
+        #endregion
+
+        public DataBin(int setSize)
         {
+            this.setSize = setSize;
             DataSets = new List<DataSet>();
-            for (int i= 0; i < SetSize; i++)
+            for (int i= 0; i < this.setSize; i++)
             {
                 DataSets.Add(new DataSet());
             }
-        }
 
+            SplitBin();
+        }
+        #endregion
+        #region Split
+        /// <summary>
+        /// Converts the bin into the Datasets
+        /// </summary>
         private void SplitBin()
         {
-            int batchsize = Bin.Count / SetSize;
-            List<List<Chromosome>> ChromosomeSets = Bin.ChunkBy<Chromosome>(batchsize);
+            int batchsize = Bin.Count / setSize;
+            List<List<Fragment>> FragmentSets = Bin.ChunkBy<Fragment>(batchsize);
             for (int i = 0; i < DataSets.Count; i++)
             {
-                DataSets[i].Chromosomes = ChromosomeSets[i];
+                DataSets[i].Fragments = FragmentSets[i];
             }
 
         }
+        #endregion
 
     }
+    #region Utility
     /// <summary>
     /// Helper methods for the lists.
     /// </summary>
@@ -46,4 +70,5 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
                 .ToList();
         }
     }
+    #endregion
 }
