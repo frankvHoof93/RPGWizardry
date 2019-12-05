@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6113444342723452126}
   - component: {fileID: 593522381379644970}
   - component: {fileID: 7295321308355197159}
-  - component: {fileID: 5175693010138246313}
+  - component: {fileID: -4833950533955187618}
   m_Layer: 0
-  m_Name: DustPile
+  m_Name: GoldPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24940327, y: 0.5154377}
   m_EdgeRadius: 0
---- !u!114 &5175693010138246313
+--- !u!114 &-4833950533955187618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5796319703105649280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cdfd5bd95bc5540833e88c5dcb0f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 38937e17de4d32c459340bb5fc36f75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags:
