@@ -33,11 +33,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Uses Collider.OverlapCollider() to check if there are any Players or enemies in the collider.
         /// </summary>
         /// <returns>True if the collider is empty, false if it is not.</returns>
-        private int GetOverlapData()
+        private bool GetOverlapData()
         {
             List<Collider2D> results = new List<Collider2D>();
-            int output = Collider.OverlapCollider(ContactFilter, results);
-            return output;
+            return Collider.OverlapCollider(ContactFilter, results) >= 1;
         }
         #endregion
 
@@ -56,8 +55,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="collision">The thing entering the collider.</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //Check if the object is only hit by the Player.
-            if (collision.gameObject.layer == 11 && GetOverlapData() == 1)
+            //Check if there is one or more things in the collider.
+            if (GetOverlapData())
             {
                 //Set the alpha of each tilemap to half.
                 foreach (Tilemap s in Walls)
@@ -74,7 +73,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void OnTriggerExit2D(Collider2D collision)
         {
             //If there is nothing else in the trigger.
-            if (GetOverlapData() == 0)
+            if (!GetOverlapData())
             {
                 //Set the alpha of each tilemap to full.
                 foreach (Tilemap s in Walls)
