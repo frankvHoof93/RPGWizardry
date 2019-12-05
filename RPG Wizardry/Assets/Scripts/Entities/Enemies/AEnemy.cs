@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
@@ -86,14 +86,14 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Update()
         {
-            if (AvatarManager.Exists && Time.time >= enableTime)
-                UpdateEnemy(AvatarManager.Instance);
+            if (PlayerManager.Exists && Time.time >= enableTime)
+                UpdateEnemy(PlayerManager.Instance);
             AnimateEnemy();
         }
         #endregion
 
         #region Protected
-        protected abstract void UpdateEnemy(AvatarManager player);
+        protected abstract void UpdateEnemy(PlayerManager player);
         protected abstract void AnimateEnemy();
         #endregion
 

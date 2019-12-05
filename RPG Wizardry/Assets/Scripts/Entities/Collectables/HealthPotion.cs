@@ -1,5 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
-using nl.SWEG.RPGWizardry.Avatar.Inventory;
+﻿using nl.SWEG.RPGWizardry.Player;
+using nl.SWEG.RPGWizardry.Player.Inventory;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Collectables
@@ -23,7 +23,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <returns>True if Player is not at full health (potion collected)</returns>
         protected override bool OnCollect(PlayerInventory target)
         {
-            return target.GetComponent<AvatarManager>().Heal(healAmount);
+            return target.GetComponent<PlayerManager>().Heal(healAmount);
         }
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar.Inventory;
+﻿using nl.SWEG.RPGWizardry.Player.Inventory;
 using nl.SWEG.RPGWizardry.Sorcery;
 using UnityEngine;
 

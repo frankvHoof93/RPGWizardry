@@ -1,11 +1,13 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Player.Inventory;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Avatar
+namespace nl.SWEG.RPGWizardry.Player
 {
-    public class AvatarManager : SingletonBehaviour<AvatarManager>, IHealth
+    [RequireComponent(typeof(PlayerInventory))]
+    public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth
     {
         #region Variables
         #region Public
@@ -18,8 +20,13 @@ namespace nl.SWEG.RPGWizardry.Avatar
         /// Renderer of the "crosshair" book, necessary for bookerang spell
         /// </summary>
         public SpriteRenderer BookRenderer => bookRenderer;
-        [SerializeField]
-        private SpriteRenderer bookRenderer;
+        #endregion
+
+        #region Internal
+        /// <summary>
+        /// Inventory for Player
+        /// </summary>
+        internal PlayerInventory Inventory { get; private set; }
         #endregion
 
         #region Editor
@@ -29,6 +36,12 @@ namespace nl.SWEG.RPGWizardry.Avatar
         [SerializeField]
         [Tooltip("Max Health for Player")]
         private ushort maxHealth = 100;
+        /// <summary>
+        /// Renderer for Greg
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Renderer for Greg")]
+        private SpriteRenderer bookRenderer;
         #endregion
 
         #region
@@ -71,7 +84,7 @@ namespace nl.SWEG.RPGWizardry.Avatar
         }
         #endregion
 
-        #region Events
+        #region EventListeners
         /// <summary>
         /// Adds a Listener to the HealthChangeEvent
         /// </summary>
@@ -79,6 +92,8 @@ namespace nl.SWEG.RPGWizardry.Avatar
         public void AddHealthChangeListener(OnHealthChange listener)
         {
             healthChangeEvent += listener;
+            // Set Initial Value
+            listener.Invoke(Health, maxHealth, 0);
         }
         /// <summary>
         /// Removes a Listener from the HealthChangeEvent
@@ -93,10 +108,12 @@ namespace nl.SWEG.RPGWizardry.Avatar
 
         #region Unity
         /// <summary>
-        /// Sets Health to maxHealth
+        /// Grabs reference to Inventory and sets Health
         /// </summary>
-        private void Start()
+        protected override void Awake()
         {
+            Inventory = GetComponent<PlayerInventory>();
+            base.Awake();
             Health = maxHealth;
         }
         #endregion

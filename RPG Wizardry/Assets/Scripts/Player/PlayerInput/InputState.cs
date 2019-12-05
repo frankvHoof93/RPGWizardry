@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.PlayerInput
+namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
 
     public class InputState : MonoBehaviour

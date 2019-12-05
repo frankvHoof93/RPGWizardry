@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Runs AI for BookEnemy
         /// </summary>
         /// <param name="player">Reference to Player</param>
-        protected override void UpdateEnemy(AvatarManager player)
+        protected override void UpdateEnemy(PlayerManager player)
         {
             // Run Cooldown-Timer
             if (attackTimer > 0)
