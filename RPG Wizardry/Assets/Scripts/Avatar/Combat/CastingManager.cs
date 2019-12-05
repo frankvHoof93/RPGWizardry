@@ -1,9 +1,6 @@
 ﻿using nl.SWEG.RPGWizardry.PlayerInput;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;
-using nl.SWEG.RPGWizardry.Utils.Storage;
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar.Combat
@@ -13,12 +10,15 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
     {
         #region Variables
         #region Constants
+        /// <summary>
+        /// Amount of slots available for Spells
+        /// </summary>
         private const int SelectableSpellAmount = 4;
         #endregion
 
         #region Public
         /// <summary>
-        /// Prototype projectile; fill this with selected spell later
+        /// DEBUG Prototype projectile; fill this with selected spell later
         /// </summary>
         public SpellData CurrentSpell;
         #endregion
@@ -49,14 +49,30 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// Inputstate for getting button states
         /// </summary>
         private InputState inputState;
+        /// <summary>
+        /// Spells available for Casting (Currently Selected Spells)
+        /// </summary>
         private readonly SpellData[] selectedSpells = new SpellData[SelectableSpellAmount];
+        /// <summary>
+        /// Cooldowns for Spells
+        /// </summary>
         private readonly float[] spellCooldown = new float[SelectableSpellAmount];
+        /// <summary>
+        /// Index for currently selected Spell (in selectedSpells)
+        /// </summary>
         private int selectedSpellIndex = 0;
+        /// <summary>
+        /// Currently running Coroutine for Casting-Animation
+        /// </summary>
+        private Coroutine runningRoutine;
         #endregion
         #endregion
 
         #region Methods
         #region Public
+        /// <summary>
+        /// Selects next available Spell in SelectedSpells
+        /// </summary>
         public void SelectNextSpell()
         {
             int newIndex = MathFunctions.Wrap(selectedSpellIndex + 1, 0, SelectableSpellAmount);
@@ -64,7 +80,9 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
                 newIndex = MathFunctions.Wrap(newIndex + 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
         }
-
+        /// <summary>
+        /// Selects previous available Spell in SelectedSpells
+        /// </summary>
         public void SelectPreviousSpell()
         {
             int newIndex = MathFunctions.Wrap(selectedSpellIndex - 1, 0, SelectableSpellAmount);
@@ -72,7 +90,10 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
                 newIndex = MathFunctions.Wrap(newIndex - 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
         }
-
+        /// <summary>
+        /// Selects Spell by Index (if not null)
+        /// </summary>
+        /// <param name="index">Index to Select</param>
         public void SelectSpell(int index)
         {
             if (index == selectedSpellIndex)
@@ -125,13 +146,15 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// </summary>
         private void CastSpell()
         {
+            if (runningRoutine != null)
+                StopCoroutine(runningRoutine);
             SpellData spell = selectedSpells[selectedSpellIndex];
             // Spawn Spell
             spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
             // Set animation
             bookAnimator.SetBool("Cast", true);
             // TODO: Check if this coroutine might need to be cancelled at some point (e.g. cast->switch spell->cast)
-            StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
+            runningRoutine = StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
             // Set cooldown
             spellCooldown[selectedSpellIndex] = spell.Cooldown;
         }

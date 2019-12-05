@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Avatar
