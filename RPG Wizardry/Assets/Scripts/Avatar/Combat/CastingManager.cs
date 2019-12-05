@@ -184,7 +184,6 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
             castEvent?.Invoke(selectedSpellIndex, spell.Cooldown);
             // Set animation
             bookAnimator.SetBool("Cast", true);
-            // TODO: Check if this coroutine might need to be cancelled at some point (e.g. cast->switch spell->cast)
             runningRoutine = StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
             // Set cooldown
             spellCooldown[selectedSpellIndex] = spell.Cooldown;
