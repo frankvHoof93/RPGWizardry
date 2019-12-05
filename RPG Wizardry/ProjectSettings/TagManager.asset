@@ -18,9 +18,9 @@ TagManager:
   - Projectile
   - Player
   - Enemies
-  - Walls
-  - 
-  - 
+  - Upper Wall
+  - Lower Wall
+  - Back Wall
   - 
   - 
   - 
