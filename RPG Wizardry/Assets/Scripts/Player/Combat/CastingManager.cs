@@ -15,9 +15,16 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <param name="index">Index for Selected Spell</param>
         /// <param name="cooldown">Cooldown after Casting</param>
         public delegate void OnCast(ushort index, float cooldown);
-
+        /// <summary>
+        /// Delegate for Event when setting a new Spell
+        /// </summary>
+        /// <param name="index">Index Spell is set to</param>
+        /// <param name="newSpell">Spell that is set</param>
         public delegate void OnSpellChange(ushort index, SpellData newSpell);
-
+        /// <summary>
+        /// Delegate for Event when selecting a Spell
+        /// </summary>
+        /// <param name="newIndex">Index for selected Spell</param>
         public delegate void OnSelectionChange(ushort newIndex);
         #endregion
 
@@ -112,24 +119,36 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         {
             castEvent -= listener;
         }
-
+        /// <summary>
+        /// Adds Listener to Selection-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
         public void AddSelectionListener(OnSelectionChange listener)
         {
             selectionEvent += listener;
             // Set initial value
             listener.Invoke(selectedSpellIndex);
         }
-
+        /// <summary>
+        /// Removes Listener from Selection-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
         public void RemoveSelectionListener(OnSelectionChange listener)
         {
             selectionEvent -= listener;
         }
-
+        /// <summary>
+        /// Adds Listener to SpellChange-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
         public void AddSpellChangeListener(OnSpellChange listener)
         {
             spellChangeEvent += listener;
         }
-
+        /// <summary>
+        /// Removes Listener from SpellChange-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
         public void RemoveSpellChangeListener(OnSpellChange listener)
         {
             spellChangeEvent -= listener;
@@ -200,11 +219,6 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F1))
-                SelectNextSpell();
-
-
-
             for (int i = 0; i < spellCooldown.Length; i++)
                 spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
             if (inputState.Cast1 && spellCooldown[selectedSpellIndex] == 0)

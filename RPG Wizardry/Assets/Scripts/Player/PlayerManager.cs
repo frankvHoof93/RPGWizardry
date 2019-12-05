@@ -130,7 +130,7 @@ namespace nl.SWEG.RPGWizardry.Player
         /// </summary>
         private void Die()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
         #endregion
         #endregion

@@ -42,7 +42,11 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 
         #region Spells
         [Header("Spells")]
+        /// <summary>
+        /// HUD-Objects for Selected Spells
+        /// </summary>
         [SerializeField]
+        [Tooltip("")]
         private SpellHUD[] spellHuds;
         #endregion
         #endregion
@@ -133,6 +137,10 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         #endregion
 
         #region Spells
+        /// <summary>
+        /// Updates UI for Spell-Selection (Outline)
+        /// </summary>
+        /// <param name="newSelection">Index for Selection</param>
         private void UpdateSpellSelection(ushort newSelection)
         {
             for (ushort i = 0; i < spellHuds.Length; i++)
@@ -143,13 +151,21 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                     spellHuds[i].Deselect();
             }
         }
-
+        /// <summary>
+        /// Updates UI after a Spell has been switched out
+        /// </summary>
+        /// <param name="index">Index for Spell that was switched</param>
+        /// <param name="spellData">Data for new Spell</param>
         private void UpdateSpellUI(ushort index, SpellData spellData)
         {
             spellHuds[index].SetSpell(spellData);
             UpdateSpellCooldown(index, 0); // Set cooldown to 0 after switching
         }
-
+        /// <summary>
+        /// Updates UI for Cooldown after Casting a Spell
+        /// </summary>
+        /// <param name="index">Index for Spell</param>
+        /// <param name="cooldown">Duration of Cooldown</param>
         private void UpdateSpellCooldown(ushort index, float cooldown)
         {
             spellHuds[index].RunCooldown(cooldown);
