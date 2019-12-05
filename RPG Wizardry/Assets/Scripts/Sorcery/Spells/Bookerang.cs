@@ -51,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected override void Start()
         {
             base.Start();
-            if (AvatarManager.Exists)
+            if (PlayerManager.Exists)
             {
                 //Get the location of the player (to return to later)
                 playerLocation = PlayerManager.Instance.transform;
