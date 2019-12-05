@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.PlayerInput;
+﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Avatar.Combat
+namespace nl.SWEG.RPGWizardry.Player.Combat
 {
     [RequireComponent(typeof(InputState))]
     public class AimingManager : MonoBehaviour

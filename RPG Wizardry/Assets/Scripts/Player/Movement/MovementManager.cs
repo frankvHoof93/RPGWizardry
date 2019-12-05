@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.PlayerInput;
+﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Avatar.Movement
+namespace nl.SWEG.RPGWizardry.Player.Movement
 {
     [RequireComponent(typeof(Animator), typeof(InputState))]
     public class MovementManager : MonoBehaviour

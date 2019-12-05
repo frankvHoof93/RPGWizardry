@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.PlayerInput
+namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
     public class SpellCraftingInput : MonoBehaviour
     {
