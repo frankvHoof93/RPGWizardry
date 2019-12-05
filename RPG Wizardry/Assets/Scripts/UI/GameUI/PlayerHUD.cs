@@ -7,19 +7,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 {
     public class PlayerHUD : MonoBehaviour
     {
-        #region InnerTypes
-        /// <summary>
-        /// Struct used to store Colors for HealthBar
-        /// </summary>
-        [Serializable]
-        private struct HealthColors
-        {
-            public Color fullHealth;
-            public Color mediumHealth;
-            public Color lowHealth;
-        }
-        #endregion
-
         #region Variables
         #region Health
         [Header("Health")]
@@ -30,17 +17,11 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Fill-UI for HealthBar")]
         private Image healthFillBar;
         /// <summary>
-        /// Text-UI for HealthBar
+        /// DEBUG Text-UI for HealthBar
         /// </summary>
         [SerializeField]
         [Tooltip("Text-UI for HealthBar")]
         private Text healthText;
-        /// <summary>
-        /// Colors for FillBar
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Colors for FillBar")]
-        private HealthColors colors;
         #endregion
 
         #region Items
@@ -88,18 +69,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.Inventory?.RemoveGoldListener(UpdateGoldAmount);
             }
         }
-        /// <summary>
-        /// Sets default values
-        /// </summary>
-        private void Reset()
-        {
-            colors = new HealthColors
-            {
-                fullHealth = Color.green,
-                mediumHealth = Color.yellow,
-                lowHealth = Color.red
-            };
-        }
         #endregion
 
         #region Private
@@ -114,12 +83,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
             healthText.text = newHealth + "/" + maxHealth;
             float healthPercentage = (float)newHealth / (float)maxHealth;
             healthFillBar.fillAmount = healthPercentage;
-            if (healthPercentage < 0.25f)
-                healthFillBar.color = colors.lowHealth;
-            else if (healthPercentage < 0.67f)
-                healthFillBar.color = colors.mediumHealth;
-            else
-                healthFillBar.color = colors.fullHealth;
             if (change != 0)
             {
                 // TODO: Change-Popup/Effect?
