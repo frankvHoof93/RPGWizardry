@@ -1,5 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using nl.SWEG.RPGWizardry.Utils.Functions;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
@@ -49,17 +51,26 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Runs AI for BookEnemy
         /// </summary>
         /// <param name="player">Reference to Player</param>
-        protected override void UpdateEnemy(AvatarManager player)
+        protected override void UpdateEnemy(PlayerManager player)
         {
             // Run Cooldown-Timer
             if (attackTimer > 0)
                 attackTimer -= Time.deltaTime;
             // Look At Player
             Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
+            toPlayer.Normalize();
             float rotationAngle = Vector2.SignedAngle(transform.right, toPlayer);
             float maxAngle = data.Speed * Time.deltaTime;
+
             if (Mathf.Abs(rotationAngle) <= maxAngle) // Full rotation
-                transform.right = toPlayer;
+            {
+                // angle for Fwd
+                float absAngle = Vector2.SignedAngle(Vector2.up, toPlayer);
+                // Get up from fwd
+                absAngle += 90f;
+                // Set up to transform
+                transform.rotation = Quaternion.Euler(0, 0, absAngle);
+            }                
             else // Partial rotation
             {
                 if (rotationAngle < 0)
@@ -81,13 +92,40 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
         #endregion
 
+        #region Unity
+        /// <summary>
+        /// Sets ElementType to Animator
+        /// </summary>
+        protected override void Start()
+        {
+            base.Start();
+            animator.SetInteger("ElementType", (int)spell.Element);
+            animator.SetBool("Attacking", false);
+            AnimateEnemy();
+        }
+
+        /// <summary>
+        /// Sets Rotation to Animator
+        /// </summary>
+        protected override void AnimateEnemy()
+        {
+            // Rotation from 0-3 where 0 => right & 1 => up
+            int rotation = Mathf.RoundToInt(transform.rotation.eulerAngles.z / 90f) % 4;
+            animator.SetInteger("Rotation", rotation);
+        }
+        #endregion
+
         #region Private
         /// <summary>
         /// Performs attack
         /// </summary>
         private void Attack()
         {
-            spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            animator.SetBool("Attacking", true);
+            List<Projectile> projectiles = spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            for (int i = 0; i < projectiles.Count; i++)
+                projectiles[i].transform.localScale *= .75f; // Fire Small-Scale objects (compared to what the Player fires)
+            StartCoroutine(CoroutineMethods.RunDelayed(() => {animator.SetBool("Attacking", false);}, .75f));
         }
         #endregion
         #endregion

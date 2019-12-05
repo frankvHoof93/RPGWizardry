@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
@@ -33,8 +34,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [SerializeField]
         private GameObject projectilePrefab;
 
-        public void SpawnSpell(Vector2 position, Vector2 direction, LayerMask targetingMask)
+        public List<Projectile> SpawnSpell(Vector2 position, Vector2 direction, LayerMask targetingMask)
         {
+            List<Projectile> returnVal = new List<Projectile>();
             direction.Normalize();
             switch (spellPattern)
             {
@@ -45,6 +47,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                     Projectile p = projectile.GetComponent<Projectile>();
                     p.SetData(this, targetingMask);
                     Destroy(projectile, projectileLifeTime);
+                    returnVal.Add(p);
                     break;
                 case SpellPattern.cone:
                     break;
@@ -53,6 +56,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                 default:
                     break;
             }
+            return returnVal;
         }
     }
 }

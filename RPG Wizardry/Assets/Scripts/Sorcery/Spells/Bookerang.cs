@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using nl.SWEG.RPGWizardry.Avatar;
+using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
@@ -50,12 +50,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         private void Start()
         {
-            if (AvatarManager.Exists)
+            if (PlayerManager.Exists)
             {
                 //Get the location of the player (to return to later)
-                playerLocation = AvatarManager.Instance.transform;
+                playerLocation = PlayerManager.Instance.transform;
                 //Turn the "crosshair" book invisible so it looks like this projectile IS the book
-                bookRenderer = AvatarManager.Instance.BookRenderer;
+                bookRenderer = PlayerManager.Instance.BookRenderer;
                 bookRenderer.enabled = false;
             }
         }
