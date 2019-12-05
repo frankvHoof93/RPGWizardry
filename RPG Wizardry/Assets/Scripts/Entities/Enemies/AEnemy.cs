@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Avatar;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
@@ -6,6 +6,7 @@ using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
+    [RequireComponent(typeof(Animator))]
     public abstract class AEnemy : MonoBehaviour, IHealth
     {
         #region Variables
@@ -22,6 +23,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         [SerializeField]
         protected EnemyData data;
+        /// <summary>
+        /// Animator for Enemy
+        /// </summary>
+        protected Animator animator;
         #endregion
 
         #region Private
@@ -60,9 +65,17 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         #region Unity
         /// <summary>
+        /// Grabs reference to Animator
+        /// </summary>
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        /// <summary>
         /// Sets default values
         /// </summary>
-        private void Start()
+        protected virtual void Start()
         {
             Health = data.Health;
             enableTime = Time.time + data.SpawnCooldown.Random;
@@ -73,13 +86,15 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Update()
         {
-            if (AvatarManager.Exists && Time.time >= enableTime)
-                UpdateEnemy(AvatarManager.Instance);
+            if (PlayerManager.Exists && Time.time >= enableTime)
+                UpdateEnemy(PlayerManager.Instance);
+            AnimateEnemy();
         }
         #endregion
 
         #region Protected
-        protected abstract void UpdateEnemy(AvatarManager player);
+        protected abstract void UpdateEnemy(PlayerManager player);
+        protected abstract void AnimateEnemy();
         #endregion
 
         #region Private
