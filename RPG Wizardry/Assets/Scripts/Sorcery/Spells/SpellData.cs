@@ -14,6 +14,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         public float LifeTime => projectileLifeTime;
         public float ProjectileSpeed => projectileSpeed;
 
+        public Sprite Sprite => spellSprite;
+
+        public Sprite CooldownSprite => cooldownSprite;
+
         [SerializeField]
         private string spellName;
         [SerializeField]
@@ -31,6 +35,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         private Element spellElement;
         [SerializeField]
         private float spellCooldown;
+
+        [SerializeField]
+        private Sprite spellSprite;
+
+        [SerializeField]
+        private Sprite cooldownSprite;
         [SerializeField]
         private GameObject projectilePrefab;
 

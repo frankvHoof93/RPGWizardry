@@ -3,10 +3,11 @@ using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using System;
 using UnityEngine;
+using nl.SWEG.RPGWizardry.Player.Combat;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
-    [RequireComponent(typeof(PlayerInventory))]
+    [RequireComponent(typeof(PlayerInventory), typeof(CastingManager))]
     public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth
     {
         #region Variables
@@ -27,6 +28,10 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Inventory for Player
         /// </summary>
         internal PlayerInventory Inventory { get; private set; }
+        /// <summary>
+        /// CastingManager for Player
+        /// </summary>
+        internal CastingManager CastingManager { get; private set; }
         #endregion
 
         #region Editor
@@ -113,6 +118,7 @@ namespace nl.SWEG.RPGWizardry.Player
         protected override void Awake()
         {
             Inventory = GetComponent<PlayerInventory>();
+            CastingManager = GetComponent<CastingManager>();
             base.Awake();
             Health = maxHealth;
         }
@@ -124,7 +130,7 @@ namespace nl.SWEG.RPGWizardry.Player
         /// </summary>
         private void Die()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         #endregion
         #endregion

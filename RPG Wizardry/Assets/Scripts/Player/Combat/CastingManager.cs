@@ -15,6 +15,10 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <param name="index">Index for Selected Spell</param>
         /// <param name="cooldown">Cooldown after Casting</param>
         public delegate void OnCast(ushort index, float cooldown);
+
+        public delegate void OnSpellChange(ushort index, SpellData newSpell);
+
+        public delegate void OnSelectionChange(ushort newIndex);
         #endregion
 
         #region Variables
@@ -22,7 +26,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <summary>
         /// Amount of slots available for Spells
         /// </summary>
-        private const ushort SelectableSpellAmount = 4;
+        public const ushort SelectableSpellAmount = 4;
         #endregion
 
         #region Public
@@ -78,11 +82,60 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Event fired when Casting a Spell
         /// </summary>
         private event OnCast castEvent;
+        /// <summary>
+        /// Event fired when Spell-Selection changes
+        /// </summary>
+        private event OnSelectionChange selectionEvent;
+        /// <summary>
+        /// Event fired when Spell Changes
+        /// </summary>
+        private event OnSpellChange spellChangeEvent;
         #endregion
         #endregion
 
         #region Methods
         #region Public
+        #region EventListeners
+        /// <summary>
+        /// Adds Listener to Cast-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddCastListener(OnCast listener)
+        {
+            castEvent += listener;
+        }
+        /// <summary>
+        /// Removes Listener from Cast-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveCastListener(OnCast listener)
+        {
+            castEvent -= listener;
+        }
+
+        public void AddSelectionListener(OnSelectionChange listener)
+        {
+            selectionEvent += listener;
+            // Set initial value
+            listener.Invoke(selectedSpellIndex);
+        }
+
+        public void RemoveSelectionListener(OnSelectionChange listener)
+        {
+            selectionEvent -= listener;
+        }
+
+        public void AddSpellChangeListener(OnSpellChange listener)
+        {
+            spellChangeEvent += listener;
+        }
+
+        public void RemoveSpellChangeListener(OnSpellChange listener)
+        {
+            spellChangeEvent -= listener;
+        }
+        #endregion
+
         /// <summary>
         /// Selects next available Spell in SelectedSpells
         /// </summary>
@@ -115,22 +168,6 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
                 return; // No Spell in slot
             selectedSpellIndex = index;
         }
-        /// <summary>
-        /// Adds Listener to Cast-Event
-        /// </summary>
-        /// <param name="listener">Listener to Add</param>
-        public void AddCastListener(OnCast listener)
-        {
-            castEvent += listener;
-        }
-        /// <summary>
-        /// Removes Listener from Cast-Event
-        /// </summary>
-        /// <param name="listener">Listener to Remove</param>
-        public void RemoveCastListener(OnCast listener)
-        {
-            castEvent -= listener;
-        }
         #endregion
 
         #region Internal
@@ -139,10 +176,11 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         /// <param name="spell">Spell to set</param>
         /// <param name="index">Index to set Spell to</param>
-        internal void SetSpell(SpellData spell, int index)
+        internal void SetSpell(SpellData spell, ushort index)
         {
             selectedSpells[index] = spell;
             spellCooldown[index] = 0;
+            spellChangeEvent?.Invoke(index, spell);
         }
         #endregion
 
@@ -162,6 +200,11 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.F1))
+                SelectNextSpell();
+
+
+
             for (int i = 0; i < spellCooldown.Length; i++)
                 spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
             if (inputState.Cast1 && spellCooldown[selectedSpellIndex] == 0)
