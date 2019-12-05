@@ -8,12 +8,21 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
     [RequireComponent(typeof(InputState))]
     public class CastingManager : MonoBehaviour
     {
+        #region InnerTypes
+        /// <summary>
+        /// Delegate for Event when Casting a Spell
+        /// </summary>
+        /// <param name="index">Index for Selected Spell</param>
+        /// <param name="cooldown">Cooldown after Casting</param>
+        public delegate void OnCast(ushort index, float cooldown);
+        #endregion
+
         #region Variables
         #region Constants
         /// <summary>
         /// Amount of slots available for Spells
         /// </summary>
-        private const int SelectableSpellAmount = 4;
+        private const ushort SelectableSpellAmount = 4;
         #endregion
 
         #region Public
@@ -60,11 +69,15 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// <summary>
         /// Index for currently selected Spell (in selectedSpells)
         /// </summary>
-        private int selectedSpellIndex = 0;
+        private ushort selectedSpellIndex = 0;
         /// <summary>
         /// Currently running Coroutine for Casting-Animation
         /// </summary>
         private Coroutine runningRoutine;
+        /// <summary>
+        /// Event fired when Casting a Spell
+        /// </summary>
+        private event OnCast castEvent;
         #endregion
         #endregion
 
@@ -75,9 +88,9 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// </summary>
         public void SelectNextSpell()
         {
-            int newIndex = MathFunctions.Wrap(selectedSpellIndex + 1, 0, SelectableSpellAmount);
+            ushort newIndex = (ushort)MathFunctions.Wrap(selectedSpellIndex + 1, 0, SelectableSpellAmount);
             while (selectedSpells[newIndex] == null) // No Spell in Slot
-                newIndex = MathFunctions.Wrap(newIndex + 1, 0, SelectableSpellAmount); // Try next slot
+                newIndex = (ushort)MathFunctions.Wrap(newIndex + 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
         }
         /// <summary>
@@ -85,22 +98,38 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
         /// </summary>
         public void SelectPreviousSpell()
         {
-            int newIndex = MathFunctions.Wrap(selectedSpellIndex - 1, 0, SelectableSpellAmount);
+            ushort newIndex = (ushort)MathFunctions.Wrap(selectedSpellIndex - 1, 0, SelectableSpellAmount);
             while (selectedSpells[newIndex] == null) // No Spell in Slot
-                newIndex = MathFunctions.Wrap(newIndex - 1, 0, SelectableSpellAmount); // Try next slot
+                newIndex = (ushort)MathFunctions.Wrap(newIndex - 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
         }
         /// <summary>
         /// Selects Spell by Index (if not null)
         /// </summary>
         /// <param name="index">Index to Select</param>
-        public void SelectSpell(int index)
+        public void SelectSpell(ushort index)
         {
             if (index == selectedSpellIndex)
                 return; // Already selected
             if (selectedSpells[index] == null)
                 return; // No Spell in slot
             selectedSpellIndex = index;
+        }
+        /// <summary>
+        /// Adds Listener to Cast-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddCastListener(OnCast listener)
+        {
+            castEvent += listener;
+        }
+        /// <summary>
+        /// Removes Listener from Cast-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveCastListener(OnCast listener)
+        {
+            castEvent -= listener;
         }
         #endregion
 
@@ -151,6 +180,8 @@ namespace nl.SWEG.RPGWizardry.Avatar.Combat
             SpellData spell = selectedSpells[selectedSpellIndex];
             // Spawn Spell
             spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
+            // Run Event
+            castEvent?.Invoke(selectedSpellIndex, spell.Cooldown);
             // Set animation
             bookAnimator.SetBool("Cast", true);
             // TODO: Check if this coroutine might need to be cancelled at some point (e.g. cast->switch spell->cast)
