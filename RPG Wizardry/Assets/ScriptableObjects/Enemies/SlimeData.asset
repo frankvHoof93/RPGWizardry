@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Slime
   enemyHealth: 10
   enemyAttack: 10
-  enemySpeed: 30
+  enemySpeed: 2
   spawnCooldown:
     Min: 0
     Max: 3
