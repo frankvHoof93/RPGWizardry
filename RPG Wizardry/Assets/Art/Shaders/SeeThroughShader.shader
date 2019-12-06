@@ -65,33 +65,20 @@
 			}
 
 			sampler2D _MainTex;
-			sampler2D _AlphaTex;
-			float _UseSeeThrough;
 			float _AlphaSplitEnabled;
 			float _SeeThroughAlpha;
 			float _SeeThroughRadius;
 
 			
-        UNITY_INSTANCING_BUFFER_START(Props)
-           UNITY_DEFINE_INSTANCED_PROP(fixed4, _SeeThroughCenter)
-        UNITY_INSTANCING_BUFFER_END(Props)
-
-			fixed4 SampleSpriteTexture (float2 uv)
-			{
-				fixed4 color = tex2D (_MainTex, uv);
-
-#if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
-				if (_AlphaSplitEnabled)
-					color.a = tex2D (_AlphaTex, uv).r;
-#endif //UNITY_TEXTURE_ALPHASPLIT_ALLOWED
-
-				return color;
-			}
+			UNITY_INSTANCING_BUFFER_START(Props)
+				UNITY_DEFINE_INSTANCED_PROP(fixed4, _SeeThroughCenter)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UseSeeThrough)
+			UNITY_INSTANCING_BUFFER_END(Props)
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
-				if (_UseSeeThrough == 1)
+				fixed4 c = tex2D (_MainTex, IN.texcoord) * IN.color;
+				if (UNITY_ACCESS_INSTANCED_PROP(Props, _UseSeeThrough) == 1)
 					c.a = IsInCircle(IN.vertex, UNITY_ACCESS_INSTANCED_PROP(Props, _SeeThroughCenter).xy, _SeeThroughRadius) ? _SeeThroughAlpha : c.a;
 				c.rgb *= c.a;
 				return c;
