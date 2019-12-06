@@ -63,7 +63,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
 
         /// <summary>
-        /// Triggered when slime dies
+        /// Triggered when slime dies, updates animator and spawns babies if big
         /// </summary>
         /// <param name="player">Reference to Player</param>
         protected override void OnDeath()
