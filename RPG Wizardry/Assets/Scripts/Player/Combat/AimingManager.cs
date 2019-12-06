@@ -64,14 +64,14 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             {
                 if (BookPivot.localPosition.z < 1)
                 {
-                    BookPivot.localPosition = new Vector3(0, 0, 1);
+                    BookPivot.localPosition = new Vector3(0, 0.5f, 1);
                 }
             }
             else if (BookPivot.rotation.z < 0)
             {
                 if (BookPivot.localPosition.z > -1)
                 {
-                    BookPivot.localPosition = new Vector3(0, 0, -1);
+                    BookPivot.localPosition = new Vector3(0, 0.5f, -1);
                 }
             }
         }

@@ -48,8 +48,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Get references for the player position and renderer of the "crosshair" book
         /// </summary>
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             if (PlayerManager.Exists)
             {
                 //Get the location of the player (to return to later)
