@@ -8,6 +8,12 @@ namespace nl.SWEG.RPGWizardry.Editor.PropertyDrawers
     [CustomPropertyDrawer(typeof(TagSelectorAttribute))]
     public class TagSelectorPropertyDrawer : PropertyDrawer
     {
+        /// <summary>
+        /// Draws Tag-Property in Inspector
+        /// </summary>
+        /// <param name="position">Rect in Inspector-Window</param>
+        /// <param name="property">Property to draw for</param>
+        /// <param name="label">Label for Property</param>
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType == SerializedPropertyType.String)

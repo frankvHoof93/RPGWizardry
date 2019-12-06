@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Utils.Enums
 {
+    /// <summary>
+    /// Direction in 2D-Space
+    /// </summary>
     [Flags]
     public enum Direction
     {
