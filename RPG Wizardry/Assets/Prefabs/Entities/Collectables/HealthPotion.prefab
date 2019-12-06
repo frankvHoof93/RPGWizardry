@@ -121,4 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Player
-  healAmount: 0
+  healAmount: 25

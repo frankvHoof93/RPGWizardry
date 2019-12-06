@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Collectables
 {
-    public class DustPile : ACollectable
+    public class GoldPile : ACollectable
     {
         #region Variables
         /// <summary>
-        /// Amount of Dust in Pile
+        /// Amount of Gold in Pile
         /// </summary>
         [SerializeField]
-        [Tooltip("Amount of Dust in Pile")]
+        [Tooltip("Amount of Gold in Pile")]
         private uint Amount = 0;
         #endregion
 
         #region Methods
         /// <summary>
-        /// Sets amount of Dust in Pile
+        /// Sets amount of Gold in Pile
         /// </summary>
         /// <param name="amount">Amount to Set</param>
         internal void SetAmount(uint amount)
@@ -30,7 +30,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <param name="target">Inventory to Add to</param>
         protected override bool OnCollect(PlayerInventory target)
         {
-            target.AddDust(Amount);
+            target.AddGold(Amount);
             return true;
         }
         #endregion
