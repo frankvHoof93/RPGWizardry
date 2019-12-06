@@ -39,7 +39,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         public override void CheckIfSolved()
         {
-            if(ImageTransform.localPosition.y <= CorrectPosition + 10 && ImageTransform.localPosition.y >= CorrectPosition - 10)
+            if(ImageTransform.localPosition.y <= CorrectPosition + range && ImageTransform.localPosition.y >= CorrectPosition - range)
             {
                 Solved = true;
             }
