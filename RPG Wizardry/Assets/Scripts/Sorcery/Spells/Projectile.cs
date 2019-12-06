@@ -85,6 +85,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         protected virtual void Effect(Collider2D collision)
         {
+            GetComponent<Collider2D>().enabled = false;
             //oh man i can feel the effect
             collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
             Destroy(gameObject); // TODO: Animation?

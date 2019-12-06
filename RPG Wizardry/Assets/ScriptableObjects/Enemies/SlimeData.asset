@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862005a3efda0d142bf061ab94c557b2, type: 3}
   m_Name: SlimeData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: 
-  enemyHealth: 0
-  enemyAttack: 0
-  enemySpeed: 0
+  enemyName: Slime
+  enemyHealth: 10
+  enemyAttack: 10
+  enemySpeed: 2
+  spawnCooldown:
+    Min: 0
+    Max: 3
   droppedLoot:
     dust:
-      amount: 0
-      chance: 0
+      amount: 25
+      chance: 0.5
     gold:
       amount: 0
       chance: 0
