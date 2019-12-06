@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Combat
 {
-    [RequireComponent(typeof(InputManager))]
+    [RequireComponent(typeof(PlayerManager))]
     public class AimingManager : MonoBehaviour
     {
         #region Variables
@@ -13,9 +13,9 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         [SerializeField]
         private Transform BookPivot;
         /// <summary>
-        /// InputState for Aiming
+        /// Manager for Player
         /// </summary>
-        private InputManager input;
+        private PlayerManager player;
         /// <summary>
         /// Animator for the book
         /// </summary>
@@ -30,7 +30,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Start()
         {
-            input = GetComponent<InputManager>();
+            player = GetComponent<PlayerManager>();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         private void PivotToMouse()
         {
             //Get location to look at
-            Vector3 lookPos = input.State.AimingData;
+            Vector3 lookPos = player.InputManager.State.AimingData;
             float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
             //Rotate to look at mouse/controller direction
             BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

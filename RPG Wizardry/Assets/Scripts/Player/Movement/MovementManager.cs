@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Movement
 {
-    [RequireComponent(typeof(Animator), typeof(InputManager))]
+    [RequireComponent(typeof(Animator), typeof(PlayerManager))]
     public class MovementManager : MonoBehaviour
     {
         #region Variables
@@ -22,9 +22,9 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private Animator animator;
         /// <summary>
-        /// InputManager for Movement
+        /// Manager for Player
         /// </summary>
-        private InputManager input;
+        private PlayerManager player;
         #endregion
         #endregion
 
@@ -36,7 +36,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         private void Start()
         {
             animator = GetComponent<Animator>();
-            input = GetComponent<InputManager>();
+            player = GetComponent<PlayerManager>();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(input.State.MovementData);
+            Movement(player.InputManager.State.MovementData);
         }
         #endregion
 
