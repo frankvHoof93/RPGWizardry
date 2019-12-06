@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
@@ -48,8 +49,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Get references for the player position and renderer of the "crosshair" book
         /// </summary>
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             if (PlayerManager.Exists)
             {
                 //Get the location of the player (to return to later)
@@ -118,6 +120,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //Bool check so it doesnt get stuck on anything on the way back
             if (!back)
             {
+                collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
                 Return();
             }
         }

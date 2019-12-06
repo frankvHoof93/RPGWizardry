@@ -26,7 +26,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         #region Private
         private float range;
         #endregion
-        public ControlFragment(Image image, Transform transform, float correctPosition, float range) : base(image, transform)
+        public ControlFragment(float correctPosition, float range) : base()
         {
             CorrectPosition = correctPosition;
             Solved = false;

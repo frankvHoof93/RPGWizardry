@@ -121,4 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Player
-  Amount: 0
+  Amount: 5

@@ -14,7 +14,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// <summary>
         /// 
         /// </summary>
-        public Image FragmentImage { get; private set; }
+        public Image FragmentImage { get; set; }
 
         /// <summary>
         /// Texture data for the image
@@ -31,10 +31,14 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public Transform ImageTransform { get; set; }
         #endregion
 
-        public Fragment(Image image, Transform transform)
+        //public Fragment(Image image, Transform transform)
+        //{
+        //    this.FragmentImage = image;
+        //    this.ImageTransform = transform;
+        //}
+
+        public Fragment()
         {
-            this.FragmentImage = image;
-            this.ImageTransform = transform;
         }
         #endregion
 

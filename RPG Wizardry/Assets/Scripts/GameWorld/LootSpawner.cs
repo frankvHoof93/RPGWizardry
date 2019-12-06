@@ -12,7 +12,12 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         [SerializeField]
         private GameObject[] lootPrefabs = new GameObject[4];
 
-        // TODO: Use SingletonBehaviour
+        /// <summary>
+        /// Spawns Loot
+        /// </summary>
+        /// <param name="loot">Loot to spawn</param>
+        /// <param name="position">Position to spawn at</param>
+        /// <param name="amount">Amount to set (for DustPile)</param>
         public void SpawnLoot(Collectables loot, Vector3 position, uint amount = 1)
         {
             GameObject spawnedObject = Instantiate(lootPrefabs[(int)loot]);

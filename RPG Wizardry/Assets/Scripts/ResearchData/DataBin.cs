@@ -21,13 +21,18 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
         private List<DataSet> DataSets;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private bool IsSolved;
+        /// <summary>
         /// Definition of how bin will be divided into DataSets
         /// </summary>
         private int setSize;
         #endregion
 
-        public DataBin(int setSize)
+        public DataBin(List<Fragment> bin, int setSize)
         {
+            Bin = bin;
             this.setSize = setSize;
             DataSets = new List<DataSet>();
             for (int i= 0; i < this.setSize; i++)
@@ -36,6 +41,33 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
             }
 
             SplitBin();
+        }
+
+        public bool IsDataBinSolved()
+        {
+            int solvedCount = 0;
+            for (int i = 0; i < this.setSize; i++)
+            {
+                if (DataSets[i].IsSolved)
+                    solvedCount++;
+            }
+            if(solvedCount == setSize)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public DataSet UnsolvedDataSet()
+        {
+            for (int i=0; i < this.setSize; i++)
+            {
+                if (!DataSets[i].IsSolved)
+                    return DataSets[i];
+            }
+            return null;
         }
         #endregion
         #region Split
@@ -53,7 +85,6 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
 
         }
         #endregion
-
     }
     #region Utility
     /// <summary>

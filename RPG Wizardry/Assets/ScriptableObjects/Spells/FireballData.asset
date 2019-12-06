@@ -19,5 +19,7 @@ MonoBehaviour:
   projectileLifeTime: 4
   spellElement: 1
   spellCooldown: 2
+  spellSprite: {fileID: 21300000, guid: e09d0bae001eeea47bfab40e58d58818, type: 3}
+  cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
   projectilePrefab: {fileID: 4998689496432118957, guid: bbbbc478b0354b94a8cd103e117e4f99,
     type: 3}

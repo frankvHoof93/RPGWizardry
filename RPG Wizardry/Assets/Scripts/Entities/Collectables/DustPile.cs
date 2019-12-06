@@ -15,6 +15,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Sets amount of Dust in Pile
+        /// </summary>
+        /// <param name="amount">Amount to Set</param>
         internal void SetAmount(uint amount)
         {
             Amount = amount;

@@ -1,5 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
-using System;
+using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +39,16 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Text-UI for Gold-Amount")]
         private Text goldText;
         #endregion
+
+        #region Spells
+        [Header("Spells")]
+        /// <summary>
+        /// HUD-Objects for Selected Spells
+        /// </summary>
+        [SerializeField]
+        [Tooltip("")]
+        private SpellHUD[] spellHuds;
+        #endregion
         #endregion
 
         #region Methods
@@ -54,6 +64,9 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.AddHealthChangeListener(UpdateHealthBar);
                 player.Inventory?.AddDustListener(UpdateDustAmount);
                 player.Inventory?.AddGoldListener(UpdateGoldAmount);
+                player.CastingManager?.AddSelectionListener(UpdateSpellSelection);
+                player.CastingManager?.AddSpellChangeListener(UpdateSpellUI);
+                player.CastingManager?.AddCastListener(UpdateSpellCooldown);
             }
         }
         /// <summary>
@@ -67,11 +80,15 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.RemoveHealthChangeListener(UpdateHealthBar);
                 player.Inventory?.RemoveDustListener(UpdateDustAmount);
                 player.Inventory?.RemoveGoldListener(UpdateGoldAmount);
+                player.CastingManager?.RemoveSelectionListener(UpdateSpellSelection);
+                player.CastingManager?.RemoveSpellChangeListener(UpdateSpellUI);
+                player.CastingManager?.RemoveCastListener(UpdateSpellCooldown);
             }
         }
         #endregion
 
         #region Private
+        #region Health
         /// <summary>
         /// Updates HealthBar
         /// </summary>
@@ -88,6 +105,9 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 // TODO: Change-Popup/Effect?
             }
         }
+        #endregion
+
+        #region Inventory
         /// <summary>
         /// Updates Dust-Amount
         /// </summary>
@@ -114,6 +134,43 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 // TODO: Change-Popup/Effect?
             }
         }
+        #endregion
+
+        #region Spells
+        /// <summary>
+        /// Updates UI for Spell-Selection (Outline)
+        /// </summary>
+        /// <param name="newSelection">Index for Selection</param>
+        private void UpdateSpellSelection(ushort newSelection)
+        {
+            for (ushort i = 0; i < spellHuds.Length; i++)
+            {
+                if (i == newSelection)
+                    spellHuds[i].Select();
+                else
+                    spellHuds[i].Deselect();
+            }
+        }
+        /// <summary>
+        /// Updates UI after a Spell has been switched out
+        /// </summary>
+        /// <param name="index">Index for Spell that was switched</param>
+        /// <param name="spellData">Data for new Spell</param>
+        private void UpdateSpellUI(ushort index, SpellData spellData)
+        {
+            spellHuds[index].SetSpell(spellData);
+            UpdateSpellCooldown(index, 0); // Set cooldown to 0 after switching
+        }
+        /// <summary>
+        /// Updates UI for Cooldown after Casting a Spell
+        /// </summary>
+        /// <param name="index">Index for Spell</param>
+        /// <param name="cooldown">Duration of Cooldown</param>
+        private void UpdateSpellCooldown(ushort index, float cooldown)
+        {
+            spellHuds[index].RunCooldown(cooldown);
+        }
+        #endregion
         #endregion
         #endregion
     }

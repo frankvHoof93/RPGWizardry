@@ -46,26 +46,26 @@ namespace nl.SWEG.RPGWizardry.Utils
             }
 
             // Loop across chromosomes
-            for (int i = 0; i < data.GetLength(0) -1; i++)
-            {
-                Fragment chromosome = new Fragment(images[i], images[i].transform);
+            ////for (int i = 0; i < data.GetLength(0) -1; i++)
+            ////{
+            ////    Fragment chromosome = new Fragment(images[i], images[i].transform);
                 
-                chromosome.ImgData = data.GetRow(i);
+            ////    chromosome.ImgData = data.GetRow(i);
 
-                Texture2D imgTex = (Texture2D)chromosome.FragmentImage.mainTexture;
-                ClearTexture(imgTex);
+            ////    Texture2D imgTex = (Texture2D)chromosome.FragmentImage.mainTexture;
+            ////    ClearTexture(imgTex);
 
-                // Loop across data for chromosome
-                for (int j = 0; j < chromosome.ImgData.Length -1; j++)
-                {
-                    // Add Pixel to Img
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(chromosome.ImgData[j] * imgTex.height), Color.black);
-                }
-                imgTex.Apply();
-                dataSet.Fragments.Add(chromosome);    
-            }
-            ControlFragment control = new ControlFragment(images[14], images[14].transform, -20, 10);
-            dataSet.Fragments.Add(control);
+            ////    // Loop across data for chromosome
+            ////    for (int j = 0; j < chromosome.ImgData.Length -1; j++)
+            ////    {
+            ////        // Add Pixel to Img
+            ////        imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(chromosome.ImgData[j] * imgTex.height), Color.black);
+            ////    }
+            ////    imgTex.Apply();
+            ////    dataSet.Fragments.Add(chromosome);    
+            ////}
+            ////ControlFragment control = new ControlFragment(images[14], images[14].transform, -20, 10);
+            ////dataSet.Fragments.Add(control);
         }
 
         private void Update()
