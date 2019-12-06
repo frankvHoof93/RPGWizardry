@@ -1,30 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
     [RequireComponent(typeof(Collider2D))]
-    public class BackwallManager : MonoBehaviour
+    public abstract class OpacityManager : MonoBehaviour
     {
         #region Variables
         /// <summary>
         /// The filter that makes sure only the player is able to trigger the methods.
         /// </summary>
         [SerializeField]
-        private ContactFilter2D ContactFilter;
-
-        /// <summary>
-        /// The wall tilemaps.
-        /// </summary>
-        [Space]
-        [SerializeField]
-        private List<Tilemap> Walls;
+        private ContactFilter2D contactFilter;
 
         /// <summary>
         /// The trigger that checks if the player enters it.
         /// </summary>
-        private Collider2D Collider;
+        private Collider2D collider;
         #endregion
 
         #region Methods
@@ -33,20 +26,27 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Uses Collider.OverlapCollider() to check if there are any Players or enemies in the collider.
         /// </summary>
         /// <returns>True if the collider is empty, false if it is not.</returns>
-        private bool GetOverlapData()
+        private int GetOverlapData()
         {
             List<Collider2D> results = new List<Collider2D>();
-            return Collider.OverlapCollider(ContactFilter, results) >= 1;
+            int output = collider.OverlapCollider(contactFilter, results);
+            return output;
         }
+
+        /// <summary>
+        /// Changed the alpha of all relevant objects.
+        /// </summary>
+        /// <param name="a">The alpha value the objects need to be changed to</param>
+        protected abstract void ChangeAlpha(float a);
         #endregion
 
         #region Unity
         /// <summary>
         /// Gets the collider.
         /// </summary>
-        void Start()
+        protected void Start()
         {
-            Collider = GetComponent<Collider2D>();
+            collider = GetComponent<Collider2D>();
         }
 
         /// <summary>
@@ -55,14 +55,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="collision">The thing entering the collider.</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //Check if there is one or more things in the collider.
-            if (GetOverlapData())
+            //Check if the object is only hit by the Player.
+            if (collision.gameObject.layer == 11 && GetOverlapData() == 1)
             {
-                //Set the alpha of each tilemap to half.
-                foreach (Tilemap s in Walls)
-                {
-                    s.color = new Color(s.color.r, s.color.g, s.color.b, 0.5f);
-                }
+                //Set the alpha of the renderer to half.
+                ChangeAlpha(0.5f);
             }
         }
 
@@ -73,13 +70,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void OnTriggerExit2D(Collider2D collision)
         {
             //If there is nothing else in the trigger.
-            if (!GetOverlapData())
+            if (GetOverlapData() == 0)
             {
-                //Set the alpha of each tilemap to full.
-                foreach (Tilemap s in Walls)
-                {
-                    s.color = new Color(s.color.r, s.color.g, s.color.b, 1f);
-                }
+                //Set the alpha of the renderer to full.
+                ChangeAlpha(1);
             }
         }
         #endregion

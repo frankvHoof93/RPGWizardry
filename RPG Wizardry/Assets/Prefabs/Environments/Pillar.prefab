@@ -89,8 +89,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2648290261274794170}
   - component: {fileID: 2648290261274794180}
-  - component: {fileID: 2648290261274794171}
   - component: {fileID: 7098974967532857816}
+  - component: {fileID: 2648290261274794171}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Untagged
@@ -164,6 +164,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7098974967532857816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648290261274794169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13f82cdf4809ed43b743588c6c75e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 6144
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!61 &2648290261274794171
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,7 +206,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.2717271}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50234604, y: 0.2}
+    pivot: {x: 0.5, y: 0.18292682}
     oldSize: {x: 1, y: 2.5625}
     newSize: {x: 1, y: 2.5625}
     adaptiveTilingThreshold: 0.5
@@ -190,32 +216,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.55}
   m_EdgeRadius: 0
---- !u!114 &7098974967532857816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2648290261274794169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 817067949ed39ef488c142f13d24f3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ContactFilter:
-    useTriggers: 1
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 2048
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
 --- !u!1 &2648290261444379454
 GameObject:
   m_ObjectHideFlags: 0
