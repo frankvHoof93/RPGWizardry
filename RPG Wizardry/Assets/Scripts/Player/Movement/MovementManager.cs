@@ -3,10 +3,20 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Movement
 {
-    [RequireComponent(typeof(Animator), typeof(InputState))]
+    [RequireComponent(typeof(Animator), typeof(InputManager))]
     public class MovementManager : MonoBehaviour
     {
         #region Variables
+        #region Editor
+        /// <summary>
+        /// MovementSpeed for Player
+        /// </summary>
+        [SerializeField]
+        [Tooltip("MovementSpeed for Player")]
+        private float speed = 1f;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Animator for Avatar
         /// </summary>
@@ -14,7 +24,8 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// <summary>
         /// InputManager for Movement
         /// </summary>
-        private InputState inputState;
+        private InputManager input;
+        #endregion
         #endregion
 
         #region Methods
@@ -25,7 +36,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         private void Start()
         {
             animator = GetComponent<Animator>();
-            inputState = GetComponent<InputState>();
+            input = GetComponent<InputManager>();
         }
 
         /// <summary>
@@ -33,7 +44,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(inputState.MovementData);
+            Movement(input.State.MovementData);
         }
         #endregion
 
@@ -50,7 +61,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
             animator.SetFloat("Speed", movement.magnitude);
 
             //big complicated animation algorhythm
-            if (!(movement.x == 0 && movement.y == 0))
+            if ((Vector2)movement != Vector2.zero)
             {
                 if (movement.x > 0 && movement.x > movement.y) // East
                     animator.SetInteger("LastDirection", 0);
@@ -62,7 +73,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
                     animator.SetInteger("LastDirection", 3);
             }
             //actually move the character
-            Vector3 adjustedMovement = transform.position + movement * Time.deltaTime;
+            Vector3 adjustedMovement = transform.position + movement * speed * Time.deltaTime;
             adjustedMovement.z = adjustedMovement.y;
             transform.position = adjustedMovement;
         }

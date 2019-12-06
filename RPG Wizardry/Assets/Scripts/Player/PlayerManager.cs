@@ -16,7 +16,6 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Player Health
         /// </summary>
         public ushort Health { get; private set; }
-
         /// <summary>
         /// Renderer of the "crosshair" book, necessary for bookerang spell
         /// </summary>
@@ -49,7 +48,7 @@ namespace nl.SWEG.RPGWizardry.Player
         private SpriteRenderer bookRenderer;
         #endregion
 
-        #region
+        #region Private
         /// <summary>
         /// Event Raised when Health changes
         /// </summary>

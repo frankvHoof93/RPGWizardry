@@ -22,6 +22,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Default values for this Enemy
         /// </summary>
         [SerializeField]
+        [Tooltip("Default values for this Enemy")]
         protected EnemyData data;
         /// <summary>
         /// Animator for Enemy
