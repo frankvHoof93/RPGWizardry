@@ -14,9 +14,10 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// List of fragments for this dataset
         /// </summary>
         public List<Fragment> Fragments { get; set; }
+
+        public bool IsSolved { get; set; }
         #endregion
         //TODO: Add automatic generation of Control Fragments
-
         #endregion
         #region Check
         /// <summary>
