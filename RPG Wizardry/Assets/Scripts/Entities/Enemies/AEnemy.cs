@@ -28,6 +28,12 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Animator for Enemy
         /// </summary>
         protected Animator animator;
+        /// <summary>
+        /// LayerMask for Attacks
+        /// </summary>
+        [SerializeField]
+        [Tooltip("LayerMask for Attacks")]
+        protected LayerMask attackCollisionMask;
         #endregion
 
         #region Private
@@ -35,6 +41,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Time at which Updates are enabled for this Enemy. This time is determined at Start by grabbing a random Cooldown-Value from the EnemyData
         /// </summary>
         private float enableTime;
+        
         #endregion
         #endregion
 
@@ -96,6 +103,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         #region Protected
         protected abstract void UpdateEnemy(PlayerManager player);
         protected abstract void AnimateEnemy();
+        protected abstract void OnDeath();
         #endregion
 
         #region Private
@@ -119,10 +127,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
 
-
             // TODO: Death Animation & Audio
-
-            Destroy(gameObject);
+            OnDeath();
         }
         #endregion
         #endregion
