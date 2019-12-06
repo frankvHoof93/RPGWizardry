@@ -55,7 +55,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //Check if the object is only hit by the Player.
-            if (collision.gameObject.layer == 11 && OverlapsWithEntity())
+            if (OverlapsWithEntity())
             {
                 //Set the alpha of the renderer to half.
                 ChangeAlpha(0.5f);
@@ -69,7 +69,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void OnTriggerExit2D(Collider2D collision)
         {
             //If there is nothing else in the trigger.
-            if (OverlapsWithEntity())
+            if (!OverlapsWithEntity())
             {
                 //Set the alpha of the renderer to full.
                 ChangeAlpha(1);
