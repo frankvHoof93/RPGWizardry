@@ -23,8 +23,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             if (PlayerManager.Exists)
             {
-                playerTransform = PlayerManager.Instance.GetComponent<Transform>();
-                
+                playerTransform = PlayerManager.Instance.transform;
             }
         }
 
