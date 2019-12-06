@@ -142,7 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   big: 1
-  babySlime: {fileID: 2965875635159383517, guid: 711fdab4ee7ed514582e500808b38bbd,
+  babySlime: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
     type: 3}
 --- !u!70 &-8195125079426558290
 CapsuleCollider2D:
@@ -157,6 +157,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
-  m_Size: {x: 0.84366906, y: 0.42332754}
+  m_Offset: {x: 0, y: 0.25}
+  m_Size: {x: 0.9, y: 0.5}
   m_Direction: 1
