@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery
 {
+    [System.Serializable]
     public class SpellPage
     {
         #region Variables
@@ -19,7 +21,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
-        private Spell spell;
+        private SpellData spell;
         #endregion
 
         #region Methods

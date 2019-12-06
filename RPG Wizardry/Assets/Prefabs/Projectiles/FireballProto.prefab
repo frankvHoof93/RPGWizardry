@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6746551060393561873}
   - component: {fileID: 5857493217555144017}
   m_Layer: 10
-  m_Name: PrototypeFireball
+  m_Name: FireballProto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4998689496432118957}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.517, y: -0.123000026, z: -1.6180263}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,6 +78,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 088c4095fad1bb24fa8aadf4ab0f7fe3, type: 3}
+  m_Sprite: {fileID: 342106534826215554, guid: c3374208b1d506a469f5583e30ba0403, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
@@ -113,6 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c245d0d7aadb34d9fec475bded2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   SplashObject: {fileID: 6031568290108856524, guid: b0a893c8b2ed1214c9fcb9380b28e388,
     type: 3}
 --- !u!58 &5857493217555144017
@@ -128,6 +132,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.14}
+  m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
-  m_Radius: 0.14
+  m_Radius: 0.38917348
