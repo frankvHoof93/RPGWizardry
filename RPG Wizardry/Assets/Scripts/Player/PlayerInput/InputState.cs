@@ -1,31 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
-
-    public class InputState : MonoBehaviour
+    public struct InputState
     {
         #region Variables
-        #region Public
-
         /// <summary>
-        /// Outgoing movement values: X horizontal, Y vertical, Z depth (render order)
+        /// Outgoing movement values: X horizontal, Y vertical
         /// </summary>
-        public Vector3 MovementData;
+        public Vector2 MovementData;
         /// <summary>
-        /// Outgoing movement values: essentially location vector 3 of look target
+        /// Look-Direction
         /// </summary>
-        public Vector3 AimingData;
+        public Vector2 AimingData;
         /// <summary>
         /// Outgoing button values: left mouse / A button
         /// </summary>
         public bool Cast1;
-
-        #endregion
         #endregion
     }
 }
-
-

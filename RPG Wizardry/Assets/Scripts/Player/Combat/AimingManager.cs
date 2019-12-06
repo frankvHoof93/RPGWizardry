@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Combat
 {
-    [RequireComponent(typeof(InputState))]
+    [RequireComponent(typeof(PlayerManager))]
     public class AimingManager : MonoBehaviour
     {
         #region Variables
@@ -13,9 +13,9 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         [SerializeField]
         private Transform BookPivot;
         /// <summary>
-        /// InputState for Aiming
+        /// Manager for Player
         /// </summary>
-        private InputState inputState;
+        private PlayerManager player;
         /// <summary>
         /// Animator for the book
         /// </summary>
@@ -28,15 +28,15 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <summary>
         /// Grabs inputstate reference for aiming
         /// </summary>
-        void Start()
+        private void Start()
         {
-            inputState = GetComponent<InputState>();
+            player = GetComponent<PlayerManager>();
         }
 
         /// <summary>
         /// Handles aiming based on Input
         /// </summary>
-        void Update()
+        private void Update()
         {
             PivotToMouse();
         }
@@ -48,10 +48,10 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Rotates a pivot to point at the mouse, aiming at it
         /// Also changes the Z position of the book to rotate around the player
         /// </summary>
-        void PivotToMouse()
+        private void PivotToMouse()
         {
             //Get location to look at
-            Vector3 lookPos = inputState.AimingData;
+            Vector3 lookPos = player.InputManager.State.AimingData;
             float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
             //Rotate to look at mouse/controller direction
             BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

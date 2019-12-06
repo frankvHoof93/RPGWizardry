@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils
+namespace nl.SWEG.RPGWizardry.Utils.Behaviours
 {
     public class DestroySelf : MonoBehaviour
     {
