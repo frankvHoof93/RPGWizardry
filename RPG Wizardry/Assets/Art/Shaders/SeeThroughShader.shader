@@ -4,9 +4,9 @@
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
-		[MaterialToggle] _UseSeeThrough ("Use SeeThrough", Float) = 0
-		_SeeThroughAlpha ("Alpha Value SeeThrough", Range(0, 1)) = 0.3
-		_SeeThroughCenter ("CenterPoint SeeThrough", Vector) = (0,0,0,0)
+		[HideInInspector] _UseSeeThrough ("Use SeeThrough", Float) = 0
+		[HideInInspector] _SeeThroughCenter ("CenterPoint SeeThrough", Vector) = (0,0,0,0)
+		_SeeThroughAlpha ("Alpha Value SeeThrough", Range(0, 1)) = 0.3		
 		_SeeThroughRadius ("Radius SeeThrough", float) = 30
 	}
 
@@ -49,7 +49,6 @@
 				fixed4 color    : COLOR;
 				float2 texcoord  : TEXCOORD0;
 			};
-			
 
 			v2f vert(appdata_t IN)
 			{
@@ -65,10 +64,9 @@
 			}
 
 			sampler2D _MainTex;
-			float _AlphaSplitEnabled;
+			fixed _AlphaSplitEnabled;
 			float _SeeThroughAlpha;
-			float _SeeThroughRadius;
-
+			fixed _SeeThroughRadius;
 			
 			UNITY_INSTANCING_BUFFER_START(Props)
 				UNITY_DEFINE_INSTANCED_PROP(fixed4, _SeeThroughCenter)
@@ -78,8 +76,8 @@
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				fixed4 c = tex2D (_MainTex, IN.texcoord) * IN.color;
-				if (UNITY_ACCESS_INSTANCED_PROP(Props, _UseSeeThrough) == 1)
-					c.a = IsInCircle(IN.vertex, UNITY_ACCESS_INSTANCED_PROP(Props, _SeeThroughCenter).xy, _SeeThroughRadius) ? _SeeThroughAlpha : c.a;
+				if (UNITY_ACCESS_INSTANCED_PROP(Props, _UseSeeThrough) == 1 && IsInCircle(IN.vertex, UNITY_ACCESS_INSTANCED_PROP(Props, _SeeThroughCenter).xy, _SeeThroughRadius))
+					c.a = _SeeThroughAlpha;
 				c.rgb *= c.a;
 				return c;
 			}
