@@ -2,11 +2,9 @@
 {
 	Properties
 	{
-		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
-		[HideInInspector] _UseSeeThrough ("Use SeeThrough", int) = 0
-		[HideInInspector] _SeeThroughLength ("Amount (Max 4)", int) = 0
-		_SeeThroughAlpha ("Alpha Value SeeThrough", Range(0, 1)) = 0.3
+		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {} // Texture from Renderer
+		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0 // ?
+		_SeeThroughAlpha ("Alpha Value SeeThrough", Range(0, 1)) = 0.3 // Alpha-Value inside Circle
 	}
 
 	SubShader
@@ -31,7 +29,6 @@
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile _ PIXELSNAP_ON
-			#pragma multi_compile_instancing
 			#include "UnityCG.cginc"
 			#include "CircleFunction.cginc"
 			
@@ -50,7 +47,7 @@
 			};
 			
 
-			v2f vert(appdata_t IN)
+			v2f vert(appdata_t IN) // Vertex-Function copied from Sprites-Default
 			{
 				v2f OUT;
 				OUT.vertex = UnityObjectToClipPos(IN.vertex);
@@ -59,13 +56,13 @@
 				#ifdef PIXELSNAP_ON
 				OUT.vertex = UnityPixelSnap (OUT.vertex);
 				#endif
-
 				return OUT;
 			}
 
 			sampler2D _MainTex;
 			fixed _AlphaSplitEnabled;
 			float _SeeThroughAlpha;
+			// uniform to set in code
 			uniform int _UseSeeThrough;
 			uniform int _SeeThroughLength; // max 64
 			uniform float centers[128];
@@ -73,16 +70,23 @@
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
+				// Grab Pixel-Value from Input-Texture
 				fixed4 c = tex2D (_MainTex, IN.texcoord) * IN.color;
+
+				// Check if SeeThrough-Alpha should be applied
 				if (_UseSeeThrough == 1 && _SeeThroughLength > 0)
 				{
+					// Create Array for Positions
 					float2 midpoints[64];
+					// Load Positions to Vector2s
 					for (int i = 0; i < _SeeThroughLength; i++)
 						midpoints[i] = float2(centers[i*2], centers[i*2+1]);
+
+					// Check if Pixel is inside a Circle
 					if (IsInAnyCircleLarge(IN.vertex, midpoints, radii, _SeeThroughLength))
-						c.a = _SeeThroughAlpha;
+						c.a = _SeeThroughAlpha; // TRUE: Apply Alpha
 				}
-				c.rgb *= c.a;
+				c.rgb *= c.a; // Apply Alpha to RGB (copied from Sprites-Default)
 				return c;
 			}
 		ENDCG
