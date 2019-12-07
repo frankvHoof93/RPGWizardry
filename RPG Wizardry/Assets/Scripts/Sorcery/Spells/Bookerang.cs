@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
-using System.Collections;
-using nl.SWEG.RPGWizardry.Entities.Stats;
+using nl.SWEG.RPGWizardry.Utils.Functions;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
@@ -12,7 +12,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Speed at which the book rotates in flight
         /// </summary>
         [SerializeField]
-        private int SpinSpeed;
+        private float SpinSpeed;
+        /// <summary>
+        /// Duration for which the book pauses before returning
+        /// </summary>
+        [SerializeField]
+        private float hangTime = 0.3f;
         /// <summary>
         /// Bool for whether the book is moving forwards (false) or returning (true)
         /// </summary>
@@ -44,6 +49,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         private Vector3 savedPosition;
         #endregion
+
         #region Methods
         #region Unity
         /// <summary>
@@ -54,14 +60,16 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             base.Start();
             if (PlayerManager.Exists)
             {
+                PlayerManager player = PlayerManager.Instance;
                 //Get the location of the player (to return to later)
-                playerLocation = PlayerManager.Instance.transform;
+                playerLocation = player.transform;
                 //Turn the "crosshair" book invisible so it looks like this projectile IS the book
-                bookRenderer = PlayerManager.Instance.BookRenderer;
+                bookRenderer = player.BookRenderer;
                 bookRenderer.enabled = false;
             }
         }
         #endregion
+
         #region Protected
         /// <summary>
         /// Move in a straight line until we hit something or max out our range
@@ -125,6 +133,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             }
         }
         #endregion
+
         #region Private
         /// <summary>
         /// Returns the book to the player, after hanging in the air for a short time
@@ -134,19 +143,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             back = true;
             savedPosition = transform.position;
             movedSpace = 0;
-            StartCoroutine(Hang(0.3f));
-        }
-
-        /// <summary>
-        /// Pause the book's movement for X seconds. It will continue spinning
-        /// </summary>
-        /// <param name="seconds">Amount of seconds the book should pause</param>
-        /// <returns></returns>
-        private IEnumerator Hang(float seconds)
-        {
             pause = true;
-            yield return new WaitForSeconds(seconds);
-            pause = false;
+            StartCoroutine(CoroutineMethods.RunDelayed(() => { pause = false; }, hangTime));
         }
         #endregion
         #endregion

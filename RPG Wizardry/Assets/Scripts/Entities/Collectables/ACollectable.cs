@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Player.Inventory;
+using nl.SWEG.RPGWizardry.Utils.Attributes;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// Tags for Collision
         /// </summary>
         [SerializeField]
+        [TagSelector]
         [Tooltip("Tags for Collision")]
         private string[] targetTags;
         #endregion

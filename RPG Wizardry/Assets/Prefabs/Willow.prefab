@@ -57,6 +57,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -141,16 +142,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1649351625787668030}
   - component: {fileID: 1649351625787668029}
+  - component: {fileID: 1257007501}
   - component: {fileID: 1649351625787668024}
+  - component: {fileID: 1614139952160609278}
   - component: {fileID: 1649351625787668031}
-  - component: {fileID: 1649351625787668025}
   - component: {fileID: 1649351625787668026}
-  - component: {fileID: 1649351625787668027}
   - component: {fileID: 1649351625787668004}
+  - component: {fileID: 1649351625787668025}
   - component: {fileID: 506691715}
   - component: {fileID: 506691714}
-  - component: {fileID: 1257007501}
-  - component: {fileID: 1614139952160609278}
   m_Layer: 11
   m_Name: Willow
   m_TagString: Untagged
@@ -198,6 +198,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -222,6 +223,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1257007501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625787668028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRootObject: 0
+  maxHealth: 100
+  bookRenderer: {fileID: 1649351625540714792}
 --- !u!114 &1649351625787668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +248,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f6fa74076afcf648b83547c8c4633d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+--- !u!114 &1614139952160609278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625787668028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbf44c86a097b64faf325ba8b4c662c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1649351625787668031
@@ -246,9 +275,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdafd6e0f9c30d3489b72c4b69c97ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementMultiplier: 4
   gameState: 1
   controlScheme: 0
+--- !u!114 &1649351625787668026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625787668028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f558b5a58381abb4fbb0aa6f2921ca78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BookPivot: {fileID: 1649351625646304831}
+  bookAnimator: {fileID: 4558486416647510740}
+--- !u!114 &1649351625787668004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649351625787668028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentSpell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
+  spawnLocation: {fileID: 1649351625540714799}
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  bookAnimator: {fileID: 4558486416647510740}
 --- !u!95 &1649351625787668025
 Animator:
   serializedVersion: 3
@@ -268,53 +328,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1649351625787668026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f558b5a58381abb4fbb0aa6f2921ca78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BookPivot: {fileID: 1649351625646304831}
-  bookAnimator: {fileID: 4558486416647510740}
---- !u!114 &1649351625787668027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa241646431ae3c4c8fd52ed3ebd02d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementData: {x: 0, y: 0, z: 0}
-  AimingData: {x: 0, y: 0, z: 0}
-  Cast1: 0
---- !u!114 &1649351625787668004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentSpell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  spawnLocation: {fileID: 1649351625540714799}
-  targetingMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  bookAnimator: {fileID: 4558486416647510740}
 --- !u!50 &506691715
 Rigidbody2D:
   serializedVersion: 4
@@ -352,7 +365,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.62906915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.08}
     oldSize: {x: 1, y: 2}
     newSize: {x: 0.24, y: 0.54}
     adaptiveTilingThreshold: 0.5
@@ -362,30 +375,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.78186166}
   m_EdgeRadius: 0
---- !u!114 &1257007501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasRootObject: 0
-  maxHealth: 100
-  bookRenderer: {fileID: 1649351625540714792}
---- !u!114 &1614139952160609278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649351625787668028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bbf44c86a097b64faf325ba8b4c662c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
