@@ -41,6 +41,7 @@
 				float4 vertex   : POSITION;
 				float4 color    : COLOR;
 				float2 texcoord : TEXCOORD0;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
 			struct v2f
@@ -48,11 +49,15 @@
 				float4 vertex   : SV_POSITION;
 				fixed4 color    : COLOR;
 				float2 texcoord  : TEXCOORD0;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
+			
 
 			v2f vert(appdata_t IN)
 			{
 				v2f OUT;
+                UNITY_SETUP_INSTANCE_ID(IN);
+                UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
 				OUT.vertex = UnityObjectToClipPos(IN.vertex);
 				OUT.texcoord = IN.texcoord;
 				OUT.color = IN.color;
@@ -67,6 +72,7 @@
 			fixed _AlphaSplitEnabled;
 			float _SeeThroughAlpha;
 			fixed _SeeThroughRadius;
+
 			
 			UNITY_INSTANCING_BUFFER_START(Props)
 				UNITY_DEFINE_INSTANCED_PROP(fixed4, _SeeThroughCenter)
@@ -75,6 +81,7 @@
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
+				UNITY_SETUP_INSTANCE_ID(IN);
 				fixed4 c = tex2D (_MainTex, IN.texcoord) * IN.color;
 				if (UNITY_ACCESS_INSTANCED_PROP(Props, _UseSeeThrough) == 1 && IsInCircle(IN.vertex, UNITY_ACCESS_INSTANCED_PROP(Props, _SeeThroughCenter).xy, _SeeThroughRadius))
 					c.a = _SeeThroughAlpha;
