@@ -1,40 +1,64 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
+using UnityEngine;
 
-public class multi1demo : MonoBehaviour
+/// <summary>
+/// This script should be re-written to work with a single renderer. This script can create at most 4 'circles' through an image, using GPU-Instancing
+/// </summary>
+public class Multi1Demo : MonoBehaviour
 {
+    #region Variables
+    #region Editor
+    /// <summary>
+    /// Renderers this Script works on
+    /// </summary>
     [SerializeField]
     private Renderer[] renderers;
-
+    /// <summary>
+    /// Transform-Targets for Circle-Centers
+    /// </summary>
     [SerializeField]
     private Transform[] tfs;
-
+    /// <summary>
+    /// Radius for each Transform-Target
+    /// </summary>
     [SerializeField]
     private float[] radii;
+    #endregion
 
+    #region Private
+    /// <summary>
+    /// Cached MaterialPropertyBlock
+    /// </summary>
     private MaterialPropertyBlock block;
+    #endregion
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    #region Methods
+    /// <summary>
+    /// Creates MPB & sets up Radii
+    /// </summary>
+    private void Start()
     {
         block = new MaterialPropertyBlock();
         radii = new float[tfs.Length];
         for (int i = 0; i < radii.Length; i++)
             radii[i] = UnityEngine.Random.Range(25f, 80f);
     }
-
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Sets values for Renderer-Instances using MaterialPropertyBlock
+    /// </summary>
+    private void Update()
     {
         List<Transform> final = new List<Transform>(4);
         for (int i = 0; i < renderers.Length; i++)
         {
             final.Clear();
             Renderer r = renderers[i];
+            // Read Current MPB-Values from Renderer (only necessary if renderer itself can/has changed any values)
             r.GetPropertyBlock(block);
+            #region CalcVariables
             // Find 4 closest tfs
             List<Transform> closest = tfs.Where(tf => tf.gameObject.activeSelf).OrderBy(tf => Vector3.Distance(tf.position, r.transform.position)).ToList();
             int amount = Mathf.Min(closest.Count, 4);
@@ -45,7 +69,7 @@ public class multi1demo : MonoBehaviour
                 if (j < 4)
                     rad.Add(radii[Array.IndexOf(tfs, closest[j])]);
             }
-            block.SetInt("_UseSeeThrough", 1);
+            // Set Radius-Values to a Vector4
             Vector4 radius = new Vector4();
             if (rad.Count > 0)
                 radius.x = rad[0];
@@ -55,9 +79,8 @@ public class multi1demo : MonoBehaviour
                 radius.z = rad[2];
             if (rad.Count > 3)
                 radius.w = rad[3];
-            block.SetVector("_SeeThroughRadii", radius);
+            // Set Center-Values to Vector4-1
             Vector4 vec = new Vector4();
-            block.SetInt("_SeeThroughLength", amount);
             if (final.Count > 0)
             {
                 Vector3 screenSpace = Camera.main.WorldToScreenPoint(final[0].position);
@@ -70,7 +93,7 @@ public class multi1demo : MonoBehaviour
                 vec.z = screenSpace.x;
                 vec.w = screenSpace.y;
             }
-            block.SetVector("_SeeThroughCenter1", vec);
+            // Set Center-Values to Vector4-4
             Vector4 vec2 = new Vector4();
             if (final.Count > 2)
             {
@@ -84,8 +107,16 @@ public class multi1demo : MonoBehaviour
                 vec2.z = screenSpace.x;
                 vec2.w = screenSpace.y;
             }
+            #endregion
+            // Set Variables to MPB
+            block.SetInt("_UseSeeThrough", 1);
+            block.SetInt("_SeeThroughLength", amount);
+            block.SetVector("_SeeThroughRadii", radius);
+            block.SetVector("_SeeThroughCenter1", vec);
             block.SetVector("_SeeThroughCenter2", vec2);
+            // Set MPB to renderer
             r.SetPropertyBlock(block);
         }
     }
+    #endregion
 }
