@@ -6,6 +6,7 @@ inline bool IsInCircle(float2 position, float2 circleMid, float circleRadius)
 // Checks if a position is inside of any of the given circles (small batch)
 inline bool IsInAnyCircle(float2 position, float2 circles[4], float radii[4], int length)
 {
+	[loop] // Prevent unrolling of loop by compiler
 	for (int i = 0; i < length; i++)
 		if (IsInCircle(position, circles[i], radii[i]))
 			return true;
@@ -14,6 +15,7 @@ inline bool IsInAnyCircle(float2 position, float2 circles[4], float radii[4], in
 // Checks if a position is inside of any of the given circles (large batch)
 inline bool IsInAnyCircleLarge(float2 position, float2 circles[64], float radii[64], int length)
 {
+	[loop] // Prevent unrolling of loop by compiler
 	for (int i = 0; i < length; i++)
 		if (IsInCircle(position, circles[i], radii[i]))
 			return true;

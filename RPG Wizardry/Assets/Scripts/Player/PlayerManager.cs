@@ -5,11 +5,12 @@ using System;
 using UnityEngine;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
+using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
-    public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth
+    public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth, IOpacity
     {
         #region Variables
         #region Public
@@ -21,6 +22,11 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Renderer of the "crosshair" book, necessary for bookerang spell
         /// </summary>
         public SpriteRenderer BookRenderer => bookRenderer;
+
+        public float OpacityRadius => opacityRadius;
+
+        public int OpacityPriority => 0; // Highest Priority
+        public Vector2 OpacityOffset => opacityOffset;
         #endregion
 
         #region Internal
@@ -51,6 +57,13 @@ namespace nl.SWEG.RPGWizardry.Player
         [SerializeField]
         [Tooltip("Renderer for Greg")]
         private SpriteRenderer bookRenderer;
+        /// <summary>
+        /// Opacity-Radius in Pixels
+        /// </summary>
+        [SerializeField]
+        private float opacityRadius = 30f;
+        [SerializeField]
+        private Vector2 opacityOffset = new Vector2(0f, -30f);
         #endregion
 
         #region Private

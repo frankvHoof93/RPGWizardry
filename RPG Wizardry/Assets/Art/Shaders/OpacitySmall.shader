@@ -1,4 +1,4 @@
-﻿Shader "Custom/SeeThroughMulti1Shader"
+﻿Shader "Custom/OpacitySmall"
 {
 	Properties
 	{

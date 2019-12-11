@@ -14,7 +14,15 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private Transform playerTransform;
 
+        public Camera Camera { get; private set; }
+
         #region Methods
+        protected override void Awake()
+        {
+            base.Awake();
+            Camera = GetComponent<Camera>();
+        }
+
         /// <summary>
         /// Gets reference to player transform
         /// </summary>
