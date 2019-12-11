@@ -3,39 +3,41 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
-    [RequireComponent(typeof(InputState))]
     public class InputManager : MonoBehaviour
     {
         #region Variables
-
-        #region Private
-        private InputState inputState;
-
-        //setting to increase movement speed
-        [SerializeField]
-        private int movementMultiplier = 1;
-
-        //serialized for easy inspector switching (DEBUG)
-        [SerializeField]
-        private GameState gameState = GameState.GamePlay;
+        #region Public
         /// <summary>
-        /// ControlScheme for Input
+        /// Current State for Input
+        /// </summary>
+        public InputState State => inputState;
+        #endregion
+
+        #region Editor
+        /// <summary>
+        /// Current State of GamePlay
+        /// TODO: Move elsewhere
         /// </summary>
         [SerializeField]
+        private GameState gameState = GameState.GamePlay; //serialized for easy inspector switching (DEBUG)
+        /// <summary>
+        /// ControlScheme for Input-Reading
+        /// </summary>
+        [SerializeField]
+        [Tooltip("ControlScheme for InputReading")]
         private ControlScheme controlScheme;
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Current State for Input
+        /// </summary>
+        private InputState inputState;
         #endregion
         #endregion
 
         #region Methods
         #region Unity
-        /// <summary>
-        /// Gets inputstate component reference
-        /// </summary>
-        private void Start()
-        {
-            inputState = GetComponent<InputState>();
-        }
-
         /// <summary>
         /// Checks inputs based on gamestate
         /// </summary>
@@ -60,10 +62,8 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         private void MovementInputs()
         {
-            //collect movement input, multiply for effectiveness
             //same for keyboard and controller
-            inputState.MovementData = new Vector3(Input.GetAxis("Horizontal") * movementMultiplier,
-                Input.GetAxis("Vertical") * movementMultiplier, 0.0f);
+            inputState.MovementData = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }
 
         /// <summary>
@@ -73,23 +73,21 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         {
             //on controller, use the right stick
             if (controlScheme == ControlScheme.Controller)
-            {
-                inputState.AimingData = new Vector3(Input.GetAxis("RightX"),
-                    Input.GetAxis("RightY"), 0.0f);
-                
-            }
+                inputState.AimingData = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
             //on keyboard, use the mouse
             else if (controlScheme == ControlScheme.Keyboard)
             {
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-                inputState.AimingData = lookPos - transform.position;
+                inputState.AimingData = (lookPos - transform.position).normalized;
             }
         }
 
+        /// <summary>
+        /// Collects button states
+        /// </summary>
         private void ButtonInputs()
         {
-            //collect button states
             //same for keyboard and controller
             inputState.Cast1 = Input.GetButton("Fire1");
         }
