@@ -31,7 +31,7 @@ namespace nl.SWEG.RPGWizardry.Player
         /// </summary>
         public int OpacityPriority => 0; // Highest Priority
         /// <summary>
-        /// Opacity-Offset from Transform (in World-Space
+        /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => opacityOffset;
         #endregion
