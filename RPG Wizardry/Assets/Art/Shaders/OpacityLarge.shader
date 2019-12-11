@@ -1,4 +1,4 @@
-﻿Shader "Custom/SeeThroughMulti2Shader"
+﻿Shader "Custom/OpacityLarge"
 {
 	Properties
 	{

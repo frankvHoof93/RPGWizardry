@@ -6,11 +6,38 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 {
     public class OpacityManagerLargeBatch : OpacityManager
     {
+        #region Variables
+        /// <summary>
+        /// Cached Array for Positions
+        /// </summary>
         private float[] cachedPos = new float[128];
+        /// <summary>
+        /// Cached Array for Radii
+        /// </summary>
         private float[] cachedRad = new float[64];
-
+        /// <summary>
+        /// Materials to apply Opacity to
+        /// </summary>
         private Material[] materials;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Sets up Materials
+        /// </summary>
+        private void Start()
+        {
+            materials = new Material[renderers.Length];
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                materials[i] = renderers[i].material;
+                renderers[i].material = materials[i]; // Break Batching, Create Materials
+            }
+        }
+        /// <summary>
+        /// Sets Opacity to Materials
+        /// </summary>
+        /// <param name="objects">Objects to set Opacity for (max 64)</param>
         protected override void SetToShader(List<OpacityObject> objects)
         {
             if (!CameraManager.Exists)
@@ -35,15 +62,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 mat.SetFloatArray("radii", cachedRad);
             }
         }
-
-        private void Start()
-        {
-            materials = new Material[renderers.Length];
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                materials[i] = renderers[i].material;
-                renderers[i].material = materials[i]; // Break Batching, Create Materials
-            }
-        }
+        #endregion
     }
 }

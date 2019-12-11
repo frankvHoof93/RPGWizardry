@@ -1,7 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
@@ -10,13 +8,14 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     public class CameraManager : SingletonBehaviour<CameraManager>
     {
         /// <summary>
-        /// Transform of the player
+        /// Camera-Component for Camera
         /// </summary>
-        private Transform playerTransform;
-
         public Camera Camera { get; private set; }
 
         #region Methods
+        /// <summary>
+        /// Grabs Reference to Camera
+        /// </summary>
         protected override void Awake()
         {
             base.Awake();
@@ -24,24 +23,16 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         }
 
         /// <summary>
-        /// Gets reference to player transform
-        /// </summary>
-        // Start is called before the first frame update
-        private void Start()
-        {
-            if (PlayerManager.Exists)
-            {
-                playerTransform = PlayerManager.Instance.transform;
-            }
-        }
-
-        /// <summary>
         /// Every frame, updates current position of camera to match player
         /// </summary>
         private void Update()
         {
+            if (!PlayerManager.Exists)
+                return;
+
+            Transform playerTF = PlayerManager.Instance.transform;
             transform.position = new Vector3(
-                playerTransform.position.x, playerTransform.position.y, playerTransform.position.z-10);
+                playerTF.position.x, playerTF.position.y, playerTF.position.z-10);
         }
         #endregion
     }

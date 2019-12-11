@@ -1,5 +1,4 @@
 ﻿using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,16 +8,27 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     [RequireComponent(typeof(Collider2D))]
     public abstract class OpacityManager : MonoBehaviour
     {
+        #region InnerObjects
+        /// <summary>
+        /// Object used to store Transform with its IOpacity-Implementation
+        /// </summary>
         protected class OpacityObject
         {
             public Transform transform;
             public IOpacity opacity;
         }
+        #endregion
 
         #region Variables
+        /// <summary>
+        /// Renderers to apply Opacity to
+        /// </summary>
         [SerializeField]
+        [Tooltip("Renderers to apply Opacity to")]
         protected Renderer[] renderers;
-
+        /// <summary>
+        /// (Current) Objects to get Opacity from
+        /// </summary>
         private readonly HashSet<OpacityObject> objects = new HashSet<OpacityObject>();
         #endregion
 
@@ -42,12 +52,17 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             objects.RemoveWhere(n => ReferenceEquals(n.transform, collision.transform));
         }
-
+        /// <summary>
+        /// Sets Opacity to Renderer
+        /// </summary>
         private void LateUpdate()
         {
             SetToShader(objects.OrderBy(n => n.opacity.OpacityPriority).ToList());
         }
-
+        /// <summary>
+        /// Sets Opacity to Material/Shader
+        /// </summary>
+        /// <param name="objects">Objects to set Opacity for</param>
         protected abstract void SetToShader(List<OpacityObject> objects);
         #endregion
     }
