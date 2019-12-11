@@ -48,7 +48,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         protected void Start()
         {
             hitbox = GetComponent<Collider2D>();
-            Close();
+            Open();
         }
         #endregion
         #endregion

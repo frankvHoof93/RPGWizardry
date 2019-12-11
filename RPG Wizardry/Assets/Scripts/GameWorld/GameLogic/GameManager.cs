@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld.GameLogic
+namespace nl.SWEG.RPGWizardry
 {
     public class GameManager : MonoBehaviour
     {

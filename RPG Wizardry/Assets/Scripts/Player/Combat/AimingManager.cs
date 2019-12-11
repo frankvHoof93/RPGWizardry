@@ -50,28 +50,32 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         void PivotToMouse()
         {
-            //Get location to look at
-            Vector3 lookPos = inputState.AimingData;
-            float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-            //Rotate to look at mouse/controller direction
-            BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            //Change rotation parameter in animator, changing sprites
-            bookAnimator.SetFloat("Rotation", BookPivot.rotation.z);
-
-            //Change Z position, rotating around player appropriately
-            if (BookPivot.rotation.z > 0)
+            //If the player is allowed to move
+            if (!GameManager.Instance.Locked)
             {
-                if (BookPivot.localPosition.z < 1)
+                //Get location to look at
+                Vector3 lookPos = inputState.AimingData;
+                float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+                //Rotate to look at mouse/controller direction
+                BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                //Change rotation parameter in animator, changing sprites
+                bookAnimator.SetFloat("Rotation", BookPivot.rotation.z);
+
+                //Change Z position, rotating around player appropriately
+                if (BookPivot.rotation.z > 0)
                 {
-                    BookPivot.localPosition = new Vector3(0, 0.5f, 1);
+                    if (BookPivot.localPosition.z < 1)
+                    {
+                        BookPivot.localPosition = new Vector3(0, 0.5f, 1);
+                    }
                 }
-            }
-            else if (BookPivot.rotation.z < 0)
-            {
-                if (BookPivot.localPosition.z > -1)
+                else if (BookPivot.rotation.z < 0)
                 {
-                    BookPivot.localPosition = new Vector3(0, 0.5f, -1);
+                    if (BookPivot.localPosition.z > -1)
+                    {
+                        BookPivot.localPosition = new Vector3(0, 0.5f, -1);
+                    }
                 }
             }
         }
