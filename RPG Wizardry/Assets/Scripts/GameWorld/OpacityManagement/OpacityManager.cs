@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
@@ -7,59 +8,40 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     [RequireComponent(typeof(Collider2D))]
     public abstract class OpacityManager : MonoBehaviour
     {
+        #region InnerObjects
+        /// <summary>
+        /// Object used to store Transform with its IOpacity-Implementation
+        /// </summary>
+        protected class OpacityObject
+        {
+            public Transform transform;
+            public IOpacity opacity;
+        }
+        #endregion
+
         #region Variables
         /// <summary>
-        /// The filter that makes sure only the player is able to trigger the methods.
+        /// Renderers to apply Opacity to
         /// </summary>
         [SerializeField]
-        private ContactFilter2D contactFilter;
-
+        [Tooltip("Renderers to apply Opacity to")]
+        protected Renderer[] renderers;
         /// <summary>
-        /// The trigger that checks if the player enters it.
+        /// (Current) Objects to get Opacity from
         /// </summary>
-        private Collider2D collider;
+        private readonly HashSet<OpacityObject> objects = new HashSet<OpacityObject>();
         #endregion
 
         #region Methods
-        #region Private
-        /// <summary>
-        /// Uses Collider.OverlapCollider() to check if there are any Players or enemies in the collider.
-        /// </summary>
-        /// <returns>True if the collider is empty, false if it is not.</returns>
-        private bool OverlapsWithEntity()
-        {
-            List<Collider2D> results = new List<Collider2D>();
-            return collider.OverlapCollider(contactFilter, results) == 1;
-        }
-
-        /// <summary>
-        /// Changed the alpha of all relevant objects.
-        /// </summary>
-        /// <param name="a">The alpha value the objects need to be changed to</param>
-        protected abstract void ChangeAlpha(float a);
-        #endregion
-
-        #region Unity
-        /// <summary>
-        /// Gets the collider.
-        /// </summary>
-        protected void Start()
-        {
-            collider = GetComponent<Collider2D>();
-        }
-
         /// <summary>
         /// Checks if the thing entering the trigger is a player, and if it's fhe first thing to enter it, makes the walls transparent.
         /// </summary>
         /// <param name="collision">The thing entering the collider.</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //Check if the object is only hit by the Player.
-            if (OverlapsWithEntity())
-            {
-                //Set the alpha of the renderer to half.
-                ChangeAlpha(0.5f);
-            }
+            IOpacity opacity = collision.gameObject.GetComponent<IOpacity>();
+            if (opacity != null)
+                objects.Add(new OpacityObject { transform = collision.transform, opacity = opacity });
         }
 
         /// <summary>
@@ -68,14 +50,20 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="collision">the thing leaving the collider.</param>
         private void OnTriggerExit2D(Collider2D collision)
         {
-            //If there is nothing else in the trigger.
-            if (!OverlapsWithEntity())
-            {
-                //Set the alpha of the renderer to full.
-                ChangeAlpha(1);
-            }
+            objects.RemoveWhere(n => ReferenceEquals(n.transform, collision.transform));
         }
-        #endregion
+        /// <summary>
+        /// Sets Opacity to Renderer
+        /// </summary>
+        private void LateUpdate()
+        {
+            SetToShader(objects.OrderBy(n => n.opacity.OpacityPriority).ToList());
+        }
+        /// <summary>
+        /// Sets Opacity to Material/Shader
+        /// </summary>
+        /// <param name="objects">Objects to set Opacity for</param>
+        protected abstract void SetToShader(List<OpacityObject> objects);
         #endregion
     }
 }

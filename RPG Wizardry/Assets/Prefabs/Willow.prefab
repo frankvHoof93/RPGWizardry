@@ -238,6 +238,8 @@ MonoBehaviour:
   hasRootObject: 0
   maxHealth: 100
   bookRenderer: {fileID: 1649351625540714792}
+  opacityRadius: 35
+  opacityOffset: {x: 0, y: 0.75}
 --- !u!114 &1649351625787668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fa74076afcf648b83547c8c4633d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 4
 --- !u!114 &1614139952160609278
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,11 +5,12 @@ using System;
 using UnityEngine;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
+using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
-    public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth
+    public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth, IOpacity
     {
         #region Variables
         #region Public
@@ -21,6 +22,18 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Renderer of the "crosshair" book, necessary for bookerang spell
         /// </summary>
         public SpriteRenderer BookRenderer => bookRenderer;
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        public float OpacityRadius => opacityRadius;
+        /// <summary>
+        /// Priority for rendering Opacity
+        /// </summary>
+        public int OpacityPriority => 0; // Highest Priority
+        /// <summary>
+        /// Opacity-Offset from Transform (in World-Space)
+        /// </summary>
+        public Vector2 OpacityOffset => opacityOffset;
         #endregion
 
         #region Internal
@@ -51,6 +64,20 @@ namespace nl.SWEG.RPGWizardry.Player
         [SerializeField]
         [Tooltip("Renderer for Greg")]
         private SpriteRenderer bookRenderer;
+
+        [Header("Opacity")]
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Opacity-Radius in Pixels (for 720p)")]
+        private float opacityRadius = 30f;
+        /// <summary>
+        /// Opacity-Offset from Transform (in World-Space
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Opacity-Offset from Transform (in World-Space)")]
+        private Vector2 opacityOffset = new Vector2(0f, -30f);
         #endregion
 
         #region Private
