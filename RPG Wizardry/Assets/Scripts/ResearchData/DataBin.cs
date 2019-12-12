@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace  nl.SWEG.RPGWizardry.ResearchData
+namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataBin
     {
@@ -35,12 +35,16 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
             Bin = bin;
             this.setSize = setSize;
             DataSets = new List<DataSet>();
-            for (int i= 0; i < this.setSize; i++)
+            for (int i = 0; i < this.setSize; i++)
             {
                 DataSets.Add(new DataSet());
             }
 
             SplitBin();
+            for (int i = 0; i < this.setSize; i++)
+            {
+                DataSets[i].GenerateControlFragments();
+            }
         }
 
         public bool IsDataBinSolved()
@@ -51,7 +55,7 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
                 if (DataSets[i].IsSolved)
                     solvedCount++;
             }
-            if(solvedCount == setSize)
+            if (solvedCount == setSize)
             {
                 return true;
             }
@@ -62,7 +66,7 @@ namespace  nl.SWEG.RPGWizardry.ResearchData
         }
         public DataSet UnsolvedDataSet()
         {
-            for (int i=0; i < this.setSize; i++)
+            for (int i = 0; i < this.setSize; i++)
             {
                 if (!DataSets[i].IsSolved)
                     return DataSets[i];
