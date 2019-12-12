@@ -19,6 +19,22 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         #endregion
         //TODO: Add automatic generation of Control Fragments
         #endregion
+        #region Control
+        public void GenerateControlFragments()
+        {
+            ControlFragment start = new ControlFragment(20, 5);
+            start.ImgData = new float[] { 1.410f, 1.375f, 1.350f, 1.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
+            ControlFragment middle = new ControlFragment(-20, 5);
+            middle.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
+            ControlFragment end = new ControlFragment(-10, 5);
+            end.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
+            int mid = (Fragments.Count + 3) / 2;
+            Fragments.Insert(0, start);
+            Fragments.Insert(mid, middle);
+            Fragments.Add(end);
+
+        }
+        #endregion
         #region Check
         /// <summary>
         /// Checks if all the control fragments in the fragment list are solved or not.
@@ -46,3 +62,4 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         #endregion
     }
 }
+    

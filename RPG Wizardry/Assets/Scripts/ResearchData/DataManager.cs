@@ -15,6 +15,8 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         private int setSize;
         [SerializeField]
         private List<Image> images;
+        [SerializeField]
+        private RenderTexture texture;
         // Start is called before the first frame update
         void Start()
         {
@@ -34,16 +36,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public void PopulateUI()
         {
             LoadDataSet();
-            ControlFragment start = new ControlFragment(20, 5);
-            start.ImgData = new float[] { 1.410f, 1.375f, 1.350f, 1.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment middle = new ControlFragment(-20, 5);
-            middle.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment end = new ControlFragment(-10, 5);
-            end.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            int mid = (CurrentSet.Fragments.Count + 3) / 2;
-            CurrentSet.Fragments.Insert(0, start);
-            CurrentSet.Fragments.Insert(mid, middle);
-            CurrentSet.Fragments.Add(end);
             for (int i = 0; i < CurrentSet.Fragments.Count; i++)
             {
                 CurrentSet.Fragments[i].FragmentImage = images[i];
@@ -53,6 +45,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
                 {
                     // Add Pixel to Img
+                    
                     imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.black);
                 }
                 imgTex.Apply();
