@@ -3,11 +3,12 @@ using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
 using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
+using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
     [RequireComponent(typeof(Animator))]
-    public abstract class AEnemy : MonoBehaviour, IHealth
+    public abstract class AEnemy : MonoBehaviour, IHealth, IOpacity
     {
         #region Variables
         #region Public
@@ -15,6 +16,18 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Current Health for this Enemy
         /// </summary>
         public ushort Health { get; private set; }
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        public float OpacityRadius => data?.OpacityRadius ?? 0;
+        /// <summary>
+        /// Priority for rendering Opacity
+        /// </summary>
+        public int OpacityPriority => data?.OpacityPriority ?? 1;
+        /// <summary>
+        /// Opacity-Offset from Transform (in World-Space)
+        /// </summary>
+        public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
         #endregion
 
         #region Protected
