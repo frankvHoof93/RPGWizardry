@@ -54,7 +54,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             if (!GameManager.Instance.Locked)
             {
                 //Get location to look at
-                Vector3 lookPos = inputState.AimingData;
+                Vector3 lookPos = PlayerManager.Instance.InputManager.State.AimingData;
                 float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
                 //Rotate to look at mouse/controller direction
                 BookPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

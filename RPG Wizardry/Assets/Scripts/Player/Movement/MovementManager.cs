@@ -58,6 +58,8 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
             //If the player is allowed to move
             if (!GameManager.Instance.Locked)
             {
+                print("unlocked");
+
                 //send values to the animator so it can decide what animation to show
                 animator.SetFloat("Horizontal", movement.x);
                 animator.SetFloat("Vertical", movement.y);
@@ -76,9 +78,15 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
                         animator.SetInteger("LastDirection", 3);
                 }
                 //actually move the character
-                Vector3 adjustedMovement = transform.position + movement * Time.deltaTime;
+                Vector3 adjustedMovement = transform.position + movement * speed * Time.deltaTime;
                 adjustedMovement.z = adjustedMovement.y;
                 transform.position = adjustedMovement;
+            }
+            else
+            {
+                //Set the speed to 0 so the character stops walking.
+                animator.SetFloat("Speed", 0);
+                print("locked");
             }
         }
         #endregion
