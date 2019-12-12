@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
@@ -31,7 +32,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="spawn">the place where the player needs to end up.</param>
         public void SwitchRoom(GameObject previous, GameObject next, Transform spawn)
         {
-            StartCoroutine(switchRoom(previous, next, spawn));
+            if (spawn != null)
+                StartCoroutine(switchRoom(previous, next, spawn));
+            else
+                throw new System.NotImplementedException("This door doesn't connect to anything! (did you set the spawn location?)");
         }
         #endregion
 
@@ -106,9 +110,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
             Transform playerTF = PlayerManager.Instance.transform;
             transform.position = new Vector3(
-                Mathf.Round(playerTransform.position.x * 1000.0f) / 1000.0f,
-                Mathf.Round(playerTransform.position.y * 1000.0f) / 1000.0f,
-                Mathf.Round(playerTransform.position.z - 500.00f * 1000.0f) / 1000.0f);
+                Mathf.Round(playerTF.position.x * 1000.0f) / 1000.0f,
+                Mathf.Round(playerTF.position.y * 1000.0f) / 1000.0f,
+                Mathf.Round(playerTF.position.z - 500.00f * 1000.0f) / 1000.0f);
         }
         #endregion
         #endregion

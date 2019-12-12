@@ -22,7 +22,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            print("collide");
             CameraManager.Instance.SwitchRoom(Room, TargetRoom, TargetSpawn);
         }
         #endregion
