@@ -58,8 +58,6 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
             //If the player is allowed to move
             if (!GameManager.Instance.Locked)
             {
-                print("unlocked");
-
                 //send values to the animator so it can decide what animation to show
                 animator.SetFloat("Horizontal", movement.x);
                 animator.SetFloat("Vertical", movement.y);
