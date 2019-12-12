@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Combat
 {
-    [RequireComponent(typeof(InputState))]
+    [RequireComponent(typeof(PlayerManager))]
     public class CastingManager : MonoBehaviour
     {
         #region InnerTypes
@@ -66,9 +66,9 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
 
         #region Private
         /// <summary>
-        /// Inputstate for getting button states
+        /// Manager for Player
         /// </summary>
-        private InputState inputState;
+        private PlayerManager player;
         /// <summary>
         /// Spells available for Casting (Currently Selected Spells)
         /// </summary>
@@ -209,7 +209,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Start()
         {
-            inputState = GetComponent<InputState>();
+            player = GetComponent<PlayerManager>();
             //DEBUG (Set serialized spell to position 0 in SelectedSpells)
             SetSpell(CurrentSpell, 0);
         }
@@ -221,7 +221,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         {
             for (int i = 0; i < spellCooldown.Length; i++)
                 spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
-            if (inputState.Cast1 && spellCooldown[selectedSpellIndex] == 0)
+            if (player.InputManager.State.Cast1 && spellCooldown[selectedSpellIndex] == 0)
                 CastSpell();
         }
         #endregion

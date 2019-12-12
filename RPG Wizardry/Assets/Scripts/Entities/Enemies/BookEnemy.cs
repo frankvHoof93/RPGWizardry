@@ -23,12 +23,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [SerializeField]
         [Tooltip("Spell to use when Attacking")]
         private SpellData spell;
-        /// <summary>
-        /// LayerMask for Attacks
-        /// </summary>
-        [SerializeField]
-        [Tooltip("LayerMask for Attacks")]
-        private LayerMask spellCollisionMask;
+        
         /// <summary>
         /// Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)
         /// </summary>
@@ -113,6 +108,11 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             int rotation = Mathf.RoundToInt(transform.rotation.eulerAngles.z / 90f) % 4;
             animator.SetInteger("Rotation", rotation);
         }
+
+        protected override void OnDeath()
+        {
+            throw new System.NotImplementedException();
+        }
         #endregion
 
         #region Private
@@ -122,7 +122,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Attack()
         {
             animator.SetBool("Attacking", true);
-            List<Projectile> projectiles = spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, spellCollisionMask);
+            List<Projectile> projectiles = spell.SpawnSpell(transform.position + transform.right * 0.2f, transform.right, attackCollisionMask);
             for (int i = 0; i < projectiles.Count; i++)
                 projectiles[i].transform.localScale *= .75f; // Fire Small-Scale objects (compared to what the Player fires)
             StartCoroutine(CoroutineMethods.RunDelayed(() => {animator.SetBool("Attacking", false);}, .75f));

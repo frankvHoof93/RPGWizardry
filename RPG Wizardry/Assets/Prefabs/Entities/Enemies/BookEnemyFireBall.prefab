@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6a6fa805088b2e44e99f7ed20a94a8ce, type: 2}
-  spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  spellCollisionMask:
+  attackCollisionMask:
     serializedVersion: 2
     m_Bits: 2048
+  spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
   attackAngleMargin: 5
 --- !u!212 &30696588968422745
 SpriteRenderer:
@@ -78,6 +78,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
