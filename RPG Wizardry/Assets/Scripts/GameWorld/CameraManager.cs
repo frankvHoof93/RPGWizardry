@@ -33,7 +33,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void Update()
         {
             transform.position = new Vector3(
-                playerTransform.position.x, playerTransform.position.y, playerTransform.position.z-10);
+                Mathf.Round(playerTransform.position.x * 1000.0f) / 1000.0f,
+                Mathf.Round(playerTransform.position.y * 1000.0f) / 1000.0f,
+                Mathf.Round(playerTransform.position.z - 500.00f * 1000.0f) / 1000.0f);
         }
         #endregion
     }
