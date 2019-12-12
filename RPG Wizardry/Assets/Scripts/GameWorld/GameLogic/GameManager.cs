@@ -1,30 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using nl.SWEG.RPGWizardry.Utils.Behaviours;
 
 namespace nl.SWEG.RPGWizardry
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : SingletonBehaviour<GameManager>
     {
-        public static GameManager Instance;
-
         #region Variables
         public GameState GameState;
         public bool Locked;
-        #endregion
-
-        #region Methods
-        #region Unity
-        private void Start()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-
-            Locked = false;
-        }
-        #endregion
         #endregion
     }
 
