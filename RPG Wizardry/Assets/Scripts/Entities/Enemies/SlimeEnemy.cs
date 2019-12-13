@@ -68,6 +68,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <param name="player">Reference to Player</param>
         protected override void OnDeath()
         {
+            GetComponent<Collider2D>().enabled = false;
             dead = true;
             animator.SetBool("Dead", true);
             if (big)
