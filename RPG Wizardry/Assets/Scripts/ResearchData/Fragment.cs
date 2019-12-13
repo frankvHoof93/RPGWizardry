@@ -31,12 +31,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public Transform ImageTransform { get; set; }
         #endregion
 
-        //public Fragment(Image image, Transform transform)
-        //{
-        //    this.FragmentImage = image;
-        //    this.ImageTransform = transform;
-        //}
-
         public Fragment()
         {
         }

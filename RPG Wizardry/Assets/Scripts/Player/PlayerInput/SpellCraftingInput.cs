@@ -57,8 +57,12 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 
                 if (results.Count > 0)
                 {
-                    draggedImage = results[0].gameObject.GetComponent<Image>();
-                    mousePos = Input.mousePosition;
+                    if(results[0].gameObject.tag == "Bar")
+                    {
+                        draggedImage = results[0].gameObject.GetComponent<Image>();
+                        mousePos = Input.mousePosition;
+                    }
+
                 }
             }
             else if (Input.GetMouseButton(0) && draggedImage != null) // Held (Drag)
