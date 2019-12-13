@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         [SerializeField]
         [Tooltip("Text-UI for HealthBar")]
-        private Text healthText;
+        private TextMeshProUGUI healthText;
         #endregion
 
         #region Items
@@ -31,13 +32,13 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         [SerializeField]
         [Tooltip("Text-UI for Dust-Amount")]
-        private Text dustText;
+        private TextMeshProUGUI dustText;
         /// <summary>
         /// Text-UI for Gold-Amount
         /// </summary>
         [SerializeField]
         [Tooltip("Text-UI for Gold-Amount")]
-        private Text goldText;
+        private TextMeshProUGUI goldText;
         #endregion
 
         #region Spells
@@ -115,7 +116,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="change">Change in amount</param>
         private void UpdateDustAmount(uint newAmount, int change)
         {
-            dustText.text = newAmount.ToString();
+            dustText.text = "X " + newAmount.ToString();
             if (change != 0)
             {
                 // TODO: Change-Popup/Effect?
@@ -128,7 +129,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="change">Change in amount</param>
         private void UpdateGoldAmount(uint newAmount, int change)
         {
-            goldText.text = newAmount.ToString();
+            goldText.text = "X " + newAmount.ToString();
             if (change != 0)
             {
                 // TODO: Change-Popup/Effect?
