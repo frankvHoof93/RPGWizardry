@@ -3442,6 +3442,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5dd9074d9391a47b9491000f99b7ec, type: 3}
+--- !u!114 &478797147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1614139952160609278, guid: 6d5dd9074d9391a47b9491000f99b7ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 478797146}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbf44c86a097b64faf325ba8b4c662c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &484275224
 GameObject:
   m_ObjectHideFlags: 0
@@ -8026,27 +8038,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188149008}
   m_CullTransparentMesh: 0
---- !u!1 &1257007490 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1649351625787668028, guid: 6d5dd9074d9391a47b9491000f99b7ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 478797146}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1257007501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257007490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasRootObject: 0
-  maxHealth: 100
-  bookRenderer: {fileID: 0}
 --- !u!1 &1277858700
 GameObject:
   m_ObjectHideFlags: 0
@@ -11601,6 +11592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSpell:
     spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
+  inventory: {fileID: 478797147}
   title: {fileID: 961777021}
   button: {fileID: 955261947}
 --- !u!1 &1704868257
