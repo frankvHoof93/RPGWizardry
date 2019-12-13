@@ -16,14 +16,21 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private List<Image> images;
         [SerializeField]
-        private SpellManager spellManager;
+        private SpellPageManager spellManager;
         // Start is called before the first frame update
         void Start()
         {
-            CurrentBin = LoadDataBin();
+            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
+            if(CurrentBin == null)
+            {
+                CurrentBin = LoadDataBin();
+            }
             PopulateUI();
         }
 
+        /// <summary>
+        /// Perform start when page is enabled again.
+        /// </summary>
         private void OnEnable()
         {
             Start();
@@ -94,6 +101,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
         }
 
+        //TODO: Remove datastub 
         private DataBin LoadDataBin()
         {
             DataStubBin Stub = new DataStubBin();

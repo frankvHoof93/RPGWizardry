@@ -3354,6 +3354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Willow
       objectReference: {fileID: 0}
+    - target: {fileID: 1649351625787668028, guid: 6d5dd9074d9391a47b9491000f99b7ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1649351625787668030, guid: 6d5dd9074d9391a47b9491000f99b7ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11596,7 +11601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSpell:
     spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  title: {fileID: 0}
+  title: {fileID: 961777021}
   button: {fileID: 955261947}
 --- !u!1 &1704868257
 GameObject:
