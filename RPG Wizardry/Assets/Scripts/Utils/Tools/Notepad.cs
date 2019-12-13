@@ -5,17 +5,11 @@
 /// <para>
 ///     These Objects are not used in the Application itself (or only used for analysis)
 /// </para>
-/// <para>
-///     COPYRIGHT: DTT (2018)
-/// </para>
 /// </summary>
 namespace nl.DTT.Utils.Tools
 {
     /// <summary>
     /// Adds notes a Game Object, in order to document things for yourself or for others
-    /// <para>
-    ///     Made by: Dezley Kleyn
-    /// </para>
     /// </summary>
     public class Notepad : MonoBehaviour
     {
