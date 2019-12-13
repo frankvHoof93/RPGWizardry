@@ -1,12 +1,58 @@
 using nl.SWEG.RPGWizardry.Entities.Stats;
+using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 {
-    public abstract class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour, IOpacity
     {
         #region Variables
+        #region Public
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        public float OpacityRadius => opacityRadius;
+        /// <summary>
+        /// Priority for rendering Opacity
+        /// </summary>
+        public int OpacityPriority => opacityPriority;
+        /// <summary>
+        /// Opacity-Offset from Transform (in World-Space)
+        /// </summary>
+        public Vector2 OpacityOffset => opacityOffset;
+        #endregion
+
+        #region Editor
+        /// <summary>
+        /// Mask of layer containing walls and other obstructions
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Mask of layer containing walls and other obstructions")]
+        private LayerMask wallLayer;
+        [Header("Opacity")]
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        [SerializeField]
+        [Range(1, 10000)]
+        [Tooltip("Opacity-Radius in Pixels (for 720p)")]
+        private int opacityPriority = 2;
+        /// <summary>
+        /// Priority for rendering Opacity
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Priority for rendering Opacity")]
+        private float opacityRadius = 35f;
+        /// <summary>
+        /// Opacity-Offset from Transform (in World-Space)
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Opacity-Offset from Transform (in World-Space)")]
+        private Vector2 opacityOffset;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Data for Spell
         /// </summary>
@@ -16,14 +62,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         protected LayerMask targetLayer;
         /// <summary>
-        /// Mask of layer containing walls and other obstructions
-        /// </summary>
-        [SerializeField]
-        private LayerMask wallLayer;
-        /// <summary>
         /// Combined layermask for all things to collide with
         /// </summary>
         private LayerMask collisionLayer;
+        #endregion
         #endregion
 
         #region Methods
