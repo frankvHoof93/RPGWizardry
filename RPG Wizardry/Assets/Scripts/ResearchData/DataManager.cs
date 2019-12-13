@@ -16,12 +16,24 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private List<Image> images;
         [SerializeField]
-        private RenderTexture texture;
+        private SpellPageManager spellManager;
         // Start is called before the first frame update
         void Start()
         {
-            CurrentBin = LoadDataBin();
+            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
+            if(CurrentBin == null)
+            {
+                CurrentBin = LoadDataBin();
+            }
             PopulateUI();
+        }
+
+        /// <summary>
+        /// Perform start when page is enabled again.
+        /// </summary>
+        private void OnEnable()
+        {
+            Start();
         }
 
         // Update is called once per frame
@@ -29,17 +41,20 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         {
             if(CurrentSet.CheckDataSolved())
             {
-                Debug.Log("Finished");
+                spellManager.UnlockSpell();
+                spellManager.gameObject.active = true;
+                this.gameObject.active = false;    
             }
         }
 
+        //TODO: Convert to RenderTexture, can't currently work out how to do it.
         public void PopulateUI()
         {
             LoadDataSet();
             for (int i = 0; i < CurrentSet.Fragments.Count; i++)
             {
                 CurrentSet.Fragments[i].FragmentImage = images[i];
-                CurrentSet.Fragments[i].ImageTransform = images[i].transform;
+                CurrentSet.Fragments[i].ImageTransform = images[i].transform.parent;
                 Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
                 ClearTexture(imgTex);
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
@@ -63,6 +78,21 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             tex.Apply();
         }
 
+        public void ClearTexture()
+        {
+            for (int i = 0; i < CurrentSet.Fragments.Count; i++)
+            {
+                Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
+                ClearTexture(imgTex);
+            }
+        }
+
+                private void OnApplicationQuit()
+        {
+            for (int i = 0; i < images.Count; i++)
+                ClearTexture((Texture2D)images[i].mainTexture);
+        }
+
         public void LoadDataSet()
         {
             if(!CurrentBin.IsDataBinSolved())
@@ -71,16 +101,12 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
         }
 
+        //TODO: Remove datastub 
         private DataBin LoadDataBin()
         {
             DataStubBin Stub = new DataStubBin();
             return Stub.Bin;
             
-        }
-
-        private bool UnlockSpell(SpellPage spell)
-        {
-            return Inventory.UnlockSpell(spell);
         }
 
     }

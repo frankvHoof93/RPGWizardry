@@ -24,6 +24,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         private SpellData spell;
         #endregion
 
+        public string SpellTitle { get => spell.Name; }
         #region Methods
         /// <summary>
         /// Unlocks Spell on this Page (after crafting)
