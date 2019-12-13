@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -9,10 +9,17 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     public class CameraManager : SingletonBehaviour<CameraManager>
     {
         #region Fields
+        private ScreenFade screenFader;
+
         /// <summary>
         /// Camera-Component for Camera
         /// </summary>
         public Camera Camera { get; private set; }
+
+        /// <summary>
+        /// Is true when the camera fading in or out.
+        /// </summary>
+        public bool Fading;
 
         /// <summary>
         /// How long it takes to fade in or out.
@@ -25,79 +32,62 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         #region Methods
         #region Public
         /// <summary>
-        /// Starts the switchRoom coroutine.
+        /// Fade the camera visibility between 2 values.
         /// </summary>
-        /// <param name="previous">The room the player is currently in.</param>
-        /// <param name="next">The room the player needs to go.</param>
-        /// <param name="spawn">the place where the player needs to end up.</param>
-        public void SwitchRoom(GameObject previous, GameObject next, Transform spawn)
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        public void Fade(float from, float to)
         {
-            if (spawn != null)
-                StartCoroutine(switchRoom(previous, next, spawn));
-            else
-                throw new System.NotImplementedException("This door doesn't connect to anything! (did you set the spawn location?)");
+            Fading = true;
+            screenFader.enabled = true;
+            LeanTween.value(gameObject, UpdateShader, from, to, FadeTime);
         }
         #endregion
 
         #region Private
-        /// <summary>
-        /// moves the player between 2 rooms, and handles room visibility accordingly.
-        /// </summary>
-        /// <param name="previous">The room the player is currently in.</param>
-        /// <param name="next">The room the player needs to go.</param>
-        /// <param name="spawn">the place where the player needs to end up.</param>
-        /// <returns></returns>
-        private IEnumerator switchRoom(GameObject previous, GameObject next, Transform spawn)
-        {
-            //Make sure the player cant move
-            GameManager.Instance.Locked = true;
-
-            //Fade the screen out
-            LeanTween.value(gameObject, UpdateShader, 1, 0, FadeTime);
-            yield return new WaitForSeconds(FadeTime);
-
-            //Enable the new room
-            next.SetActive(true);
-
-            //Move the player to new room
-            if (PlayerManager.Exists)
-            {
-                PlayerManager.Instance.transform.position = spawn.position;
-            }
-
-            //Disable the old room
-            previous.SetActive(false);
-
-            //Fade the screen back in
-            LeanTween.value(gameObject, UpdateShader, 0, 1, FadeTime);
-            yield return new WaitForSeconds(FadeTime);
-
-            //Make sure the player can move again
-            GameManager.Instance.Locked = false;
-
-            //Activate enemies in new room
-        }
-
         /// <summary>
         /// Updates the shader used for room transitioning.
         /// </summary>
         /// <param name="value">A value between 0 and 1.</param>
         private void UpdateShader(float value)
         {
-            print(value);
-
             //TODO: tie this value to the fade shader.
+            screenFader.SetValue(value);
+
+            if (value == 0)
+            {
+                Fading = false;
+            }
+            else if (value == 1)
+            {
+                Fading = false;
+                screenFader.enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Enables the camera after the first frame because the shader doesn't work fast enough.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator toggleCamera()
+        {
+            Camera.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            Camera.enabled = true;
         }
         #endregion
 
         #region Unity
         /// <summary>
-        /// Grabs Reference to Camera
+        /// Grabs Reference to Camera, and instantiate the screenfade shader.
         /// </summary>
         protected override void Awake()
         {
             base.Awake();
             Camera = GetComponent<Camera>();
+            screenFader = GetComponent<ScreenFade>();
+
+            StartCoroutine(toggleCamera());
         }
 
         /// <summary>
@@ -105,6 +95,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void Update()
         {
+
+            Camera.enabled = true;
             if (!PlayerManager.Exists)
                 return;
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using nl.SWEG.RPGWizardry.GameWorld;
 
 namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
@@ -77,7 +78,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
             else if (controlScheme == ControlScheme.Keyboard)
             {
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-                Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                Vector3 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
                 inputState.AimingData = (lookPos - transform.position).normalized;
             }
         }

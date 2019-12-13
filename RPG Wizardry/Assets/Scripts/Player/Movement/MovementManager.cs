@@ -84,7 +84,6 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
             {
                 //Set the speed to 0 so the character stops walking.
                 animator.SetFloat("Speed", 0);
-                print("locked");
             }
         }
         #endregion
