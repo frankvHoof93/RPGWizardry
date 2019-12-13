@@ -141,6 +141,11 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         #endregion
 
         #region Getters
+        /// <summary>
+        /// Whether the player has this spell in his/her inventory (does not check for Unlocking)
+        /// </summary>
+        /// <param name="spell">Spell to check against</param>
+        /// <returns></returns>
         public bool HasSpell(SpellData spell)
         {
             return Pages.Any(p => ReferenceEquals(spell, p.Spell));
@@ -156,7 +161,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// <param name="page">Page to add</param>
         internal bool AddPage(SpellPage page)
         {
-            if (page != null && !pages.Any(p => ReferenceEquals(p.Spell, page.Spell)))
+            if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
                 return true;

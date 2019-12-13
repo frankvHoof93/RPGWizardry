@@ -7,6 +7,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
     public class PageObject : ACollectable
     {
         #region Variables
+        /// <summary>
+        /// Sets SpellPage on this Object
+        /// </summary>
         internal SpellPage Page
         {
             set { page = value; }

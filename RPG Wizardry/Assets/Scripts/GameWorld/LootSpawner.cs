@@ -40,6 +40,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             }
         }
 
+        /// <summary>
+        /// Spawns a PageObject
+        /// </summary>
+        /// <param name="position">Position to Spawn at (WorldSpace)</param>
+        /// <param name="spell">Spell for Page</param>
         public void SpawnPage(Vector3 position, SpellData spell)
         {
             GameObject spawnedObject = Instantiate(lootPrefabs[(int)Collectables.Page]);
