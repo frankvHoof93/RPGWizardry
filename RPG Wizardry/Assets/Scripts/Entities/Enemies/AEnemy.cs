@@ -133,9 +133,11 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             spawn = loot.gold;
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
-            spawn = loot.page;
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Page, transform.position, spawn.amount);
+            // Page Spawn handled by BookEnemy
+            //spawn = loot.page;
+            //if (spawn.amount > 0 && spawn.chance >= rng)
+            //    LootSpawner.Instance.SpawnPage(transform.position, )
+            //    LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Page, transform.position, spawn.amount);
             spawn = loot.potion;
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);

@@ -7,6 +7,11 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
     public class PageObject : ACollectable
     {
         #region Variables
+        internal SpellPage Page
+        {
+            set { page = value; }
+        }
+
         /// <summary>
         /// SpellPage in Object
         /// </summary>
@@ -22,7 +27,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <param name="target">Inventory to Add to</param>
         protected override bool OnCollect(PlayerInventory target)
         {
-            return target.AddPage(page);
+            bool value = target.AddPage(page);
+            if (!value)
+                Destroy(gameObject); // Player already has this spell. Destroy gameobject
+            return value; // Destroying of GameObject handled by base-class
         }
         #endregion
     }

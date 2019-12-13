@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 190392265832547143}
   - component: {fileID: 8045335093488096650}
   - component: {fileID: 7422262605839612642}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PageObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -98,7 +99,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.25, y: 6.25}
+    oldSize: {x: 0.6666667, y: 0.6666667}
     newSize: {x: 0.08, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,5 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Player
+  opacityRadius: 40
+  opacityOffset: {x: 0, y: 0}
   page:
     spell: {fileID: 0}
