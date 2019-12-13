@@ -7,6 +7,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     [RequireComponent(typeof(SpriteRenderer))]
     public class VerticalDoor : Door
     {
+        [Space]
         #region Variables
         /// <summary>
         /// The opened door sprite.
@@ -50,10 +51,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Gets the spriterendere of the door, and calls base.start.
         /// </summary>
-        private void Start()
+        protected override void Awake()
         {
             doorRenderer = GetComponent<SpriteRenderer>();
-            base.Start();
+            base.Awake();
         }
         #endregion
         #endregion

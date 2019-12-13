@@ -1,7 +1,10 @@
 ﻿using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using System;
 using UnityEngine;
+using System.Collections;
 using static nl.SWEG.RPGWizardry.GameWorld.RoomData;
+using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.Player;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -11,33 +14,43 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Rooms in Current Floor
         /// </summary>
-        [SerializeField]
         private RoomData[] floorRooms;
+
+        /// <summary>
+        /// A list of all rooms on the floor.
+        /// </summary>
+        [SerializeField]
+        private Room[] rooms;
+        [Space]
 
         /// <summary>
         /// Currently Loaded Room
         /// </summary>
-        private GameObject room;
+        [SerializeField]
+        private Room activeRoom;
         #endregion
 
         #region Methods
         #region Public
+
+        /// <summary>
+        /// Starts the coroutine that switches from one room to the other.
+        /// </summary>
+        /// <param name="destination">The door in the target room.</param>
+        public void SwitchTo(Door destination)
+        {
+            StartCoroutine(switchRoom(destination));
+        }
+
         /// <summary>
         /// Loads Room by Index. Unloads current room, and spawns Enemies for Room as well
         /// </summary>
         /// <param name="index">Index for Room to Spawn</param>
         public void LoadRoom(uint index)
         {
-            if (index >= floorRooms.Length)
-                throw new ArgumentException("Index out of Range", "index");
-            if (room != null)
-                UnloadRoom();
             RoomData data = floorRooms[index];
-            room = Instantiate(data.RoomPrefab);
-            room.transform.parent = transform;
-            room.transform.position = Vector3.zero;
             GameObject parent = new GameObject("SpawnedObjects");
-            parent.transform.parent = room.transform;
+            parent.transform.parent = activeRoom.transform;
             parent.transform.position = Vector3.zero;
             for (int i = 0; i < data.Spawns.Length; i++)
             {
@@ -47,13 +60,76 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 enemy.transform.localPosition = template.spawnPosition;
             }
         }
+        #endregion
+
+        #region Private
         /// <summary>
-        /// Unloads currently loaded Room
+        /// moves the player between 2 rooms, and handles room visibility accordingly.
         /// </summary>
-        public void UnloadRoom()
+        /// <param name="previous">The room the player is currently in.</param>
+        /// <param name="next">The room the player needs to go.</param>
+        /// <param name="spawn">the place where the player needs to end up.</param>
+        /// <returns></returns>
+        private IEnumerator switchRoom(Door destination)
         {
-            if (room != null)
-                Destroy(room);
+            //Make sure the player can't move
+            GameManager.Instance.Locked = true;
+
+            //Fade the screen out
+            CameraManager.instance.Fade(1, 0);
+            while (CameraManager.instance.Fading)
+            {
+                yield return null;
+            }
+
+            //Disable the old room
+            activeRoom.Disable();
+            
+            //Move the player to new room
+            if (PlayerManager.Exists)
+                PlayerManager.Instance.transform.position = destination.transform.position;
+
+
+            //Enable the new room
+            destination.Room.Enable();
+            activeRoom = destination.Room;
+
+            //Fade the screen back in
+            CameraManager.instance.Fade(0, 1);
+            while (CameraManager.instance.Fading)
+            {
+                yield return null;
+            }
+
+            //Make sure the player can move again
+            GameManager.Instance.Locked = false;
+
+            //Activate enemies in new room
+            if (!activeRoom.Cleared)
+            {
+                //Spawn enemies
+
+                //close doors
+                yield return new WaitForSeconds(0.25f);
+                activeRoom.CloseDoors();
+            }
+            else
+            {
+                //open doors
+                activeRoom.OpenDoors();
+            }
+        }
+
+        private IEnumerator startFade()
+        {
+            yield return new WaitForSeconds(0.25f);
+
+            //fade camera in
+            CameraManager.instance.Fade(0, 1);
+            while (CameraManager.instance.Fading)
+            {
+                yield return null;
+            }
         }
         #endregion
 
@@ -63,7 +139,15 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void Start()
         {
-            LoadRoom(0);
+            for (int i = 0; i < rooms.Length; i++)
+            {
+                if (rooms[i] != activeRoom)
+                {
+                    rooms[i].Disable();
+                }
+            }
+
+            StartCoroutine(startFade());
         }
         #endregion
         #endregion

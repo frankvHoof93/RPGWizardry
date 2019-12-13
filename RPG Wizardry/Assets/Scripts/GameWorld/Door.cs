@@ -9,6 +9,17 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     {
         #region Variables
         /// <summary>
+        /// The room the door is leading to.
+        /// </summary>
+        public Room Room { get; private set; }
+
+        /// <summary>
+        /// The other side of the door, in a different room.
+        /// </summary>
+        [SerializeField]
+        private Door destination;
+
+        /// <summary>
         /// The light that gets displayed when the door is opened.
         /// </summary>
         [SerializeField]
@@ -17,7 +28,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// The collider of the door.
         /// </summary>
-        private Collider2D hitbox;
+        [SerializeField]
+        private Collider2D collider;
         #endregion
 
         #region Methods
@@ -27,7 +39,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         public virtual void Open()
         {
-            hitbox.enabled = false;
+            collider.enabled = false;
             lights.SetActive(true);
         }
 
@@ -36,7 +48,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         public virtual void Close()
         {
-            hitbox.enabled = true;
+            collider.enabled = true;
             lights.SetActive(false);
         }
         #endregion
@@ -45,10 +57,18 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Gets the collider, and closes the door.
         /// </summary>
-        protected void Start()
+        protected virtual void Awake()
         {
-            hitbox = GetComponent<Collider2D>();
-            Open();
+            Room = GetComponentInParent<Room>();
+        }
+
+        /// <summary>
+        /// Checks if the player is hitting the room switch trigger.
+        /// </summary>
+        /// <param name="collision"></param>
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            FloorManager.Instance.SwitchTo(destination);
         }
         #endregion
         #endregion
