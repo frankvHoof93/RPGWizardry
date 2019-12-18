@@ -141,12 +141,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             for (int i = 0; i < rooms.Length; i++)
             {
-                if (rooms[i] != activeRoom)
-                {
-                    rooms[i].Disable();
-                }
+                rooms[i].Disable();
             }
 
+            activeRoom.Enable();
             StartCoroutine(startFade());
         }
         #endregion

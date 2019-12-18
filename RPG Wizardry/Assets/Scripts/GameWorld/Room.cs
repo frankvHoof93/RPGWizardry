@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using nl.SWEG.RPGWizardry.Entities.Enemies;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -14,9 +15,25 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         [SerializeField]
         private Door[] doors;
 
+        [Space]
+        public GameObject EnemyHolder;
+
+        private void Start()
+        {
+            foreach (AEnemy enemy in EnemyHolder.GetComponentsInChildren<AEnemy>(true))
+            {
+                enemy.Killed += CheckRoomClear;
+                print("Enemy");
+            }
+        }
+
         public void Enable()
         {
             gameObject.SetActive(true);
+            if (!Cleared)
+            {
+                CloseDoors();
+            }
         }
 
         public void Disable()
@@ -43,6 +60,21 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             for (int i = 0; i < doors.Length; i++)
             {
                 doors[i].Open();
+            }
+        }
+
+        /// <summary>
+        /// Checks if the room still has enemies. if it doesn't, the doors open.
+        /// </summary>
+        private void CheckRoomClear()
+        {
+            print(EnemyHolder.transform.childCount);
+            if (EnemyHolder.transform.childCount == 0)
+            {
+                for (int i = 0; i < doors.Length; i++)
+                {
+                    OpenDoors();
+                }
             }
         }
     }
