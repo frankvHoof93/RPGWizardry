@@ -20,11 +20,20 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
         private void Start()
         {
-            foreach (AEnemy enemy in EnemyHolder.GetComponentsInChildren<AEnemy>(true))
+            AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
+
+            if (enemies.Length > 0)
             {
-                enemy.Killed += CheckRoomClear;
-                print("Enemy");
+                foreach (AEnemy enemy in enemies)
+                {
+                    enemy.Killed += CheckRoomClear;
+                    print("Enemy");
+                }
             }
+            else
+            {
+                Cleared = true;
+            }           
         }
 
         public void Enable()
@@ -68,11 +77,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void CheckRoomClear()
         {
-            print(EnemyHolder.transform.childCount);
             if (EnemyHolder.transform.childCount == 0)
             {
                 for (int i = 0; i < doors.Length; i++)
                 {
+                    Cleared = true;
                     OpenDoors();
                 }
             }

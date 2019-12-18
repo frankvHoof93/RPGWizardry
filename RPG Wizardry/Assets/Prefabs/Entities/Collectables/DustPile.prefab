@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 593522381379644970}
   - component: {fileID: 7295321308355197159}
   - component: {fileID: 5175693010138246313}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DustPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 1853b9538c57e9045934c214641e10a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8238514770305fe4e82a86d3f4829f9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +99,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.25, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 0.08, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,4 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Player
+  opacityRadius: 40
+  opacityOffset: {x: 0, y: 0}
   Amount: 5

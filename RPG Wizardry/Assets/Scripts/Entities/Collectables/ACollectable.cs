@@ -29,13 +29,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         #endregion
 
         #region Editor
-        /// <summary>
-        /// Tags for Collision
-        /// </summary>
-        [SerializeField]
-        [TagSelector]
-        [Tooltip("Tags for Collision")]
-        private string[] targetTags;
         [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
@@ -65,14 +58,13 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <param name="collision">Collider with which Collision occured</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targetTags.Contains(collision.gameObject.tag))
-            {
-                PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
-                if (inv == null)
-                    throw new InvalidOperationException("Target has no Inventory");
-                if (OnCollect(inv))
-                    Destroy(gameObject);
-            }
+            print("picked up");
+
+            PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
+            if (inv == null)
+                throw new InvalidOperationException("Target has no Inventory");
+            if (OnCollect(inv))
+                Destroy(gameObject);
         }
         #endregion
     }
