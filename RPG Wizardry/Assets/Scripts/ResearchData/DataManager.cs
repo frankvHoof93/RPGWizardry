@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
@@ -28,6 +28,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         [SerializeField]
         private SpellPageManager spellManager;
+
+        [SerializeField]
+        private TextMeshProUGUI message;
         // Start is called before the first frame update
         void Start()
         {
@@ -37,6 +40,8 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 CurrentBin = LoadDataBin();
             }
             PopulateUI();
+            message.enabled = false;
+
         }
 
         /// <summary>
@@ -53,8 +58,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             if(CurrentSet.CheckDataSolved())
             {
                 spellManager.UnlockSpell();
-                spellManager.gameObject.active = true;
-                this.gameObject.active = false;    
+                message.enabled = true;
             }
         }
 
