@@ -18,7 +18,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         [Space]
         public GameObject EnemyHolder;
 
-        private void Start()
+        private void OnEnable()
         {
             AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
             if (enemies.Length > 0)
