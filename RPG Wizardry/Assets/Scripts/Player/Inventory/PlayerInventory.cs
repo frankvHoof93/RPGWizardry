@@ -59,7 +59,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         #endregion
         #endregion
 
-        #region Methods
+       #region Methods
         #region Public
         #region EventListeners
         /// <summary>
@@ -98,6 +98,24 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         {
             goldChangeEvent -= listener;
         }
+        #endregion
+        #region Spells
+
+        /// <summary>
+        /// Unlocks a Page in the Inventory, only if you can pay the costs needed for it.
+        /// </summary>
+        /// <param name="page">Page to unlock</param>
+        /// <returns></returns>
+        public bool UnlockSpell(SpellPage page)
+        {
+            if (Dust >= page.DustCost)
+            {
+                page.UnlockSpell();
+                Dust -= page.DustCost;
+            }
+
+            return page.Unlocked;
+        } 
         #endregion
 
         #region Storage
