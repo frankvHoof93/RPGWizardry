@@ -29,6 +29,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private SpellPageManager spellManager;
 
+        /// <summary>
+        /// Message to show if you unlocked the spell or not.
+        /// </summary>
         [SerializeField]
         private TextMeshProUGUI message;
         // Start is called before the first frame update
