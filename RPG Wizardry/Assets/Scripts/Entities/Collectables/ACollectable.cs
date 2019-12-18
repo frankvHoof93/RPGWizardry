@@ -58,8 +58,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <param name="collision">Collider with which Collision occured</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            print("picked up");
-
             PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
             if (inv == null)
                 throw new InvalidOperationException("Target has no Inventory");

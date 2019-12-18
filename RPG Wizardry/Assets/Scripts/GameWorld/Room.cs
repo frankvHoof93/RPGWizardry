@@ -21,13 +21,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private void Start()
         {
             AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
-
             if (enemies.Length > 0)
             {
                 foreach (AEnemy enemy in enemies)
                 {
                     enemy.Killed += CheckRoomClear;
-                    print("Enemy");
                 }
             }
             else
