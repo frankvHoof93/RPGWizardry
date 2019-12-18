@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 8401781902434766534}
   - component: {fileID: 5691672337049842900}
   - component: {fileID: 8401781902434766528}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Door Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
