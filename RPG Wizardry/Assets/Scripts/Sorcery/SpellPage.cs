@@ -12,6 +12,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         public bool Unlocked { get; private set; }
 
+        //TODO Dustcost should be retrieved from the SpellData object
         /// <summary>
         /// The dust cost for the spell to unlock.  
         /// </summary>
@@ -22,9 +23,14 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [SerializeField]
         [Tooltip("Data for Spell")]
         private SpellData spell;
+
+        /// <summary>
+        /// Spell title returned from the spell object.
+        /// </summary>
+        public string SpellTitle { get => spell.Name; }
         #endregion
 
-        public string SpellTitle { get => spell.Name; }
+
         #region Methods
         /// <summary>
         /// Unlocks Spell on this Page (after crafting)

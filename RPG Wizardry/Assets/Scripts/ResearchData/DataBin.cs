@@ -1,27 +1,21 @@
-﻿using System.Collections;
+﻿using nl.SWEG.RPGWizardry.Utils;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataBin
     {
-        #region Methods
-        #region Public
+        #region Variables
         /// <summary>
         /// List of all fragments in supplied Research Bin
         /// </summary>
         public List<Fragment> Bin { get; private set; }
-        #endregion
-        #region Private
         /// <summary>
         /// Datasets after splitting the bin into managable pieces
         /// </summary>
         private List<DataSet> DataSets;
-
         /// <summary>
-        /// 
+        /// Flags the databin is its solved or not.
         /// </summary>
         private bool IsSolved;
         /// <summary>
@@ -29,7 +23,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         private int setSize;
         #endregion
-
+        #region Methods
         public DataBin(List<Fragment> bin, int setSize)
         {
             Bin = bin;
@@ -47,6 +41,10 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
         }
 
+        /// <summary>
+        /// Checks if the sets in this databin are solved
+        /// </summary>
+        /// <returns>A true or false based on the outcome</returns>
         public bool IsDataBinSolved()
         {
             int solvedCount = 0;
@@ -57,7 +55,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
             return solvedCount == setSize;
         }
-        public DataSet UnsolvedDataSet()
+        /// <summary>
+        /// Returns the first unsolved Dataset
+        /// </summary>
+        /// <returns>A Dataset</returns>
+        public DataSet FirstUnsolvedDataSet()
         {
             for (int i = 0; i < this.setSize; i++)
             {
@@ -66,8 +68,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
             return null;
         }
-        #endregion
-        #region Split
         /// <summary>
         /// Converts the bin into the Datasets
         /// </summary>
@@ -83,20 +83,4 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         }
         #endregion
     }
-    #region Utility
-    /// <summary>
-    /// Helper methods for the lists.
-    /// </summary>
-    public static class ListExtensions
-    {
-        public static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize)
-        {
-            return source
-                .Select((x, i) => new { Index = i, Value = x })
-                .GroupBy(x => x.Index / chunkSize)
-                .Select(x => x.Select(v => v.Value).ToList())
-                .ToList();
-        }
-    }
-    #endregion
 }

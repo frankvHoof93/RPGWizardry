@@ -1,5 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Player.Inventory;
+﻿using nl.SWEG.RPGWizardry.Player.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +7,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
 {
     public class SpellPageManager : MonoBehaviour
     {
+        #region Variables
         /// <summary>
         /// Spell targeted for unlocking
         /// </summary>
@@ -25,6 +25,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         private TextMeshProUGUI title;
         [SerializeField]
         private Button button;
+
+        #endregion
+        #region Methods
         private void Start()
         {
             title.text = selectedSpell.SpellTitle;
@@ -52,6 +55,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             }
 
         }
+        #endregion
     }
 }
 

@@ -31,9 +31,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public Transform ImageTransform { get; set; }
         #endregion
 
-        public Fragment()
-        {
-        }
         #endregion
 
         #region Check

@@ -7,6 +7,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
     {
+        #region Variables
         /// <summary>
         /// Current bin to be used for minigames/research
         /// </summary>
@@ -34,6 +35,8 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         [SerializeField]
         private TextMeshProUGUI message;
+        #endregion
+        #region Methods
         // Start is called before the first frame update
         void Start()
         {
@@ -77,7 +80,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 CurrentSet.Fragments[i].FragmentImage = images[i];
                 CurrentSet.Fragments[i].ImageTransform = images[i].transform.parent;
                 Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
-                ClearTexture(imgTex);
+                ClearTextures(imgTex);
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
                 {
                     // Add Pixel to Img
@@ -96,7 +99,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// Cleares the images and reset it to their base state.
         /// </summary>
         /// <param name="tex">Target texture</param>
-        private void ClearTexture(Texture2D tex)
+        private void ClearTextures(Texture2D tex)
         {
             for (int x = 0; x < tex.width; x++)
                 for (int y = 0; y < tex.height; y++)
@@ -107,7 +110,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         private void OnApplicationQuit()
         {
             for (int i = 0; i < images.Count; i++)
-                ClearTexture((Texture2D)images[i].mainTexture);
+                ClearTextures((Texture2D)images[i].mainTexture);
         }
 
         /// <summary>
@@ -117,7 +120,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         {
             if(!CurrentBin.IsDataBinSolved())
             {
-                CurrentSet = CurrentBin.UnsolvedDataSet();
+                CurrentSet = CurrentBin.FirstUnsolvedDataSet();
             }
         }
 
@@ -128,6 +131,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             return Stub.Bin;
             
         }
+        #endregion
 
     }
 }

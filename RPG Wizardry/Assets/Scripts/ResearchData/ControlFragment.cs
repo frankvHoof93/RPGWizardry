@@ -9,8 +9,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
 
     public class ControlFragment : Fragment
     {
-        #region Methods
-        #region Public
+        #region Variables
         /// <summary>
         /// The position which is the solution to this control fragment.
         /// </summary>
@@ -20,13 +19,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         public bool Solved { get; private set; }
 
-        #endregion
-        #region Private
         /// <summary>
         /// the offset from the correct position which will count as a valid solution
         /// </summary> 
         private float range;
-        #endregion
+        #region Methods
         public ControlFragment(float correctPosition, float range) : base()
         {
             CorrectPosition = correctPosition;
@@ -50,6 +47,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
             
         }
+        #endregion
         #endregion
     }
 }
