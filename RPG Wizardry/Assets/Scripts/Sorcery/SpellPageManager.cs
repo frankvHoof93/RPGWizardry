@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
+using nl.SWEG.RPGWizardry.Player.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// Player inventory  which contains current spell pages;
         /// </summary>
         [SerializeField]
-        private PlayerManager player;
+        private PlayerInventory inventory;
         /// <summary>
         /// Title of spell page
         /// </summary>
@@ -29,12 +30,17 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             title.text = selectedSpell.SpellTitle;
         }
 
+        private void OnEnable()
+        {
+            title.text = selectedSpell.SpellTitle;
+        }
+
         /// <summary>
         /// Unlocking of spell
         /// </summary>
         public void UnlockSpell()
         {
-                player.Inventory?.UnlockSpell(selectedSpell);
+                inventory?.UnlockSpell(selectedSpell);
             
         }
         // Update is called once per frame

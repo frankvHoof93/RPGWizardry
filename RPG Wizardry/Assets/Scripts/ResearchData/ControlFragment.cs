@@ -44,7 +44,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             {
                 Solved = true;
             }
-            Solved = false;
+            else
+            {
+                Solved = false;
+            }
+            
         }
         #endregion
     }

@@ -22,11 +22,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         #region Control
         public void GenerateControlFragments()
         {
-            ControlFragment start = new ControlFragment(20, 5);
+            ControlFragment start = new ControlFragment(20, 10);
             start.ImgData = new float[] { 1.410f, 1.375f, 1.350f, 1.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment middle = new ControlFragment(-20, 5);
+            ControlFragment middle = new ControlFragment(-20, 10);
             middle.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment end = new ControlFragment(-10, 5);
+            ControlFragment end = new ControlFragment(-10, 10);
             end.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
             int mid = (Fragments.Count + 3) / 2;
             Fragments.Insert(0, start);
