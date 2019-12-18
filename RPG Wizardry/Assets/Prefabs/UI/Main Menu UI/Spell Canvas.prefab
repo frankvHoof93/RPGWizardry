@@ -1072,6 +1072,7 @@ GameObject:
   - component: {fileID: 7072635281116298757}
   - component: {fileID: 7072635281116298756}
   - component: {fileID: 7072635281116298755}
+  - component: {fileID: -2840214508168978668}
   m_Layer: 5
   m_Name: Spell Canvas
   m_TagString: Untagged
@@ -1160,6 +1161,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-2840214508168978668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072635281116298754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddce477868af9304b8104635527f0224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSpell:
+    spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
+  inventory: {fileID: 0}
+  title: {fileID: 7072635279858129477}
+  button: {fileID: 7072635279834969283}
 --- !u!1 &7072635281224321299
 GameObject:
   m_ObjectHideFlags: 0
