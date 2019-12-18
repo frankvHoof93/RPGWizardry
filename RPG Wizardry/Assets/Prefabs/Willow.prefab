@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasRootObject: 0
-  maxHealth: 100
+  maxHealth: 120
   bookRenderer: {fileID: 1649351625540714792}
   opacityRadius: 35
   opacityOffset: {x: 0, y: 0.75}
