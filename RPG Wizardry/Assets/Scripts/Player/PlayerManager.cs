@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Player.Inventory;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System;
+using System.Collections;
 using UnityEngine;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
