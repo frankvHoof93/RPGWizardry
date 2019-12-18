@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 593522381379644970}
   - component: {fileID: 7295321308355197159}
   - component: {fileID: -4833950533955187618}
-  m_Layer: 17
+  m_Layer: 16
   m_Name: GoldPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
