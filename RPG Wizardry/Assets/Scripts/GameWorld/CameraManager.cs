@@ -42,6 +42,18 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             screenFader.enabled = true;
             LeanTween.value(gameObject, UpdateShader, from, to, FadeTime);
         }
+
+        /// <summary>
+        /// Overload of Fade that takes a custom fade time argument
+        /// </summary>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        public void Fade(float from, float to, float fadeTime)
+        {
+            Fading = true;
+            screenFader.enabled = true;
+            LeanTween.value(gameObject, UpdateShader, from, to, fadeTime);
+        }
         #endregion
 
         #region Private

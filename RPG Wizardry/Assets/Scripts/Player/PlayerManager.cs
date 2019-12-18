@@ -6,6 +6,7 @@ using UnityEngine;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+using nl.SWEG.RPGWizardry.GameWorld;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
@@ -98,12 +99,11 @@ namespace nl.SWEG.RPGWizardry.Player
         public void Damage(ushort amount)
         {
             if (amount >= Health)
-                Die();
-            else
             {
-                Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
-                healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+                Die();
             }
+            Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+            healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
         }
 
         /// <summary>
@@ -162,7 +162,18 @@ namespace nl.SWEG.RPGWizardry.Player
         /// </summary>
         private void Die()
         {
-            throw new NotImplementedException();
+            GetComponent<Collider2D>().enabled = false;
+            if (CameraManager.Exists)
+            {
+                StartCoroutine(EndGame());
+            }
+        }
+
+        private IEnumerator EndGame()
+        {
+            CameraManager.instance.Fade(0.7f, 0, 2f);
+            yield return new WaitForSeconds(2);
+            Application.Quit();
         }
         #endregion
         #endregion

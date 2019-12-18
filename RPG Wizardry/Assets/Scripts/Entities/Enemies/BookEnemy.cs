@@ -111,7 +111,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         protected override void OnDeath()
         {
-            throw new System.NotImplementedException();
+            //THIS ENEMY DIE NOW
+            Destroy(gameObject);
         }
         #endregion
 
