@@ -32,7 +32,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
         #region Methods
         #region Public
-
         /// <summary>
         /// Starts the coroutine that switches from one room to the other.
         /// </summary>
