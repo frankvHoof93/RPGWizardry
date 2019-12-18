@@ -1,8 +1,10 @@
 ﻿using nl.SWEG.RPGWizardry.Sorcery;
+using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Inventory
@@ -155,6 +157,18 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             throw new NotImplementedException();
         }
         #endregion
+
+        #region Getters
+        /// <summary>
+        /// Whether the player has this spell in his/her inventory (does not check for Unlocking)
+        /// </summary>
+        /// <param name="spell">Spell to check against</param>
+        /// <returns></returns>
+        public bool HasSpell(SpellData spell)
+        {
+            return Pages.Any(p => ReferenceEquals(spell, p.Spell));
+        }
+        #endregion
         #endregion
 
         #region Internal
@@ -165,7 +179,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// <param name="page">Page to add</param>
         internal bool AddPage(SpellPage page)
         {
-            if (page != null && !pages.Contains(page))
+            if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
                 return true;

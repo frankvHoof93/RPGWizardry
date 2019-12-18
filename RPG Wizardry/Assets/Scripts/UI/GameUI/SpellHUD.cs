@@ -9,12 +9,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
     {
         #region Variables
         #region Editor
-        /// <summary>
-        /// Text-Object for Spell-Name
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Text-Object for Spell-Name")]
-        private Text nameText;
+        [Header("UI")]
         /// <summary>
         /// Image-Object for Spell
         /// </summary>
@@ -22,17 +17,24 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Image-Object for Spell")]
         private Image spellImage;
         /// <summary>
-        /// Image-Object for Selection-Outline
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Image-Object for Selection-Outline")]
-        private Image selectionOutline;
-        /// <summary>
         /// Image-Object for Spell-Cooldown
         /// </summary>
         [SerializeField]
         [Tooltip("Image-Object for Spell-Cooldown")]
         private Image cooldownOverlay;
+        [Header("Controls")]
+        /// <summary>
+        /// Image-Object for Selection-Outline (KeyBoard)
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Image-Object for Selection-Outline (KeyBoard)")]
+        private Image selectionOutlineKeyBoard;
+        /// <summary>
+        /// Panel which shows Button (Controller)
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Panel which shows Button (Controller)")]
+        private GameObject buttonPanelController;
         #endregion
 
         #region Private
@@ -50,14 +52,14 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         public void Select()
         {
-            selectionOutline.enabled = true;
+            selectionOutlineKeyBoard.enabled = true;
         }
         /// <summary>
         /// Deselects this spell (Disables Selection-Outline)
         /// </summary>
         public void Deselect()
         {
-            selectionOutline.enabled = false;
+            selectionOutlineKeyBoard.enabled = false;
         }
         /// <summary>
         /// Sets Spell-Data to UI-Elements
@@ -65,7 +67,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="spellData">Data for Spell to set</param>
         public void SetSpell(SpellData spellData)
         {
-            nameText.text = spellData.Name;
             spellImage.sprite = spellData.Sprite;
             spellImage.enabled = true;
             cooldownOverlay.sprite = spellData.CooldownSprite;

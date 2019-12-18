@@ -31,7 +31,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Prefab for Room (Floor, Walls, etc.)
         /// </summary>
-        public GameObject RoomPrefab => roomPrefab;
+        public Room RoomPrefab => roomPrefab;
         /// <summary>
         /// Templates for Spawning Enemies
         /// </summary>
@@ -44,7 +44,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         [SerializeField]
         [Tooltip("Prefab for Room (Floor, Walls, etc.)")]
-        private GameObject roomPrefab;
+        private Room roomPrefab;
         /// <summary>
         /// Templates for Spawning Enemies
         /// </summary>

@@ -1,5 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Collectables;
+using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
@@ -30,12 +32,24 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 case Collectables.Gold:
                     break;
                 case Collectables.Page:
-                    break;
+                    throw new ArgumentException("Call SpawnPage instead");
                 case Collectables.Potion:
                     break;
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Spawns a PageObject
+        /// </summary>
+        /// <param name="position">Position to Spawn at (WorldSpace)</param>
+        /// <param name="spell">Spell for Page</param>
+        public void SpawnPage(Vector3 position, SpellData spell)
+        {
+            GameObject spawnedObject = Instantiate(lootPrefabs[(int)Collectables.Page]);
+            spawnedObject.GetComponent<PageObject>().Page = new Sorcery.SpellPage(spell);
+            spawnedObject.transform.position = position;
         }
     }
 }

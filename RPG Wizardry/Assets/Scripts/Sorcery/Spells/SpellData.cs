@@ -15,6 +15,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [Tooltip("Name for Spell")]
         private string spellName;
         /// <summary>
+        /// Cost in Dust for Spell-Unlocking
+        /// </summary>
+        public ushort SpellCost => spellCost;
+        [SerializeField]
+        [Tooltip("Cost in Dust for Spell-Unlocking")]
+        private ushort spellCost;
+        /// <summary>
         /// Pattern for Projectiles
         /// </summary>
         public SpellPattern Pattern => spellPattern;

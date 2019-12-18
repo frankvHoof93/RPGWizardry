@@ -28,6 +28,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
+
+        public delegate void Kill();
+        public Kill Killed;
         #endregion
 
         #region Protected
@@ -133,15 +136,21 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             spawn = loot.gold;
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
-            spawn = loot.page;
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Page, transform.position, spawn.amount);
             spawn = loot.potion;
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
 
             // TODO: Death Animation & Audio
             OnDeath();
+            transform.parent = null;
+        }
+
+        private void OnDestroy()
+        {
+            if (Killed != null)
+            {
+                Killed();
+            }
         }
         #endregion
         #endregion

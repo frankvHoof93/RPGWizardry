@@ -91,8 +91,20 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void SpawnBabies()
         {
-            Instantiate(babySlime, transform.position + new Vector3(0.2f, 0, 0), transform.rotation);
-            Instantiate(babySlime, transform.position + new Vector3(-0.2f, 0, 0), transform.rotation);
+            AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                if (enemies[i] != this)
+                {
+                    enemies[i].transform.parent = transform.parent;
+                    enemies[i].gameObject.SetActive(true);
+                }
+            }
+
+            /*
+            Instantiate(babySlime, transform.position + new Vector3(0.2f, 0, 0), transform.rotation, transform.parent);
+            Instantiate(babySlime, transform.position + new Vector3(-0.2f, 0, 0), transform.rotation, transform.parent);
+            */
         }
         
         /// <summary>
