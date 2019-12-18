@@ -3170,7 +3170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caster: {fileID: 393362067}
   eventSystem: {fileID: 1642494622}
-  tag: 
+  tag: Bar
 --- !u!114 &393362072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3442,18 +3442,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5dd9074d9391a47b9491000f99b7ec, type: 3}
---- !u!114 &478797147 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1257007501, guid: 6d5dd9074d9391a47b9491000f99b7ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 478797146}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &484275224
 GameObject:
   m_ObjectHideFlags: 0
@@ -11592,7 +11580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSpell:
     spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  player: {fileID: 478797147}
+  player: {fileID: 2029194534}
   title: {fileID: 961777021}
   button: {fileID: 955261947}
 --- !u!1 &1704868257
@@ -14325,6 +14313,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025158950}
   m_CullTransparentMesh: 0
+--- !u!114 &2029194534 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1257007501, guid: 6d5dd9074d9391a47b9491000f99b7ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 478797146}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d67c938cd47cf4c96b726ffcb01234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2054914381
 GameObject:
   m_ObjectHideFlags: 0
