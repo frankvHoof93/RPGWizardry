@@ -55,14 +55,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 if (DataSets[i].IsSolved)
                     solvedCount++;
             }
-            if (solvedCount == setSize)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return solvedCount == setSize;
         }
         public DataSet UnsolvedDataSet()
         {

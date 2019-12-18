@@ -1,6 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Player.Inventory;
-using nl.SWEG.RPGWizardry.Sorcery;
-using System.Collections;
+﻿using nl.SWEG.RPGWizardry.Sorcery;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +7,25 @@ namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
     {
-        public PlayerInventory Inventory;
-        public DataBin CurrentBin;
+        /// <summary>
+        /// Current bin to be used for minigames/research
+        /// </summary>
+        private DataBin CurrentBin;
+
+        /// <summary>
+        /// Current selection of fragments used for the minigame
+        /// </summary>
         private DataSet CurrentSet;
-        private int setSize;
+
+        /// <summary>
+        /// The bar images that need to be drawn on.
+        /// </summary>
         [SerializeField]
         private List<Image> images;
+
+        /// <summary>
+        /// Spell manager used to switch to based on research result
+        /// </summary>
         [SerializeField]
         private SpellPageManager spellManager;
         // Start is called before the first frame update
@@ -48,6 +59,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         }
 
         //TODO: Convert to RenderTexture, can't currently work out how to do it.
+        /// <summary>
+        /// Used to populate the images on the slider bars for the spellcrafting minigame.
+        /// </summary>
         public void PopulateUI()
         {
             LoadDataSet();
@@ -70,6 +84,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
 
         }
 
+
+        /// <summary>
+        /// Cleares the images and reset it to their base state.
+        /// </summary>
+        /// <param name="tex">Target texture</param>
         private void ClearTexture(Texture2D tex)
         {
             for (int x = 0; x < tex.width; x++)
@@ -78,21 +97,15 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             tex.Apply();
         }
 
-        public void ClearTexture()
-        {
-            for (int i = 0; i < CurrentSet.Fragments.Count; i++)
-            {
-                Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
-                ClearTexture(imgTex);
-            }
-        }
-
-                private void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             for (int i = 0; i < images.Count; i++)
                 ClearTexture((Texture2D)images[i].mainTexture);
         }
 
+        /// <summary>
+        /// loads the next dataset when the previous ones are solved.
+        /// </summary>
         public void LoadDataSet()
         {
             if(!CurrentBin.IsDataBinSolved())

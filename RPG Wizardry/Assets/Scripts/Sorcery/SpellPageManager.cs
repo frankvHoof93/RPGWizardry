@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using nl.SWEG.RPGWizardry.Player.Inventory;
-using UnityEngine.UI;
+﻿using nl.SWEG.RPGWizardry.Player;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace nl.SWEG.RPGWizardry.Sorcery
 {
@@ -17,7 +16,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// Player inventory  which contains current spell pages;
         /// </summary>
         [SerializeField]
-        private PlayerInventory inventory;
+        private PlayerManager player;
         /// <summary>
         /// Title of spell page
         /// </summary>
@@ -25,7 +24,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         private TextMeshProUGUI title;
         [SerializeField]
         private Button button;
-        void Start()
+        private void Start()
         {
             title.text = selectedSpell.SpellTitle;
         }
@@ -35,14 +34,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         public void UnlockSpell()
         {
-            if(inventory != null)
-            {
-                inventory.UnlockSpell(selectedSpell);
-            }
+                player.Inventory?.UnlockSpell(selectedSpell);
             
         }
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (selectedSpell.Unlocked && button.enabled)
             {

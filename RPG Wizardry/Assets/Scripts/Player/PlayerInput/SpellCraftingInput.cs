@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using nl.SWEG.RPGWizardry.Utils.Attributes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +20,11 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         [SerializeField]
         private EventSystem eventSystem;
+
+        [SerializeField]
+        [TagSelector]
+        [Tooltip("Tag for bar moving")]
+        private string tag;
         #endregion
 
         #region Private
@@ -57,7 +63,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 
                 if (results.Count > 0)
                 {
-                    if(results[0].gameObject.tag == "Bar")
+                    if(results[0].gameObject.tag == tag )
                     {
                         draggedImage = results[0].gameObject.GetComponent<Image>();
                         mousePos = Input.mousePosition;

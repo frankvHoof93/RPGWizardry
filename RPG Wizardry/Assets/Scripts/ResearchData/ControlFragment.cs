@@ -14,16 +14,17 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// <summary>
         /// The position which is the solution to this control fragment.
         /// </summary>
-        public float CorrectPosition { get; set; }
+        public float CorrectPosition { get; private set; }
         /// <summary>
         /// Used to determine if this fragment is solved or not.
         /// </summary>
         public bool Solved { get; private set; }
-        /// <summary>
-        /// the offset from the correct position which will count as a valid solution
-        /// </summary>
+
         #endregion
         #region Private
+        /// <summary>
+        /// the offset from the correct position which will count as a valid solution
+        /// </summary> 
         private float range;
         #endregion
         public ControlFragment(float correctPosition, float range) : base()
@@ -43,6 +44,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             {
                 Solved = true;
             }
+            Solved = false;
         }
         #endregion
     }
