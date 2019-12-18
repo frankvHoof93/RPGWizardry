@@ -232,18 +232,22 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void CastSpell()
         {
-            if (runningRoutine != null)
-                StopCoroutine(runningRoutine);
-            SpellData spell = selectedSpells[selectedSpellIndex];
-            // Spawn Spell
-            spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
-            // Run Event
-            castEvent?.Invoke(selectedSpellIndex, spell.Cooldown);
-            // Set animation
-            bookAnimator.SetBool("Cast", true);
-            runningRoutine = StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
-            // Set cooldown
-            spellCooldown[selectedSpellIndex] = spell.Cooldown;
+            //If the player is allowed to shoot
+            if (!GameManager.Instance.Locked)
+            {
+                if (runningRoutine != null)
+                    StopCoroutine(runningRoutine);
+                SpellData spell = selectedSpells[selectedSpellIndex];
+                // Spawn Spell
+                spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
+                // Run Event
+                castEvent?.Invoke(selectedSpellIndex, spell.Cooldown);
+                // Set animation
+                bookAnimator.SetBool("Cast", true);
+                runningRoutine = StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
+                // Set cooldown
+                spellCooldown[selectedSpellIndex] = spell.Cooldown;
+            }
         }
         #endregion
         #endregion

@@ -28,6 +28,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
+
+        public delegate void Kill();
+        public Kill Killed;
         #endregion
 
         #region Protected
@@ -139,6 +142,15 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
             // TODO: Death Animation & Audio
             OnDeath();
+            transform.parent = null;
+        }
+
+        private void OnDestroy()
+        {
+            if (Killed != null)
+            {
+                Killed();
+            }
         }
         #endregion
         #endregion
