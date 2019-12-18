@@ -8,6 +8,14 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
     {
         #region Variables
         /// <summary>
+        /// Sets SpellPage on this Object
+        /// </summary>
+        internal SpellPage Page
+        {
+            set { page = value; }
+        }
+
+        /// <summary>
         /// SpellPage in Object
         /// </summary>
         [SerializeField]
@@ -22,7 +30,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// <param name="target">Inventory to Add to</param>
         protected override bool OnCollect(PlayerInventory target)
         {
-            return target.AddPage(page);
+            bool value = target.AddPage(page);
+            if (!value)
+                Destroy(gameObject); // Player already has this spell. Destroy gameobject
+            return value; // Destroying of GameObject handled by base-class
         }
         #endregion
     }

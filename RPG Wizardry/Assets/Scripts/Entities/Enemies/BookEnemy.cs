@@ -1,4 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Player;
+﻿using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using System.Collections.Generic;
@@ -97,6 +98,28 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             animator.SetInteger("ElementType", (int)spell.Element);
             animator.SetBool("Attacking", false);
             AnimateEnemy();
+            // Fix first frame sprite (Unity-Bug)
+            string stateName = "BookFaceRight";
+            switch (spell.Element)
+            {
+                case Sorcery.Element.None:
+                    stateName = "Earth" + stateName;
+                    break;
+                case Sorcery.Element.Fire:
+                    stateName = "Fire" + stateName;
+                    break;
+                case Sorcery.Element.Water:
+                    stateName = "Water" + stateName;
+                    break;
+                case Sorcery.Element.Electricity:
+                    stateName = "Electric" + stateName;
+                    break;
+                case Sorcery.Element.Earth:
+                    stateName = "Earth" + stateName;
+                    break;
+            }
+            animator.Play(stateName); // Set state to animator
+            animator.Update(0);
         }
 
         /// <summary>
@@ -111,7 +134,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         protected override void OnDeath()
         {
-            throw new System.NotImplementedException();
+            if (PlayerManager.Exists)
+                if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
+                    LootSpawner.Instance.SpawnPage(transform.position, spell);
+            Destroy(gameObject); // DIE
         }
         #endregion
 

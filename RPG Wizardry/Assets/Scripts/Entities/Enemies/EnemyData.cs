@@ -18,8 +18,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             public LootSpawn dust;
             [SerializeField]
             public LootSpawn gold;
-            [SerializeField]
-            public LootSpawn page;
+            //[SerializeField] // Removed, as Pages require Spells to spawn (not every enemy has a spell)
+            //public LootSpawn page;
             [SerializeField]
             public LootSpawn potion;
         }

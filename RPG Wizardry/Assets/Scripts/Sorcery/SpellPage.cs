@@ -14,12 +14,27 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// <summary>
         /// Data for Spell
         /// </summary>
+        public SpellData Spell => spell;
+        /// <summary>
+        /// Data for Spell
+        /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
         private SpellData spell;
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Constructor for a SpellPage
+        /// </summary>
+        /// <param name="spell"></param>
+        /// <param name="unlocked"></param>
+        public SpellPage(SpellData spell, bool unlocked = false)
+        {
+            this.spell = spell;
+            Unlocked = unlocked;
+        }
+
         /// <summary>
         /// Unlocks Spell on this Page (after crafting)
         /// </summary>
