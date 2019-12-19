@@ -186,6 +186,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             if (selectedSpells[index] == null)
                 return; // No Spell in slot
             selectedSpellIndex = index;
+            selectionEvent.Invoke(selectedSpellIndex);
         }
         #endregion
 
