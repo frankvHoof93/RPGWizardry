@@ -8,6 +8,23 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
     public class SlimeEnemy : AEnemy
     {
         #region Variables
+        #region Public
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        public override float OpacityRadius
+        {
+            get
+            {
+                float defaultRadius = base.OpacityRadius;
+                if (babySlime)
+                    defaultRadius *= 0.5f;
+                return defaultRadius;
+            }
+        }
+        #endregion
+
+        #region Editor
         /// <summary>
         /// Is this a momma or a babbu slime?
         /// </summary>
@@ -20,6 +37,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [SerializeField]
         [Tooltip("Baby slime prefab to spawn on death")]
         private GameObject babySlime;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Current movement, to send to animator
         /// </summary>
@@ -28,6 +48,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Has this enemy died?
         /// </summary>
         private bool dead;
+        #endregion
         #endregion
 
         #region Methods
