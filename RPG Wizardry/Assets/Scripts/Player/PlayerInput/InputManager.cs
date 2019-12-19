@@ -58,7 +58,11 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         private void MovementInputs(ref InputState inputState)
         {
             //same for keyboard and controller
-            inputState.MovementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Vector2 movementDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            // Normalize if needed (Can have length <= 1)
+            if (movementDir.magnitude > 1)
+                movementDir.Normalize();
+            inputState.MovementDirection = movementDir;
         }
 
         /// <summary>
