@@ -113,9 +113,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void OnCollisionStay2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
-            {
-                collision.gameObject.GetComponent<IHealth>()?.Damage(data.Attack);
-            }
+                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
         }
         #endregion
         #endregion
