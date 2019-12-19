@@ -102,7 +102,9 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Event fired when Spell Changes
         /// </summary>
         private event OnSpellChange spellChangeEvent;
-
+        /// <summary>
+        /// Current Timeout for Scrolling (Spell-Selection)
+        /// </summary>
         private float currScrollTimeout = 0f;
         #endregion
         #endregion
