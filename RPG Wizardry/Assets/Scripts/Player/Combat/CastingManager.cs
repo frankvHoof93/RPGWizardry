@@ -40,7 +40,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <summary>
         /// DEBUG Prototype projectile; fill this with selected spell later
         /// </summary>
-        public SpellData CurrentSpell;
+        public SpellData[] CurrentSpells;
         #endregion
 
         #region Editor
@@ -62,6 +62,11 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         [SerializeField]
         [Tooltip("Animator for Greg")]
         private Animator bookAnimator;
+        /// <summary>
+        /// Timeout for Scrolling (timeout between Selections)
+        /// </summary>
+        [SerializeField]
+        private float scrollTimeOut = 0.25f;
         #endregion
 
         #region Private
@@ -97,6 +102,8 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Event fired when Spell Changes
         /// </summary>
         private event OnSpellChange spellChangeEvent;
+
+        private float currScrollTimeout = 0f;
         #endregion
         #endregion
 
@@ -160,20 +167,26 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         public void SelectNextSpell()
         {
+            if (currScrollTimeout > 0)
+                return;
             ushort newIndex = (ushort)MathFunctions.Wrap(selectedSpellIndex + 1, 0, SelectableSpellAmount);
             while (selectedSpells[newIndex] == null) // No Spell in Slot
                 newIndex = (ushort)MathFunctions.Wrap(newIndex + 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
+            currScrollTimeout = scrollTimeOut;
         }
         /// <summary>
         /// Selects previous available Spell in SelectedSpells
         /// </summary>
         public void SelectPreviousSpell()
         {
+            if (currScrollTimeout > 0)
+                return;
             ushort newIndex = (ushort)MathFunctions.Wrap(selectedSpellIndex - 1, 0, SelectableSpellAmount);
             while (selectedSpells[newIndex] == null) // No Spell in Slot
                 newIndex = (ushort)MathFunctions.Wrap(newIndex - 1, 0, SelectableSpellAmount); // Try next slot
             SelectSpell(newIndex);
+            currScrollTimeout = scrollTimeOut;
         }
         /// <summary>
         /// Selects Spell by Index (if not null)
@@ -212,7 +225,12 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         {
             player = GetComponent<PlayerManager>();
             //DEBUG (Set serialized spell to position 0 in SelectedSpells)
-            SetSpell(CurrentSpell, 0);
+            for (int i = 3; i >= 0; i--)
+            {
+                if (i >= CurrentSpells.Length)
+                    continue;
+                SetSpell(CurrentSpells[i], (ushort)i);
+            }
         }
 
         /// <summary>
@@ -222,8 +240,24 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         {
             for (int i = 0; i < spellCooldown.Length; i++)
                 spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
-            if (player.InputManager.State.Cast1 && spellCooldown[selectedSpellIndex] == 0)
-                CastSpell();
+            currScrollTimeout = Mathf.Clamp(currScrollTimeout - Time.deltaTime, 0, float.MaxValue);
+            InputState input = player.InputManager.State;
+            if (input.SelectSpell != 0) // Spell-Selection
+            {
+                if (input.SelectSpell < InputState.SpellSelection.SelectPrevious) // Selection by Index
+                    SelectSpell((ushort)(input.SelectSpell - 1));
+                else if (input.SelectSpell == InputState.SpellSelection.SelectPrevious)
+                    SelectPreviousSpell();
+                else if (input.SelectSpell == InputState.SpellSelection.SelectNext)
+                    SelectNextSpell();
+            }
+            if (input.Cast) // Spell-Casting
+            {
+                if (input.CastIndex.HasValue) // Controller
+                    CastSpell((ushort)input.CastIndex.Value);
+                else // Keyboard
+                    CastSpell(); // Cast selected Spell
+            }
         }
         #endregion
 
@@ -234,7 +268,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         private void CastSpell()
         {
             //If the player is allowed to shoot
-            if (!GameManager.Instance.Locked)
+            if (!GameManager.Instance.Locked && spellCooldown[selectedSpellIndex] <= 0)
             {
                 if (runningRoutine != null)
                     StopCoroutine(runningRoutine);
@@ -248,6 +282,18 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
                 runningRoutine = StartCoroutine(CoroutineMethods.RunDelayed(() => { bookAnimator.SetBool("Cast", false); }, 0.1f));
                 // Set cooldown
                 spellCooldown[selectedSpellIndex] = spell.Cooldown;
+            }
+        }
+        /// <summary>
+        /// Casts Spell by Index (If Spell is Equipped for Index)
+        /// </summary>
+        /// <param name="index">Index for Spell (0-4)</param>
+        private void CastSpell(ushort index)
+        {
+            if (selectedSpells.Length >= index && selectedSpells[index] != null)
+            {
+                selectedSpellIndex = index;
+                CastSpell();
             }
         }
         #endregion
