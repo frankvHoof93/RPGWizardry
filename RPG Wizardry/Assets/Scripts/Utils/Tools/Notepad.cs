@@ -6,7 +6,7 @@
 ///     These Objects are not used in the Application itself (or only used for analysis)
 /// </para>
 /// </summary>
-namespace nl.DTT.Utils.Tools
+namespace nl.SWEG.RPGWizardry.Utils.Tools
 {
     /// <summary>
     /// Adds notes a Game Object, in order to document things for yourself or for others

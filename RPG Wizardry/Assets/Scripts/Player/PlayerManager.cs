@@ -7,10 +7,13 @@ using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.GameWorld;
+using System;
+using nl.SWEG.RPGWizardry.UI;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
+    [RequireComponent(typeof(Renderer))]
     public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth, IOpacity
     {
         #region Variables
@@ -86,6 +89,7 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Event Raised when Health changes
         /// </summary>
         private event OnHealthChange healthChangeEvent;
+        private Renderer renderer;
         #endregion
         #endregion
 
@@ -151,6 +155,8 @@ namespace nl.SWEG.RPGWizardry.Player
             Inventory = GetComponent<PlayerInventory>();
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
+            renderer = GetComponent<Renderer>();
+            healthChangeEvent += (newHealth, maxHealth, change) => PopupFactory.CreateDamageUI(transform.position, (ushort)Math.Abs(change), renderer, Color.red);
             base.Awake();
             Health = maxHealth;
         }

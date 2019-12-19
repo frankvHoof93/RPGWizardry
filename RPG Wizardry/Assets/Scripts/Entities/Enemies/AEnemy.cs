@@ -4,10 +4,12 @@ using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
 using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+using nl.SWEG.RPGWizardry.UI;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Renderer))]
     public abstract class AEnemy : MonoBehaviour, IHealth, IOpacity
     {
         #region Variables
@@ -28,7 +30,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
-
         public delegate void Kill();
         public Kill Killed;
         #endregion
@@ -44,6 +45,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Animator for Enemy
         /// </summary>
         protected Animator animator;
+        protected Renderer renderer;
         /// <summary>
         /// LayerMask for Attacks
         /// </summary>
@@ -82,7 +84,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             else
             {
                 Health -= amount;
-                // TODO: Animation?
+                PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
             }
         }
         #endregion
@@ -94,6 +96,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            renderer = GetComponent<Renderer>();
         }
 
         /// <summary>
@@ -128,6 +131,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Die()
         {
+            PopupFactory.CreateDamageUI(transform.position, Health, renderer, Color.green);
             float rng = Random.Range(0f, 1f);
             LootTable loot = data.Loot;
             LootSpawn spawn = loot.dust;
