@@ -26,12 +26,9 @@ MonoBehaviour:
     gold:
       amount: 0
       chance: 0
-    page:
-      amount: 1
-      chance: 0
     potion:
       amount: 0
       chance: 0
   opacityPriority: 1
-  opacityRadius: 0
+  opacityRadius: 50
   opacityOffset: {x: 0, y: 0}

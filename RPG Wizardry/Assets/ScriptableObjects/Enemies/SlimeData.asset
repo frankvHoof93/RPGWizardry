@@ -30,5 +30,5 @@ MonoBehaviour:
       amount: 0
       chance: 0
   opacityPriority: 1
-  opacityRadius: 0
+  opacityRadius: 100
   opacityOffset: {x: 0, y: 0}

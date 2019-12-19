@@ -17,7 +17,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             get
             {
                 float defaultRadius = base.OpacityRadius;
-                if (babySlime)
+                if (!big)
                     defaultRadius *= 0.5f;
                 return defaultRadius;
             }
