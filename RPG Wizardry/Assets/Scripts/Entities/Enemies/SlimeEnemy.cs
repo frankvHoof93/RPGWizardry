@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
@@ -77,6 +75,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             }
         }
         #endregion
+
         #region Private
         /// <summary>
         /// Destroys self at the end of the death animation
@@ -111,7 +110,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// If it touches an object in the target layer, it damages it
         /// </summary>
         /// <param name="collision"></param>
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
             {
