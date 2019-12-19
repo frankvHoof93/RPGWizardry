@@ -107,6 +107,7 @@ namespace nl.SWEG.RPGWizardry.Player
                 Die();
             }
             Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
         }
 
@@ -120,6 +121,7 @@ namespace nl.SWEG.RPGWizardry.Player
                 return false;
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
             return true;
         }
         #endregion
@@ -156,7 +158,6 @@ namespace nl.SWEG.RPGWizardry.Player
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
             renderer = GetComponent<Renderer>();
-            healthChangeEvent += (newHealth, maxHealth, change) => PopupFactory.CreateDamageUI(transform.position, (ushort)Math.Abs(change), renderer, Color.red);
             base.Awake();
             Health = maxHealth;
         }
