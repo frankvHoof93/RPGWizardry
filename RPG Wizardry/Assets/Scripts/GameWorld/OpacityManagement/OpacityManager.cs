@@ -57,6 +57,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void LateUpdate()
         {
+            objects.RemoveWhere(o => o == null || o.transform == null);
             SetToShader(objects.OrderBy(n => n.opacity.OpacityPriority).ToList());
         }
         /// <summary>

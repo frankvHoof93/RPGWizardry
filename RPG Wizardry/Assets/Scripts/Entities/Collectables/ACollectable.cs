@@ -60,7 +60,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         {
             PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
             if (inv == null)
-                throw new InvalidOperationException("Target has no Inventory");
+                return;
             if (OnCollect(inv))
                 Destroy(gameObject);
         }

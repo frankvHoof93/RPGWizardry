@@ -10,7 +10,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// <summary>
         /// Current State for Input
         /// </summary>
-        public InputState State => inputState;
+        public InputState State { get; private set; }
         #endregion
 
         #region Editor
@@ -25,14 +25,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         [SerializeField]
         [Tooltip("ControlScheme for InputReading")]
-        private ControlScheme controlScheme;
-        #endregion
-
-        #region Private
-        /// <summary>
-        /// Current State for Input
-        /// </summary>
-        private InputState inputState;
+        private ControlScheme controlScheme = ControlScheme.Keyboard;
         #endregion
         #endregion
 
@@ -43,16 +36,18 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         private void Update()
         {
+            InputState newState = new InputState();
             switch (gameState)
             {
                 case GameState.GamePlay:
-                    MovementInputs();
-                    AimingInputs();
-                    ButtonInputs();
+                    MovementInputs(ref newState);
+                    AimingInputs(ref newState);
+                    ButtonInputs(ref newState);
                     break;
                 default:
                     break;
             }
+            State = newState;
         }
         #endregion
 
@@ -60,36 +55,68 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// <summary>
         /// collects unity movement input while in gameplay state and saves in inputstate
         /// </summary>
-        private void MovementInputs()
+        private void MovementInputs(ref InputState inputState)
         {
             //same for keyboard and controller
-            inputState.MovementData = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            inputState.MovementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }
 
         /// <summary>
         /// collects unity aiming input while in gameplay state and saves in inputstate
         /// </summary>
-        private void AimingInputs()
+        private void AimingInputs(ref InputState inputState)
         {
-            //on controller, use the right stick
-            if (controlScheme == ControlScheme.Controller)
-                inputState.AimingData = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
-            //on keyboard, use the mouse
-            else if (controlScheme == ControlScheme.Keyboard)
+            switch (controlScheme)
             {
-                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-                Vector3 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
-                inputState.AimingData = (lookPos - transform.position).normalized;
+                // on controller, use the right stick
+                case ControlScheme.Controller:
+                    inputState.AimDirection = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
+                    break;
+                //on keyboard, use the mouse
+                case ControlScheme.Keyboard:
+                default:
+                    Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+                    Vector3 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
+                    inputState.AimDirection = (lookPos - transform.position).normalized;
+                    break;
             }
         }
 
         /// <summary>
-        /// Collects button states
+        /// Collects button/key states
         /// </summary>
-        private void ButtonInputs()
+        private void ButtonInputs(ref InputState inputState)
         {
-            //same for keyboard and controller
-            inputState.Cast1 = Input.GetButton("Fire1");
+            switch (controlScheme)
+            {
+                case ControlScheme.Controller:
+                    int? index = null;
+                    for (int i = 4; i > 0; i--) // Check from highest to lowest index, to ensure lowest held index is set in State
+                        if (Input.GetButton($"Fire{i}"))
+                        {
+                            inputState.Cast = true;
+                            index = i;
+                        }
+                    inputState.CastIndex = index;
+                    break;
+                case ControlScheme.Keyboard:
+                default:
+                    inputState.Cast = Input.GetButton("Fire1");
+                    // Spell-Selection
+                    if (Input.GetKeyDown(KeyCode.Alpha1)) // Select Index 1
+                        inputState.SelectSpell = InputState.SpellSelection.Index1;
+                    else if (Input.GetKeyDown(KeyCode.Alpha2)) // Select Index 2
+                        inputState.SelectSpell = InputState.SpellSelection.Index2;
+                    else if (Input.GetKeyDown(KeyCode.Alpha3)) // Select Index 3
+                        inputState.SelectSpell = InputState.SpellSelection.Index3;
+                    else if (Input.GetKeyDown(KeyCode.Alpha4)) // Select Index 4
+                        inputState.SelectSpell = InputState.SpellSelection.Index4;
+                    else if (Input.mouseScrollDelta.y > 0) // Select Next (Scroll Up)
+                        inputState.SelectSpell = InputState.SpellSelection.SelectNext;
+                    else if (Input.mouseScrollDelta.y < 0) // Select Previous (Scroll Down)
+                        inputState.SelectSpell = InputState.SpellSelection.SelectPrevious;
+                    break;
+            }
         }
         #endregion
         #endregion
