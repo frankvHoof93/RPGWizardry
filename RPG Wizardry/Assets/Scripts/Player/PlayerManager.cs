@@ -103,11 +103,9 @@ namespace nl.SWEG.RPGWizardry.Player
         public void Damage(ushort amount)
         {
             if (amount >= Health)
-            {
                 Die();
-            }
             Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
         }
 
@@ -121,7 +119,7 @@ namespace nl.SWEG.RPGWizardry.Player
                 return false;
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green, 50);
             return true;
         }
         #endregion
