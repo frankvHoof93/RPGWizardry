@@ -9,6 +9,8 @@ using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.GameWorld;
 using System;
 using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.Utils;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
@@ -105,11 +107,13 @@ namespace nl.SWEG.RPGWizardry.Player
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
+            renderer.SetSpriteColor(Color.red);
             if (amount >= Health)
                 Die();
             Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
             PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+            StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
         }
 
         /// <summary>

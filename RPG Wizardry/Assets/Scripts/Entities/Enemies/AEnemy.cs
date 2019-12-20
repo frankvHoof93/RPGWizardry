@@ -5,6 +5,8 @@ using UnityEngine;
 using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.Utils;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
@@ -86,8 +88,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
                 Die();
             else
             {
+                renderer.SetSpriteColor(Color.red);
                 Health -= amount;
                 PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
+                StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
             }
         }
         #endregion
@@ -134,6 +138,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Die()
         {
+            renderer.SetSpriteColor(Color.red);
             PopupFactory.CreateDamageUI(transform.position, Health, renderer, Color.green);
             float rng = Random.Range(0f, 1f);
             LootTable loot = data.Loot;
