@@ -45,6 +45,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Animator for Enemy
         /// </summary>
         protected Animator animator;
+        /// <summary>
+        /// Renderer for Enemy
+        /// </summary>
         protected Renderer renderer;
         /// <summary>
         /// LayerMask for Attacks

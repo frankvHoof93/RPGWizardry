@@ -89,6 +89,9 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Event Raised when Health changes
         /// </summary>
         private event OnHealthChange healthChangeEvent;
+        /// <summary>
+        /// Renderer for Player
+        /// </summary>
         private Renderer renderer;
         #endregion
         #endregion
