@@ -36,6 +36,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private TextMeshProUGUI message;
 
+        /// <summary>
+        /// Button the player can use to check if he did the research correctly.
+        /// </summary>
         [SerializeField]
         private Button checkButton;
         #endregion
@@ -68,6 +71,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
            
         }
 
+        /// <summary>
+        /// Used to check if the player has solved the research Set
+        /// </summary>
         public void CheckIfSolved()
         {
             if (CurrentSet.CheckDataSolved())

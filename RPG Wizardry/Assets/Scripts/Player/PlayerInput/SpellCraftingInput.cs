@@ -73,23 +73,12 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
             }
             else if (Input.GetMouseButton(0) && draggedImage != null) // Held (Drag)
             {
-                
-                if(draggedImage.transform.localPosition.y >= -45 && draggedImage.transform.localPosition.y <= 45)
-                {
-                    float deltaY = Input.mousePosition.y - mousePos.y;
 
-                    draggedImage.transform.Translate(0, deltaY, 0, Space.Self);
-                    mousePos = Input.mousePosition;
-                }
-                if (draggedImage.transform.localPosition.y >= 45)
-                {
-                    draggedImage.transform.localPosition = new Vector3(draggedImage.transform.localPosition.x, 45, draggedImage.transform.localPosition.z);
-                }
-                if(draggedImage.transform.localPosition.y <= -45)
-                {
-                    draggedImage.transform.localPosition = new Vector3(draggedImage.transform.localPosition.x, -    45, draggedImage.transform.localPosition.z);
-                }
                 // Move Image-Pos
+                float deltaY = Input.mousePosition.y - mousePos.y;
+                draggedImage.transform.Translate(0, deltaY, 0, Space.Self);
+                draggedImage.transform.localPosition = new Vector3(draggedImage.transform.localPosition.x, Mathf.Clamp(draggedImage.transform.localPosition.y, -45, 45), draggedImage.transform.localPosition.z);
+                mousePos = Input.mousePosition;
 
 
             }
