@@ -89,7 +89,6 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
                 {
                     draggedImage.transform.localPosition = new Vector3(draggedImage.transform.localPosition.x, -    45, draggedImage.transform.localPosition.z);
                 }
-                Debug.Log(draggedImage.transform.localPosition.y);
                 // Move Image-Pos
 
 
