@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 261892829062464300}
   - component: {fileID: 261892829062464339}
   - component: {fileID: 261892829062464338}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Door Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}

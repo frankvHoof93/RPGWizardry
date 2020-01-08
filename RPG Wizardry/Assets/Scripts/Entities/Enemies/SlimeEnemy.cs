@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
@@ -10,6 +8,23 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
     public class SlimeEnemy : AEnemy
     {
         #region Variables
+        #region Public
+        /// <summary>
+        /// Opacity-Radius in Pixels (for 720p)
+        /// </summary>
+        public override float OpacityRadius
+        {
+            get
+            {
+                float defaultRadius = base.OpacityRadius;
+                if (!big)
+                    defaultRadius *= 0.5f;
+                return defaultRadius;
+            }
+        }
+        #endregion
+
+        #region Editor
         /// <summary>
         /// Is this a momma or a babbu slime?
         /// </summary>
@@ -22,6 +37,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [SerializeField]
         [Tooltip("Baby slime prefab to spawn on death")]
         private GameObject babySlime;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Current movement, to send to animator
         /// </summary>
@@ -30,6 +48,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Has this enemy died?
         /// </summary>
         private bool dead;
+        #endregion
         #endregion
 
         #region Methods
@@ -77,6 +96,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             }
         }
         #endregion
+
         #region Private
         /// <summary>
         /// Destroys self at the end of the death animation
@@ -111,12 +131,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// If it touches an object in the target layer, it damages it
         /// </summary>
         /// <param name="collision"></param>
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
-            {
-                collision.gameObject.GetComponent<IHealth>()?.Damage(data.Attack);
-            }
+                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
         }
         #endregion
         #endregion

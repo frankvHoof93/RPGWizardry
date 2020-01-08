@@ -19,7 +19,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
         /// </summary>
-        public float OpacityRadius => data?.OpacityRadius ?? 0;
+        public virtual float OpacityRadius => data?.OpacityRadius ?? 0;
         /// <summary>
         /// Priority for rendering Opacity
         /// </summary>
@@ -147,10 +147,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
         private void OnDestroy()
         {
-            if (Killed != null)
-            {
-                Killed();
-            }
+            Killed?.Invoke();
         }
         #endregion
         #endregion
