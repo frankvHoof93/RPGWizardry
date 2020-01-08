@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bar
   layers:
   - Default
   - TransparentFX
@@ -15,14 +16,14 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Projectile
+  - Player
+  - Enemies
+  - Upper Wall
+  - Lower Wall
+  - Back Wall
+  - Collectables
+  - RoomSwitcher
   - 
   - 
   - 
