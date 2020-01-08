@@ -105,7 +105,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 {
                     // Add Pixel to Img
                     
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.black);
+                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.magenta);
                 }
                 imgTex.Apply();
 
@@ -123,7 +123,8 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         {
             for (int x = 0; x < tex.width; x++)
                 for (int y = 0; y < tex.height; y++)
-                    tex.SetPixel(x, y, Color.white);
+                    tex.SetPixel(x, y, new Color(0,0,0,0));
+            tex.alphaIsTransparency = true;
             tex.Apply();
         }
 

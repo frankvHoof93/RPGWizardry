@@ -9783,6 +9783,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1828717208041440701, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 922392e84290b454da2da897ee05e0d7,
+        type: 3}
+    - target: {fileID: 1828717208041440701, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 3aca8afb5824ab84e9e68ce449453010, type: 2}
     - target: {fileID: 180880614, guid: 07d0f5e35778a854d8b822838367f5d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
