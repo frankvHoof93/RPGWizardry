@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Slime
   enemyHealth: 10
-  enemyAttack: 10
+  enemyAttack: 2
   enemySpeed: 2
   spawnCooldown:
     Min: 0
@@ -26,9 +26,9 @@ MonoBehaviour:
     gold:
       amount: 0
       chance: 0
-    page:
-      amount: 0
-      chance: 0
     potion:
       amount: 0
       chance: 0
+  opacityPriority: 1
+  opacityRadius: 100
+  opacityOffset: {x: 0, y: 0}

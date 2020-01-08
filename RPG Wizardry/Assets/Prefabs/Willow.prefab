@@ -238,8 +238,8 @@ MonoBehaviour:
   hasRootObject: 0
   maxHealth: 120
   bookRenderer: {fileID: 1649351625540714792}
-  opacityRadius: 35
-  opacityOffset: {x: 0, y: 0.75}
+  opacityRadius: 100
+  opacityOffset: {x: 0, y: 0.4}
 --- !u!114 &1649351625787668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,12 +305,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSpell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
+  CurrentSpells:
+  - {fileID: 11400000, guid: a989aeb625692a84dadc005d92ab04b1, type: 2}
   spawnLocation: {fileID: 1649351625540714799}
   targetingMask:
     serializedVersion: 2
     m_Bits: 4096
   bookAnimator: {fileID: 4558486416647510740}
+  scrollTimeOut: 0.25
 --- !u!95 &1649351625787668025
 Animator:
   serializedVersion: 3
