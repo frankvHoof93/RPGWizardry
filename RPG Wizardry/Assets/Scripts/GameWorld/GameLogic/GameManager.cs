@@ -63,7 +63,6 @@ namespace nl.SWEG.RPGWizardry
         internal void OnExitMenu(Scene arg0)
         {
             SceneManager.sceneUnloaded -= OnExitMenu;
-            Debug.Log($"ExitMenu: {arg0.name}");
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
         }
