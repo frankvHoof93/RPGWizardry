@@ -124,7 +124,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             for (int x = 0; x < tex.width; x++)
                 for (int y = 0; y < tex.height; y++)
                     tex.SetPixel(x, y, new Color(0,0,0,0));
-            tex.alphaIsTransparency = true;
             tex.Apply();
         }
 
