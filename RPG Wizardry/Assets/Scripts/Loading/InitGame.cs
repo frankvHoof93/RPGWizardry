@@ -1,10 +1,17 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using nl.SWEG.RPGWizardry.Loading;
+using UnityEngine;
 
-public class InitGame : MonoBehaviour
+namespace nl.SWEG.RPGWizardry.Utils
 {
-    private void Start()
+    public class InitGame : MonoBehaviour
     {
-        SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+        /// <summary>
+        /// Runs Intro, then Loads Main Menu
+        /// </summary>
+        private void Start()
+        {
+            // TODO: run Intro
+            SceneLoader.Instance.LoadMenuScene(); // Start game by loading menu-scene
+        }
     }
 }
