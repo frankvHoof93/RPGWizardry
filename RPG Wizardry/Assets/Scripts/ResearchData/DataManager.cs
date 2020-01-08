@@ -35,6 +35,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         [SerializeField]
         private TextMeshProUGUI message;
+
+        [SerializeField]
+        private Button checkButton;
         #endregion
         #region Methods
         // Start is called before the first frame update
@@ -46,6 +49,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 CurrentBin = LoadDataBin();
             }
             PopulateUI();
+            checkButton.enabled = true;
             message.enabled = false;
 
         }
@@ -61,10 +65,20 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         // Update is called once per frame
         void Update()
         {
-            if(CurrentSet.CheckDataSolved())
+           
+        }
+
+        public void CheckIfSolved()
+        {
+            if (CurrentSet.CheckDataSolved())
             {
                 spellManager.UnlockSpell();
                 message.enabled = true;
+                checkButton.enabled = false;
+            }
+            else
+            {
+                message.enabled = false;
             }
         }
 

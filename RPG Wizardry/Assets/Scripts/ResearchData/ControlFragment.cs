@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace nl.SWEG.RPGWizardry.ResearchData
+﻿namespace nl.SWEG.RPGWizardry.ResearchData
 {
 
     public class ControlFragment : Fragment

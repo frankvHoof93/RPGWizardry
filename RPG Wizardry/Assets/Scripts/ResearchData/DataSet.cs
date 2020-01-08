@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace nl.SWEG.RPGWizardry.ResearchData
@@ -21,12 +18,12 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         #region Control
         public void GenerateControlFragments()
         {
-            ControlFragment start = new ControlFragment(20, 10);
-            start.ImgData = new float[] { 1.410f, 1.375f, 1.350f, 1.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment middle = new ControlFragment(-20, 10);
-            middle.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
-            ControlFragment end = new ControlFragment(-10, 10);
-            end.ImgData = new float[] { 0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f };
+            ControlFragment start = new ControlFragment(40, 15);
+            start.ImgData = new float[] { 0.150f, 0.175f, 0.150f, 0.175f, 0.160f, 0.120f, 0.180f, 0.125f, 0.130f, 0.195f, 0.145f };
+            ControlFragment middle = new ControlFragment(15, 15);
+            middle.ImgData = new float[] { 0.180f, 0.175f, 0.190f, 0.175f, 0.210f, 0.220f, 0.180f, 0.210f, 0.210f, 0.185f, 0.115f };
+            ControlFragment end = new ControlFragment(-30, 15);
+            end.ImgData = new float[] { 0.610f, 0.675f, 0.650f, 0.675f, 0.660f, 0.600f, 0.680f, 0.610f, 0.610f, 0.695f, 0.615f };
             int mid = (Fragments.Count + 3) / 2;
             Fragments.Insert(0, start);
             Fragments.Insert(mid, middle);
