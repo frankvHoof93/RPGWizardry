@@ -7,15 +7,26 @@ namespace nl.SWEG.RPGWizardry
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {
-        #region Variables
-        public GameState GameState;
-        public bool Locked;
+        #region InnerTypes
+        public enum GameState
+        {
+            Menu = 0,
+            GamePlay = 1
+        }
         #endregion
+
+        #region Variables
+        public GameState State { get; private set; } = GameState.Menu;
+
+        public bool Paused { get; private set; } = false;
+        #endregion
+
+        public void TogglePause()
+        {
+            Paused = !Paused;
+        }
+
     }
 
-    public enum GameState
-    {
-        Menu = 0,
-        GamePlay = 1
-    }
+    
 }

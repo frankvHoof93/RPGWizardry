@@ -72,7 +72,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private IEnumerator switchRoom(Door destination)
         {
             //Make sure the player can't move
-            GameManager.Instance.Locked = true;
+            if (!GameManager.Instance.Paused)
+                GameManager.Instance.TogglePause();
 
             //Fade the screen out
             CameraManager.instance.Fade(1, 0);
@@ -101,7 +102,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             }
 
             //Make sure the player can move again
-            GameManager.Instance.Locked = false;
+            if (GameManager.Instance.Paused)
+                GameManager.Instance.TogglePause();
+
 
             //Activate enemies in new room
             if (!activeRoom.Cleared)
