@@ -42,6 +42,9 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// </summary>
         private readonly List<SpellPage> pages = new List<SpellPage>();
 
+        /// <summary>
+        /// Base spell the player has access too.
+        /// </summary>
         [SerializeField]
         private SpellData baseSpell;
 
