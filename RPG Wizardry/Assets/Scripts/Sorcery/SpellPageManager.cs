@@ -25,17 +25,21 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         private TextMeshProUGUI title;
         [SerializeField]
         private Button button;
+        [SerializeField]
+        private Image spellImage;
 
         #endregion
         #region Methods
-        private void Start()
+
+        public void SetSelectedSpell(SpellPage target)
         {
-            title.text = selectedSpell.SpellTitle;
+            selectedSpell = target;
         }
 
         private void OnEnable()
         {
             title.text = selectedSpell.SpellTitle;
+            spellImage.sprite = selectedSpell.Spell.Sprite;
         }
 
         /// <summary>
