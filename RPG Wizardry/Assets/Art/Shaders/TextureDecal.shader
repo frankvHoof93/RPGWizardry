@@ -4,10 +4,9 @@
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		_DecalTex("Decal Texture", 2D) = "white" {}
-		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 		[HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
-		[HideInInspector] _Flip("Flip", Vector) = (1,1,1,1)
-		_Decal1("Decal1", Vector) = (1,1,1,1)
+		_DecalUV("Decal UVs", Vector) = (1,1,1,1)
+		_Decal2UV("Decal2 UVs", Vector) = (1,1,1,1)
 	}
 
 		SubShader
@@ -26,47 +25,57 @@
 		Blend One OneMinusSrcAlpha
 
 		CGPROGRAM
-		#pragma surface surf Lambert vertex:vert nofog nolightmap nodynlightmap keepalpha noinstancing
-		#pragma multi_compile_local _ PIXELSNAP_ON
+		#pragma surface surf NoLighting alpha:blend noshadow noambient nolightmap nodynlightmap nodirlightmap nofog noforwardadd noshadowmask 
 		#include "UnitySprites.cginc"
 
+		fixed4 LightingNoLighting(SurfaceOutput s, fixed3 lightDir, fixed atten)
+		{
+			return fixed4(s.Albedo, s.Alpha);
+		}
+
 		sampler2D _DecalTex;
-		fixed4 _Decal1;
+		fixed4 _DecalUV;
+		fixed4 _Decal2UV;
+		
+		uniform float4 UVs[32];
+		uniform int splatCount;
 
 		struct Input
-		{
+		{ 
 			float2 uv_MainTex;
-			float2 vert;
+			float2 uv_DecalTex;
 		};
-
-		void vert(inout appdata_full v, out Input o)
-		{
-			v.vertex = UnityFlipSprite(v.vertex, _Flip);
-
-			#if defined(PIXELSNAP_ON)
-			v.vertex = UnityPixelSnap(v.vertex);
-			#endif
-
-			UNITY_INITIALIZE_OUTPUT(Input, o);
-			o.vert = v.vertex;
-		}
 
 		void surf(Input IN, inout SurfaceOutput o)
 		{
 			half4 c = SampleSpriteTexture(IN.uv_MainTex);
-			half4 decal = tex2D(_DecalTex, IN.uv_MainTex);
-			if (IN.vert.x == _Decal1.x)
-			{
-				o.Albedo = float3(255, 0, 0);
-			}
-			else
-			{
-				o.Albedo = float3(255,255,255);
-			}
+			o.Albedo = c.rgb;
 			o.Alpha = c.a;
+
+			[loop]
+			for (int i = 0; i < splatCount; i++)
+			{
+				fixed4 _UV = UVs[i];
+				float2 uv = float2(_UV.x * IN.uv_DecalTex.x + _UV.z, IN.uv_DecalTex.y * _UV.y + _UV.w);
+				if (uv.x > 0 && uv.x < 1 && uv.y > 0 && uv.y < 1)
+				{
+					half4 decal = tex2D(_DecalTex, uv);
+					if (decal.a > 0.01)
+					{
+						// Overwrite (Splat)
+						o.Albedo = decal.rgb * decal.a;
+						// Blend (Multiply) (Best on white MainTex)
+						//o.Albedo = (o.Albedo * o.Alpha) * (decal.rgb * decal.a);
+						//decal.a *= o.Alpha;
+						// Blend (Additive) (Best on black/transparent MainTex)
+						//o.Albedo = o.Albedo * o.Alpha + decal.rgb * decal.a / (o.Alpha + decal.a);
+						//decal.a += o.Alpha;
+						o.Alpha = decal.a > 1 ? 1 : decal.a;
+					}
+				}
+			}
 		}
 		ENDCG
 	}
-
-		Fallback "Transparent/VertexLit"
+	Fallback "Transparent/VertexLit"
 }
