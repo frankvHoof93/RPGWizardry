@@ -13,7 +13,13 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         public InputState State { get; private set; }
         #endregion
-
+        #region Private
+        /// <summary>
+        /// Pivot on which the book rotates; necessary to aim at the mouse properly
+        /// </summary>
+        [SerializeField]
+        private Transform BookPivot;
+        #endregion
         #region Editor
         /// <summary>
         /// ControlScheme for Input-Reading
@@ -74,9 +80,10 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
                 //on keyboard, use the mouse
                 case ControlScheme.Keyboard:
                 default:
-                    Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-                    Vector3 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
-                    inputState.AimDirection = (lookPos - transform.position).normalized;
+                    Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
+                    inputState.AimDirection = (lookPos - (Vector2)BookPivot.transform.position).normalized;
+                    Debug.DrawRay(transform.position, inputState.AimDirection, Color.red,1.5f);
                     break;
             }
         }

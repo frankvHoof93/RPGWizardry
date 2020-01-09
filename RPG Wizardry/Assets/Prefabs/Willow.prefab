@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdafd6e0f9c30d3489b72c4b69c97ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BookPivot: {fileID: 1649351625646304831}
   gameState: 1
   controlScheme: 0
 --- !u!114 &1649351625787668026
@@ -307,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentSpells:
   - {fileID: 11400000, guid: a989aeb625692a84dadc005d92ab04b1, type: 2}
+  - {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
   spawnLocation: {fileID: 1649351625540714799}
   targetingMask:
     serializedVersion: 2
