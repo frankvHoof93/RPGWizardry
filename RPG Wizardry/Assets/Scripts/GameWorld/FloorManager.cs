@@ -1,11 +1,8 @@
-﻿using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System;
-using UnityEngine;
+﻿using nl.SWEG.RPGWizardry.Player;
+using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using System.Collections;
+using UnityEngine;
 using static nl.SWEG.RPGWizardry.GameWorld.RoomData;
-using nl.SWEG.RPGWizardry.GameWorld;
-using nl.SWEG.RPGWizardry.Player;
-using UnityEngine.Events;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -87,7 +84,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             //Make sure the player can't move
             if (!GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause();
+                GameManager.Instance.TogglePause(false);
 
             //Fade the screen out
             CameraManager.instance.Fade(1, 0);
