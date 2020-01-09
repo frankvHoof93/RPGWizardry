@@ -41,11 +41,14 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         #region Public
         public void SetTextSize(uint pixelsHeight)
         {
-            float realworldSize = Camera.main.orthographicSize * 2f; // Size of visible Height in WorldSpace
-            float percentage = pixelsHeight / ResolutionMath.DefaultHeight; // Convert to percentage of full Height
-            realworldSize = percentage * realworldSize;
-            RectTransform textTf = (RectTransform)textField.transform;
-            textTf.sizeDelta = new Vector2(realworldSize * 5f, realworldSize);
+            if (CameraManager.Exists)
+            {
+                float realworldSize = CameraManager.Instance.Camera.orthographicSize * 2f; // Size of visible Height in WorldSpace
+                float percentage = pixelsHeight / ResolutionMath.DefaultHeight; // Convert to percentage of full Height
+                realworldSize = percentage * realworldSize;
+                RectTransform textTf = (RectTransform)textField.transform;
+                textTf.sizeDelta = new Vector2(realworldSize * 5f, realworldSize);
+            }
         }
 
         /// <summary>

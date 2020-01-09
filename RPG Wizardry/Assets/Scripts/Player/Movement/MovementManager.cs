@@ -56,7 +56,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         private void Movement(Vector3 movement)
         {
             //If the player is allowed to move
-            if (!GameManager.Instance.Locked)
+            if (!GameManager.Instance.Paused)
             {
                 //send values to the animator so it can decide what animation to show
                 animator.SetFloat("Horizontal", movement.x);

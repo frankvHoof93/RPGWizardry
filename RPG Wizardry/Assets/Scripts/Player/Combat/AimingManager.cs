@@ -51,7 +51,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         private void PivotToMouse()
         {
             //If the player is allowed to move
-            if (!GameManager.Instance.Locked)
+            if (!GameManager.Instance.Paused)
             {
                 //Get location to look at
                 Vector3 lookPos = PlayerManager.Instance.InputManager.State.AimDirection;

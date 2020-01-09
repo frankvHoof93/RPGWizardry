@@ -1,40 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using nl.SWEG.RPGWizardry.Entities.Enemies;
 using UnityEngine;
-using nl.SWEG.RPGWizardry.Entities.Enemies;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
     public class Room : MonoBehaviour
     {
-        public bool Cleared;
+        #region Variables
+        #region Public
+        /// <summary>
+        /// Whether the Room has been Cleared (No more Enemies)
+        /// </summary>
+        public bool Cleared { get; private set; }
+        #endregion
 
+        #region Editor
         /// <summary>
         /// All doors in the room.
         /// </summary>
         [SerializeField]
         private Door[] doors;
+        /// <summary>
+        /// Parent for Enemies in Room
+        /// </summary>
+        [SerializeField]
+        private GameObject EnemyHolder;
+        /// <summary>
+        /// SpawnPosition for Player
+        /// </summary>
+        [SerializeField]
+        private Transform playerSpawnPos;
+        #endregion
+        #endregion
 
-        [Space]
-        public GameObject EnemyHolder;
-
-        private void OnEnable()
+        #region Methods
+        #region Public
+        /// <summary>
+        /// Gets Player-SpawnPosition for Room
+        /// </summary>
+        /// <returns>SpawnPosition for Player (WorldSpace)</returns>
+        public Vector3 GetPlayerSpawn()
         {
-            AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
-            if (enemies.Length > 0)
-            {
-                foreach (AEnemy enemy in enemies)
-                {
-                    enemy.Killed += CheckRoomClear;
-                }
-            }
-            else
-            {
-                Cleared = true;
-            }           
+            return playerSpawnPos.position;
         }
+        #endregion
 
-        public void Enable()
+        #region Internal
+        /// <summary>
+        /// Enables Objects in Room
+        /// </summary>
+        internal void Enable()
         {
             gameObject.SetActive(true);
             if (!Cleared)
@@ -42,34 +56,53 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 CloseDoors();
             }
         }
-
-        public void Disable()
+        /// <summary>
+        /// Disables Objects in Room
+        /// </summary>
+        internal void Disable()
         {
             gameObject.SetActive(false);
         }
-
         /// <summary>
-        /// Close all the doors in the room.
+        /// Closes all the doors in the room
         /// </summary>
-        public void CloseDoors()
+        internal void CloseDoors()
         {
             for (int i = 0; i < doors.Length; i++)
             {
                 doors[i].Close();
             }
         }
-
         /// <summary>
-        /// Opens all the doors in the room.
+        /// Opens all the doors in the room
         /// </summary>
-        public void OpenDoors()
+        internal void OpenDoors()
         {
             for (int i = 0; i < doors.Length; i++)
             {
                 doors[i].Open();
             }
         }
+        #endregion
 
+        #region Unity
+        /// <summary>
+        /// Adds Event-Listeners to Enemies
+        /// </summary>
+        private void Awake()
+        {
+            AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
+            if (enemies.Length > 0)
+            {
+                foreach (AEnemy enemy in enemies)
+                    enemy.Killed += CheckRoomClear;
+            }
+            else
+                Cleared = true;
+        }
+        #endregion
+
+        #region Private
         /// <summary>
         /// Checks if the room still has enemies. if it doesn't, the doors open.
         /// </summary>
@@ -77,12 +110,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             if (EnemyHolder.transform.childCount == 0)
             {
-                for (int i = 0; i < doors.Length; i++)
-                {
-                    Cleared = true;
-                    OpenDoors();
-                }
+                Cleared = true;
+                OpenDoors();
             }
         }
+        #endregion
+        #endregion
     }
 }

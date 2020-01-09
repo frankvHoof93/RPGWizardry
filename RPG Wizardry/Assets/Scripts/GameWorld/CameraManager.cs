@@ -5,21 +5,27 @@ using System.Collections;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
-    [RequireComponent(typeof(Camera))]
+    [RequireComponent(typeof(Camera), typeof(AudioListener))]
+    [RequireComponent(typeof(ScreenFade))]
     public class CameraManager : SingletonBehaviour<CameraManager>
     {
         #region Fields
-        private ScreenFade screenFader;
-
+        #region Public
         /// <summary>
         /// Camera-Component for Camera
         /// </summary>
         public Camera Camera { get; private set; }
+        /// <summary>
+        /// Listener for Audio in Scene
+        /// </summary>
+        public AudioListener AudioListener { get; private set; }
 
         /// <summary>
         /// Is true when the camera fading in or out.
         /// </summary>
-        public bool Fading;
+        public bool Fading { get; private set; }
+        #endregion
+
 
         /// <summary>
         /// How long it takes to fade in or out.
@@ -27,10 +33,21 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         [SerializeField]
         [Range(0.00f, 2f)]
         private float FadeTime;
+
+
+        private ScreenFade screenFader;
         #endregion
 
         #region Methods
         #region Public
+        /// <summary>
+        /// Toggles AudioListener on Camera
+        /// </summary>
+        public void ToggleAudio()
+        {
+            AudioListener.enabled = !AudioListener.enabled;
+        }        
+
         /// <summary>
         /// Fade the camera visibility between 2 values.
         /// </summary>
@@ -98,8 +115,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             base.Awake();
             Camera = GetComponent<Camera>();
             screenFader = GetComponent<ScreenFade>();
-
-            StartCoroutine(toggleCamera());
+            AudioListener = GetComponent<AudioListener>();
+            //StartCoroutine(toggleCamera());
         }
 
         /// <summary>
@@ -107,8 +124,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void Update()
         {
-
-            Camera.enabled = true;
             if (!PlayerManager.Exists)
                 return;
 
