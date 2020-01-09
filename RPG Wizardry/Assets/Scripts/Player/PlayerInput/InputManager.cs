@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using nl.SWEG.RPGWizardry.GameWorld;
+using static nl.SWEG.RPGWizardry.GameManager;
 
 namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
@@ -21,12 +22,6 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         #endregion
         #region Editor
         /// <summary>
-        /// Current State of GamePlay
-        /// TODO: Move elsewhere
-        /// </summary>
-        [SerializeField]
-        private GameState gameState = GameState.GamePlay; //serialized for easy inspector switching (DEBUG)
-        /// <summary>
         /// ControlScheme for Input-Reading
         /// </summary>
         [SerializeField]
@@ -43,7 +38,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         private void Update()
         {
             InputState newState = new InputState();
-            switch (gameState)
+            switch (GameManager.Instance.State)
             {
                 case GameState.GamePlay:
                     MovementInputs(ref newState);

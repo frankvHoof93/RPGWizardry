@@ -5,6 +5,7 @@ using System.Collections;
 using static nl.SWEG.RPGWizardry.GameWorld.RoomData;
 using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
+using UnityEngine.Events;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -26,7 +27,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Currently Loaded Room
         /// </summary>
-        [SerializeField]
         private Room activeRoom;
         #endregion
 
@@ -42,6 +42,20 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         }
 
         /// <summary>
+        /// Loads Floor, spawning Objects & Player
+        /// </summary>
+        public void LoadFloor()
+        {
+            if (activeRoom != null)
+                activeRoom.Disable();
+            activeRoom = rooms[0];
+            activeRoom.Enable();
+            GameManager.Instance.SpawnPlayer(activeRoom.GetPlayerSpawn());
+            StartCoroutine(startFade());
+        }
+
+        /// <summary>
+        /// UNUSED
         /// Loads Room by Index. Unloads current room, and spawns Enemies for Room as well
         /// </summary>
         /// <param name="index">Index for Room to Spawn</param>
@@ -72,7 +86,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private IEnumerator switchRoom(Door destination)
         {
             //Make sure the player can't move
-            GameManager.Instance.Locked = true;
+            if (!GameManager.Instance.Paused)
+                GameManager.Instance.TogglePause();
 
             //Fade the screen out
             CameraManager.instance.Fade(1, 0);
@@ -101,7 +116,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             }
 
             //Make sure the player can move again
-            GameManager.Instance.Locked = false;
+            if (GameManager.Instance.Paused)
+                GameManager.Instance.TogglePause();
+
 
             //Activate enemies in new room
             if (!activeRoom.Cleared)
@@ -125,10 +142,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
             //fade camera in
             CameraManager.instance.Fade(0, 1);
-            while (CameraManager.instance.Fading)
-            {
-                yield return null;
-            }
         }
         #endregion
 
@@ -136,15 +149,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Loads first Room
         /// </summary>
-        private void Start()
+        protected override void Awake()
         {
             for (int i = 0; i < rooms.Length; i++)
-            {
                 rooms[i].Disable();
-            }
-
-            activeRoom.Enable();
-            StartCoroutine(startFade());
+            base.Awake();
         }
         #endregion
         #endregion
