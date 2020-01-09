@@ -7,10 +7,15 @@ using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.GameWorld;
+using System;
+using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.Utils;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
+    [RequireComponent(typeof(Renderer))]
     public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth, IOpacity
     {
         #region Variables
@@ -86,6 +91,10 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Event Raised when Health changes
         /// </summary>
         private event OnHealthChange healthChangeEvent;
+        /// <summary>
+        /// Renderer for Player
+        /// </summary>
+        private Renderer renderer;
         #endregion
         #endregion
 
@@ -98,12 +107,13 @@ namespace nl.SWEG.RPGWizardry.Player
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
+            renderer.SetSpriteColor(Color.red);
             if (amount >= Health)
-            {
                 Die();
-            }
             Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+            StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
         }
 
         /// <summary>
@@ -116,6 +126,7 @@ namespace nl.SWEG.RPGWizardry.Player
                 return false;
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green, 50);
             return true;
         }
         #endregion
@@ -151,6 +162,7 @@ namespace nl.SWEG.RPGWizardry.Player
             Inventory = GetComponent<PlayerInventory>();
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
+            renderer = GetComponent<Renderer>();
             base.Awake();
             Health = maxHealth;
         }
