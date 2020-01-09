@@ -38,8 +38,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                 //Set the line to end at the object
                 lineRenderer.SetPosition(0, transform.localPosition);
                 lineRenderer.SetPosition(1, hit.point);
-                Debug.DrawRay(transform.position, transform.up * hit.distance, Color.yellow, 5);
-                Debug.Log("Did Hit");
             }
             //No, it didn't hit anything
             else
@@ -47,21 +45,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                 //Set the line to end at the max distance
                 lineRenderer.SetPosition(0, transform.localPosition);
                 lineRenderer.SetPosition(1, transform.position + transform.up * data.LifeTime);
-                Debug.DrawRay(transform.position, transform.up * data.LifeTime, Color.red,5);
-                Debug.Log("Did not Hit");
             }
-            //Animate the line
-            StartCoroutine(CreateBolt());
-        }
 
-        //Displays line, then deletes self
-        private IEnumerator CreateBolt()
-        {
-            //Set line to visible
+            //enable renderer so line appears
             lineRenderer.enabled = true;
-            yield return new WaitForSeconds(0.1f);
-            //End of attack; delete self
-            Destroy(gameObject);
+            //attack complete; destroy self
+            Destroy(gameObject,0.1f);
         }
     }
 }
