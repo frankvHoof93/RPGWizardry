@@ -208,8 +208,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -452003623
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: -2724944495550030736, guid: 65139f1d0ee48eb469cdf1187e32cf82,
     type: 3}
@@ -278,7 +278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BookPivot: {fileID: 1649351625646304831}
-  gameState: 1
   controlScheme: 0
 --- !u!114 &1649351625787668026
 MonoBehaviour:

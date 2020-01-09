@@ -2548,9 +2548,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 418714155
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2658,7 +2658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &816389490708649447
 Transform:
   m_ObjectHideFlags: 0
@@ -4173,8 +4173,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
   m_SortingOrder: 14
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4932,9 +4932,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 11
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.09375, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -6010,9 +6010,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -6676,9 +6676,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 16
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0.03999996, z: 0}
   m_MaxChunkCount: 16
@@ -6697,7 +6697,6 @@ GameObject:
   m_Component:
   - component: {fileID: 816389491888201865}
   - component: {fileID: 3188529959550072824}
-  - component: {fileID: 5119101091888758924}
   m_Layer: 0
   m_Name: Long horizontal room
   m_TagString: Untagged
@@ -6740,21 +6739,6 @@ MonoBehaviour:
   - {fileID: 696045865695383353}
   EnemyHolder: {fileID: 3503053110126995516}
   playerSpawnPos: {fileID: 8630312795913456316}
---- !u!114 &5119101091888758924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816389491888201864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f208c9ff96558a4c8a4b268f08dd4f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors: []
-  EnemyHolder: {fileID: 0}
-  playerSpawnPos: {fileID: 0}
 --- !u!1 &816389492030148063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7724,9 +7708,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -9726,9 +9710,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -9894,11 +9878,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 816389490361069517}
     m_Modifications:
-    - target: {fileID: 215257904273409939, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
-        type: 3}
-      propertyPath: m_Name
-      value: Door Left
-      objectReference: {fileID: 0}
     - target: {fileID: 215257904273409940, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9953,6 +9932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 215257904273409939, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Door Left
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5006ae1269a07214fa8f4e2616ed0c6a, type: 3}
@@ -10068,11 +10052,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4029942270849232097}
     m_Modifications:
-    - target: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
-        type: 3}
-      propertyPath: m_Name
-      value: BookEnemyFireBall (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 30696588968422751, guid: b37ad8b5fa2afba48a2070865fae4a2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10128,6 +10107,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
+        type: 3}
+      propertyPath: m_Name
+      value: BookEnemyFireBall (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b37ad8b5fa2afba48a2070865fae4a2b, type: 3}
 --- !u!4 &808795841278515788 stripped
@@ -10143,11 +10127,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4029942270849232097}
     m_Modifications:
-    - target: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
-        type: 3}
-      propertyPath: m_Name
-      value: BookEnemyFireBall (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 30696588968422751, guid: b37ad8b5fa2afba48a2070865fae4a2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10202,6 +10181,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
+        type: 3}
+      propertyPath: m_Name
+      value: BookEnemyFireBall (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b37ad8b5fa2afba48a2070865fae4a2b, type: 3}

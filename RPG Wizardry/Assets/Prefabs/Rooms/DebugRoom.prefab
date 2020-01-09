@@ -1585,9 +1585,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 418714155
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2482,9 +2482,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3177,9 +3177,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 11
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.09375, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3205,7 +3205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1257210562811054737
 Transform:
   m_ObjectHideFlags: 0
@@ -4261,9 +4261,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 11
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -4998,9 +4998,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -5687,38 +5687,20 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 3, y: 3, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 5, y: 3, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 15
     m_Data: {fileID: 11400000, guid: 579feb8fc05ee5b4cb8d23884514fa54, type: 2}
-  - m_RefCount: 42
+  - m_RefCount: 40
     m_Data: {fileID: 11400000, guid: 094b91d2611734b4d9880e674cfc0272, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 15
     m_Data: {fileID: -442639557990899606, guid: ab06fac2a950e4645b3c3d1e72b4d050,
       type: 3}
-  - m_RefCount: 42
+  - m_RefCount: 40
     m_Data: {fileID: 554743073390855734, guid: ab06fac2a950e4645b3c3d1e72b4d050, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 57
+  - m_RefCount: 55
     m_Data:
       e00: 1
       e01: 0
@@ -5737,7 +5719,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 57
+  - m_RefCount: 55
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5797,9 +5779,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -969025261
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -5844,37 +5826,13 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1257210563388449196}
     m_ColliderPaths:
-    - - X: 99999971
-        Y: -10000000
-      - X: 99999971
-        Y: 0
-      - X: 90000000
-        Y: 29
-      - X: 89999971
-        Y: 30000000
-      - X: 60000000
-        Y: 30000029
-      - X: 59999971
-        Y: 40000000
-      - X: 50000000
-        Y: 39999971
-      - X: 50000029
-        Y: 20000000
-      - X: 80000000
-        Y: 19999971
-      - X: 80000029
-        Y: -10000000
     - - X: -80000029
         Y: -10000000
       - X: -79999971
         Y: 30000000
       - X: 30000000
-        Y: 29999971
-      - X: 30000029
-        Y: 20000000
-      - X: 40000000
-        Y: 20000029
-      - X: 39999971
+        Y: 30000029
+      - X: 29999971
         Y: 40000000
       - X: -90000000
         Y: 39999971
@@ -5884,6 +5842,30 @@ CompositeCollider2D:
         Y: -29
       - X: -99999971
         Y: -10000000
+    - - X: 99999971
+        Y: -10000000
+      - X: 99999971
+        Y: 0
+      - X: 90000000
+        Y: 29
+      - X: 89999971
+        Y: 30000000
+      - X: 50000000
+        Y: 29999971
+      - X: 50000029
+        Y: 20000000
+      - X: 80000000
+        Y: 19999971
+      - X: 80000029
+        Y: -10000000
+    - - X: 39999971
+        Y: 20000000
+      - X: 39999971
+        Y: 30000000
+      - X: 30000000
+        Y: 29999971
+      - X: 30000029
+        Y: 20000000
     - - X: 59999971
         Y: -80000000
       - X: 60000029
@@ -5928,21 +5910,21 @@ CompositeCollider2D:
     m_Paths:
     - - {x: -8.000006, y: -1}
       - {x: -7.9999943, y: 3}
-      - {x: 3, y: 2.9999943}
-      - {x: 3.0000057, y: 2}
-      - {x: 4, y: 2.0000057}
-      - {x: 3.9999945, y: 4}
+      - {x: 3, y: 3.0000057}
+      - {x: 2.9999943, y: 4}
       - {x: -9, y: 3.9999945}
       - {x: -9.000006, y: 0}
       - {x: -10, y: -0.0000058}
       - {x: -9.999994, y: -1}
+    - - {x: 3.9999945, y: 2}
+      - {x: 3.9999945, y: 3}
+      - {x: 3, y: 2.9999943}
+      - {x: 3.0000057, y: 2}
     - - {x: 9.999994, y: -1}
       - {x: 9.999994, y: 0}
       - {x: 9, y: 0.0000058}
       - {x: 8.999994, y: 3}
-      - {x: 6, y: 3.0000057}
-      - {x: 5.9999943, y: 4}
-      - {x: 5, y: 3.9999945}
+      - {x: 5, y: 2.9999943}
       - {x: 5.0000057, y: 2}
       - {x: 8, y: 1.9999943}
       - {x: 8.000006, y: -1}
@@ -6390,9 +6372,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 16
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0.28125, z: 0}
   m_MaxChunkCount: 16
@@ -6498,7 +6480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f208c9ff96558a4c8a4b268f08dd4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cleared: 0
   doors:
   - {fileID: 1257210563582632692}
   - {fileID: 1257210564565409960}
@@ -6759,11 +6740,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1257210564727971816}
     m_Modifications:
-    - target: {fileID: 261892828261991346, guid: b7b6ffdb54488ec42833acce3208f852,
-        type: 3}
-      propertyPath: Room
-      value: 
-      objectReference: {fileID: 1257210564589632221}
     - target: {fileID: 261892829062464301, guid: b7b6ffdb54488ec42833acce3208f852,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6824,6 +6800,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door Up
       objectReference: {fileID: 0}
+    - target: {fileID: 261892829062464302, guid: b7b6ffdb54488ec42833acce3208f852,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 261892829062464338, guid: b7b6ffdb54488ec42833acce3208f852,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 261892828343165134, guid: b7b6ffdb54488ec42833acce3208f852,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b6ffdb54488ec42833acce3208f852, type: 3}
 --- !u!4 &1257210563582632693 stripped
@@ -6851,11 +6842,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1257210564727971816}
     m_Modifications:
-    - target: {fileID: 215257904273409939, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
-        type: 3}
-      propertyPath: m_Name
-      value: Door Left
-      objectReference: {fileID: 0}
     - target: {fileID: 215257904273409940, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6911,6 +6897,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 215257904273409939, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Door Left
+      objectReference: {fileID: 0}
     - target: {fileID: 9148991509380747371, guid: 5006ae1269a07214fa8f4e2616ed0c6a,
         type: 3}
       propertyPath: Room
@@ -6943,11 +6934,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1257210564727971816}
     m_Modifications:
-    - target: {fileID: 973368533137426127, guid: 3dffa27fcbf3aa74cb3875a938e14397,
-        type: 3}
-      propertyPath: Room
-      value: 
-      objectReference: {fileID: 1257210564589632221}
     - target: {fileID: 4545784416241618944, guid: 3dffa27fcbf3aa74cb3875a938e14397,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7003,6 +6989,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 973368533137426127, guid: 3dffa27fcbf3aa74cb3875a938e14397,
+        type: 3}
+      propertyPath: Room
+      value: 
+      objectReference: {fileID: 1257210564589632221}
     - target: {fileID: 4545784416241618945, guid: 3dffa27fcbf3aa74cb3875a938e14397,
         type: 3}
       propertyPath: m_Name
