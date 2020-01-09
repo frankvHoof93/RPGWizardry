@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using UnityEngine;
@@ -26,10 +27,29 @@ namespace nl.SWEG.RPGWizardry
         /// Whether the Game is currently Paused
         /// </summary>
         public bool Paused { get; private set; } = false;
+
+        #region Editor
+        /// <summary>
+        /// Prefab for Player
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Prefab for Player")]
+        private GameObject playerPrefab;
+        #endregion
         #endregion
 
         #region Methods
         #region Public
+        /// <summary>
+        /// Spawns Player
+        /// </summary>
+        /// <param name="position">Position (WorldSpace) to spawn Player at</param>
+        public void SpawnPlayer(Vector3 position)
+        {
+            GameObject player = Instantiate(playerPrefab);
+            player.transform.position = position;
+            GameUIManager.Instance.HUD.Initialize();
+        }
         /// <summary>
         /// Toggles Game-Pause
         /// </summary>
@@ -53,7 +73,10 @@ namespace nl.SWEG.RPGWizardry
             if (arg1 != LoadSceneMode.Single)
                 return; // GameScene was not loaded Single (Menu-Exit)
             Debug.LogWarning("Start new Game");
+            FloorManager.Instance.LoadFloor();
+            State = GameState.GamePlay;
         }
+
         /// <summary>
         /// Restarts game (un-pauses) after menu-exit
         /// </summary>

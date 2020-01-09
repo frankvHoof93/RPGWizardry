@@ -6,6 +6,7 @@ using System.Collections;
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
     [RequireComponent(typeof(Camera), typeof(AudioListener))]
+    [RequireComponent(typeof(ScreenFade))]
     public class CameraManager : SingletonBehaviour<CameraManager>
     {
         #region Fields
@@ -115,7 +116,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             Camera = GetComponent<Camera>();
             screenFader = GetComponent<ScreenFade>();
             AudioListener = GetComponent<AudioListener>();
-            StartCoroutine(toggleCamera());
+            //StartCoroutine(toggleCamera());
         }
 
         /// <summary>
@@ -123,8 +124,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         private void Update()
         {
-
-            Camera.enabled = true;
             if (!PlayerManager.Exists)
                 return;
 

@@ -238,6 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasRootObject: 1
+  playerPrefab: {fileID: 1649351625787668028, guid: 6d5dd9074d9391a47b9491000f99b7ec,
+    type: 3}
 --- !u!1 &1297538937
 GameObject:
   m_ObjectHideFlags: 0
