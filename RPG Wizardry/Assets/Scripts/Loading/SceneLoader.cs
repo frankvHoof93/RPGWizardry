@@ -1,4 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Utils;
+﻿using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using UnityEngine.SceneManagement;
 
