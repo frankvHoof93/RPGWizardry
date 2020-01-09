@@ -4,7 +4,8 @@
     {
         public const string InitSceneName =         "InitScene";
         public const string MainMenuSceneName =     "MainMenuScene";
-        public const string GameSceneName =          "GameScene";
+        public const string GameSceneName =         "GameScene";
+        public const string GameOverSceneName =     "GameOverScene";
 
         public const string SaveFile = "SaveFile.save";
     }

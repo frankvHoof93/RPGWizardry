@@ -1,4 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
+﻿using System;
+using System.Collections;
+using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.Loading;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
@@ -57,6 +60,20 @@ namespace nl.SWEG.RPGWizardry
         {
             Paused = !Paused;
         }
+
+        public void EndGame(bool gameOver)
+        {
+            State = GameState.GameOver;
+            if (gameOver)
+            {
+                StartCoroutine(GameOver());
+            }
+            else
+            {
+                // Save Game
+                // Load Main Menu
+            }
+        }
         #endregion
 
         #region SceneLoad
@@ -87,6 +104,17 @@ namespace nl.SWEG.RPGWizardry
             SceneManager.sceneUnloaded -= OnExitMenu;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
+        }
+        #endregion
+
+        #region Private
+        private IEnumerator GameOver()
+        {
+            // TODO: Animation
+            // TODO: Delete save game
+            yield return new WaitForSeconds(2f);
+            CameraManager.Instance.ToggleAudio();
+            SceneLoader.Instance.LoadGameOverScene();
         }
         #endregion
         #endregion
