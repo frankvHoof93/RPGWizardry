@@ -24,12 +24,6 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         private GameObject SpellCanvas;
 
         /// <summary>
-        /// The player
-        /// </summary>
-        [SerializeField]
-        private PlayerManager player;
-
-        /// <summary>
         /// List of spells in the book.
         /// </summary>
         private List<SpellPage> pages;
@@ -41,10 +35,11 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
 
         private void OnEnable()
         {
+            
             SpellTabs = new List<GameObject>();
-            if(player.Inventory.Pages != null)
+            if(PlayerManager.Instance.Inventory != null)
             {
-                pages = player.Inventory.Pages;
+                pages = PlayerManager.Instance.Inventory.Pages;
                 foreach (SpellPage page in pages)
                 {
                     GameObject newSpellInfo = Instantiate(spellInfo);

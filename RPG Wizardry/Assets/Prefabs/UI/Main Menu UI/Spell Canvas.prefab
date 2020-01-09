@@ -1186,9 +1186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSpell:
     spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  inventory: {fileID: 0}
   title: {fileID: 7072635279858129477}
   button: {fileID: 7072635279834969283}
+  spellImage: {fileID: 7072635280241727141}
 --- !u!1 &7072635281224321299
 GameObject:
   m_ObjectHideFlags: 0

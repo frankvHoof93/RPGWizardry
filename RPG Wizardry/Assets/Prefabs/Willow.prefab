@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbf44c86a097b64faf325ba8b4c662c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpell: {fileID: 11400000, guid: a989aeb625692a84dadc005d92ab04b1, type: 2}
 --- !u!114 &1649351625787668031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +279,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BookPivot: {fileID: 1649351625646304831}
-  gameState: 1
   controlScheme: 0
 --- !u!114 &1649351625787668026
 MonoBehaviour:
