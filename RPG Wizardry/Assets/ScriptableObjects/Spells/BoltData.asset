@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98ba7c6f23761e5438c478e003061819, type: 3}
-  m_Name: StoneFistData
+  m_Name: BoltData
   m_EditorClassIdentifier: 
-  spellName: StoneFist
+  spellName: Bolt
   spellCost: 0
   spellPattern: 0
-  spellDamage: 12
-  spellElement: 4
-  spellCooldown: 1
-  projectileLifeTime: 1
-  projectileSpeed: 4
-  spellSprite: {fileID: 21300000, guid: 94445a3e8e3c8684b84819291c31a3ce, type: 3}
+  spellDamage: 35
+  spellElement: 3
+  spellCooldown: 2
+  projectileLifeTime: 4
+  projectileSpeed: 0
+  spellSprite: {fileID: 21300000, guid: 9ed3a159f1c2b6e4aa37275a2656da63, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
-  projectilePrefab: {fileID: 4998689496432118957, guid: 23249c11343093c42833e13fa39ecb04,
+  projectilePrefab: {fileID: 1076609150677746452, guid: f0de2f57c119770409c059dfe4153448,
     type: 3}
