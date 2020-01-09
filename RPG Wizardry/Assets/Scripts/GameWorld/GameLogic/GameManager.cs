@@ -59,6 +59,7 @@ namespace nl.SWEG.RPGWizardry
         public void TogglePause()
         {
             Paused = !Paused;
+            Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
         }
 
         public void EndGame(bool gameOver)
