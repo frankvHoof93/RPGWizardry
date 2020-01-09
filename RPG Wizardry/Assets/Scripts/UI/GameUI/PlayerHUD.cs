@@ -53,6 +53,16 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         #endregion
 
         #region Methods
+        #region Public
+        /// <summary>
+        /// Initiliazes HUD
+        /// </summary>
+        public void Initialize()
+        {
+            OnEnable();
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Registers this UI to Events

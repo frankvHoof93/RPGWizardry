@@ -175,17 +175,14 @@ namespace nl.SWEG.RPGWizardry.Player
         private void Die()
         {
             GetComponent<Collider2D>().enabled = false;
-            if (CameraManager.Exists)
-            {
-                StartCoroutine(EndGame());
-            }
+            EndGame();
         }
 
-        private IEnumerator EndGame()
+        private void EndGame()
         {
-            CameraManager.instance.Fade(0.7f, 0, 2f);
-            yield return new WaitForSeconds(2);
-            Application.Quit();
+            if (CameraManager.Exists)
+                CameraManager.Instance.Fade(0.7f, 0, 2f);
+            GameManager.Instance.EndGame(true);
         }
         #endregion
         #endregion
