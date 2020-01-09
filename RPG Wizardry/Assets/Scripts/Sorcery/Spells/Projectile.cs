@@ -52,7 +52,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         private Vector2 opacityOffset;
         #endregion
 
-        #region Private
+        #region Protected
         /// <summary>
         /// Data for Spell
         /// </summary>
@@ -64,7 +64,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Combined layermask for all things to collide with
         /// </summary>
-        private LayerMask collisionLayer;
+        protected LayerMask collisionLayer;
         #endregion
         #endregion
 
