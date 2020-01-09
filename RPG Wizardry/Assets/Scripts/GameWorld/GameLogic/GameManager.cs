@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
-using nl.SWEG.RPGWizardry.GameWorld;
+﻿using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Loading;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -71,8 +70,8 @@ namespace nl.SWEG.RPGWizardry
             }
             else
             {
-                // Save Game
-                // Load Main Menu
+                // TODO: Save Game
+                // TODO: Load Main Menu
             }
         }
         #endregion
@@ -90,7 +89,6 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Scene
             if (arg1 != LoadSceneMode.Single)
                 return; // GameScene was not loaded Single (Menu-Exit)
-            Debug.LogWarning("Start new Game");
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
         }
