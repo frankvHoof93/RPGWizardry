@@ -46,31 +46,20 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         private Button checkButton;
         #endregion
         #region Methods
-        // Start is called before the first frame update
-        void Start()
-        {
-            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
-            if(CurrentBin == null)
-            {
-                CurrentBin = LoadDataBin();
-            }
-            PopulateUI();
-            checkButton.enabled = true;
-            message.enabled = false;
-
-        }
-
-        private void Awake()
-        {
-
-        }
 
         /// <summary>
         /// Perform start when page is enabled again.
         /// </summary>
         private void OnEnable()
         {
-            Start();
+            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
+            if (CurrentBin == null)
+            {
+                CurrentBin = LoadDataBin();
+            }
+            PopulateUI();
+            checkButton.enabled = true;
+            message.enabled = false;
         }
 
         // Update is called once per frame
