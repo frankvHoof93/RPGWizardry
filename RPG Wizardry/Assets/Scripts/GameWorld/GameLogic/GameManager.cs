@@ -11,6 +11,13 @@ namespace nl.SWEG.RPGWizardry
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {
+        [SerializeField]
+        private Texture2D crosshair;
+        [SerializeField]
+        private Texture2D cursor;
+
+        private Vector2 crosshairHotspot;
+
         #region InnerTypes
         public enum GameState
         {
@@ -60,7 +67,9 @@ namespace nl.SWEG.RPGWizardry
             Paused = !Paused;
             if (setTimeScale)
                 Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
-            Cursor.visible = Paused;
+
+            //Set cursor to cursor if paused, crosshair if unpaused
+            Cursor.SetCursor(Paused ? cursor : crosshair, Paused ? Vector2.zero : crosshairHotspot, CursorMode.Auto);
         }
 
         public void EndGame(bool gameOver)
@@ -94,7 +103,8 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
-            Cursor.visible = false;
+            
+            Cursor.SetCursor(crosshair,crosshairHotspot,CursorMode.Auto);
         }
 
         /// <summary>
@@ -107,6 +117,13 @@ namespace nl.SWEG.RPGWizardry
             SceneManager.sceneUnloaded -= OnExitMenu;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
+        }
+        #endregion
+
+        #region Unity
+        private void Start()
+        {
+            crosshairHotspot = new Vector2(crosshair.width / 2f, crosshair.height / 2f);
         }
         #endregion
 
