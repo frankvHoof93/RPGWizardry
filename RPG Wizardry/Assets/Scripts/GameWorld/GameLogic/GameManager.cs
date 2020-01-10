@@ -93,6 +93,7 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
+            Cursor.visible = false;
         }
 
         /// <summary>
