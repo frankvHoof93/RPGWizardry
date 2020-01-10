@@ -60,6 +60,7 @@ namespace nl.SWEG.RPGWizardry
             Paused = !Paused;
             if (setTimeScale)
                 Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
+            Cursor.visible = Paused;
         }
 
         public void EndGame(bool gameOver)
