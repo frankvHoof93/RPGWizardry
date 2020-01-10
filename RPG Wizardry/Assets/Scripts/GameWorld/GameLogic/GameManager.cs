@@ -60,11 +60,13 @@ namespace nl.SWEG.RPGWizardry
             Paused = !Paused;
             if (setTimeScale)
                 Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
+            Cursor.visible = Paused;
         }
 
         public void EndGame(bool gameOver)
         {
             State = GameState.GameOver;
+            Cursor.visible = true;
             if (gameOver)
             {
                 StartCoroutine(GameOver());
@@ -92,6 +94,7 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
+            Cursor.visible = false;
         }
 
         /// <summary>
