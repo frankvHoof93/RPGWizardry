@@ -36,33 +36,32 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private TextMeshProUGUI message;
 
+        [SerializeField]
+        private Texture2D splatTex;
+
         /// <summary>
         /// Button the player can use to check if he did the research correctly.
         /// </summary>
         [SerializeField]
         private Button checkButton;
+
+        private bool started = false;
         #endregion
         #region Methods
-        // Start is called before the first frame update
-        void Start()
+
+        private void Start()
         {
-            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
-            if(CurrentBin == null)
-            {
-                CurrentBin = LoadDataBin();
-            }
-            PopulateUI();
-            checkButton.enabled = true;
-            message.enabled = false;
+            UpdateBars();
+            started = true;
 
         }
-
         /// <summary>
         /// Perform start when page is enabled again.
         /// </summary>
         private void OnEnable()
         {
-            Start();
+            if(started)
+            UpdateBars();
         }
 
         // Update is called once per frame
@@ -71,6 +70,17 @@ namespace nl.SWEG.RPGWizardry.ResearchData
            
         }
 
+        private void UpdateBars()
+        {
+            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
+            if (CurrentBin == null)
+            {
+                CurrentBin = LoadDataBin();
+            }
+            PopulateUI();
+            checkButton.enabled = true;
+            message.enabled = false;
+        }
         /// <summary>
         /// Used to check if the player has solved the research Set
         /// </summary>
@@ -95,20 +105,46 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public void PopulateUI()
         {
             LoadDataSet();
-            for (int i = 0; i < CurrentSet.Fragments.Count; i++)
+            for (int i = 0; i < 10; i++)
             {
+                //old shit
                 CurrentSet.Fragments[i].FragmentImage = images[i];
                 CurrentSet.Fragments[i].ImageTransform = images[i].transform.parent;
                 Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
-                ClearTextures(imgTex);
+                //ClearTextures(imgTex);
+
+                float targetScale = CurrentSet.Fragments[i].ImgData.Length;
+
+
+                Image renderer = CurrentSet.Fragments[i].FragmentImage;
+                Material m = new Material(Shader.Find("Custom/TextureDecal"));
+                m.SetTexture("_DecalTex", splatTex);
+                renderer.material = m;
+
+
+                Vector4[] vectors = new Vector4[(int)targetScale];
+
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
                 {
-                    // Add Pixel to Img
-                    
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.black);
-                }
-                imgTex.Apply();
+                    Vector2 tiling = new Vector2(((float)imgTex.width / (float)splatTex.width), ((float)imgTex.height / (float)splatTex.height));
+                    // base offset to corner:
+                    Vector2 offset = new Vector2(.5f, .5f); // TODO: Check this
 
+                    Vector2 posOnTarget = new Vector2(UnityEngine.Random.Range(0, imgTex.width-20), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
+                //    Debug.Log("PosOnTarget: " + posOnTarget);
+                    posOnTarget = new Vector2(posOnTarget.x / splatTex.width, posOnTarget.y / splatTex.height);
+                    offset += posOnTarget;
+                    offset *= -1f;
+                //    Debug.Log($"Tiling: {tiling.ToString("N2")} Offset: {offset.ToString("N2")}");
+                    // Add Pixel to Img
+                    vectors[j] = new Vector4(tiling.x, tiling.y, offset.x, offset.y);
+                    m.SetInt("splatCount", vectors.Length);
+                    m.SetVectorArray("UVs", vectors);
+
+                    //imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.magenta);
+                }
+                //imgTex.Apply();
+                
 
             }
 
@@ -121,10 +157,10 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// <param name="tex">Target texture</param>
         private void ClearTextures(Texture2D tex)
         {
-            for (int x = 0; x < tex.width; x++)
-                for (int y = 0; y < tex.height; y++)
-                    tex.SetPixel(x, y, Color.white);
-            tex.Apply();
+          //  for (int x = 0; x < tex.width; x++)
+          //      for (int y = 0; y < tex.height; y++)
+           //         tex.SetPixel(x, y, new Color(0,0,0,0));
+           // tex.Apply();
         }
 
         private void OnApplicationQuit()

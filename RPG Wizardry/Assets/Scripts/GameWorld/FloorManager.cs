@@ -98,12 +98,12 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             
             //Move the player to new room
             if (PlayerManager.Exists)
-                PlayerManager.Instance.transform.position = destination.transform.position;
+                PlayerManager.Instance.transform.position = destination.Spawn.position;
 
 
             //Enable the new room
-            destination.Room.Enable();
-            activeRoom = destination.Room;
+            destination.TargetRoom.Enable();
+            activeRoom = destination.TargetRoom;
 
             //Fade the screen back in
             CameraManager.instance.Fade(0, 1);

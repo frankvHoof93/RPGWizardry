@@ -33,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// <summary>
         /// Pages in Inventory
         /// </summary>
-        public List<SpellPage> Pages { get { return new List<SpellPage>(); } }
+        public List<SpellPage> Pages { get { return pages; } }
         #endregion
 
         #region Private
@@ -41,6 +41,12 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// Pages in Inventory
         /// </summary>
         private readonly List<SpellPage> pages = new List<SpellPage>();
+
+        /// <summary>
+        /// Base spell the player has access too.
+        /// </summary>
+        [SerializeField]
+        private SpellData baseSpell;
 
         #region Events
         /// <summary>
@@ -115,9 +121,16 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             }
 
             return page.Unlocked;
-        } 
+        }
         #endregion
 
+        private void Start()
+        {
+            
+            SpellPage bookerang = new SpellPage(baseSpell, true);
+            pages.Add(bookerang);
+
+        }
         #region Storage
         /// <summary>
         /// Loads Inventory from File
