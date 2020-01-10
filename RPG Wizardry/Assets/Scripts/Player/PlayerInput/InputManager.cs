@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using nl.SWEG.RPGWizardry.GameWorld;
+using static nl.SWEG.RPGWizardry.GameManager;
 
 namespace nl.SWEG.RPGWizardry.Player.PlayerInput
 {
@@ -12,14 +13,14 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         /// </summary>
         public InputState State { get; private set; }
         #endregion
-
-        #region Editor
+        #region Private
         /// <summary>
-        /// Current State of GamePlay
-        /// TODO: Move elsewhere
+        /// Pivot on which the book rotates; necessary to aim at the mouse properly
         /// </summary>
         [SerializeField]
-        private GameState gameState = GameState.GamePlay; //serialized for easy inspector switching (DEBUG)
+        private Transform BookPivot;
+        #endregion
+        #region Editor
         /// <summary>
         /// ControlScheme for Input-Reading
         /// </summary>
@@ -37,7 +38,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         private void Update()
         {
             InputState newState = new InputState();
-            switch (gameState)
+            switch (GameManager.Instance.State)
             {
                 case GameState.GamePlay:
                     MovementInputs(ref newState);
@@ -58,7 +59,7 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
         private void MovementInputs(ref InputState inputState)
         {
             //same for keyboard and controller
-            Vector2 movementDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Vector2 movementDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             // Normalize if needed (Can have length <= 1)
             if (movementDir.magnitude > 1)
                 movementDir.Normalize();
@@ -79,9 +80,10 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
                 //on keyboard, use the mouse
                 case ControlScheme.Keyboard:
                 default:
-                    Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-                    Vector3 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
-                    inputState.AimDirection = (lookPos - transform.position).normalized;
+                    Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
+                    inputState.AimDirection = (lookPos - (Vector2)BookPivot.transform.position).normalized;
+                    Debug.DrawRay(transform.position, inputState.AimDirection, Color.red,1.5f);
                     break;
             }
         }

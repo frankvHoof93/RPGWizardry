@@ -270,7 +270,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         private void CastSpell()
         {
             //If the player is allowed to shoot
-            if (!GameManager.Instance.Locked && spellCooldown[selectedSpellIndex] <= 0)
+            if (!GameManager.Instance.Paused && spellCooldown[selectedSpellIndex] <= 0)
             {
                 if (runningRoutine != null)
                     StopCoroutine(runningRoutine);

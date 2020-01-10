@@ -73,10 +73,14 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
             }
             else if (Input.GetMouseButton(0) && draggedImage != null) // Held (Drag)
             {
+
                 // Move Image-Pos
                 float deltaY = Input.mousePosition.y - mousePos.y;
                 draggedImage.transform.Translate(0, deltaY, 0, Space.Self);
+                draggedImage.transform.localPosition = new Vector3(draggedImage.transform.localPosition.x, Mathf.Clamp(draggedImage.transform.localPosition.y, -45, 45), draggedImage.transform.localPosition.z);
                 mousePos = Input.mousePosition;
+
+
             }
             else if (Input.GetMouseButtonUp(0)) // Released
             {
