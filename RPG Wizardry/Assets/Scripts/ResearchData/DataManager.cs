@@ -103,7 +103,8 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public void PopulateUI()
         {
             LoadDataSet();
-            for (int i = 0; i < CurrentSet.Fragments.Count; i++)
+            Debug.Log("Fragments: " + CurrentSet.Fragments.Count);
+            for (int i = 0; i < 10; i++)
             {
                 //old shit
                 CurrentSet.Fragments[i].FragmentImage = images[i];
@@ -129,11 +130,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                     Vector2 offset = new Vector2(.5f, .5f); // TODO: Check this
 
                     Vector2 posOnTarget = new Vector2(UnityEngine.Random.Range(0, imgTex.width-20), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
-                    Debug.Log("PosOnTarget: " + posOnTarget);
+                //    Debug.Log("PosOnTarget: " + posOnTarget);
                     posOnTarget = new Vector2(posOnTarget.x / splatTex.width, posOnTarget.y / splatTex.height);
                     offset += posOnTarget;
                     offset *= -1f;
-                    Debug.Log($"Tiling: {tiling.ToString("N2")} Offset: {offset.ToString("N2")}");
+                //    Debug.Log($"Tiling: {tiling.ToString("N2")} Offset: {offset.ToString("N2")}");
                     // Add Pixel to Img
                     vectors[j] = new Vector4(tiling.x, tiling.y, offset.x, offset.y);
                     m.SetInt("splatCount", vectors.Length);
