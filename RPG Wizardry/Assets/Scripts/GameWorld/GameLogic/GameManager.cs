@@ -66,6 +66,7 @@ namespace nl.SWEG.RPGWizardry
         public void EndGame(bool gameOver)
         {
             State = GameState.GameOver;
+            Cursor.visible = true;
             if (gameOver)
             {
                 StartCoroutine(GameOver());
