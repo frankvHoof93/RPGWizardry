@@ -4562,13 +4562,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f208c9ff96558a4c8a4b268f08dd4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cleared: 1
   doors:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 780901586410022549}
   EnemyHolder: {fileID: 8907047729703470694}
+  playerSpawnPos: {fileID: 0}
 --- !u!1 &8594446162763593156
 GameObject:
   m_ObjectHideFlags: 0

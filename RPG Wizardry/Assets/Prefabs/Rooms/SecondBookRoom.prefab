@@ -7206,11 +7206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f208c9ff96558a4c8a4b268f08dd4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cleared: 0
   doors:
   - {fileID: 0}
   - {fileID: 4329045679447713022}
   EnemyHolder: {fileID: 5654803981700132648}
+  playerSpawnPos: {fileID: 0}
 --- !u!1 &4800922736886654302
 GameObject:
   m_ObjectHideFlags: 0
