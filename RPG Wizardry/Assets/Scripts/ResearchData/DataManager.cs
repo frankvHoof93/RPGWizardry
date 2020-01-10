@@ -36,6 +36,9 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         [SerializeField]
         private TextMeshProUGUI message;
 
+        [SerializeField]
+        private Texture2D splatTex;
+
         /// <summary>
         /// Button the player can use to check if he did the research correctly.
         /// </summary>
@@ -54,6 +57,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             PopulateUI();
             checkButton.enabled = true;
             message.enabled = false;
+
+        }
+
+        private void Awake()
+        {
 
         }
 
@@ -97,14 +105,25 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             LoadDataSet();
             for (int i = 0; i < CurrentSet.Fragments.Count; i++)
             {
+                //old shit
                 CurrentSet.Fragments[i].FragmentImage = images[i];
                 CurrentSet.Fragments[i].ImageTransform = images[i].transform.parent;
                 Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
                 ClearTextures(imgTex);
+
+                float targetScale = CurrentSet.Fragments[i].ImgData.Length;
+
+
+                Image renderer = CurrentSet.Fragments[i].FragmentImage;
+                Material m = new Material(Shader.Find("Custom/TextureDecal"));
+                m.SetTexture("_DecalTex", splatTex);
+                renderer.material = m;
+                    
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
                 {
                     // Add Pixel to Img
                     
+
                     imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.magenta);
                 }
                 imgTex.Apply();

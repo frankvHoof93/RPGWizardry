@@ -5,8 +5,6 @@
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		_DecalTex("Decal Texture", 2D) = "white" {}
 		[HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
-		_DecalUV("Decal UVs", Vector) = (1,1,1,1)
-		_Decal2UV("Decal2 UVs", Vector) = (1,1,1,1)
 	}
 
 		SubShader
@@ -34,8 +32,6 @@
 		}
 
 		sampler2D _DecalTex;
-		fixed4 _DecalUV;
-		fixed4 _Decal2UV;
 		
 		uniform float4 UVs[32];
 		uniform int splatCount;
