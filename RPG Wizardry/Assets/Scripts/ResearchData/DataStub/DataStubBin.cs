@@ -107,7 +107,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 ImgData =  new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f },
                 OriginalRow = 19
             }
-        }, 4
+        }, (int)(20/7)
         );
 
     }

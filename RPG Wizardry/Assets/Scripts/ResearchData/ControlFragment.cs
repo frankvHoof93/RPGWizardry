@@ -31,6 +31,11 @@
         /// </summary>
         public override void CheckIfSolved()
         {
+            if (ImageTransform == null)
+            {
+                Solved = true; 
+                return;
+            }
             if(ImageTransform.localPosition.y <= CorrectPosition + range && ImageTransform.localPosition.y >= CorrectPosition - range)
             {
                 Solved = true;
