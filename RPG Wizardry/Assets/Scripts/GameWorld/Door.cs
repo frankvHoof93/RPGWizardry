@@ -11,7 +11,16 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// The room the door is leading to.
         /// </summary>
-        public Room Room { get; private set; }
+        public Room TargetRoom { get; private set; }
+
+        public Transform Spawn { get { return spawn; } }
+
+        /// <summary>
+        /// The place where the player spawns when they enter the room.
+        /// </summary>
+        [SerializeField]
+        private Transform spawn;
+
 
         /// <summary>
         /// The other side of the door, in a different room.
@@ -20,16 +29,22 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private Door destination;
 
         /// <summary>
-        /// The light that gets displayed when the door is opened.
+        /// The trigger which teleports the player to the other room.
         /// </summary>
-        [SerializeField]
-        private GameObject lights;
+        private Collider2D collider;
 
         /// <summary>
-        /// The collider of the door.
+        /// The opened door sprite.
+        /// </summary>
+        [Space]
+        [SerializeField]
+        private GameObject openSprite;
+
+        /// <summary>
+        /// The closed door sprite.
         /// </summary>
         [SerializeField]
-        private Collider2D collider;
+        private GameObject closedSprite;
         #endregion
 
         #region Methods
@@ -37,19 +52,19 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>.
         /// Opens the door.
         /// </summary>
-        public virtual void Open()
+        public void Open()
         {
-            collider.enabled = false;
-            lights.SetActive(true);
+            closedSprite.SetActive(false);
+            openSprite.SetActive(true);
         }
 
         /// <summary>
         /// Closes the door.
         /// </summary>
-        public virtual void Close()
+        public void Close()
         {
-            collider.enabled = true;
-            lights.SetActive(false);
+            openSprite.SetActive(false);
+            closedSprite.SetActive(true);
         }
         #endregion
 
@@ -59,7 +74,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         protected virtual void Awake()
         {
-            Room = GetComponentInParent<Room>();
+            TargetRoom = GetComponentInParent<Room>();
         }
 
         /// <summary>
