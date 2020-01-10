@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BookData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Book
-  enemyHealth: 10
+  enemyHealth: 30
   enemyAttack: 0
   enemySpeed: 45
   spawnCooldown:

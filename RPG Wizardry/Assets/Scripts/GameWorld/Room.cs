@@ -7,6 +7,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 {
     public class Room : MonoBehaviour
     {
+        /// <summary>
+        /// Wether the room is cleared or not.
+        /// </summary>
         public bool Cleared;
 
         /// <summary>
