@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 91f8d86059ba64840a07fd727ced176f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9021800114738998358
+    second: wilow_spritesheet_0
+  - first:
+      213: -9060586931303517562
+    second: wilow_spritesheet_1
+  - first:
+      213: -2712765111628987576
+    second: wilow_spritesheet_2
+  - first:
+      213: 150471299597895129
+    second: wilow_spritesheet_3
+  - first:
+      213: -7829507509335901004
+    second: wilow_spritesheet_4
+  - first:
+      213: -7201410178173812425
+    second: wilow_spritesheet_5
+  - first:
+      213: 3725277622048027721
+    second: wilow_spritesheet_6
+  - first:
+      213: 3313663475600932423
+    second: wilow_spritesheet_7
+  - first:
+      213: 1642361083701039562
+    second: wilow_spritesheet_8
+  - first:
+      213: -7970676719376587008
+    second: wilow_spritesheet_9
+  - first:
+      213: -4881570308620845686
+    second: wilow_spritesheet_10
+  - first:
+      213: -1751651798521004325
+    second: wilow_spritesheet_11
+  - first:
+      213: 3240423751234233910
+    second: wilow_spritesheet_12
+  - first:
+      213: -6223051415952416603
+    second: wilow_spritesheet_13
+  - first:
+      213: 5669347306802668015
+    second: wilow_spritesheet_14
+  - first:
+      213: -531075550668193311
+    second: wilow_spritesheet_15
+  - first:
+      213: -816140916232417729
+    second: wilow_spritesheet_16
+  - first:
+      213: -3981224540156952936
+    second: wilow_spritesheet_17
+  - first:
+      213: -6975053400112397948
+    second: wilow_spritesheet_18
+  - first:
+      213: -6208065012616266125
+    second: wilow_spritesheet_19
+  - first:
+      213: -5859413287123763917
+    second: wilow_spritesheet_20
+  - first:
+      213: -6088269357258139966
+    second: wilow_spritesheet_21
+  - first:
+      213: 3388000218975831776
+    second: wilow_spritesheet_22
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wilow_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3600
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb6451cf906e9eb4790e92b34ea02a8f
+      internalID: -9021800114738998358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 3600
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16bc119210c0da24193c98e7c9b5aa77
+      internalID: -9060586931303517562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 3600
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17865a56880def9448911c116f9a2063
+      internalID: -2712765111628987576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 3600
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4877827e60c6e64199e4395b9243413
+      internalID: 150471299597895129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 3600
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b694dcb4d62559143a5f5f1dcd31eee8
+      internalID: -7829507509335901004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2700
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d34a1f61095acc54c8280d84af18dcb1
+      internalID: -7201410178173812425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 2700
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b7da8c8dd669646b1a0f683b2b7a24
+      internalID: 3725277622048027721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 2700
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76205174d0f4d464799ea50f54276d90
+      internalID: 3313663475600932423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 2700
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 060b4daec33700c42b158b62bf30a694
+      internalID: 1642361083701039562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 2700
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9ed1bd8454db1499d30e9c029792ad
+      internalID: -7970676719376587008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c3f54575f1c3d498fee28df4c2e043
+      internalID: -4881570308620845686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dee8472e8612b314c93ddc2e05474e68
+      internalID: -1751651798521004325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5dcd6eea707cda4997239af6e2fd8ee
+      internalID: 3240423751234233910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bec2cd76e063ca4e931b2adf53ae3e5
+      internalID: -6223051415952416603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0aa8dadeae7dcd49b69c3858f0c6f4e
+      internalID: 5669347306802668015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 900
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c748e22bc531741bf3cee3a4567c54
+      internalID: -531075550668193311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 900
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 050270f92aa22a84f9c868433c822b54
+      internalID: -816140916232417729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 900
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36141debee4e1a24baf1537783b994bb
+      internalID: -3981224540156952936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 900
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a805d10c3bff7ec45ac394541e3d5a78
+      internalID: -6975053400112397948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 900
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e541f45c377fc4ab47f95a868764f5
+      internalID: -6208065012616266125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fcb94e3c3b369f4ba3b087c0bc02b82
+      internalID: -5859413287123763917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e851ed5b0de47f4fbfbfd6a74d7242c
+      internalID: -6088269357258139966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wilow_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cfe1157e3db1fe4dbf1a4b23da31347
+      internalID: 3388000218975831776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 4ba6cca7580b5db4788371db06cc0474
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
