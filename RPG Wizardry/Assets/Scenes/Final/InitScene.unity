@@ -238,6 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasRootObject: 1
+  crosshair: {fileID: 2800000, guid: 914ebc152b571964c97200366de45375, type: 3}
+  cursor: {fileID: 2800000, guid: 03fded3121182224693d55bd6e466693, type: 3}
   playerPrefab: {fileID: 1649351625787668028, guid: 6d5dd9074d9391a47b9491000f99b7ec,
     type: 3}
 --- !u!1 &1297538937
