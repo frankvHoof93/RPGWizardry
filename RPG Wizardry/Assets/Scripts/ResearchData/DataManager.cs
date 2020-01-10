@@ -109,7 +109,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 CurrentSet.Fragments[i].FragmentImage = images[i];
                 CurrentSet.Fragments[i].ImageTransform = images[i].transform.parent;
                 Texture2D imgTex = (Texture2D)CurrentSet.Fragments[i].FragmentImage.mainTexture;
-                ClearTextures(imgTex);
+                //ClearTextures(imgTex);
 
                 float targetScale = CurrentSet.Fragments[i].ImgData.Length;
 
@@ -118,16 +118,31 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 Material m = new Material(Shader.Find("Custom/TextureDecal"));
                 m.SetTexture("_DecalTex", splatTex);
                 renderer.material = m;
-                    
+
+
+                Vector4[] vectors = new Vector4[(int)targetScale];
+
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length - 1; j++)
                 {
+                    Vector2 tiling = new Vector2(((float)imgTex.width / (float)splatTex.width), ((float)imgTex.height / (float)splatTex.height));
+                    // base offset to corner:
+                    Vector2 offset = new Vector2(.5f, .5f);
+
+                   // Vector2 posOnTarget = new Vector2(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
+                   // Debug.Log("PosOnTarget: " + posOnTarget);
+                    //posOnTarget = new Vector2(posOnTarget.x / splatTex.width, posOnTarget.y / splatTex.height);
+                    //offset += posOnTarget;
+
+                    Debug.Log($"Tiling: {tiling.ToString("N2")} Offset: {offset.ToString("N2")}");
                     // Add Pixel to Img
-                    
+                    vectors[j] = new Vector4(tiling.x, tiling.y, offset.x, offset.y);
+                    m.SetInt("splatCount", vectors.Length);
+                    m.SetVectorArray("UVs", vectors);
 
-                    imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.magenta);
+                    //imgTex.SetPixel(UnityEngine.Random.Range(0, imgTex.width), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height), Color.magenta);
                 }
-                imgTex.Apply();
-
+                //imgTex.Apply();
+                
 
             }
 
@@ -140,10 +155,10 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// <param name="tex">Target texture</param>
         private void ClearTextures(Texture2D tex)
         {
-            for (int x = 0; x < tex.width; x++)
-                for (int y = 0; y < tex.height; y++)
-                    tex.SetPixel(x, y, new Color(0,0,0,0));
-            tex.Apply();
+          //  for (int x = 0; x < tex.width; x++)
+          //      for (int y = 0; y < tex.height; y++)
+           //         tex.SetPixel(x, y, new Color(0,0,0,0));
+           // tex.Apply();
         }
 
         private void OnApplicationQuit()
