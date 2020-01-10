@@ -548,6 +548,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell List Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5244897388212724462, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5244897388212724458, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -658,6 +663,11 @@ PrefabInstance:
       propertyPath: SpellCanvas
       value: 
       objectReference: {fileID: 1698780246}
+    - target: {fileID: 5244897388195181224, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9112d8fc51d8f8439672d4ca9da3b87, type: 3}
 --- !u!1 &905302725 stripped
@@ -1491,6 +1501,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3222417033037486708, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222417033037486708, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1417790784}
     - target: {fileID: 3222417033037486704, guid: 07d0f5e35778a854d8b822838367f5d8,
         type: 3}
       propertyPath: eventSystem

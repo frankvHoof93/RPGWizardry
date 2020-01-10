@@ -44,13 +44,33 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         [SerializeField]
         private Button checkButton;
+
+        private bool started = false;
         #endregion
         #region Methods
 
+        private void Start()
+        {
+            UpdateBars();
+            started = true;
+
+        }
         /// <summary>
         /// Perform start when page is enabled again.
         /// </summary>
         private void OnEnable()
+        {
+            if(started)
+            UpdateBars();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+           
+        }
+
+        private void UpdateBars()
         {
             //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
             if (CurrentBin == null)
@@ -61,13 +81,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             checkButton.enabled = true;
             message.enabled = false;
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-           
-        }
-
         /// <summary>
         /// Used to check if the player has solved the research Set
         /// </summary>
@@ -92,7 +105,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         public void PopulateUI()
         {
             LoadDataSet();
-            Debug.Log("Fragments: " + CurrentSet.Fragments.Count);
             for (int i = 0; i < 10; i++)
             {
                 //old shit
