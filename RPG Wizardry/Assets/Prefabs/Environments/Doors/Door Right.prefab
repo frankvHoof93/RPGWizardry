@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71cd3af1f8844f449ca1eac36bb03b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawn: {fileID: 5597841242922363580}
+  spawn: {fileID: 5597841242922363580}
   destination: {fileID: 0}
   openSprite: {fileID: 5437864186735487398}
   closedSprite: {fileID: 3455081841846098560}

@@ -13,10 +13,14 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         public Room TargetRoom { get; private set; }
 
+        public Transform Spawn { get { return spawn; } }
+
         /// <summary>
         /// The place where the player spawns when they enter the room.
         /// </summary>
-        public Transform Spawn;
+        [SerializeField]
+        private Transform spawn;
+
 
         /// <summary>
         /// The other side of the door, in a different room.
