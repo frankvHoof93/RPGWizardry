@@ -1,16 +1,13 @@
-﻿using nl.SWEG.RPGWizardry.Player.Inventory;
-using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System.Collections;
-using UnityEngine;
-using nl.SWEG.RPGWizardry.Player.Combat;
-using nl.SWEG.RPGWizardry.Player.PlayerInput;
-using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld;
-using System;
+using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+using nl.SWEG.RPGWizardry.Player.Combat;
+using nl.SWEG.RPGWizardry.Player.Inventory;
+using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.UI;
 using nl.SWEG.RPGWizardry.Utils;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player
 {
@@ -84,6 +81,12 @@ namespace nl.SWEG.RPGWizardry.Player
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset = new Vector2(0f, -30f);
+        /// <summary>
+        /// Amount of FRAMES Player is invincible for after being damaged
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Amount of FRAMES Player is invincible for after being damaged")]
+        private uint invincibilityFrames = 60;
         #endregion
 
         #region Private
@@ -95,6 +98,10 @@ namespace nl.SWEG.RPGWizardry.Player
         /// Renderer for Player
         /// </summary>
         private Renderer renderer;
+        /// <summary>
+        /// Whether the Player is currently Invincible
+        /// </summary>
+        private bool isInvincible;
         #endregion
         #endregion
 
@@ -107,13 +114,19 @@ namespace nl.SWEG.RPGWizardry.Player
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
-            renderer.SetSpriteColor(Color.red);
-            if (amount >= Health)
-                Die();
-            Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
-            healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
-            StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
+            if (!isInvincible)
+            {
+                isInvincible = true;
+                //renderer.SetSpriteColor(Color.red);
+                if (amount >= Health)
+                    Die();
+                Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
+                PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
+                healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
+                // Tween to Red
+                LeanTween.value(gameObject, col => renderer.SetSpriteColor(col), Color.white, Color.red, (invincibilityFrames / 60f) / 6f)
+                    .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
+            }
         }
 
         /// <summary>
