@@ -315,7 +315,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   bookAnimator: {fileID: 4558486416647510740}
-  scrollTimeOut: 0.25
+  scrollTimeOut: 0.1
 --- !u!95 &1649351625787668025
 Animator:
   serializedVersion: 3
