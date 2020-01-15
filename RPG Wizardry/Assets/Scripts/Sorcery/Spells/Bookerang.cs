@@ -128,7 +128,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //Bool check so it doesnt get stuck on anything on the way back
             if (!back)
             {
+                //apply knockback
+                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                body.AddForce(transform.up * data.Knockback);
+
+                //apply damage
                 collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
+
                 Return();
             }
         }

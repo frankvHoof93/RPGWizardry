@@ -20,6 +20,7 @@ MonoBehaviour:
   spellCooldown: 1
   projectileLifeTime: 1
   projectileSpeed: 4
+  knockback: 500
   spellSprite: {fileID: 21300000, guid: 94445a3e8e3c8684b84819291c31a3ce, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
   projectilePrefab: {fileID: 4998689496432118957, guid: 23249c11343093c42833e13fa39ecb04,
