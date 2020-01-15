@@ -9,6 +9,8 @@
 
 		SubShader
 	{
+		LOD 400
+
 		Tags
 		{
 			"Queue" = "Transparent"
@@ -20,10 +22,13 @@
 		Cull Off
 		Lighting Off
 		ZWrite Off
-		Blend One OneMinusSrcAlpha
+		ZTest [unity_GUIZTestMode]
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		CGPROGRAM
-		#pragma surface surf NoLighting alpha:blend noshadow noambient nolightmap nodynlightmap nodirlightmap nofog noforwardadd noshadowmask 
+		#pragma surface surf NoLighting alpha:blend noshadow novertexlights noambient nolightmap nodynlightmap nodirlightmap nofog noforwardadd noshadowmask 
+            #include "UnityCG.cginc"
+            #include "UnityUI.cginc"
 		#include "UnitySprites.cginc"
 
 		fixed4 LightingNoLighting(SurfaceOutput s, fixed3 lightDir, fixed atten)
