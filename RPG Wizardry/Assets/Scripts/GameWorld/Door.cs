@@ -6,6 +6,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     public class Door : MonoBehaviour
     {
         #region Variables
+        #region Public
         /// <summary>
         /// The room the door is leading to.
         /// </summary>
@@ -19,40 +20,50 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             }
         }
 
+        /// <summary>
+        /// The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)
+        /// </summary>
         public Transform Spawn { get { return spawn; } }
+        #endregion
 
+        #region Editor
         /// <summary>
         /// The place where the player spawns when they enter the room.
         /// </summary>
         [SerializeField]
+        [Tooltip("The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)")]
         private Transform spawn;
-
-
         /// <summary>
         /// The other side of the door, in a different room.
         /// </summary>
         [SerializeField]
+        [Tooltip("The other side of the door, in a different room.")]
         private Door destination;
-
-        /// <summary>
-        /// The trigger which teleports the player to the other room.
-        /// </summary>
-        private Collider2D collider;
-
         /// <summary>
         /// The opened door sprite.
         /// </summary>
         [Space]
         [SerializeField]
+        [Tooltip("The opened door sprite.")]
         private GameObject openSprite;
-
         /// <summary>
         /// The closed door sprite.
         /// </summary>
         [SerializeField]
+        [Tooltip("The closed door sprite.")]
         private GameObject closedSprite;
+        #endregion
 
+        #region Private
+        /// <summary>
+        /// The trigger which teleports the player to the other room.
+        /// </summary>
+        private Collider2D collider;
+        /// <summary>
+        /// Room this door is a part of
+        /// </summary>
         private Room room;
+        #endregion
         #endregion
 
         #region Methods
