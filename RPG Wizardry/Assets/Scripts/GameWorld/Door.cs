@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -11,7 +9,15 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// The room the door is leading to.
         /// </summary>
-        public Room TargetRoom { get; private set; }
+        public Room Room
+        {
+            get
+            {
+                if (room == null)
+                    Awake();
+                return room;
+            }
+        }
 
         public Transform Spawn { get { return spawn; } }
 
@@ -45,6 +51,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         [SerializeField]
         private GameObject closedSprite;
+
+        private Room room;
         #endregion
 
         #region Methods
@@ -70,11 +78,19 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
         #region Unity
         /// <summary>
-        /// Gets the collider, and closes the door.
+        /// Gets TargetRoom
         /// </summary>
-        protected virtual void Awake()
+        private void Awake()
         {
-            TargetRoom = GetComponentInParent<Room>();
+            Transform tf = transform;
+            while (room == null)
+            {
+                room = tf.GetComponent<Room>();
+                if (room == null && tf != tf.root)
+                    tf = tf.parent;
+                else // Found root (or Room)
+                    return;
+            }
         }
 
         /// <summary>
