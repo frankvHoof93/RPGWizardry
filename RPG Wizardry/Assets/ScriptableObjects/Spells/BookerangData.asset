@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: BookerangData
   m_EditorClassIdentifier: 
   spellName: Bookerang
+  spellDescription: 'Test Description: Basic Attack. Yeet Greg at your enemies'
+  spellCost: 0
   spellPattern: 0
   spellDamage: 10
-  projectileSpeed: 10
-  projectileLifeTime: 4
   spellElement: 0
   spellCooldown: 1
+  projectileLifeTime: 4
+  projectileSpeed: 10
   spellSprite: {fileID: 21300000, guid: 457703b35df55f84eb0ca6a82700b841, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 4796e0dff0bd9fb44ac2e4a8f52f4ded, type: 3}
   projectilePrefab: {fileID: 8986202624484149180, guid: 3f471dcd9ee44244d8d258644eef966e,

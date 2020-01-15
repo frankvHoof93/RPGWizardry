@@ -1,5 +1,4 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Player.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +22,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         private Button button;
         [SerializeField]
         private Image spellImage;
+        [SerializeField]
+        private TextMeshProUGUI description;
 
         #endregion
         #region Methods
@@ -30,12 +31,17 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         public void SetSelectedSpell(SpellPage target)
         {
             selectedSpell = target;
+            OnEnable(); // Set new Info
         }
 
         private void OnEnable()
         {
+            if (selectedSpell == null)
+                return;
             title.text = selectedSpell.SpellTitle;
             spellImage.sprite = selectedSpell.Spell.Sprite;
+            description.text = selectedSpell.Spell.Description;
+            button.enabled = !selectedSpell.Unlocked;
         }
 
         /// <summary>
@@ -43,17 +49,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         public void UnlockSpell()
         {
-                PlayerManager.Instance.Inventory?.UnlockSpell(selectedSpell);
-            
-        }
-        // Update is called once per frame
-        private void Update()
-        {
-            if (selectedSpell.Unlocked && button.enabled)
-            {
-                button.enabled = false;
-            }
-
+            PlayerManager.Instance.Inventory?.UnlockSpell(selectedSpell);
+            button.enabled = false;
         }
         #endregion
     }

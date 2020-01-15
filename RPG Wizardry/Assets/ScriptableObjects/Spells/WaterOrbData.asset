@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterOrbData
   m_EditorClassIdentifier: 
   spellName: WaterOrb
+  spellDescription: Test Description
   spellCost: 0
   spellPattern: 0
   spellDamage: 12
