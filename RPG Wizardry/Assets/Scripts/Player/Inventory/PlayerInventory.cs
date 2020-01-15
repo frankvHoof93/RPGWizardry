@@ -65,7 +65,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         #endregion
         #endregion
 
-       #region Methods
+        #region Methods
         #region Public
         #region EventListeners
         /// <summary>

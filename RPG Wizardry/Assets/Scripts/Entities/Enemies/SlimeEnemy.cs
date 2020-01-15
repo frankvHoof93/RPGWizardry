@@ -133,8 +133,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <param name="collision"></param>
         private void OnCollisionStay2D(Collision2D collision)
         {
-            if (attackCollisionMask.HasLayer(collision.gameObject.layer))
-                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
+            if (GameManager.Exists && !GameManager.Instance.Paused) // Don't do damage while game is paused
+                if (attackCollisionMask.HasLayer(collision.gameObject.layer))
+                    collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
         }
         #endregion
         #endregion

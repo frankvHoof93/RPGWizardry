@@ -112,7 +112,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                     projectile.transform.up = direction;
                     Projectile p = projectile.GetComponent<Projectile>();
                     p.SetData(this, targetingMask);
-                    Destroy(projectile, projectileLifeTime);
                     returnVal.Add(p);
                     break;
                 case SpellPattern.cone:

@@ -82,9 +82,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <returns></returns>
         private IEnumerator switchRoom(Door destination)
         {
-            //Make sure the player can't move
+            //Make sure the game is paused
             if (!GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause(false);
+                GameManager.Instance.TogglePause();
 
             //Fade the screen out
             CameraManager.instance.Fade(1, 0);

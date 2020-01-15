@@ -120,9 +120,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Update()
         {
-            if (PlayerManager.Exists && Time.time >= enableTime)
+            if (PlayerManager.Exists && Time.time >= enableTime
+                && GameManager.Exists && !GameManager.Instance.Paused) // Update only when playing
                 UpdateEnemy(PlayerManager.Instance);
-            AnimateEnemy();
+            AnimateEnemy(); // Animate Always
         }
         #endregion
 
