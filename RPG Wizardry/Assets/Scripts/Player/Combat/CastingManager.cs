@@ -66,7 +66,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Timeout for Scrolling (timeout between Selections)
         /// </summary>
         [SerializeField]
-        private float scrollTimeOut = 0.25f;
+        private float scrollTimeOut;
         #endregion
 
         #region Private
