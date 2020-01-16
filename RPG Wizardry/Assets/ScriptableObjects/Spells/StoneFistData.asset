@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StoneFistData
   m_EditorClassIdentifier: 
   spellName: StoneFist
+  spellDescription: Test Description
   spellCost: 0
   spellPattern: 0
   spellDamage: 12

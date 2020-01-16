@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: 
   spellName: FireBall
+  spellDescription: Test Description
   spellCost: 0
   spellPattern: 0
   spellDamage: 25
