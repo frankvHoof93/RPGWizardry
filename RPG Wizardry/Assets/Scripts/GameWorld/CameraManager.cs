@@ -128,10 +128,18 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 return;
 
             Transform playerTF = PlayerManager.Instance.transform;
-            transform.position = new Vector3(
+            Vector3 playerPos = new Vector3(
                 Mathf.Round(playerTF.position.x * 1000.0f) / 1000.0f,
                 Mathf.Round(playerTF.position.y * 1000.0f) / 1000.0f,
                 Mathf.Round(playerTF.position.z - 500.00f * 1000.0f) / 1000.0f);
+            Vector3 mousePos = Camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseDir = mousePos - playerPos;
+            if (mouseDir.magnitude < 1)
+                mouseDir.Normalize();
+            Vector3 cameraPos;
+            cameraPos = playerPos + mouseDir.normalized * 0.5f * Mathf.Sqrt(mouseDir.magnitude);
+            cameraPos = Vector3.Lerp(transform.position, cameraPos, .5f);
+            transform.position = cameraPos;
         }
         #endregion
         #endregion
