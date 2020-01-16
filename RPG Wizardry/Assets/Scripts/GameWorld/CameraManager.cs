@@ -26,16 +26,31 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         public bool Fading { get; private set; }
         #endregion
 
-
+        #region Editor
         /// <summary>
         /// How long it takes to fade in or out.
         /// </summary>
         [SerializeField]
         [Range(0.00f, 2f)]
         private float FadeTime;
+        /// <summary>
+        /// Time-amount for Smoothing
+        /// </summary>
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float smoothTime = .3f;
+        #endregion
 
-
+        #region Private
+        /// <summary>
+        /// Camera-Velocity (when moving)
+        /// </summary>
+        private Vector3 velocity = Vector3.zero;
+        /// <summary>
+        /// Script used for Fading
+        /// </summary>
         private ScreenFade screenFader;
+        #endregion
         #endregion
 
         #region Methods
@@ -116,7 +131,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             Camera = GetComponent<Camera>();
             screenFader = GetComponent<ScreenFade>();
             AudioListener = GetComponent<AudioListener>();
-            //StartCoroutine(toggleCamera());
         }
 
         /// <summary>
@@ -138,8 +152,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 mouseDir.Normalize();
             Vector3 cameraPos;
             cameraPos = playerPos + mouseDir.normalized * 0.5f * Mathf.Sqrt(mouseDir.magnitude);
-            cameraPos = Vector3.Lerp(transform.position, cameraPos, .5f);
-            transform.position = cameraPos;
+            transform.position = Vector3.SmoothDamp(transform.position, cameraPos, ref velocity, smoothTime);
         }
         #endregion
         #endregion
