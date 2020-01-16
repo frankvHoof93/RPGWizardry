@@ -64,6 +64,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [Tooltip("Speed for Projectiles")]
         private float projectileSpeed;
         /// <summary>
+        /// Knockback for Projectiles
+        /// </summary>
+        public int Knockback => knockback;
+        [SerializeField]
+        [Tooltip("Knockback for Projectiles")]
+        private int knockback;
+        /// <summary>
         /// UI-Sprite for Spell
         /// </summary>
         public Sprite Sprite => spellSprite;

@@ -128,8 +128,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected virtual void Effect(Collider2D collision)
         {
             GetComponent<Collider2D>().enabled = false;
+            //apply knockback
+            Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+            body.AddForce(transform.up * data.Knockback);
             //oh man i can feel the effect
             collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
+
             Destroy(gameObject); // TODO: Animation?
         }
         #endregion

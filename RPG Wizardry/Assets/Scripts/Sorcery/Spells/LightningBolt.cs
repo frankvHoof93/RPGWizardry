@@ -34,6 +34,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //Yes, it hit something
             if (hit)
             {
+                //if it's an object with a rigidbody, apply knockback
+                Rigidbody2D body = hit.transform.GetComponent<Rigidbody2D>();
+                body.AddForce(transform.up * data.Knockback);
                 //If it's an object with health, damage it
                 hit.transform.GetComponent<IHealth>()?.Damage(data.Damage);
                 //Set the line to end at the object

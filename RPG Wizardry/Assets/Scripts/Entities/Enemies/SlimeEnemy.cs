@@ -1,6 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
@@ -87,8 +88,14 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <param name="player">Reference to Player</param>
         protected override void OnDeath()
         {
-            GetComponent<Collider2D>().enabled = false;
             dead = true;
+            StartCoroutine(DieAnimation());
+        }
+
+        private IEnumerator DieAnimation()
+        {
+            yield return new WaitForSeconds(0.3f);
+            GetComponent<Collider2D>().enabled = false;
             animator.SetBool("Dead", true);
             if (big)
             {
