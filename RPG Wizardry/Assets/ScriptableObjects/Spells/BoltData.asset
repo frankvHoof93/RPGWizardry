@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: BoltData
   m_EditorClassIdentifier: 
   spellName: Bolt
+  spellDescription: Test Description
   spellCost: 0
   spellPattern: 0
-  spellDamage: 35
+  spellDamage: 15
   spellElement: 3
   spellCooldown: 2
   projectileLifeTime: 4
   projectileSpeed: 0
+  knockback: 350
   spellSprite: {fileID: 21300000, guid: 9ed3a159f1c2b6e4aa37275a2656da63, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
   projectilePrefab: {fileID: 1076609150677746452, guid: f0de2f57c119770409c059dfe4153448,

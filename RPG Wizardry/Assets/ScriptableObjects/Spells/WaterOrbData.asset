@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterOrbData
   m_EditorClassIdentifier: 
   spellName: WaterOrb
+  spellDescription: Test Description
   spellCost: 0
   spellPattern: 0
   spellDamage: 12
@@ -20,6 +21,7 @@ MonoBehaviour:
   spellCooldown: 1
   projectileLifeTime: 5
   projectileSpeed: 4
+  knockback: 200
   spellSprite: {fileID: 21300000, guid: 79a599063acc57545816ddf5af5f847a, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
   projectilePrefab: {fileID: 4998689496432118957, guid: 09fbb8be70ecf01479d9c5edefe0b391,

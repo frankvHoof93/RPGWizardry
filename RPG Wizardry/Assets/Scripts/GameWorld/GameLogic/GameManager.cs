@@ -11,6 +11,13 @@ namespace nl.SWEG.RPGWizardry
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {
+        [SerializeField]
+        private Texture2D crosshair;
+        [SerializeField]
+        private Texture2D cursor;
+
+        private Vector2 crosshairHotspot;
+
         #region InnerTypes
         public enum GameState
         {
@@ -55,16 +62,21 @@ namespace nl.SWEG.RPGWizardry
         /// <summary>
         /// Toggles Game-Pause
         /// </summary>
-        public void TogglePause(bool setTimeScale = true)
+        public void TogglePause()
         {
             Paused = !Paused;
-            if (setTimeScale)
-                Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
+            if (Paused) // This is nasty, but it should work. It pauses ALL active tweens, but still allows new tweens to be started/ran.
+                LeanTween.pauseAll(); 
+            else
+                LeanTween.resumeAll(); // Resumes ALL tweens (including the ones that are NOT in GameState.Playing
+            //Set cursor to cursor if paused, crosshair if unpaused
+            Cursor.SetCursor(Paused ? cursor : crosshair, Paused ? Vector2.zero : crosshairHotspot, CursorMode.Auto);
         }
 
         public void EndGame(bool gameOver)
         {
             State = GameState.GameOver;
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
             if (gameOver)
             {
                 StartCoroutine(GameOver());
@@ -92,6 +104,8 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
+            
+            Cursor.SetCursor(crosshair,crosshairHotspot,CursorMode.Auto);
         }
 
         /// <summary>
@@ -104,6 +118,13 @@ namespace nl.SWEG.RPGWizardry
             SceneManager.sceneUnloaded -= OnExitMenu;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
+        }
+        #endregion
+
+        #region Unity
+        private void Start()
+        {
+            crosshairHotspot = new Vector2(crosshair.width / 2f, crosshair.height / 2f);
         }
         #endregion
 

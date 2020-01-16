@@ -20,7 +20,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         {
             ControlFragment start = new ControlFragment(40, 15);
             start.ImgData = new float[] { 0.150f, 0.175f, 0.150f, 0.175f, 0.160f, 0.120f, 0.180f, 0.125f, 0.130f, 0.195f, 0.145f };
-            ControlFragment middle = new ControlFragment(15, 15);
+            ControlFragment middle = new ControlFragment(20, 15);
             middle.ImgData = new float[] { 0.180f, 0.175f, 0.190f, 0.175f, 0.210f, 0.220f, 0.180f, 0.210f, 0.210f, 0.185f, 0.115f };
             ControlFragment end = new ControlFragment(-30, 15);
             end.ImgData = new float[] { 0.610f, 0.675f, 0.650f, 0.675f, 0.660f, 0.600f, 0.680f, 0.610f, 0.610f, 0.695f, 0.615f };

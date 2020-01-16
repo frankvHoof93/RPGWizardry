@@ -28,11 +28,15 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
 
             //Build a raycast
             RaycastHit2D hit;
+            //CircleCast to make the hit more generous
+            hit = Physics2D.CircleCast(transform.position, 1, transform.up, data.LifeTime, collisionLayer);
             //Does the ray intersect any objects in the collision layer
             //Yes, it hit something
-            hit = Physics2D.Raycast(transform.position, transform.up, data.LifeTime, collisionLayer);
             if (hit)
             {
+                //if it's an object with a rigidbody, apply knockback
+                Rigidbody2D body = hit.transform.GetComponent<Rigidbody2D>();
+                body.AddForce(transform.up * data.Knockback);
                 //If it's an object with health, damage it
                 hit.transform.GetComponent<IHealth>()?.Damage(data.Damage);
                 //Set the line to end at the object

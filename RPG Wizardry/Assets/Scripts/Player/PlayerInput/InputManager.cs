@@ -118,9 +118,9 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
                     else if (Input.GetKeyDown(KeyCode.Alpha4)) // Select Index 4
                         inputState.SelectSpell = InputState.SpellSelection.Index4;
                     else if (Input.mouseScrollDelta.y > 0) // Select Next (Scroll Up)
-                        inputState.SelectSpell = InputState.SpellSelection.SelectNext;
-                    else if (Input.mouseScrollDelta.y < 0) // Select Previous (Scroll Down)
                         inputState.SelectSpell = InputState.SpellSelection.SelectPrevious;
+                    else if (Input.mouseScrollDelta.y < 0) // Select Previous (Scroll Down)
+                        inputState.SelectSpell = InputState.SpellSelection.SelectNext;
                     break;
             }
         }

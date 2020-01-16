@@ -82,9 +82,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <returns></returns>
         private IEnumerator switchRoom(Door destination)
         {
-            //Make sure the player can't move
+            //Make sure the game is paused
             if (!GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause(false);
+                GameManager.Instance.TogglePause();
 
             //Fade the screen out
             CameraManager.instance.Fade(1, 0);
@@ -98,12 +98,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             
             //Move the player to new room
             if (PlayerManager.Exists)
-                PlayerManager.Instance.transform.position = destination.transform.position;
-
+                PlayerManager.Instance.transform.position = destination.Spawn.position;
 
             //Enable the new room
-            destination.Room.Enable();
             activeRoom = destination.Room;
+            activeRoom.Enable();
 
             //Fade the screen back in
             CameraManager.instance.Fade(0, 1);
