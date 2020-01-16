@@ -104,7 +104,7 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
-            
+            Paused = false;
             Cursor.SetCursor(crosshair,crosshairHotspot,CursorMode.Auto);
         }
 
@@ -116,6 +116,7 @@ namespace nl.SWEG.RPGWizardry
         internal void OnExitMenu(Scene arg0)
         {
             SceneManager.sceneUnloaded -= OnExitMenu;
+            Paused = false;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
         }
