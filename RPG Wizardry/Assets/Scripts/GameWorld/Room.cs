@@ -106,7 +106,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Checks if the room still has enemies. if it doesn't, the doors open.
         /// </summary>
-        private void CheckRoomClear()
+        protected virtual void CheckRoomClear()
         {
             if (EnemyHolder.transform.childCount == 0)
             {
