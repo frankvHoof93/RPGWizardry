@@ -50,6 +50,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
+        /// <summary>
+        /// Current LifeTime for Projectile. Used for Destruction
+        /// </summary>
+        private float lifeTime;
         #endregion
 
         #region Protected
@@ -97,7 +101,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         private void FixedUpdate()
         {
-            Move();
+            if (GameManager.Exists && !GameManager.Instance.Paused)
+                Move();
         }
 
         /// <summary>
@@ -119,6 +124,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         {
             transform.position += transform.up * Time.deltaTime * data.ProjectileSpeed;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+            lifeTime += Time.deltaTime;
+            if (lifeTime >= data.LifeTime)
+                Destroy(gameObject);
         }
 
         /// <summary>

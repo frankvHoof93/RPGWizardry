@@ -62,12 +62,13 @@ namespace nl.SWEG.RPGWizardry
         /// <summary>
         /// Toggles Game-Pause
         /// </summary>
-        public void TogglePause(bool setTimeScale = true)
+        public void TogglePause()
         {
             Paused = !Paused;
-            if (setTimeScale)
-                Time.timeScale = Paused ? 0f : 1f; // TODO: Find a better way to pause
-
+            if (Paused) // This is nasty, but it should work. It pauses ALL active tweens, but still allows new tweens to be started/ran.
+                LeanTween.pauseAll(); 
+            else
+                LeanTween.resumeAll(); // Resumes ALL tweens (including the ones that are NOT in GameState.Playing
             //Set cursor to cursor if paused, crosshair if unpaused
             Cursor.SetCursor(Paused ? cursor : crosshair, Paused ? Vector2.zero : crosshairHotspot, CursorMode.Auto);
         }
@@ -75,7 +76,7 @@ namespace nl.SWEG.RPGWizardry
         public void EndGame(bool gameOver)
         {
             State = GameState.GameOver;
-            Cursor.visible = true;
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
             if (gameOver)
             {
                 StartCoroutine(GameOver());

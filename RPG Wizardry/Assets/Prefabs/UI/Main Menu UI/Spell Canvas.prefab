@@ -1189,6 +1189,7 @@ MonoBehaviour:
   title: {fileID: 7072635279858129477}
   button: {fileID: 7072635279834969283}
   spellImage: {fileID: 7072635280241727141}
+  description: {fileID: 7072635280120097545}
 --- !u!1 &7072635281224321299
 GameObject:
   m_ObjectHideFlags: 0

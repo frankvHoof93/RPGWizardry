@@ -44,7 +44,8 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(player.InputManager.State.MovementDirection);
+            if (GameManager.Exists && !GameManager.Instance.Paused)
+                Movement(player.InputManager.State.MovementDirection);
         }
         #endregion
 
