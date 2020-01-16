@@ -228,7 +228,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             {
                 if (selectedSpells[i] == null)
                 {
-                    selectedSpells[i] = spell;
+                    SetSpell(spell, (ushort)i);
                     return true;
                 }
             }
