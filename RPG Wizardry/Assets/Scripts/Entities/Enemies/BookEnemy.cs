@@ -137,6 +137,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (PlayerManager.Exists)
                 if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
                     LootSpawner.Instance.SpawnPage(transform.position, spell);
+            transform.parent = null;
             Destroy(gameObject); // DIE
         }
         #endregion
