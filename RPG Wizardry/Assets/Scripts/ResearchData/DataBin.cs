@@ -73,6 +73,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         private void SplitBin()
         {
+            setSize = Bin.Count / 10;
             int batchsize = Bin.Count / setSize;
             List<List<Fragment>> FragmentSets = Bin.ChunkBy<Fragment>(batchsize);
             for (int i = 0; i < DataSets.Count; i++)

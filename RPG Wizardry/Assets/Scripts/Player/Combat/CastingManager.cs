@@ -66,7 +66,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Timeout for Scrolling (timeout between Selections)
         /// </summary>
         [SerializeField]
-        private float scrollTimeOut = 0.25f;
+        private float scrollTimeOut;
         #endregion
 
         #region Private
@@ -240,25 +240,28 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Update()
         {
-            for (int i = 0; i < spellCooldown.Length; i++)
-                spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
-            currScrollTimeout = Mathf.Clamp(currScrollTimeout - Time.deltaTime, 0, float.MaxValue);
-            InputState input = player.InputManager.State;
-            if (input.SelectSpell != 0) // Spell-Selection
+            if (GameManager.Exists && !GameManager.Instance.Paused)
             {
-                if (input.SelectSpell < InputState.SpellSelection.SelectPrevious) // Selection by Index
-                    SelectSpell((ushort)(input.SelectSpell - 1));
-                else if (input.SelectSpell == InputState.SpellSelection.SelectPrevious)
-                    SelectPreviousSpell();
-                else if (input.SelectSpell == InputState.SpellSelection.SelectNext)
-                    SelectNextSpell();
-            }
-            if (input.Cast) // Spell-Casting
-            {
-                if (input.CastIndex.HasValue) // Controller
-                    CastSpell((ushort)input.CastIndex.Value);
-                else // Keyboard
-                    CastSpell(); // Cast selected Spell
+                for (int i = 0; i < spellCooldown.Length; i++)
+                    spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
+                currScrollTimeout = Mathf.Clamp(currScrollTimeout - Time.deltaTime, 0, float.MaxValue);
+                InputState input = player.InputManager.State;
+                if (input.SelectSpell != 0) // Spell-Selection
+                {
+                    if (input.SelectSpell < InputState.SpellSelection.SelectPrevious) // Selection by Index
+                        SelectSpell((ushort)(input.SelectSpell - 1));
+                    else if (input.SelectSpell == InputState.SpellSelection.SelectPrevious)
+                        SelectPreviousSpell();
+                    else if (input.SelectSpell == InputState.SpellSelection.SelectNext)
+                        SelectNextSpell();
+                }
+                if (input.Cast) // Spell-Casting
+                {
+                    if (input.CastIndex.HasValue) // Controller
+                        CastSpell((ushort)input.CastIndex.Value);
+                    else // Keyboard
+                        CastSpell(); // Cast selected Spell
+                }
             }
         }
         #endregion
