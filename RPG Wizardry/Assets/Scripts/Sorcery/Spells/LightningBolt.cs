@@ -1,4 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Audio;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         {
             //Call base start so we have the collision layer
             base.Start();
+
+            //play sound effect
+            AudioManager.Instance.PlaySound(data.ImpactClip);
 
             //Get the line renderer
             lineRenderer = GetComponent<LineRenderer>();
