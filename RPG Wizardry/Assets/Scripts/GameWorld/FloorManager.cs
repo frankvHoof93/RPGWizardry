@@ -19,7 +19,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         [SerializeField]
         private Room[] rooms;
-        [Space]
 
         /// <summary>
         /// Currently Loaded Room
@@ -97,13 +96,13 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             activeRoom.Disable();
             
             //Move the player to new room
-            if (PlayerManager.Exists)
-                PlayerManager.Instance.transform.position = destination.Spawn.position;
+            PlayerManager.Instance.transform.position = destination.Spawn.position;
 
             //Enable the new room
             activeRoom = destination.Room;
             activeRoom.Enable();
-
+            // Move Camera to Player
+            CameraManager.Instance.transform.position = PlayerManager.Instance.transform.position;
             //Fade the screen back in
             CameraManager.instance.Fade(0, 1);
             while (CameraManager.instance.Fading)

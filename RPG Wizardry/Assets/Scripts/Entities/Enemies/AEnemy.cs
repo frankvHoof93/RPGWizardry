@@ -153,7 +153,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
             // TODO: Death Animation & Audio
             OnDeath();
-            transform.parent = null;
         }
 
         private void OnDestroy()
