@@ -82,12 +82,15 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (rotationAngle >= attackAngleMargin) // Not looking at player
                 return;
             // Check if Book can Attack
-            if (attackTimer <= 0)
+            if (!dead)
             {
-                float totalCooldown = spell.Cooldown * cooldownModifier;
-                attackTimer = totalCooldown;
-                // Attack Player
-                Attack();
+                if (attackTimer <= 0)
+                {
+                    float totalCooldown = spell.Cooldown * cooldownModifier;
+                    attackTimer = totalCooldown;
+                    // Attack Player
+                    Attack();
+                }
             }
         }
         #endregion
