@@ -4,6 +4,7 @@ using nl.SWEG.RPGWizardry.UI;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace nl.SWEG.RPGWizardry.Loading
@@ -110,7 +111,11 @@ namespace nl.SWEG.RPGWizardry.Loading
                 Destroy(GameUIManager.Instance.gameObject);
             }
             if (LootSpawner.Exists)
-                Destroy(GameUIManager.Instance.gameObject);
+            {
+                Transform parent = LootSpawner.Instance.transform.parent;
+                Destroy(LootSpawner.Instance.gameObject);
+                Destroy(parent.gameObject);
+            }
             if (PlayerManager.Exists)
                 Destroy(PlayerManager.Instance.gameObject);
         }

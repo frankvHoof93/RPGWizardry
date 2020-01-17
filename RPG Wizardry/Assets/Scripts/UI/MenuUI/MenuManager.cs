@@ -62,6 +62,7 @@ namespace nl.SWEG.RPGWizardry.UI
 
         public void EndRun()
         {
+            SceneLoader.Instance.LoadMenuScene(true);
         }
 
         public void QuitGame(bool saveGame)

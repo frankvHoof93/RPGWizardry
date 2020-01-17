@@ -27,8 +27,8 @@ MonoBehaviour:
       amount: 0
       chance: 0
     potion:
-      amount: 0
-      chance: 0
+      amount: 1
+      chance: 0.1
   opacityPriority: 1
   opacityRadius: 100
   opacityOffset: {x: 0, y: 0}

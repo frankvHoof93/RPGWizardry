@@ -1,5 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Movement
 {
@@ -29,6 +28,16 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         #endregion
 
         #region Methods
+        #region Public
+        /// <summary>
+        /// Sets Movement to 0
+        /// </summary>
+        public void FreezeMovement()
+        {
+            Movement(Vector3.zero);
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Grabs Reference to Animator and InputState
