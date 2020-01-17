@@ -63,12 +63,27 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         private void OnEnable()
         {
+            uint? dust = PlayerManager.Instance.Inventory?.Dust;
             if (selectedSpell == null)
                 return;
             title.text = selectedSpell.SpellTitle;
             spellImage.sprite = selectedSpell.Spell.Sprite;
             description.text = selectedSpell.Spell.Description;
-            button.enabled = !selectedSpell.Unlocked;
+            if(selectedSpell.Unlocked)
+            {
+                button.enabled = false;
+                button.GetComponentInChildren<TextMeshProUGUI>().text = "Unlocked";
+            }
+            else if(dust >= selectedSpell.DustCost)
+            {
+                button.enabled = !selectedSpell.Unlocked;
+                button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
+            }
+            else
+            {
+                button.enabled = false;
+                button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
+            }
         }
         #endregion
     }

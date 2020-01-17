@@ -14,18 +14,30 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         private SpellListController spellListController;
 
         [SerializeField]
-        private Image Element;
+        private Image element;
 
         [SerializeField]
-        private List<Sprite> sprites;
+        private List<Sprite> checkSprites;
+        [SerializeField]
+        private List<Sprite> elementSprites;
 
         [SerializeField]
         private TextMeshProUGUI title;
+        [SerializeField]
+        private Image check;
 
         internal void Populate(SpellPage page, SpellListController spellListController)
         {
             Page = page;
-            Element.sprite = sprites[(int)Page.Spell.Element];
+            element.sprite = elementSprites[(int)Page.Spell.Element];
+            if(page.Unlocked)
+            {
+                check.sprite = checkSprites[1];
+            }
+            else
+            {
+                check.sprite = checkSprites[0];
+            }
             title.text = Page.Spell.Name;
             this.spellListController = spellListController;
         }
