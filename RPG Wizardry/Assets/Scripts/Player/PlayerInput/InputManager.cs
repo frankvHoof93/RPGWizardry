@@ -83,7 +83,6 @@ namespace nl.SWEG.RPGWizardry.Player.PlayerInput
                     Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                     Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
                     inputState.AimDirection = (lookPos - (Vector2)BookPivot.transform.position).normalized;
-                    Debug.DrawRay(transform.position, inputState.AimDirection, Color.red,1.5f);
                     break;
             }
         }
