@@ -118,6 +118,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             {
                 page.UnlockSpell();
                 Dust -= page.DustCost;
+                dustChangeEvent(Dust, (int)page.DustCost);
             }
 
             return page.Unlocked;
