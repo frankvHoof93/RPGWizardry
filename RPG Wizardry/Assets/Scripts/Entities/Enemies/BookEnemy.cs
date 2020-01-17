@@ -38,6 +38,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Cooldown-Timer for Attacking
         /// </summary>
         private float attackTimer;
+        /// Has this enemy died?
+        /// </summary>
+        private bool dead;
         #endregion
         #endregion
 
@@ -137,11 +140,18 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (PlayerManager.Exists)
                 if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
                     LootSpawner.Instance.SpawnPage(transform.position, spell);
-            Destroy(gameObject); // DIE
+
+            dead = true;
+            animator.SetBool("Death", true);
         }
         #endregion
 
         #region Private
+        private void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
+        }
+
         /// <summary>
         /// Performs attack
         /// </summary>
