@@ -38,6 +38,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Cooldown-Timer for Attacking
         /// </summary>
         private float attackTimer;
+        /// <summary>
         /// Has this enemy died?
         /// </summary>
         private bool dead;
@@ -147,6 +148,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         #endregion
 
         #region Private
+
+        /// <summary>
+        /// Destroys book after animation has been preformed
+        /// </summary>
         private void DeathAnimationEnd()
         {
             Destroy(gameObject);
