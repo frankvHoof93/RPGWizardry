@@ -9,10 +9,15 @@ namespace nl.SWEG.RPGWizardry.Audio
     [RequireComponent(typeof(AudioSource))]
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
-        //TO DO: play music
+        /// <summary>
+        /// Audiosource that plays background music
+        /// </summary>
         [SerializeField]
         private AudioSource musicSource;
 
+        /// <summary>
+        /// Starts music when entering a scene that contains this script
+        /// </summary>
         private void Start()
         {
             musicSource.Play();
