@@ -24,18 +24,8 @@ namespace nl.SWEG.RPGWizardry.Audio
             effectSource.pitch += rnd;
 
             effectSource.PlayOneShot(clip);
-            StartCoroutine(RemoveSourceAfterClip(effectSource, clip));
-        }
-
-        /// <summary>
-        /// Removes an audiosource after a given clip's length
-        /// </summary>
-        private IEnumerator RemoveSourceAfterClip(AudioSource aSource,AudioClip clip)
-        {
-            yield return new WaitForSeconds(clip.length);
-            Destroy(aSource);
+            Destroy(effectSource, clip.length);
         }
     }
-
 }
 
