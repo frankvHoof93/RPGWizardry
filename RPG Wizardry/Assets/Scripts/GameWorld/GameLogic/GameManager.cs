@@ -1,5 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Loading;
+using nl.SWEG.RPGWizardry.Player;
+using nl.SWEG.RPGWizardry.Player.Movement;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
@@ -69,6 +71,8 @@ namespace nl.SWEG.RPGWizardry
                 LeanTween.pauseAll(); 
             else
                 LeanTween.resumeAll(); // Resumes ALL tweens (including the ones that are NOT in GameState.Playing
+            if (Paused && PlayerManager.Exists)
+                PlayerManager.Instance.GetComponent<MovementManager>().FreezeMovement();
             //Set cursor to cursor if paused, crosshair if unpaused
             Cursor.SetCursor(Paused ? cursor : crosshair, Paused ? Vector2.zero : crosshairHotspot, CursorMode.Auto);
         }
@@ -104,7 +108,7 @@ namespace nl.SWEG.RPGWizardry
                 return; // GameScene was not loaded Single (Menu-Exit)
             FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
-            
+            Paused = false;
             Cursor.SetCursor(crosshair,crosshairHotspot,CursorMode.Auto);
         }
 
@@ -116,6 +120,7 @@ namespace nl.SWEG.RPGWizardry
         internal void OnExitMenu(Scene arg0)
         {
             SceneManager.sceneUnloaded -= OnExitMenu;
+            Paused = false;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
         }
