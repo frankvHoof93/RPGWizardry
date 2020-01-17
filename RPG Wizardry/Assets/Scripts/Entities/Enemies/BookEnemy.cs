@@ -37,8 +37,8 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Cooldown-Timer for Attacking
         /// </summary>
-        private float attackTimer;
-        /// <summary>
+        private float attackTimer;
+        /// <summary>
         /// Has this enemy died?
         /// </summary>
         private bool dead;
@@ -141,7 +141,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (PlayerManager.Exists)
                 if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
                     LootSpawner.Instance.SpawnPage(transform.position, spell);
-
+            transform.parent = null;
             dead = true;
             animator.SetBool("Death", true);
         }
@@ -152,9 +152,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Destroys book after animation has been preformed
         /// </summary>
-        private void DeathAnimationEnd()
-        {
-            Destroy(gameObject);
+        private void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
         }
 
         /// <summary>
