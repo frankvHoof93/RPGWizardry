@@ -1401,6 +1401,11 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1519505794}
+    - target: {fileID: 3222417033037486705, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: spellManager
+      value: 
+      objectReference: {fileID: 1698780247}
     - target: {fileID: 3222417033037486707, guid: 07d0f5e35778a854d8b822838367f5d8,
         type: 3}
       propertyPath: m_Name
