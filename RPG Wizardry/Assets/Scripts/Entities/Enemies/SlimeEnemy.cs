@@ -116,14 +116,16 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void SpawnBabies()
         {
             AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
+            Transform enemyParent = transform.parent;
             for (int i = 0; i < enemies.Length; i++)
             {
                 if (enemies[i] != this)
                 {
-                    enemies[i].transform.parent = transform.parent;
+                    enemies[i].transform.SetParent(enemyParent, true);
                     enemies[i].gameObject.SetActive(true);
                 }
             }
+            transform.SetParent(null);
         }
 
         /// <summary>
@@ -131,6 +133,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void DestroySelf()
         {
+            transform.parent = null;
             Destroy(gameObject);
         }
         

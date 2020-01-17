@@ -217,6 +217,23 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             spellCooldown[index] = 0;
             spellChangeEvent?.Invoke(index, spell);
         }
+        /// <summary>
+        /// Attemps to Equip Spell in first available (Empty) slot
+        /// </summary>
+        /// <param name="spell">Spell to Equip</param>
+        /// <returns>True if successfull (Empty slot was avilable)</returns>
+        internal bool TryEquipSpell(SpellData spell)
+        {
+            for (int i = 0; i < selectedSpells.Length; i++)
+            {
+                if (selectedSpells[i] == null)
+                {
+                    SetSpell(spell, (ushort)i);
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region Unity

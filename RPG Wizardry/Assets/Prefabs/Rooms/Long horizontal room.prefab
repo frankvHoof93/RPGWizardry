@@ -6674,9 +6674,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 16
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0.03999996, z: 0}
   m_MaxChunkCount: 16
@@ -6716,8 +6716,6 @@ Transform:
   m_Children:
   - {fileID: 816389490358157126}
   - {fileID: 816389490361069517}
-  - {fileID: 4029942270849232097}
-  - {fileID: 8630312795913456316}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6734,10 +6732,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors:
-  - {fileID: 3765496635402612016}
-  - {fileID: 696045865695383353}
-  EnemyHolder: {fileID: 3503053110126995516}
-  playerSpawnPos: {fileID: 8630312795913456316}
+  - {fileID: 0}
+  - {fileID: 0}
+  EnemyHolder: {fileID: 0}
+  playerSpawnPos: {fileID: 0}
 --- !u!114 &5119101091888758924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9724,9 +9722,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

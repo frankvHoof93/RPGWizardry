@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6746551060393561873}
   - component: {fileID: 5857493217555144017}
   m_Layer: 10
-  m_Name: WaterOrb
+  m_Name: WaterOrbProto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,9 +88,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -452003623
+  m_SortingLayer: 3
+  m_SortingOrder: 9
   m_Sprite: {fileID: 342106534826215554, guid: c3374208b1d506a469f5583e30ba0403, type: 3}
   m_Color: {r: 0, g: 1, b: 0.9890847, a: 1}
   m_FlipX: 0

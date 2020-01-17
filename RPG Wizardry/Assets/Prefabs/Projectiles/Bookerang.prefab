@@ -66,9 +66,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -452003623
+  m_SortingLayer: 3
+  m_SortingOrder: 9
   m_Sprite: {fileID: -4910348102943750720, guid: c903a4a9374378d44b2116a7f24bfc03,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8529276793014024888}
   - component: {fileID: -3923724322693545260}
   m_Layer: 10
-  m_Name: BookerangProto
+  m_Name: Bookerang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

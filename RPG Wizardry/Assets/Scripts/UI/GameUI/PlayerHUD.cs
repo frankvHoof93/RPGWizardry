@@ -87,7 +87,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.AddSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.AddSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.AddCastListener(UpdateSpellCooldown);
-                tutorialCanvas.SetActive(true);
+                //tutorialCanvas.SetActive(true);
             }
         }
         /// <summary>
@@ -104,7 +104,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.RemoveSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.RemoveSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.RemoveCastListener(UpdateSpellCooldown);
-                tutorialCanvas.SetActive(false);
+                //tutorialCanvas.SetActive(false);
             }
         }
         #endregion
