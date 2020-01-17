@@ -92,6 +92,20 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [Tooltip("UI-Sprite for Spell-Cooldown")]
         private Sprite cooldownSprite;
         /// <summary>
+        /// AudioClip for spell spawn
+        /// </summary>
+        public AudioClip SpawnClip => spawnClip;
+        [SerializeField]
+        [Tooltip("AudioClip for Spell-Spawn")]
+        private AudioClip spawnClip;
+        /// <summary>
+        /// AudioClip for spell impact
+        /// </summary>
+        public AudioClip ImpactClip => impactClip;
+        [SerializeField]
+        [Tooltip("AudioClip for Spell-Impact")]
+        private AudioClip impactClip;
+        /// <summary>
         /// Prefab for Projectile
         /// </summary>
         [SerializeField]
