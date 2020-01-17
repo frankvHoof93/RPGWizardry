@@ -22,6 +22,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Parent for Enemies in Room
         /// </summary>
+        [Space]
         [SerializeField]
         private GameObject EnemyHolder;
         /// <summary>
