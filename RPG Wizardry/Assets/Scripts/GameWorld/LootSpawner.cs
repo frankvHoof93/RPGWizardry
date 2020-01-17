@@ -18,7 +18,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Holds Loot, so it can be destroyed when a new Room is loaded
         /// </summary>
         private Transform lootHolder;
-        #region
+        #endregion
 
         #region Methods
         #region Unity
