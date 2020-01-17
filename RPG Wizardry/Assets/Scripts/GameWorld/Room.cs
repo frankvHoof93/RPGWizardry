@@ -108,6 +108,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// </summary>
         protected virtual void CheckRoomClear()
         {
+            if (EnemyHolder == null)
+                return;
             if (EnemyHolder.transform.childCount == 0)
             {
                 Cleared = true;
