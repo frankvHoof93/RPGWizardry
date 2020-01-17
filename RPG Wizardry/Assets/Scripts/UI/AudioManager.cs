@@ -10,7 +10,13 @@ namespace nl.SWEG.RPGWizardry.Audio
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
         //TO DO: play music
+        [SerializeField]
         private AudioSource musicSource;
+
+        private void Start()
+        {
+            musicSource.Play();
+        }
 
         /// <summary>
         /// Creates an audio source, plays a clip at a slightly randomized pitch,
