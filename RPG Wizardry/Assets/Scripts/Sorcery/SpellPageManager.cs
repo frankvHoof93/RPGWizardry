@@ -56,6 +56,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         internal void UnlockSpell()
         {
             PlayerManager.Instance.Inventory?.UnlockSpell(selectedSpell);
+            PlayerManager.Instance.CastingManager?.TryEquipSpell(selectedSpell.Spell);
             button.enabled = false;
         }
         /// <summary>

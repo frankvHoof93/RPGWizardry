@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a434cea844dc31046a755fd3dc142f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasRootObject: 1
+  hasRootObject: 0
   FadeTime: 1
 --- !u!114 &2122232816
 MonoBehaviour:

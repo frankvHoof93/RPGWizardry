@@ -22,6 +22,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Parent for Enemies in Room
         /// </summary>
+        [Space]
         [SerializeField]
         private GameObject EnemyHolder;
         /// <summary>
@@ -106,8 +107,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Checks if the room still has enemies. if it doesn't, the doors open.
         /// </summary>
-        private void CheckRoomClear()
+        protected virtual void CheckRoomClear()
         {
+            if (EnemyHolder == null)
+                return;
             if (EnemyHolder.transform.childCount == 0)
             {
                 Cleared = true;
