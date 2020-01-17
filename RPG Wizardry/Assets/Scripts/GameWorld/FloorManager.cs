@@ -95,7 +95,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 
             //Disable the old room
             activeRoom.Disable();
-            
+
+            // Clear Loot from old Room
+            LootSpawner.Instance.ClearLoot();
+
             //Move the player to new room
             if (PlayerManager.Exists)
                 PlayerManager.Instance.transform.position = destination.Spawn.position;
