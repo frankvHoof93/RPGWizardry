@@ -25,7 +25,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             base.Start();
 
             //play sound effect
-            AudioManager.playSFX(data.ImpactClip);
+            AudioManager.Instance.PlaySound(data.ImpactClip);
 
             //Get the line renderer
             lineRenderer = GetComponent<LineRenderer>();

@@ -97,7 +97,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             collisionLayer = targetLayer | wallLayer;
             if (data.SpawnClip != null)
             {
-                AudioManager.playSFX(data.SpawnClip);
+                AudioManager.Instance.PlaySound(data.SpawnClip);
             }
         }
 
@@ -145,7 +145,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //play impact sound
             if (data.ImpactClip != null)
             {
-                AudioManager.playSFX(data.ImpactClip);
+                AudioManager.Instance.PlaySound(data.ImpactClip);
             }
             GetComponent<Collider2D>().enabled = false;
             //apply knockback

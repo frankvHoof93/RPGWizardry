@@ -102,7 +102,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                     else
                     {
                         //play return sound
-                        AudioManager.playSFX(returnSound);
+                        AudioManager.Instance.PlaySound(returnSound);
                         //Start returning to the player
                         Return();
                     }
@@ -138,7 +138,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                 //play impact sound
                 if (data.ImpactClip != null)
                 {
-                    AudioManager.playSFX(data.ImpactClip);
+                    AudioManager.Instance.PlaySound(data.ImpactClip);
                 }
 
                 //apply knockback
