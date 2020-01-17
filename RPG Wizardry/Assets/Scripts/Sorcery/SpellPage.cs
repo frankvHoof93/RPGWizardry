@@ -12,7 +12,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         public bool Unlocked { get; private set; }
 
-        //TODO Dustcost should be retrieved from the SpellData object
         /// <summary>
         /// The dust cost for the spell to unlock.  
         /// </summary>
