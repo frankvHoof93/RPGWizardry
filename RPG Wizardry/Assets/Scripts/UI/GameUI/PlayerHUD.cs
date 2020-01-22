@@ -50,9 +50,28 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("")]
         private SpellHUD[] spellHuds;
         #endregion
+
+        #region Tutorial
+        /// <summary>
+        /// Canvas for tutorial-text
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Canvas for tutorial-text")]
+        private GameObject tutorialCanvas;
+        #endregion
         #endregion
 
         #region Methods
+        #region Public
+        /// <summary>
+        /// Initiliazes HUD
+        /// </summary>
+        public void Initialize()
+        {
+            OnEnable();
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Registers this UI to Events
@@ -68,6 +87,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.AddSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.AddSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.AddCastListener(UpdateSpellCooldown);
+                //tutorialCanvas.SetActive(true);
             }
         }
         /// <summary>
@@ -84,6 +104,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.RemoveSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.RemoveSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.RemoveCastListener(UpdateSpellCooldown);
+                //tutorialCanvas.SetActive(false);
             }
         }
         #endregion

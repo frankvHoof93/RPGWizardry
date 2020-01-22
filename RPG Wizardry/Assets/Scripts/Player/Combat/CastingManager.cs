@@ -66,7 +66,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// Timeout for Scrolling (timeout between Selections)
         /// </summary>
         [SerializeField]
-        private float scrollTimeOut = 0.25f;
+        private float scrollTimeOut;
         #endregion
 
         #region Private
@@ -217,6 +217,23 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
             spellCooldown[index] = 0;
             spellChangeEvent?.Invoke(index, spell);
         }
+        /// <summary>
+        /// Attemps to Equip Spell in first available (Empty) slot
+        /// </summary>
+        /// <param name="spell">Spell to Equip</param>
+        /// <returns>True if successfull (Empty slot was avilable)</returns>
+        internal bool TryEquipSpell(SpellData spell)
+        {
+            for (int i = 0; i < selectedSpells.Length; i++)
+            {
+                if (selectedSpells[i] == null)
+                {
+                    SetSpell(spell, (ushort)i);
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region Unity
@@ -240,25 +257,28 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// </summary>
         private void Update()
         {
-            for (int i = 0; i < spellCooldown.Length; i++)
-                spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
-            currScrollTimeout = Mathf.Clamp(currScrollTimeout - Time.deltaTime, 0, float.MaxValue);
-            InputState input = player.InputManager.State;
-            if (input.SelectSpell != 0) // Spell-Selection
+            if (GameManager.Exists && !GameManager.Instance.Paused)
             {
-                if (input.SelectSpell < InputState.SpellSelection.SelectPrevious) // Selection by Index
-                    SelectSpell((ushort)(input.SelectSpell - 1));
-                else if (input.SelectSpell == InputState.SpellSelection.SelectPrevious)
-                    SelectPreviousSpell();
-                else if (input.SelectSpell == InputState.SpellSelection.SelectNext)
-                    SelectNextSpell();
-            }
-            if (input.Cast) // Spell-Casting
-            {
-                if (input.CastIndex.HasValue) // Controller
-                    CastSpell((ushort)input.CastIndex.Value);
-                else // Keyboard
-                    CastSpell(); // Cast selected Spell
+                for (int i = 0; i < spellCooldown.Length; i++)
+                    spellCooldown[i] = Mathf.Clamp(spellCooldown[i] - Time.deltaTime, 0, float.MaxValue);
+                currScrollTimeout = Mathf.Clamp(currScrollTimeout - Time.deltaTime, 0, float.MaxValue);
+                InputState input = player.InputManager.State;
+                if (input.SelectSpell != 0) // Spell-Selection
+                {
+                    if (input.SelectSpell < InputState.SpellSelection.SelectPrevious) // Selection by Index
+                        SelectSpell((ushort)(input.SelectSpell - 1));
+                    else if (input.SelectSpell == InputState.SpellSelection.SelectPrevious)
+                        SelectPreviousSpell();
+                    else if (input.SelectSpell == InputState.SpellSelection.SelectNext)
+                        SelectNextSpell();
+                }
+                if (input.Cast) // Spell-Casting
+                {
+                    if (input.CastIndex.HasValue) // Controller
+                        CastSpell((ushort)input.CastIndex.Value);
+                    else // Keyboard
+                        CastSpell(); // Cast selected Spell
+                }
             }
         }
         #endregion
@@ -270,7 +290,7 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         private void CastSpell()
         {
             //If the player is allowed to shoot
-            if (!GameManager.Instance.Locked && spellCooldown[selectedSpellIndex] <= 0)
+            if (!GameManager.Instance.Paused && spellCooldown[selectedSpellIndex] <= 0)
             {
                 if (runningRoutine != null)
                     StopCoroutine(runningRoutine);

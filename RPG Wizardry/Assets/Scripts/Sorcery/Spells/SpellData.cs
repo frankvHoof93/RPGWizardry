@@ -15,6 +15,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [Tooltip("Name for Spell")]
         private string spellName;
         /// <summary>
+        /// Description for Spell
+        /// </summary>
+        public string Description => spellDescription;
+        [SerializeField]
+        [Tooltip("Description for Spell")]
+        private string spellDescription;
+        /// <summary>
         /// Cost in Dust for Spell-Unlocking
         /// </summary>
         public ushort SpellCost => spellCost;
@@ -64,6 +71,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [Tooltip("Speed for Projectiles")]
         private float projectileSpeed;
         /// <summary>
+        /// Knockback for Projectiles
+        /// </summary>
+        public int Knockback => knockback;
+        [SerializeField]
+        [Tooltip("Knockback for Projectiles")]
+        private int knockback;
+        /// <summary>
         /// UI-Sprite for Spell
         /// </summary>
         public Sprite Sprite => spellSprite;
@@ -77,6 +91,20 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [SerializeField]
         [Tooltip("UI-Sprite for Spell-Cooldown")]
         private Sprite cooldownSprite;
+        /// <summary>
+        /// AudioClip for spell spawn
+        /// </summary>
+        public AudioClip SpawnClip => spawnClip;
+        [SerializeField]
+        [Tooltip("AudioClip for Spell-Spawn")]
+        private AudioClip spawnClip;
+        /// <summary>
+        /// AudioClip for spell impact
+        /// </summary>
+        public AudioClip ImpactClip => impactClip;
+        [SerializeField]
+        [Tooltip("AudioClip for Spell-Impact")]
+        private AudioClip impactClip;
         /// <summary>
         /// Prefab for Projectile
         /// </summary>
@@ -105,7 +133,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                     projectile.transform.up = direction;
                     Projectile p = projectile.GetComponent<Projectile>();
                     p.SetData(this, targetingMask);
-                    Destroy(projectile, projectileLifeTime);
                     returnVal.Add(p);
                     break;
                 case SpellPattern.cone:

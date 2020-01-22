@@ -1,4 +1,5 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
+﻿using nl.SWEG.RPGWizardry.Audio;
+using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
 using UnityEngine;
@@ -48,6 +49,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Position where we ended the forward movement
         /// </summary>
         private Vector3 savedPosition;
+        /// <summary>
+        /// Sound played when the book returns without hitting anything
+        /// </summary>
+        [SerializeField]
+        private AudioClip returnSound;
         #endregion
 
         #region Methods
@@ -92,10 +98,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                         //Fly in a straight line
                         base.Move();
                         movedSpace += Time.deltaTime * data.ProjectileSpeed;
-                        
                     }
                     else
                     {
+                        //play return sound
+                        AudioManager.Instance.PlaySound(returnSound);
                         //Start returning to the player
                         Return();
                     }
@@ -128,7 +135,19 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //Bool check so it doesnt get stuck on anything on the way back
             if (!back)
             {
+                //play impact sound
+                if (data.ImpactClip != null)
+                {
+                    AudioManager.Instance.PlaySound(data.ImpactClip);
+                }
+
+                //apply knockback
+                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                body.AddForce(transform.up * data.Knockback);
+
+                //apply damage
                 collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
+
                 Return();
             }
         }

@@ -99,7 +99,8 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
             while (curr < duration)
             {
                 yield return null;
-                curr = Mathf.Clamp(curr + Time.deltaTime, 0, duration);
+                if (!GameManager.Instance.Paused) // Only update if not paused
+                    curr = Mathf.Clamp(curr + Time.deltaTime, 0, duration);
                 cooldownOverlay.fillAmount = 1 - (curr / duration);
             }
             yield return null;

@@ -4,10 +4,14 @@ using nl.SWEG.RPGWizardry.GameWorld;
 using UnityEngine;
 using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.Utils;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Renderer))]
     public abstract class AEnemy : MonoBehaviour, IHealth, IOpacity
     {
         #region Variables
@@ -28,7 +32,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
-
         public delegate void Kill();
         public Kill Killed;
         #endregion
@@ -44,6 +47,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Animator for Enemy
         /// </summary>
         protected Animator animator;
+        /// <summary>
+        /// Renderer for Enemy
+        /// </summary>
+        protected Renderer renderer;
         /// <summary>
         /// LayerMask for Attacks
         /// </summary>
@@ -82,8 +89,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             else
             {
                 Health -= amount;
-                // TODO: Animation?
             }
+            renderer.SetSpriteColor(Color.red);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
+            StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
         }
         #endregion
 
@@ -94,6 +103,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            renderer = GetComponent<Renderer>();
         }
 
         /// <summary>
@@ -110,9 +120,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         private void Update()
         {
-            if (PlayerManager.Exists && Time.time >= enableTime)
+            if (PlayerManager.Exists && Time.time >= enableTime
+                && GameManager.Exists && !GameManager.Instance.Paused) // Update only when playing
                 UpdateEnemy(PlayerManager.Instance);
-            AnimateEnemy();
+            AnimateEnemy(); // Animate Always
         }
         #endregion
 
@@ -142,7 +153,6 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
 
             // TODO: Death Animation & Audio
             OnDeath();
-            transform.parent = null;
         }
 
         private void OnDestroy()

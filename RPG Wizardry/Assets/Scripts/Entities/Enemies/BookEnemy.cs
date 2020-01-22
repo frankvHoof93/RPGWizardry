@@ -37,7 +37,11 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Cooldown-Timer for Attacking
         /// </summary>
-        private float attackTimer;
+        private float attackTimer;
+        /// <summary>
+        /// Has this enemy died?
+        /// </summary>
+        private bool dead;
         #endregion
         #endregion
 
@@ -78,12 +82,15 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (rotationAngle >= attackAngleMargin) // Not looking at player
                 return;
             // Check if Book can Attack
-            if (attackTimer <= 0)
+            if (!dead)
             {
-                float totalCooldown = spell.Cooldown * cooldownModifier;
-                attackTimer = totalCooldown;
-                // Attack Player
-                Attack();
+                if (attackTimer <= 0)
+                {
+                    float totalCooldown = spell.Cooldown * cooldownModifier;
+                    attackTimer = totalCooldown;
+                    // Attack Player
+                    Attack();
+                }
             }
         }
         #endregion
@@ -137,11 +144,22 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             if (PlayerManager.Exists)
                 if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
                     LootSpawner.Instance.SpawnPage(transform.position, spell);
-            Destroy(gameObject); // DIE
+            transform.parent = null;
+            dead = true;
+            animator.SetBool("Death", true);
         }
         #endregion
 
         #region Private
+
+        /// <summary>
+        /// Destroys book after animation has been preformed
+        /// </summary>
+        private void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
+        }
+
         /// <summary>
         /// Performs attack
         /// </summary>

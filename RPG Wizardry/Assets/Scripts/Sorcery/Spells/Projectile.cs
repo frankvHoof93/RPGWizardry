@@ -1,3 +1,4 @@
+using nl.SWEG.RPGWizardry.Audio;
 using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.Utils.Functions;
@@ -50,9 +51,13 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
+        /// <summary>
+        /// Current LifeTime for Projectile. Used for Destruction
+        /// </summary>
+        private float lifeTime;
         #endregion
 
-        #region Private
+        #region Protected
         /// <summary>
         /// Data for Spell
         /// </summary>
@@ -64,7 +69,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Combined layermask for all things to collide with
         /// </summary>
-        private LayerMask collisionLayer;
+        protected LayerMask collisionLayer;
         #endregion
         #endregion
 
@@ -90,6 +95,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         protected virtual void Start()
         {
             collisionLayer = targetLayer | wallLayer;
+            if (data.SpawnClip != null)
+            {
+                AudioManager.Instance.PlaySound(data.SpawnClip);
+            }
         }
 
         /// <summary>
@@ -97,7 +106,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         private void FixedUpdate()
         {
-            Move();
+            if (GameManager.Exists && !GameManager.Instance.Paused)
+                Move();
         }
 
         /// <summary>
@@ -106,8 +116,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collisionLayer.HasLayer(collision.gameObject.layer))
+            if(collisionLayer.HasLayer(collision.gameObject.layer))
+            {
                 Effect(collision);
+            }
         }
         #endregion
 
@@ -119,6 +131,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         {
             transform.position += transform.up * Time.deltaTime * data.ProjectileSpeed;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+            lifeTime += Time.deltaTime;
+            if (lifeTime >= data.LifeTime)
+                Destroy(gameObject);
         }
 
         /// <summary>
@@ -127,9 +142,18 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <param name="collision"></param>
         protected virtual void Effect(Collider2D collision)
         {
+            //play impact sound
+            if (data.ImpactClip != null)
+            {
+                AudioManager.Instance.PlaySound(data.ImpactClip);
+            }
             GetComponent<Collider2D>().enabled = false;
+            //apply knockback
+            Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+            body.AddForce(transform.up * data.Knockback);
             //oh man i can feel the effect
             collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
+
             Destroy(gameObject); // TODO: Animation?
         }
         #endregion

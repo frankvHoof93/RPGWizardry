@@ -1,5 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Movement
 {
@@ -29,6 +28,16 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         #endregion
 
         #region Methods
+        #region Public
+        /// <summary>
+        /// Sets Movement to 0
+        /// </summary>
+        public void FreezeMovement()
+        {
+            Movement(Vector3.zero);
+        }
+        #endregion
+
         #region Unity
         /// <summary>
         /// Grabs Reference to Animator and InputState
@@ -44,7 +53,8 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            Movement(player.InputManager.State.MovementDirection);
+            if (GameManager.Exists && !GameManager.Instance.Paused)
+                Movement(player.InputManager.State.MovementDirection);
         }
         #endregion
 
@@ -56,7 +66,7 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         private void Movement(Vector3 movement)
         {
             //If the player is allowed to move
-            if (!GameManager.Instance.Locked)
+            if (!GameManager.Instance.Paused)
             {
                 //send values to the animator so it can decide what animation to show
                 animator.SetFloat("Horizontal", movement.x);

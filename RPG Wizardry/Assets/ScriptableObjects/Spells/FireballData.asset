@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: 
   spellName: FireBall
+  spellDescription: Test Description
+  spellCost: 100
   spellPattern: 0
   spellDamage: 25
-  projectileSpeed: 5
-  projectileLifeTime: 4
   spellElement: 1
   spellCooldown: 2
+  projectileLifeTime: 4
+  projectileSpeed: 5
+  knockback: 250
   spellSprite: {fileID: 21300000, guid: e09d0bae001eeea47bfab40e58d58818, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 5e80aa1436d893c479f85ad8e11b2abd, type: 3}
+  spawnClip: {fileID: 8300000, guid: 988aedd8978731344a498e578e8c9ce7, type: 3}
+  impactClip: {fileID: 8300000, guid: 64772ad93c05f4043be95fdd4ebd82c4, type: 3}
   projectilePrefab: {fileID: 4998689496432118957, guid: bbbbc478b0354b94a8cd103e117e4f99,
     type: 3}

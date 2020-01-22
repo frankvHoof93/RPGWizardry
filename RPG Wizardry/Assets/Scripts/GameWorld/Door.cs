@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -8,28 +6,64 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     public class Door : MonoBehaviour
     {
         #region Variables
+        #region Public
         /// <summary>
         /// The room the door is leading to.
         /// </summary>
-        public Room Room { get; private set; }
+        public Room Room
+        {
+            get
+            {
+                if (room == null)
+                    Awake();
+                return room;
+            }
+        }
 
+        /// <summary>
+        /// The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)
+        /// </summary>
+        public Transform Spawn { get { return spawn; } }
+        #endregion
+
+        #region Editor
+        /// <summary>
+        /// The place where the player spawns when they enter the room.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)")]
+        private Transform spawn;
         /// <summary>
         /// The other side of the door, in a different room.
         /// </summary>
         [SerializeField]
+        [Tooltip("The other side of the door, in a different room.")]
         private Door destination;
-
         /// <summary>
-        /// The light that gets displayed when the door is opened.
+        /// The opened door sprite.
+        /// </summary>
+        [Space]
+        [SerializeField]
+        [Tooltip("The opened door sprite.")]
+        private GameObject openSprite;
+        /// <summary>
+        /// The closed door sprite.
         /// </summary>
         [SerializeField]
-        private GameObject lights;
+        [Tooltip("The closed door sprite.")]
+        private GameObject closedSprite;
+        #endregion
 
+        #region Private
         /// <summary>
-        /// The collider of the door.
+        /// The trigger which teleports the player to the other room.
         /// </summary>
-        [SerializeField]
         private Collider2D collider;
+        /// <summary>
+        /// Room this door is a part of
+        /// </summary>
+        private Room room;
+        #endregion
         #endregion
 
         #region Methods
@@ -37,29 +71,37 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>.
         /// Opens the door.
         /// </summary>
-        public virtual void Open()
+        public void Open()
         {
-            collider.enabled = false;
-            lights.SetActive(true);
+            closedSprite.SetActive(false);
+            openSprite.SetActive(true);
         }
 
         /// <summary>
         /// Closes the door.
         /// </summary>
-        public virtual void Close()
+        public void Close()
         {
-            collider.enabled = true;
-            lights.SetActive(false);
+            openSprite.SetActive(false);
+            closedSprite.SetActive(true);
         }
         #endregion
 
         #region Unity
         /// <summary>
-        /// Gets the collider, and closes the door.
+        /// Gets TargetRoom
         /// </summary>
-        protected virtual void Awake()
+        private void Awake()
         {
-            Room = GetComponentInParent<Room>();
+            Transform tf = transform;
+            while (room == null)
+            {
+                room = tf.GetComponent<Room>();
+                if (room == null && tf != tf.root)
+                    tf = tf.parent;
+                else // Found root (or Room)
+                    return;
+            }
         }
 
         /// <summary>

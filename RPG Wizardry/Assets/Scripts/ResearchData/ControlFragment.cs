@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace nl.SWEG.RPGWizardry.ResearchData
+﻿namespace nl.SWEG.RPGWizardry.ResearchData
 {
 
     public class ControlFragment : Fragment
@@ -37,6 +31,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         /// </summary>
         public override void CheckIfSolved()
         {
+            if (ImageTransform == null)
+            {
+                Solved = true; 
+                return;
+            }
             if(ImageTransform.localPosition.y <= CorrectPosition + range && ImageTransform.localPosition.y >= CorrectPosition - range)
             {
                 Solved = true;

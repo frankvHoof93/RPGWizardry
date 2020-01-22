@@ -1,6 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Stats;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Entities.Enemies
@@ -82,28 +83,31 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
 
         /// <summary>
-        /// Triggered when slime dies, updates animator and spawns babies if big
+        /// Triggered when slime dies, plays death animation
         /// </summary>
         /// <param name="player">Reference to Player</param>
         protected override void OnDeath()
         {
-            GetComponent<Collider2D>().enabled = false;
             dead = true;
+            StartCoroutine(DieAnimation());
+        }
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Little bit of delay (for knockback)
+        /// Then disables collider, plays death animation, and spawns babies if big
+        /// </summary>
+        private IEnumerator DieAnimation()
+        {
+            yield return new WaitForSeconds(0.3f);
+            GetComponent<Collider2D>().enabled = false;
             animator.SetBool("Dead", true);
             if (big)
             {
                 SpawnBabies();
             }
-        }
-        #endregion
-
-        #region Private
-        /// <summary>
-        /// Destroys self at the end of the death animation
-        /// </summary>
-        private void DestroySelf()
-        {
-            Destroy(gameObject);
         }
 
         /// <summary>
@@ -112,19 +116,25 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         private void SpawnBabies()
         {
             AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
+            Transform enemyParent = transform.parent;
             for (int i = 0; i < enemies.Length; i++)
             {
                 if (enemies[i] != this)
                 {
-                    enemies[i].transform.parent = transform.parent;
+                    enemies[i].transform.SetParent(enemyParent, true);
                     enemies[i].gameObject.SetActive(true);
                 }
             }
+            transform.SetParent(null);
+        }
 
-            /*
-            Instantiate(babySlime, transform.position + new Vector3(0.2f, 0, 0), transform.rotation, transform.parent);
-            Instantiate(babySlime, transform.position + new Vector3(-0.2f, 0, 0), transform.rotation, transform.parent);
-            */
+        /// <summary>
+        /// Destroys self at the end of the death animation
+        /// </summary>
+        private void DestroySelf()
+        {
+            transform.parent = null;
+            Destroy(gameObject);
         }
         
         /// <summary>
