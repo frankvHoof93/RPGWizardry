@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using nl.SWEG.RPGWizardry.UI.GameUI;
 using System.Collections;
 using UnityEngine;
 using static nl.SWEG.RPGWizardry.GameWorld.RoomData;
@@ -104,8 +105,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             //Enable the new room
             activeRoom = destination.Room;
             activeRoom.Enable();
+
             // Move Camera to Player
-            CameraManager.Instance.transform.position = PlayerManager.Instance.transform.position;
+            CameraMover.Instance.transform.position = PlayerManager.Instance.transform.position;
+
             //Fade the screen back in
             CameraManager.instance.Fade(0, 1);
             while (CameraManager.instance.Fading)
@@ -117,19 +120,14 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             if (GameManager.Instance.Paused)
                 GameManager.Instance.TogglePause();
 
-
-            //Activate enemies in new room
+            //Activate new room
             if (!activeRoom.Cleared)
             {
-                //Spawn enemies
-
-                //close doors
                 yield return new WaitForSeconds(0.25f);
                 activeRoom.CloseDoors();
             }
             else
             {
-                //open doors
                 activeRoom.OpenDoors();
             }
         }
