@@ -1,6 +1,7 @@
 ﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;
+using System;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Combat
@@ -164,6 +165,13 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         }
         #endregion
 
+        public SpellData GetSpell(ushort index)
+        {
+            if (index > selectedSpells.Length)
+                throw new ArgumentOutOfRangeException("index", "Value larger than total amount of possible Spells");
+            return selectedSpells[index];
+        }
+
         /// <summary>
         /// Selects next available Spell in SelectedSpells
         /// </summary>
@@ -213,6 +221,15 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         /// <param name="index">Index to set Spell to</param>
         internal void SetSpell(SpellData spell, ushort index)
         {
+            int currIndex = Array.IndexOf(selectedSpells, spell);
+            if (currIndex != -1) // spell is already in selected
+            {
+                if (index == currIndex)
+                    return; // Spell is already at this index
+                selectedSpells[currIndex] = null; // Remove from previous index
+                spellCooldown[currIndex] = 0;
+                spellChangeEvent?.Invoke((ushort)currIndex, null);
+            }
             selectedSpells[index] = spell;
             spellCooldown[index] = 0;
             spellChangeEvent?.Invoke(index, spell);
@@ -295,6 +312,11 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
                 if (runningRoutine != null)
                     StopCoroutine(runningRoutine);
                 SpellData spell = selectedSpells[selectedSpellIndex];
+                if (spell == null) // Current spell is invalid (e.g. after changing spells, but not changing the selectedindex)
+                {
+                    SelectNextSpell();
+                    spell = selectedSpells[selectedSpellIndex];
+                }
                 // Spawn Spell
                 spell.SpawnSpell(spawnLocation.position, spawnLocation.up, targetingMask);
                 // Run Event
