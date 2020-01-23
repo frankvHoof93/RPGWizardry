@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
@@ -91,11 +92,19 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 spellManager.UnlockSpell();
                 message.enabled = true;
                 checkButton.enabled = false;
+                CoroutineMethods.RunDelayed(SwitchToSpellPage, 5);
+                StartCoroutine(CoroutineMethods.RunDelayed(() => { SwitchToSpellPage(); }, 3f));
             }
             else
             {
                 message.enabled = false;
             }
+        }
+
+        private void SwitchToSpellPage()
+        {
+            spellManager.gameObject.SetActive(true);
+            transform.gameObject.SetActive(false);
         }
 
         //TODO: Convert to RenderTexture, can't currently work out how to do it.
