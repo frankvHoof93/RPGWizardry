@@ -146,6 +146,7 @@ MonoBehaviour:
   big: 1
   babySlime: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
     type: 3}
+  knockback: 300
 --- !u!70 &-8195125079426558290
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,6 +170,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4437973590108185422}
     m_Modifications:
+    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
+        type: 3}
+      propertyPath: m_Name
+      value: SlimeEnemyBaby (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1245251141188743771, guid: fd633d116a8bbf94ba63e66d2a6a9618,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -224,16 +235,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
-        type: 3}
-      propertyPath: m_Name
-      value: SlimeEnemyBaby (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd633d116a8bbf94ba63e66d2a6a9618, type: 3}
 --- !u!4 &1245251140507711543 stripped
@@ -249,6 +250,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4437973590108185422}
     m_Modifications:
+    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
+        type: 3}
+      propertyPath: m_Name
+      value: SlimeEnemyBaby
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1245251141188743771, guid: fd633d116a8bbf94ba63e66d2a6a9618,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,16 +313,6 @@ PrefabInstance:
     - target: {fileID: 1245251141188743771, guid: fd633d116a8bbf94ba63e66d2a6a9618,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
-        type: 3}
-      propertyPath: m_Name
-      value: SlimeEnemyBaby
-      objectReference: {fileID: 0}
-    - target: {fileID: 1245251141188743774, guid: fd633d116a8bbf94ba63e66d2a6a9618,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -6,6 +6,9 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
     public class MovementManager : MonoBehaviour
     {
         #region Variables
+        #region Public
+        public bool Stunned;
+        #endregion
         #region Editor
         /// <summary>
         /// MovementSpeed for Player
@@ -53,8 +56,10 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            if (GameManager.Exists && !GameManager.Instance.Paused)
+            if (GameManager.Exists && !GameManager.Instance.Paused && !Stunned)
+            {
                 Movement(player.InputManager.State.MovementDirection);
+            }
         }
         #endregion
 

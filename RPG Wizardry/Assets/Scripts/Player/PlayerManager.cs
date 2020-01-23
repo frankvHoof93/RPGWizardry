@@ -3,11 +3,13 @@ using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.Inventory;
+using nl.SWEG.RPGWizardry.Player.Movement;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.UI;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player
@@ -53,6 +55,10 @@ namespace nl.SWEG.RPGWizardry.Player
         /// InputManager for Player
         /// </summary>
         internal InputManager InputManager { get; private set; }
+        /// <summary>
+        /// MovementManager for Player
+        /// </summary>
+        internal MovementManager MovementManager { get; private set; }
         #endregion
 
         #region Editor
@@ -128,6 +134,7 @@ namespace nl.SWEG.RPGWizardry.Player
                     .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
                 
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
+                StartCoroutine(Stun(0.1f));
             }
         }
 
@@ -177,6 +184,7 @@ namespace nl.SWEG.RPGWizardry.Player
             Inventory = GetComponent<PlayerInventory>();
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
+            MovementManager = GetComponent<MovementManager>();
             renderer = GetComponent<Renderer>();
             base.Awake();
             Health = maxHealth;
@@ -184,6 +192,14 @@ namespace nl.SWEG.RPGWizardry.Player
         #endregion
 
         #region Private
+
+        private IEnumerator Stun(float duration)
+        {
+            MovementManager.Stunned = true;
+            yield return new WaitForSeconds(duration);
+            MovementManager.Stunned = false;
+        }
+
         /// <summary>
         /// Performs death-animation for player, and respawns
         /// </summary>
