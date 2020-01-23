@@ -7,6 +7,10 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
     {
         #region Variables
         #region Public
+        /// <summary>
+        /// Whether the Player is allowed to move
+        /// </summary>
+        [HideInInspector]
         public bool Stunned;
         #endregion
         #region Editor
