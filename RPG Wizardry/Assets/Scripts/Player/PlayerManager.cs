@@ -134,7 +134,7 @@ namespace nl.SWEG.RPGWizardry.Player
                     .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
                 
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
-                StartCoroutine(Stun(0.1f));
+                MovementManager.Stun(0.2f);
             }
         }
 
@@ -192,14 +192,6 @@ namespace nl.SWEG.RPGWizardry.Player
         #endregion
 
         #region Private
-
-        private IEnumerator Stun(float duration)
-        {
-            MovementManager.Stunned = true;
-            yield return new WaitForSeconds(duration);
-            MovementManager.Stunned = false;
-        }
-
         /// <summary>
         /// Performs death-animation for player, and respawns
         /// </summary>
