@@ -105,6 +105,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             goldChangeEvent -= listener;
         }
         #endregion
+
         #region Spells
 
         /// <summary>
@@ -125,14 +126,6 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         }
         #endregion
 
-        private void Start()
-        {
-            
-            SpellPage bookerang = new SpellPage(baseSpell, true);
-            for (int i = 0; i < 100; i++)
-                pages.Add(bookerang);
-
-        }
         #region Storage
         /// <summary>
         /// Loads Inventory from File
@@ -184,6 +177,17 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             return Pages.Any(p => ReferenceEquals(spell, p.Spell));
         }
         #endregion
+        #endregion
+
+        #region Unity
+        /// <summary>
+        /// Sets default Spell (Bookerang)
+        /// </summary>
+        private void Start()
+        {
+            SpellPage bookerang = new SpellPage(baseSpell, true);
+            pages.Add(bookerang);
+        }
         #endregion
 
         #region Internal

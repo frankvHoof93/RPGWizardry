@@ -165,13 +165,17 @@ namespace nl.SWEG.RPGWizardry.Player.Combat
         }
         #endregion
 
+        /// <summary>
+        /// Gets Selected Spell by Index
+        /// </summary>
+        /// <param name="index">Index (In SelectedSpells) for Spell</param>
+        /// <returns>Spell at Index, if available</returns>
         public SpellData GetSpell(ushort index)
         {
             if (index > selectedSpells.Length)
                 throw new ArgumentOutOfRangeException("index", "Value larger than total amount of possible Spells");
             return selectedSpells[index];
         }
-
         /// <summary>
         /// Selects next available Spell in SelectedSpells
         /// </summary>

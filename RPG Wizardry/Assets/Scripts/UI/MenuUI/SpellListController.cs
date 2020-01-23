@@ -10,52 +10,155 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
 {
     public class SpellListController : MonoBehaviour
     {
+        #region Variables
+        #region Editor
+        [Header("Spell-Details")]
         /// <summary>
-        /// Spell info object
+        /// Spell-Info Prefab
         /// </summary>
         [SerializeField]
+        [Tooltip("Spell-Info Prefab")]
         private GameObject spellInfo;
-
         /// <summary>
-        /// Spell menu after clicking on a spell;
+        /// Menu for Spell-Details
         /// </summary>
         [SerializeField]
+        [Tooltip("Menu for Spell-Details")]
         private GameObject SpellCanvas;
-
+        [Header("List")]
+        /// <summary>
+        /// Left Page for List
+        /// </summary>
         [SerializeField]
+        [Tooltip("Left Page for List")]
         private Transform leftPage;
-
+        /// <summary>
+        /// Right Page for List
+        /// </summary>
         [SerializeField]
+        [Tooltip("Right Page for List")]
         private Transform rightPage;
-
+        /// <summary>
+        /// Previous Page-Button
+        /// </summary>
         [SerializeField]
+        [Tooltip("Previous Page-Button")]
         private GameObject prevPageButton;
-
+        /// <summary>
+        /// Next Page-Button
+        /// </summary>
         [SerializeField]
+        [Tooltip("Next Page-Button")]
         private GameObject nextPageButton;
+        [Header("Equipping")]
+        /// <summary>
+        /// UI for currently selected Spells
+        /// </summary>
+        [SerializeField]
+        [Tooltip("UI for currently selected Spells")]
+        private SpellHUD[] currSpells;
+        #endregion
 
+        #region Private
         /// <summary>
         /// List of spells in the book.
         /// </summary>
         private List<SpellPage> pages = new List<SpellPage>();
-
-        private int currentPage = 1;
-        private int totalPages => Mathf.Clamp(Mathf.CeilToInt(pages.Count / 16f), 1, int.MaxValue);
-
-        [SerializeField]
-        private SpellHUD[] currSpells;
-
-        private int? equipSelection;
-
         /// <summary>
-        /// List of Spell gameobjects
+        /// Currently Displayed Page for List
         /// </summary>
-        private List<GameObject> SpellTabs;
+        private int currentPage = 1;
+        /// <summary>
+        /// Total amount of Pages in List
+        /// </summary>
+        private int totalPages => Mathf.Clamp(Mathf.CeilToInt(pages.Count / 16f), 1, int.MaxValue);
+        /// <summary>
+        /// Current Selection for Equipping
+        /// </summary>
+        private int? equipSelection;
+        /// <summary>
+        /// UI-Objects in List
+        /// </summary>
+        private readonly List<GameObject> SpellTabs = new List<GameObject>();
+        #endregion
+        #endregion
 
+        #region Methods
+        #region Public
+        /// <summary>
+        /// Moves to Previous Page in List
+        /// </summary>
+        public void PreviousPage()
+        {
+            OnDisable();
+            currentPage = Mathf.Clamp(--currentPage, 1, totalPages);
+            OnEnable();
+        }
+        /// <summary>
+        /// Moves to Next Page in List
+        /// </summary>
+        public void NextPage()
+        {
+            OnDisable();
+            currentPage = Mathf.Clamp(++currentPage, 1, totalPages);
+            OnEnable();
+        }
+        /// <summary>
+        /// Selects Target for Equipping
+        /// </summary>
+        /// <param name="index">Index for Target</param>
+        public void SelectEquipTarget(int index)
+        {
+            if (index < 0 || index >= currSpells.Length)
+                throw new ArgumentOutOfRangeException("index", "Invalid Index");
+
+            if (equipSelection.HasValue)
+            {
+                if (equipSelection.Value == index)
+                    return; // already selected
+                DeselectEquipTarget();
+            }
+            equipSelection = index;
+            currSpells[index].Select();
+        }
+        /// <summary>
+        /// Deselects Target for Equipping
+        /// </summary>
+        public void DeselectEquipTarget()
+        {
+            equipSelection = null;
+            for (ushort i = 0; i < currSpells.Length; i++)
+                currSpells[i].Deselect();
+        }
+        #endregion
+
+        #region Internal
+        /// <summary>
+        /// Handles Clicking of Spell-Object in List (Equip/Details)
+        /// </summary>
+        /// <param name="page">Clicked SpellPage</param>
+        internal void OnSpellClick(SpellPage page)
+        {
+            if (equipSelection.HasValue)
+            {
+                if (page.Unlocked)
+                {
+                    PlayerManager.Instance.CastingManager.SetSpell(page.Spell, (ushort)equipSelection.Value);
+                    UpdateSpellHUD();
+                    DeselectEquipTarget();
+                }
+            }
+            else SwitchCanvas(page);
+        }
+        #endregion
+
+        #region Unity
+        /// <summary>
+        /// Initializes List
+        /// </summary>
         private void OnEnable()
         {
             UpdateSpellHUD();
-            SpellTabs = new List<GameObject>();
             pages = PlayerManager.Instance.Inventory.Pages;
             for (int i = (currentPage - 1) * 16; i < pages.Count && i < currentPage * 16; i++)
             {
@@ -72,80 +175,39 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             prevPageButton.SetActive(currentPage > 1); // Activate Previous Page-Button if on Page > first
             nextPageButton.SetActive(currentPage < totalPages); // Activate Next Page-Button if on Page < last
         }
-
+        /// <summary>
+        /// Destroys List
+        /// </summary>
+        private void OnDisable()
+        {
+            foreach (GameObject o in SpellTabs)
+                Destroy(o);
+            SpellTabs.Clear();
+        }
+        /// <summary>
+        /// Handles Right-Click for Deselecting Equip-Target
+        /// </summary>
         private void Update()
         {
             if (Input.GetMouseButtonDown(1))
                 DeselectEquipTarget();
         }
+        #endregion
 
-        internal void OnSpellClick(SpellPage page)
-        {
-            if (equipSelection.HasValue)
-            {
-                if (page.Unlocked)
-                {
-                    PlayerManager.Instance.CastingManager.SetSpell(page.Spell, (ushort)equipSelection.Value);
-                    UpdateSpellHUD();
-                    DeselectEquipTarget();
-                }
-            }
-            else SwitchCanvas(page);
-        }
-
+        #region Private
         /// <summary>
-        /// Switches to the other canvas.
+        /// Switches to Detail-Page
         /// </summary>
-        /// <param name="page"></param>
+        /// <param name="page">Selected SpellPage</param>
         private void SwitchCanvas(SpellPage page)
         {
             SpellCanvas.SetActive(true);
             SpellCanvas.GetComponent<SpellPageManager>().SetSelectedSpell(page);
             transform.gameObject.SetActive(false);
         }
-
-        public void NextPage()
-        {
-            OnDisable();
-            currentPage = Mathf.Clamp(++currentPage, 1, totalPages);
-            OnEnable();
-        }
-
-        public void SelectEquipTarget(int index)
-        {
-            if (index < 0 || index >= currSpells.Length)
-                throw new ArgumentOutOfRangeException("index", "Invalid Index");
-
-            if (equipSelection.HasValue)
-            {
-                if (equipSelection.Value == index)
-                    return; // already selected
-                DeselectEquipTarget();
-            }                
-            equipSelection = index;
-            currSpells[index].Select();
-        }
-
-        public void DeselectEquipTarget()
-        {
-            equipSelection = null;
-            for (ushort i = 0; i < currSpells.Length; i++)
-                currSpells[i].Deselect();
-        }
-
-        public void PreviousPage()
-        {
-            OnDisable();
-            currentPage = Mathf.Clamp(--currentPage, 1, totalPages);
-            OnEnable();
-        }
-
-        private void OnDisable()
-        {
-            foreach(GameObject o in SpellTabs)
-                Destroy(o);
-        }
-
+        /// <summary>
+        /// Updates UI for Equipped Spells
+        /// </summary>
         private void UpdateSpellHUD()
         {
             CastingManager mgr = PlayerManager.Instance.CastingManager;
@@ -154,6 +216,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             if (equipSelection.HasValue)
                 currSpells[equipSelection.Value].Select();
         }
+        #endregion
+        #endregion
     }
-
 }
