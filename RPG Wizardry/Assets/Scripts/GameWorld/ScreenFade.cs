@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using nl.SWEG.RPGWizardry.Player;
+﻿using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Utils.Functions;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.GameWorld
 {
@@ -17,9 +15,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             mat = new Material(Shader.Find("Hidden/CircleOverlay"));
             mat.SetColor("_OverlayColor", Color.black);
-
+            if (PlayerManager.Exists)
+                mat.SetVector("_PlayerPos", cam.WorldToScreenPoint(PlayerManager.Instance.transform.position));
             cam = GetComponent<Camera>();
-
             SetValue(1);
             enabled = true;
 
