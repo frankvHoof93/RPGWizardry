@@ -738,18 +738,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7230595923540429487, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+    - target: {fileID: 7395716478338022476, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
         type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[17].m_Data
-      value: 
-      objectReference: {fileID: -6272107083346056968, guid: 92d1c452a19462841b6fbc6ce9810741,
-        type: 3}
-    - target: {fileID: 7230595923540429487, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[17].m_Data
-      value: 
-      objectReference: {fileID: -6272107083346056968, guid: 92d1c452a19462841b6fbc6ce9810741,
-        type: 3}
+      propertyPath: m_Name
+      value: TutorialFloor (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 7395716478338022466, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
         type: 3}
       propertyPath: m_LocalPosition.x
