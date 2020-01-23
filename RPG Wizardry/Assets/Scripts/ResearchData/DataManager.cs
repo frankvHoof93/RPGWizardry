@@ -100,13 +100,15 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
         }
 
+        /// <summary>
+        /// Switch to the Spell page, only call when unlocked
+        /// </summary>
         private void SwitchToSpellPage()
         {
             spellManager.gameObject.SetActive(true);
             transform.gameObject.SetActive(false);
         }
 
-        //TODO: Convert to RenderTexture, can't currently work out how to do it.
         /// <summary>
         /// Used to populate the images on the slider bars for the spellcrafting minigame.
         /// </summary>
