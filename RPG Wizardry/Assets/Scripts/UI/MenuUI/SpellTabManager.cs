@@ -79,7 +79,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
 
         public void OnClick()
         {
-            spellListController.SwitchCanvas(page);
+            spellListController.OnSpellClick(page);
         }
     }
 
