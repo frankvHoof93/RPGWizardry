@@ -12,14 +12,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         private Transform camTransform;
 
         /// <summary>
-        /// How long the object should shake for.
+        /// The coroutine that's currently running.
         /// </summary>
-        private float shakeDuration;
-
-        /// <summary>
-        /// Amplitude of the shake. A larger value shakes the camera harder.
-        /// </summary>
-        private float shakeAmount;
+        private Coroutine CurrentShake;
 
         /// <summary>
         /// gets the transform of the camera.
@@ -37,26 +32,21 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <param name="intensity">the shake intensity</param>
         public void Shake(float intensity, float duration)
         {
-            //Set the variables
-            shakeDuration = duration;
-            shakeAmount = intensity;
+            if (CurrentShake != null)
+                StopCoroutine(ShakeLoop(intensity, duration));
 
-            //Start the shake if it isn't shaking already
-            if (shakeDuration > 0)
-            {
-                StartCoroutine(ShakeLoop());
-            }
+            StartCoroutine(ShakeLoop(intensity, duration));
         }
 
         /// <summary>
         /// Shakes the screen.
         /// </summary>
-        private IEnumerator ShakeLoop()
+        private IEnumerator ShakeLoop(float intensity, float duration)
         {
-            while (shakeDuration > 0)
+            while (duration > 0)
             {
-                camTransform.localPosition = Random.insideUnitSphere * shakeAmount;
-                shakeDuration -= Time.deltaTime;
+                camTransform.localPosition = Random.insideUnitSphere * intensity;
+                duration -= Time.deltaTime;
 
                 yield return null;
             }
