@@ -92,7 +92,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 spellManager.UnlockSpell();
                 message.enabled = true;
                 checkButton.enabled = false;
-                StartCoroutine(CoroutineMethods.RunDelayed(() => { SwitchToSpellPage(); }, 3f));
+                StartCoroutine(CoroutineMethods.RunDelayed(SwitchToSpellPage, 3f));
             }
             else
             {
