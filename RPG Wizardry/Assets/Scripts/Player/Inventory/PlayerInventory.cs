@@ -129,7 +129,8 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         {
             
             SpellPage bookerang = new SpellPage(baseSpell, true);
-            pages.Add(bookerang);
+            for (int i = 0; i < 100; i++)
+                pages.Add(bookerang);
 
         }
         #region Storage
