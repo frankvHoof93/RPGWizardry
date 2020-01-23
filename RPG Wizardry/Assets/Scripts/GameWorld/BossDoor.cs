@@ -18,6 +18,9 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             StartCoroutine(LoadScene());
         }
 
+        /// <summary>
+        /// Loads the boss scene
+        /// </summary>
         private IEnumerator LoadScene()
         {
             //Make sure the game is paused
