@@ -45,10 +45,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         {
             if (activeRoom != null)
                 activeRoom.Disable();
+            CameraManager.instance.Fade(0, 1);
             activeRoom = rooms[0];
             activeRoom.Enable();
             GameManager.Instance.SpawnPlayer(activeRoom.GetPlayerSpawn());
-            StartCoroutine(startFade());
         }
 
         /// <summary>
@@ -130,14 +130,6 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             {
                 activeRoom.OpenDoors();
             }
-        }
-
-        private IEnumerator startFade()
-        {
-            yield return new WaitForSeconds(0.25f);
-
-            //fade camera in
-            CameraManager.instance.Fade(0, 1);
         }
         #endregion
 
