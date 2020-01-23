@@ -142,8 +142,12 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         protected override void OnDeath()
         {
             if (PlayerManager.Exists)
+            {
                 if (!PlayerManager.Instance.Inventory.HasSpell(spell)) // Only Spawn Spell if player does not have it yet
                     LootSpawner.Instance.SpawnPage(transform.position, spell);
+                else
+                    LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, 50); // Spawn 50 dust instead of a page
+            }
             transform.parent = null;
             dead = true;
             animator.SetBool("Death", true);

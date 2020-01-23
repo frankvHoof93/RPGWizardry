@@ -12,7 +12,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         /// <summary>
         /// Target spell page for information and UI navigation
         /// </summary>
-        private SpellPage page { get; set; }
+        private SpellPage page;
 
         /// <summary>
         /// Controller for Spell list UI interaction
