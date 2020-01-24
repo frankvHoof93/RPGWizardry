@@ -56,7 +56,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// Checks collision. Calls OnCollect, then Destroys GameObject if collision was valid
         /// </summary>
         /// <param name="collision">Collider with which Collision occured</param>
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             PlayerInventory inv = collision.gameObject.GetComponent<PlayerInventory>();
             if (inv == null)

@@ -85,13 +85,16 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         public void Damage(ushort amount)
         {
             if (amount >= Health)
+            {
                 Die();
+            }
             else
             {
                 Health -= amount;
             }
+
             renderer.SetSpriteColor(Color.red);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green);
+            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red);
             StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
         }
         #endregion

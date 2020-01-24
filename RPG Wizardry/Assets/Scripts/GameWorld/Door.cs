@@ -108,7 +108,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Checks if the player is hitting the room switch trigger.
         /// </summary>
         /// <param name="collision"></param>
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             FloorManager.Instance.SwitchTo(destination);
         }

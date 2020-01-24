@@ -3,10 +3,13 @@ using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
 using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.Inventory;
+using nl.SWEG.RPGWizardry.Player.Movement;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player
@@ -52,6 +55,10 @@ namespace nl.SWEG.RPGWizardry.Player
         /// InputManager for Player
         /// </summary>
         internal InputManager InputManager { get; private set; }
+        /// <summary>
+        /// MovementManager for Player
+        /// </summary>
+        internal MovementManager MovementManager { get; private set; }
         #endregion
 
         #region Editor
@@ -117,7 +124,6 @@ namespace nl.SWEG.RPGWizardry.Player
             if (!isInvincible)
             {
                 isInvincible = true;
-                //renderer.SetSpriteColor(Color.red);
                 if (amount >= Health)
                     Die();
                 Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
@@ -126,6 +132,9 @@ namespace nl.SWEG.RPGWizardry.Player
                 // Tween to Red
                 LeanTween.value(gameObject, col => renderer.SetSpriteColor(col), Color.white, Color.red, (invincibilityFrames / 60f) / 6f)
                     .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
+                
+                ScreenShake.Instance.Shake(0.5f, 0.2f);
+                MovementManager.Stun(0.2f);
             }
         }
 
@@ -175,6 +184,7 @@ namespace nl.SWEG.RPGWizardry.Player
             Inventory = GetComponent<PlayerInventory>();
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
+            MovementManager = GetComponent<MovementManager>();
             renderer = GetComponent<Renderer>();
             base.Awake();
             Health = maxHealth;

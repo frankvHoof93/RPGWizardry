@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1649351625540714792}
   - component: {fileID: 4558486416647510740}
   m_Layer: 11
-  m_Name: Book
+  m_Name: Greg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 28580b3f3ae1e354c870050d4950e8e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -67,9 +67,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -452003623
-  m_SortingLayer: 3
-  m_SortingOrder: 9
+  m_SortingLayerID: 275696763
+  m_SortingLayer: 4
+  m_SortingOrder: 1000
   m_Sprite: {fileID: -5133401982745170632, guid: c903a4a9374378d44b2116a7f24bfc03,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d018fb6ac46f31c4ea189a3f8807dcca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,6 +240,7 @@ MonoBehaviour:
   bookRenderer: {fileID: 1649351625540714792}
   opacityRadius: 100
   opacityOffset: {x: 0, y: 0.4}
+  invincibilityFrames: 60
 --- !u!114 &1649351625787668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &506691714
 BoxCollider2D:
