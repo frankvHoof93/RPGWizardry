@@ -9,8 +9,7 @@ public class DialogueTrigger : MonoBehaviour
     // Set Dialogue variables
     public Dialogue startTutorial;
     public Dialogue castedBookerang;
-    public Dialogue slimesKilled;
-    public Dialogue pickedUpDust;
+    public Dialogue slimeRoomCleared;
     public Dialogue bookKilled;
     public Dialogue pickedUpPage;
     public Dialogue enteredMenu;
@@ -23,9 +22,6 @@ public class DialogueTrigger : MonoBehaviour
         startTutorialDialogue();
 
         PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
-        PlayerManager.Instance.Inventory.AddDustListener(dustPickupDialogue);
-
-        //AEnemy.Killed += slimeKilledDialogue; 
     }
 
     public void startTutorialDialogue()
@@ -40,16 +36,10 @@ public class DialogueTrigger : MonoBehaviour
         PlayerManager.Instance.CastingManager.RemoveCastListener(castedBookerangDialogue);
     }
 
-    public void dustPickupDialogue(uint newAmount, int change)
+    public void roomClearedSlimes(uint newAmount, int change)
     {
 
-        DialogueManager.Instance.StartDialogue(pickedUpDust);
-        PlayerManager.Instance.Inventory.RemoveDustListener(dustPickupDialogue);
-    }
-    public void slimeKilledDialogue()
-    {
-        DialogueManager.Instance.StartDialogue(slimesKilled);
-        //AEnemy.Killed -= slimeKilledDialogue;
+        DialogueManager.Instance.StartDialogue(slimeRoomCleared);
     }
 
 

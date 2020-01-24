@@ -175,52 +175,52 @@ PrefabInstance:
     - target: {fileID: 6550134645650620394, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645650620394, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645650620394, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645650620394, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645650620394, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645791826356, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645791826356, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645791826356, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645791826356, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6550134645791826356, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185704, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
@@ -229,66 +229,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
-      propertyPath: pickedUpDust.sentences.Array.size
-      value: 2
+      propertyPath: slimeRoomCleared.sentences.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
-      propertyPath: slimesKilled.sentences.Array.size
-      value: 1
+      propertyPath: slimeRoomCleared.name
+      value: Greg the Grimiore
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
-      propertyPath: slimesKilled.sentences.Array.data[0]
+      propertyPath: slimeRoomCleared.sentences.Array.data[0]
       value: Do you see that shiny purple stuff those slimes dropped? That's magic
         dust.
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
-      propertyPath: pickedUpDust.name
-      value: Greg the Grimoire
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: pickedUpDust.sentences.Array.data[0]
+      propertyPath: slimeRoomCleared.sentences.Array.data[1]
       value: If we want to use new magic spells, you'll need to gather enough magic
         dust so we can craft these spells.
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
-      propertyPath: slimesKilled.sentences.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: pickedUpDust.sentences.Array.data[1]
+      propertyPath: slimeRoomCleared.sentences.Array.data[2]
       value: But first we need to find a spell page, and i have a feeling we can get
         one in the next room.
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7921008985492895571, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}

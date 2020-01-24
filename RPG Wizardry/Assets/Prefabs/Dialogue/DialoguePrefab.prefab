@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc33db32bb03a048a5581dc9577c3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasRootObject: 0
+  hasRootObject: 1
   nameText: {fileID: 6550134646595526801}
   dialogueText: {fileID: 6550134645650620394}
   characterImage: {fileID: 6550134646962928514}
@@ -454,8 +454,8 @@ MonoBehaviour:
     - "I regret doing this\u2026 At least now you know of a way to defend yourself."
     - I sense that in the next room are some enemies.
     - Lets head on in there.
-  slimesKilled:
-    name: Greg the Grimoire
+  slimeRoomCleared:
+    name: Greg the Grimiore
     characterSprite: {fileID: 0}
     sentences:
     - Do you see that shiny purple stuff those slimes dropped? That's magic dust.
