@@ -32,12 +32,23 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [SerializeField]
         [Tooltip("Image for Spell Page")]
         private Image spellImage;
-
+        /// <summary>
+        /// Element text box
+        /// </summary>
         [SerializeField]
+        [Tooltip("Spell element")]
         private TextMeshProUGUI element;
+        /// <summary>
+        /// Damage text box
+        /// </summary>
         [SerializeField]
+        [Tooltip("Spell damage")]
         private TextMeshProUGUI damage;
+        /// <summary>
+        /// Cooldown text box
+        /// </summary>
         [SerializeField]
+        [Tooltip("Spell cooldown")]
         private TextMeshProUGUI cooldown;
         /// <summary>
         /// TextBox for Description
