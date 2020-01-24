@@ -6,6 +6,12 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 {
     public class GameUIManager : SingletonBehaviour<GameUIManager>
     {
+        #region Inner Types
+        /// <summary>
+        /// Creating openmenu event
+        /// </summary>
+        public delegate void openMenu();
+        #endregion
         #region Variables
         /// <summary>
         /// Heads-Up Display for Player
@@ -17,6 +23,30 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [SerializeField]
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
+
+        /// <summary>
+        /// Event called when menu is opened
+        /// </summary>
+        private event openMenu openMenuTutorial;
+        #endregion
+
+        #region Eventlisteners
+        /// <summary>
+        /// Adds Listener to openMenu-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddMenuListener(openMenu listener)
+        {
+            openMenuTutorial += listener;
+        }
+        /// <summary>
+        /// Removes Listener from OpenMenu-event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveMenuListener(openMenu listener)
+        {
+            openMenuTutorial -= listener;
+        }
         #endregion
 
         #region Methods

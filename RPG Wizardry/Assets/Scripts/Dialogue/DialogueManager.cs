@@ -18,7 +18,7 @@ public class DialogueManager : SingletonBehaviour<DialogueManager>
     private void Update()
     {
         // Check if key is pressed to display the next sentence in the dialogue
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
         {
             DisplayNextSentence();
         }

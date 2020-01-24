@@ -474,7 +474,7 @@ MonoBehaviour:
     sentences:
     - Great! I think we can work with this spell page, let me teach you how to unlock
       this spell.
-    - Press "tab" to open greg.
+    - Press "ESC" to open greg.
   enteredMenu:
     name: Greg the Grimoire
     characterSprite: {fileID: 0}
