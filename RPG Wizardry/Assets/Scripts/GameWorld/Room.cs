@@ -7,7 +7,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
     {
         #region Inner Types
 
-        
+        public delegate void roomClear();
 
         #endregion
         #region Variables
@@ -16,6 +16,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Whether the Room has been Cleared (No more Enemies)
         /// </summary>
         public bool Cleared { get; private set; }
+        public static roomClear clearedRoom;
         #endregion
 
         #region Editor
@@ -118,6 +119,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 return;
             if (EnemyHolder.transform.childCount == 0)
             {
+                clearedRoom();
                 Cleared = true;
                 OpenDoors();
             }

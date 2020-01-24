@@ -111,6 +111,8 @@ namespace nl.SWEG.RPGWizardry.Loading
         {
             if (CameraManager.Exists)
                 Destroy(CameraManager.Instance.gameObject);
+            if (DialogueManager.Exists)
+                Destroy(DialogueManager.Instance.gameObject);
             if (CameraMover.Exists)
                 Destroy(CameraMover.Instance.gameObject);
             if (FloorManager.Exists)

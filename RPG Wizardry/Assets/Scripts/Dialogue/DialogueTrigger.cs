@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Enemies;
+using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ public class DialogueTrigger : MonoBehaviour
     {
         startTutorialDialogue();
 
+        Room.clearedRoom += roomClearedSlimes;
         PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
+        PlayerManager.Instance.Inventory.AddPageListener(pickedUpPageDialogue);
     }
 
     public void startTutorialDialogue()
@@ -36,20 +39,23 @@ public class DialogueTrigger : MonoBehaviour
         PlayerManager.Instance.CastingManager.RemoveCastListener(castedBookerangDialogue);
     }
 
-    public void roomClearedSlimes(uint newAmount, int change)
+    public void roomClearedSlimes()
     {
-
         DialogueManager.Instance.StartDialogue(slimeRoomCleared);
+        Room.clearedRoom -= roomClearedSlimes;
+        Room.clearedRoom += bookKilledDialogue;
     }
 
 
     public void bookKilledDialogue()
     {
         DialogueManager.Instance.StartDialogue(bookKilled);
+        Room.clearedRoom -= bookKilledDialogue;
     }
-    public void pickedUpPageDialogue()
+    public void pickedUpPageDialogue(uint newAmount, int change)
     {
         DialogueManager.Instance.StartDialogue(pickedUpPage);
+        PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
     }
     public void enteredMenuDialogue()
     {

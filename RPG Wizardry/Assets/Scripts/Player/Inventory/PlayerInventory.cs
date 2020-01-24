@@ -102,6 +102,24 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         {
             goldChangeEvent -= listener;
         }
+
+        /// <summary>
+        /// Add Listener from Page-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddPageListener(OnInventoryChange listener)
+        {
+            pageChangeEvent += listener;
+        }
+
+        /// <summary>
+        /// Remove Listener from Page-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemovePageListener(OnInventoryChange listener)
+        {
+            pageChangeEvent -= listener;
+        }
         #endregion
 
         #region Spells
@@ -199,6 +217,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
+                pageChangeEvent.Invoke(Dust, 1);
                 return true;
             }
             else return false;
