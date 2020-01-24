@@ -49,7 +49,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 }
                     
             }
-            if(controlFragments.Count() == SolvedCount)
+                if(controlFragments.Count() == SolvedCount)
             {
                 return true;
             }
