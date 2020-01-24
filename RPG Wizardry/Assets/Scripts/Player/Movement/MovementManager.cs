@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace nl.SWEG.RPGWizardry.Player.Movement
 {
@@ -24,6 +25,10 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// Manager for Player
         /// </summary>
         private PlayerManager player;
+        /// <summary>
+        /// Whether the Player is allowed to move
+        /// </summary>
+        private bool stunned;
         #endregion
         #endregion
 
@@ -35,6 +40,15 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         public void FreezeMovement()
         {
             Movement(Vector3.zero);
+        }
+
+        /// <summary>
+        /// Disables the players ability to walk.
+        /// </summary>
+        /// <param name="duration">The stun duration</param>
+        public void Stun(float duration)
+        {
+            StartCoroutine(StunLoop(duration));
         }
         #endregion
 
@@ -53,8 +67,10 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         /// </summary>
         private void FixedUpdate()
         {
-            if (GameManager.Exists && !GameManager.Instance.Paused)
+            if (GameManager.Exists && !GameManager.Instance.Paused && !stunned)
+            {
                 Movement(player.InputManager.State.MovementDirection);
+            }
         }
         #endregion
 
@@ -95,6 +111,18 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
                 //Set the speed to 0 so the character stops walking.
                 animator.SetFloat("Speed", 0);
             }
+        }
+
+        /// <summary>
+        /// Stuns the player.
+        /// </summary>
+        /// <param name="duration">The stun duration</param>
+        /// <returns></returns>
+        private IEnumerator StunLoop(float duration)
+        {
+            stunned = true;
+            yield return new WaitForSeconds(duration);
+            stunned = false;
         }
         #endregion
         #endregion

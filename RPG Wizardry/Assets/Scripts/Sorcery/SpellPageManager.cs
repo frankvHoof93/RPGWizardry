@@ -33,6 +33,24 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [Tooltip("Image for Spell Page")]
         private Image spellImage;
         /// <summary>
+        /// Element text box
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Spell element")]
+        private TextMeshProUGUI element;
+        /// <summary>
+        /// Damage text box
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Spell damage")]
+        private TextMeshProUGUI damage;
+        /// <summary>
+        /// Cooldown text box
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Spell cooldown")]
+        private TextMeshProUGUI cooldown;
+        /// <summary>
         /// TextBox for Description
         /// </summary>
         [SerializeField]
@@ -70,6 +88,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             title.text = selectedSpell.SpellTitle;
             spellImage.sprite = selectedSpell.Spell.Sprite;
             description.text = selectedSpell.Spell.Description;
+            element.text = "Element: " + selectedSpell.Spell.Element;
+            damage.text = "Damage: " + selectedSpell.Spell.Damage;
+            cooldown.text = "Cooldown: " + selectedSpell.Spell.Cooldown +"s";
             if(selectedSpell.Unlocked)
             {
                 button.enabled = false;

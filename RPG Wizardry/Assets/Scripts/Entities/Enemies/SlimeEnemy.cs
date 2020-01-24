@@ -10,10 +10,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
     {
         #region Variables
         #region Public
-
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
-        /// </summary>  
+        /// </summary>
         public override float OpacityRadius
         {
             get
@@ -50,6 +49,11 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Has this enemy died?
         /// </summary>
         private bool dead;
+        /// <summary>
+        /// Amount opponent flies back on hit
+        /// </summary>
+        [SerializeField]
+        private int knockback;
         #endregion
         #endregion
 
@@ -142,10 +146,14 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// If it touches an object in the target layer, it damages it
         /// </summary>
         /// <param name="collision"></param>
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
+            {
                 collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
+                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                body.AddForce(movement * knockback);
+            }
         }
         #endregion
         #endregion

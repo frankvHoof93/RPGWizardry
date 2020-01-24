@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using nl.SWEG.RPGWizardry.Utils.Functions;
 namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
@@ -91,6 +92,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 spellManager.UnlockSpell();
                 message.enabled = true;
                 checkButton.enabled = false;
+                StartCoroutine(CoroutineMethods.RunDelayed(SwitchToSpellPage, 3f));
             }
             else
             {
@@ -98,7 +100,15 @@ namespace nl.SWEG.RPGWizardry.ResearchData
             }
         }
 
-        //TODO: Convert to RenderTexture, can't currently work out how to do it.
+        /// <summary>
+        /// Switch to the Spell page, only call when unlocked
+        /// </summary>
+        private void SwitchToSpellPage()
+        {
+            spellManager.gameObject.SetActive(true);
+            transform.gameObject.SetActive(false);
+        }
+
         /// <summary>
         /// Used to populate the images on the slider bars for the spellcrafting minigame.
         /// </summary>

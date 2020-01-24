@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Slime
   enemyHealth: 10
-  enemyAttack: 2
+  enemyAttack: 20
   enemySpeed: 2
   spawnCooldown:
     Min: 0

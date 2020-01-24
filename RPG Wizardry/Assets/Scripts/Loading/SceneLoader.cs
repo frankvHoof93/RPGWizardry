@@ -105,12 +105,14 @@ namespace nl.SWEG.RPGWizardry.Loading
         }
 
         /// <summary>
-        /// Unloads Singletons for GameSceen
+        /// Unloads Singletons for GameScene
         /// </summary>
         private void UnloadGameSceneSingletons()
         {
             if (CameraManager.Exists)
                 Destroy(CameraManager.Instance.gameObject);
+            if (CameraMover.Exists)
+                Destroy(CameraMover.Instance.gameObject);
             if (FloorManager.Exists)
                 Destroy(FloorManager.Instance.gameObject);
             if (GameUIManager.Exists)
