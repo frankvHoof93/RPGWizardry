@@ -10,9 +10,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
     {
         #region Variables
         #region Public
+
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
-        /// </summary>
+        /// </summary>  
         public override float OpacityRadius
         {
             get

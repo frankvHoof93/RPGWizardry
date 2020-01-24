@@ -10,17 +10,10 @@ public class DialogueManager : SingletonBehaviour<DialogueManager>
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public Image characterImage;
-
     public Animator animator;
 
     public Queue<string> sentences;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        sentences = new Queue<string>();
-    }
 
     private void Update()
     {
@@ -33,7 +26,8 @@ public class DialogueManager : SingletonBehaviour<DialogueManager>
 
     public void StartDialogue(Dialogue dialogue)
     {
-        if(dialogue.name != null)
+       
+        if (dialogue.name != null)
         {
             nameText.text = dialogue.name;
         }
@@ -52,11 +46,12 @@ public class DialogueManager : SingletonBehaviour<DialogueManager>
         }
         // Open the dialogue box and clear the previous sentences that could be in the sentences array
         animator.SetBool("IsOpen", true);
-    
-        sentences.Clear();
+        sentences = new Queue<string>();
+        
+
 
         // Queue dialogue to sentences array
-        foreach(string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -100,5 +95,6 @@ public class DialogueManager : SingletonBehaviour<DialogueManager>
     {
         // Closes dialogue box
         animator.SetBool("IsOpen", false);
+        sentences.Clear();
     }
 }

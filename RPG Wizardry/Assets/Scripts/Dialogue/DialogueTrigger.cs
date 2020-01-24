@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using nl.SWEG.RPGWizardry.Entities.Enemies;
+using nl.SWEG.RPGWizardry.Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue startTutorial;
     public Dialogue castedBookerang;
     public Dialogue slimesKilled;
+    public Dialogue pickedUpDust;
     public Dialogue bookKilled;
     public Dialogue pickedUpPage;
     public Dialogue enteredMenu;
@@ -15,22 +18,15 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue enteredNewSpell;
     public Dialogue entersPuzzle;
 
-    bool castBookerang = false;
-
     private void Start()
     {
         startTutorialDialogue();
-    }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && castBookerang == false)
-        {
-            castedBookerangDialogue();
-            castBookerang = true;
-        }
-    }
+        PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
+        PlayerManager.Instance.Inventory.AddDustListener(dustPickupDialogue);
 
+        //AEnemy.Killed += slimeKilledDialogue; 
+    }
 
     public void startTutorialDialogue()
     {
@@ -38,14 +34,22 @@ public class DialogueTrigger : MonoBehaviour
         DialogueManager.Instance.StartDialogue(startTutorial);
     }
 
-    public void castedBookerangDialogue()
+    public void castedBookerangDialogue(ushort index, float cooldown)
     {
         DialogueManager.Instance.StartDialogue(castedBookerang);
+        PlayerManager.Instance.CastingManager.RemoveCastListener(castedBookerangDialogue);
     }
 
-    public void slimesKilledDialogue()
+    public void dustPickupDialogue(uint newAmount, int change)
+    {
+
+        DialogueManager.Instance.StartDialogue(pickedUpDust);
+        PlayerManager.Instance.Inventory.RemoveDustListener(dustPickupDialogue);
+    }
+    public void slimeKilledDialogue()
     {
         DialogueManager.Instance.StartDialogue(slimesKilled);
+        //AEnemy.Killed -= slimeKilledDialogue;
     }
 
 

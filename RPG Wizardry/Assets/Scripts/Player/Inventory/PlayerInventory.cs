@@ -75,8 +75,6 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         public void AddDustListener(OnInventoryChange listener)
         {
             dustChangeEvent += listener;
-            // Set Initial Value
-            listener.Invoke(Dust, 0);
         }
         /// <summary>
         /// Removes Listener from Dust-Event

@@ -5,6 +5,11 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 {
     public class Room : MonoBehaviour
     {
+        #region Inner Types
+
+        
+
+        #endregion
         #region Variables
         #region Public
         /// <summary>
