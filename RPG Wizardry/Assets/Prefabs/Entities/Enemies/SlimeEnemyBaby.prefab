@@ -143,6 +143,7 @@ MonoBehaviour:
     m_Bits: 2048
   big: 0
   babySlime: {fileID: 1245251141188743774}
+  knockback: 250
 --- !u!70 &2493812286622287803
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
