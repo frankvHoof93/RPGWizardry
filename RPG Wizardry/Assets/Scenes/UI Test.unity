@@ -7980,6 +7980,7 @@ GameObject:
   - component: {fileID: 972442136}
   - component: {fileID: 972442135}
   - component: {fileID: 972442134}
+  - component: {fileID: 972442137}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8052,6 +8053,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &972442137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972442133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcdafa63aa8eaa4c88e455721b45188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRootObject: 0
+  camTransform: {fileID: 0}
+  shakeDuration: 0
+  shakeAmount: 0
+  decrease: 0
 --- !u!1 &977224512
 GameObject:
   m_ObjectHideFlags: 0
@@ -10607,6 +10625,9 @@ MonoBehaviour:
   hasRootObject: 0
   maxHealth: 100
   bookRenderer: {fileID: 0}
+  opacityRadius: 30
+  opacityOffset: {x: 0, y: -30}
+  invincibilityFrames: 60
 --- !u!1 &1290372746
 GameObject:
   m_ObjectHideFlags: 0

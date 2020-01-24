@@ -67,10 +67,21 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="spellData">Data for Spell to set</param>
         public void SetSpell(SpellData spellData)
         {
-            spellImage.sprite = spellData.Sprite;
-            spellImage.enabled = true;
-            cooldownOverlay.sprite = spellData.CooldownSprite;
-            cooldownOverlay.fillAmount = 0;
+            if (spellData != null)
+            {
+                spellImage.sprite = spellData.Sprite;
+                cooldownOverlay.sprite = spellData.CooldownSprite;
+                spellImage.enabled = true;
+                cooldownOverlay.enabled = true;
+                cooldownOverlay.fillAmount = 0;
+            }
+            else
+            {
+                spellImage.sprite = null;
+                cooldownOverlay.sprite = null;
+                spellImage.enabled = false;
+                cooldownOverlay.enabled = false;
+            }
         }
         /// <summary>
         /// Runs UI-Cooldown on Spell

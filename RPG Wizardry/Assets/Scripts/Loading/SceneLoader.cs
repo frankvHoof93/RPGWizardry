@@ -62,6 +62,14 @@ namespace nl.SWEG.RPGWizardry.Loading
             SceneManager.LoadScene(Constants.GameOverSceneName, LoadSceneMode.Additive);
             UnloadGameSceneSingletons();
         }
+        /// <summary>
+        /// Loads the boss scene
+        /// </summary>
+        public void LoadBossScene()
+        {
+            UnloadGameSceneSingletons();
+            SceneManager.LoadScene(Constants.BossSceneName, LoadSceneMode.Single);
+        }
         #endregion
 
         #region Private

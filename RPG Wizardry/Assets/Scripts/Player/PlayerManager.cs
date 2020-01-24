@@ -5,6 +5,7 @@ using nl.SWEG.RPGWizardry.Player.Combat;
 using nl.SWEG.RPGWizardry.Player.Inventory;
 using nl.SWEG.RPGWizardry.Player.PlayerInput;
 using nl.SWEG.RPGWizardry.UI;
+using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using UnityEngine;
@@ -117,7 +118,6 @@ namespace nl.SWEG.RPGWizardry.Player
             if (!isInvincible)
             {
                 isInvincible = true;
-                //renderer.SetSpriteColor(Color.red);
                 if (amount >= Health)
                     Die();
                 Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
@@ -126,6 +126,8 @@ namespace nl.SWEG.RPGWizardry.Player
                 // Tween to Red
                 LeanTween.value(gameObject, col => renderer.SetSpriteColor(col), Color.white, Color.red, (invincibilityFrames / 60f) / 6f)
                     .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
+                
+                ScreenShake.Instance.Shake(0.5f, 0.2f);
             }
         }
 

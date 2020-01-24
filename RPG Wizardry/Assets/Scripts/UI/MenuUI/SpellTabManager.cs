@@ -12,7 +12,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         /// <summary>
         /// Target spell page for information and UI navigation
         /// </summary>
-        private SpellPage page { get; set; }
+        private SpellPage page;
 
         /// <summary>
         /// Controller for Spell list UI interaction
@@ -79,7 +79,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
 
         public void OnClick()
         {
-            spellListController.SwitchCanvas(page);
+            spellListController.OnSpellClick(page);
         }
     }
 
