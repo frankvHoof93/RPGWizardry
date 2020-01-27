@@ -172,70 +172,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 379591659351298265, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_text
+    - target: {fileID: 1689153414, guid: 9982ab285efe3424599873d44e4be121, type: 3}
+      propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623909205503861216, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901038641178333891, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -261.44998
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901038641178333891, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 47.09999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550134645526149273, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550134646416185704, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: hasRootObject
-      value: 1
+    - target: {fileID: 1689153414, guid: 9982ab285efe3424599873d44e4be121, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7921008985492895571, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: m_Name
       value: DialoguePrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 7921008985492895571, guid: 9982ab285efe3424599873d44e4be121,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8687309457777540055, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}

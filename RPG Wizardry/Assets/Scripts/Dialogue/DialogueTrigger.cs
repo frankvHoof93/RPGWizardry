@@ -61,13 +61,19 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             DialogueManager.Instance.StartDialogue(pickedUpPage);
             PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
             PlayerManager.Instance.MovementManager.ToggleMovement(true);
+            DialogueManager.Instance.toggleTextBox(true);
         }
         public void enteredMenuDialogue()
         {
+            MenuManager.Instance.AddMenuEnterListener(enteredMenuDialogue);
             DialogueManager.Instance.StartDialogue(enteredMenu);
+            DialogueManager.Instance.toggleTextBox(false);
+            PlayerManager.Instance.MovementManager.ToggleMovement(false);
         }
         public void enteredSpellListDialogue()
         {
+            MenuManager.Instance.RemoveMenuEnterListener(enteredMenuDialogue);
+            MenuManager.Instance.AddSpellMenuListener(enteredNewSpellDialogue);
             DialogueManager.Instance.StartDialogue(enteredSpellList);
         }
         public void enteredNewSpellDialogue()
@@ -76,6 +82,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         }
         public void entersPuzzleDialogue()
         {
+            MenuManager.Instance.RemoveMenuEnterListener(enteredNewSpellDialogue);
             DialogueManager.Instance.StartDialogue(entersPuzzle);
         }
     }

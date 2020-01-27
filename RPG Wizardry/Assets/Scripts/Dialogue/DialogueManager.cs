@@ -14,15 +14,16 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public Image characterImage;
         public Animator animator;
 
-        public Queue<string> sentences;
+        [SerializeField] public GameObject textBox;
 
+        public Queue<string> sentences;
 
         private void Update()
         {
             // Check if key is pressed to display the next sentence in the dialogue
             if (Input.GetMouseButtonDown(1))
             {
-                    DisplayNextSentence();
+                DisplayNextSentence();
             }
         }
 
@@ -91,6 +92,12 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 dialogueText.text += letter;
                 yield return null;
             }
+        }
+
+        public void toggleTextBox(bool value)
+        {
+
+            textBox.SetActive(value);
         }
 
         void EndDialogue()
