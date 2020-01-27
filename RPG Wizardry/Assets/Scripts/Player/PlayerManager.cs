@@ -94,6 +94,13 @@ namespace nl.SWEG.RPGWizardry.Player
         [SerializeField]
         [Tooltip("Amount of FRAMES Player is invincible for after being damaged")]
         private uint invincibilityFrames = 60;
+
+        [Header("Layers")]
+        /// <summary>
+        /// Layer that contains health potions
+        /// </summary>
+        [SerializeField]
+        private LayerMask healthPotionLayer;
         #endregion
 
         #region Private
@@ -125,7 +132,13 @@ namespace nl.SWEG.RPGWizardry.Player
             {
                 isInvincible = true;
                 if (amount >= Health)
+                {
                     Die();
+                }
+
+                //stop ignoring potions
+                Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), false);
+
                 Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
                 PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
                 healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
@@ -136,6 +149,8 @@ namespace nl.SWEG.RPGWizardry.Player
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
                 MovementManager.Stun(0.2f);
             }
+
+
         }
 
         /// <summary>
@@ -145,8 +160,17 @@ namespace nl.SWEG.RPGWizardry.Player
         public bool Heal(ushort amount)
         {
             if (Health == maxHealth)
+            {
                 return false;
+            }
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
+
+            if (Health == maxHealth)
+            {
+                //ignore potions since health is full
+                Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), true);
+            }
+
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
             PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green, 50);
             return true;
@@ -188,6 +212,8 @@ namespace nl.SWEG.RPGWizardry.Player
             renderer = GetComponent<Renderer>();
             base.Awake();
             Health = maxHealth;
+            //ignore potions since health is full
+            Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), true);
         }
         #endregion
 
