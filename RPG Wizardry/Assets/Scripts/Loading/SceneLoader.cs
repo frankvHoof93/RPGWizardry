@@ -6,6 +6,7 @@ using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using nl.SWEG.RPGWizardry.UI.Dialogue;
 
 namespace nl.SWEG.RPGWizardry.Loading
 {

@@ -5,96 +5,99 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : SingletonBehaviour<DialogueManager>
+namespace nl.SWEG.RPGWizardry.UI.Dialogue
 {
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogueText;
-    public Image characterImage;
-    public Animator animator;
-
-    public Queue<string> sentences;
-
-
-    private void Update()
+    public class DialogueManager : SingletonBehaviour<DialogueManager>
     {
-        // Check if key is pressed to display the next sentence in the dialogue
-        if (Input.GetMouseButtonDown(1))
+        public TextMeshProUGUI nameText;
+        public TextMeshProUGUI dialogueText;
+        public Image characterImage;
+        public Animator animator;
+
+        public Queue<string> sentences;
+
+
+        private void Update()
         {
+            // Check if key is pressed to display the next sentence in the dialogue
+            if (Input.GetMouseButtonDown(1))
+            {
+                    DisplayNextSentence();
+            }
+        }
+
+        public void StartDialogue(Dialogue dialogue)
+        {
+
+            if (dialogue.name != null)
+            {
+                nameText.text = dialogue.name;
+            }
+            else
+            {
+                nameText.text = "";
+            }
+
+            if (dialogue.characterSprite != null)
+            {
+                characterImage.sprite = dialogue.characterSprite;
+            }
+            else
+            {
+                characterImage.sprite = null;
+            }
+            // Open the dialogue box and clear the previous sentences that could be in the sentences array
+            animator.SetBool("IsOpen", true);
+            sentences = new Queue<string>();
+
+
+
+            // Queue dialogue to sentences array
+            foreach (string sentence in dialogue.sentences)
+            {
+                sentences.Enqueue(sentence);
+            }
+
             DisplayNextSentence();
         }
-    }
 
-    public void StartDialogue(Dialogue dialogue)
-    {
-       
-        if (dialogue.name != null)
+        public void DisplayNextSentence()
         {
-            nameText.text = dialogue.name;
-        }
-        else
-        {
-            nameText.text = "";
-        }
+            // Checks if there are sentences left to display
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
 
-        if(dialogue.characterSprite != null)
-        {
-            characterImage.sprite = dialogue.characterSprite;
-        }
-        else
-        {
-            characterImage.sprite = null;
-        }
-        // Open the dialogue box and clear the previous sentences that could be in the sentences array
-        animator.SetBool("IsOpen", true);
-        sentences = new Queue<string>();
-        
+            // Remove sentence from list
+            string sentence = sentences.Dequeue();
 
+            // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
+            StopAllCoroutines();
 
-        // Queue dialogue to sentences array
-        foreach (string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
-        
-        DisplayNextSentence();
-    }
-
-    public void DisplayNextSentence()
-    {
-        // Checks if there are sentences left to display
-        if (sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
+            // Type queued sentence
+            StartCoroutine(TypeSentence(sentence));
         }
 
-        // Remove sentence from list
-        string sentence = sentences.Dequeue();
-
-        // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
-        StopAllCoroutines();
-
-        // Type queued sentence
-        StartCoroutine(TypeSentence(sentence));
-    }
-
-    IEnumerator TypeSentence (string sentence)
-    {
-        // Reset the dialogue box text to blank
-        dialogueText.text = "";
-
-        // Makes an array of each character in sentence and adds each letter to the text 
-        foreach(char letter in sentence.ToCharArray())
+        IEnumerator TypeSentence(string sentence)
         {
-            dialogueText.text += letter;
-            yield return null;
-        }
-    }
+            // Reset the dialogue box text to blank
+            dialogueText.text = "";
 
-    void EndDialogue()
-    {
-        // Closes dialogue box
-        animator.SetBool("IsOpen", false);
-        sentences.Clear();
+            // Makes an array of each character in sentence and adds each letter to the text 
+            foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return null;
+            }
+        }
+
+        void EndDialogue()
+        {
+            // Closes dialogue box
+            animator.SetBool("IsOpen", false);
+            sentences.Clear();
+        }
     }
 }

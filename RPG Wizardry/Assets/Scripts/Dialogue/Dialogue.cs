@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Dialogue
+namespace nl.SWEG.RPGWizardry.UI.Dialogue
 {
-    public string name;
+    public struct Dialogue
+    {
+        public string name;
 
-    public Sprite characterSprite;
+        public Sprite characterSprite;
 
-    [TextArea(3, 10)]
-    public string[] sentences;
+        [TextArea(3, 10)]
+        public string[] sentences;
+    }
+
 }
