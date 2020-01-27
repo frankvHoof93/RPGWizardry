@@ -115,6 +115,7 @@ namespace nl.SWEG.RPGWizardry.UI
         private void InitMainMenu()
         {
             mainMenuPanel.SetActive(true);
+            onMenuEnter?.Invoke();
             loadGameButton.interactable = SaveManager.HasSave();
         }
         #endregion
@@ -150,7 +151,7 @@ namespace nl.SWEG.RPGWizardry.UI
             public void AddMenuExitListener(OnMenu listener)
                     {
                         onMenuExit += listener;
-                    }
+        }
 
             /// <summary>
             ///Removes Listener to Main Menu Exit Event

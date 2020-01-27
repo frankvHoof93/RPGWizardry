@@ -29,6 +29,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             Room.clearedRoom += roomClearedSlimes;
             PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
             PlayerManager.Instance.Inventory.AddPageListener(pickedUpPageDialogue);
+            MenuManager.Instance.AddMenuEnterListener(enteredMenuDialogue);
+            MenuManager.Instance.AddSpellMenuListener(enteredNewSpellDialogue);
         }
 
         public void startTutorialDialogue()
@@ -65,16 +67,16 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         }
         public void enteredMenuDialogue()
         {
-            MenuManager.Instance.AddMenuEnterListener(enteredMenuDialogue);
+
             DialogueManager.Instance.StartDialogue(enteredMenu);
             DialogueManager.Instance.toggleTextBox(false);
             PlayerManager.Instance.MovementManager.ToggleMovement(false);
+            MenuManager.Instance.RemoveMenuEnterListener(enteredMenuDialogue);
         }
         public void enteredSpellListDialogue()
-        {
-            MenuManager.Instance.RemoveMenuEnterListener(enteredMenuDialogue);
-            MenuManager.Instance.AddSpellMenuListener(enteredNewSpellDialogue);
+        {       
             DialogueManager.Instance.StartDialogue(enteredSpellList);
+            MenuManager.Instance.RemoveMenuEnterListener(enteredNewSpellDialogue);
         }
         public void enteredNewSpellDialogue()
         {
@@ -82,7 +84,6 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         }
         public void entersPuzzleDialogue()
         {
-            MenuManager.Instance.RemoveMenuEnterListener(enteredNewSpellDialogue);
             DialogueManager.Instance.StartDialogue(entersPuzzle);
         }
     }
