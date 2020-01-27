@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440165da56f60c47be2041665c72a1e, type: 3}
+  m_Name: '[1] Start tutorial'
+  m_EditorClassIdentifier: 
+  characterName: Greg
+  characterSprite: {fileID: 0}
+  sentenceStrings:
+  - Ahh.. home sweet home. Oh Willow, this is your first time in the tower right?
+  - Let me teach you a bit about how this place works.
+  - "I don\u2019t know if anyone gave you the memo, but this place is filled with
+    many different monsters that probably love to have a taste of living meat."
+  - So yes, you will probably be hunted down in here, BUT! I will personally make
+    sure you get out of here before you actually will die.
+  - "I\u2019d rather not die in here as well and I need a vessel to be able to cast
+    magic."
+  - "The only spell I\u2019ve retained is\u2026 bookerang\u2026 well, please try using
+    it, but don\u2019t throw me too hard!"
