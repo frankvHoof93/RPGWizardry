@@ -16,7 +16,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         public Queue<string> sentences;
 
-
+        /// <summary>
+        /// Check if right mouse button is pressed
+        /// </summary>
         private void Update()
         {
             // Check if key is pressed to display the next sentence in the dialogue
@@ -26,9 +28,12 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             }
         }
 
-        public void StartDialogue(Dialogue dialogue)
+        /// <summary>
+        /// Begins dialogue queue
+        /// </summary>
+        /// <param name="dialogue">Scriptable dialogue object</param>
+        public void StartDialogue(DialogueData dialogue)
         {
-
             if (dialogue.name != null)
             {
                 nameText.text = dialogue.name;
@@ -38,22 +43,21 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 nameText.text = "";
             }
 
-            if (dialogue.characterSprite != null)
+            if (dialogue.Sprite != null)
             {
-                characterImage.sprite = dialogue.characterSprite;
+                characterImage.sprite = dialogue.Sprite;
             }
             else
             {
                 characterImage.sprite = null;
             }
+
             // Open the dialogue box and clear the previous sentences that could be in the sentences array
             animator.SetBool("IsOpen", true);
             sentences = new Queue<string>();
 
-
-
             // Queue dialogue to sentences array
-            foreach (string sentence in dialogue.sentences)
+            foreach (string sentence in dialogue.Sentences)
             {
                 sentences.Enqueue(sentence);
             }
@@ -61,6 +65,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             DisplayNextSentence();
         }
 
+        /// <summary>
+        /// Get the next sentence from the queue, end dialogue if none remain
+        /// </summary>
         public void DisplayNextSentence()
         {
             // Checks if there are sentences left to display
@@ -70,16 +77,21 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 return;
             }
 
-            // Remove sentence from list
+            // Get sentence from list
             string sentence = sentences.Dequeue();
 
             // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
-            StopAllCoroutines();
+            StopCoroutine(TypeSentence(sentence));
 
             // Type queued sentence
             StartCoroutine(TypeSentence(sentence));
         }
 
+        /// <summary>
+        /// Display string one character at a time
+        /// </summary>
+        /// <param name="sentence"></param>
+        /// <returns></returns>
         IEnumerator TypeSentence(string sentence)
         {
             // Reset the dialogue box text to blank
@@ -93,6 +105,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             }
         }
 
+        /// <summary>
+        /// End dialogue and clear queue
+        /// </summary>
         void EndDialogue()
         {
             // Closes dialogue box

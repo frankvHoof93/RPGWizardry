@@ -10,15 +10,15 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
     public class DialogueTrigger : MonoBehaviour
     {
         // Set Dialogue variables
-        public Dialogue startTutorial;
-        public Dialogue castedBookerang;
-        public Dialogue slimeRoomCleared;
-        public Dialogue bookKilled;
-        public Dialogue pickedUpPage;
-        public Dialogue enteredMenu;
-        public Dialogue enteredSpellList;
-        public Dialogue enteredNewSpell;
-        public Dialogue entersPuzzle;
+        public DialogueData startTutorial;
+        public DialogueData castedBookerang;
+        public DialogueData slimeRoomCleared;
+        public DialogueData bookKilled;
+        public DialogueData pickedUpPage;
+        public DialogueData enteredMenu;
+        public DialogueData enteredSpellList;
+        public DialogueData enteredNewSpell;
+        public DialogueData entersPuzzle;
 
 
 
