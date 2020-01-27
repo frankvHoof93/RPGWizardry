@@ -78,9 +78,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {       
             DialogueManager.Instance.StartDialogue(enteredSpellList);
 
-            Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
-            Button btn = spellUTF.GetComponent<Button>();
-            btn.onClick.RemoveListener(enteredSpellListDialogue);
+           // Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
+           // Button btn = spellUTF.GetComponent<Button>();
+            //btn.onClick.RemoveListener(enteredSpellListDialogue);
         }
 
         public void enteredNewSpellDialogue()
@@ -98,10 +98,11 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             {
                 return;
             }
-            Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
-            Button btn = spellTF.GetComponent<Button>();
-            btn.onClick.AddListener(enteredSpellListDialogue);
             enteredMenuDialogue();
+
+           /* Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
+            Button btn = spellTF.GetComponent<Button>();
+            btn.onClick.AddListener(enteredSpellListDialogue);*/
         }
     }
 }
