@@ -4,9 +4,10 @@ using nl.SWEG.RPGWizardry.UI;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using nl.SWEG.RPGWizardry.UI.Dialogue;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using nl.SWEG.RPGWizardry.UI.Dialogue;
+
 
 namespace nl.SWEG.RPGWizardry.Loading
 {

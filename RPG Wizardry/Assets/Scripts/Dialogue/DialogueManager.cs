@@ -13,6 +13,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public TextMeshProUGUI dialogueText;
         public Image characterImage;
         public Animator animator;
+        public Animator animatorTextbox;
 
         [SerializeField] public GameObject textBox;
 
@@ -116,6 +117,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {
 
             textBox.SetActive(value);
+            animatorTextbox.SetBool("isOpened", value);
         }
 
         /// <summary>

@@ -1,9 +1,12 @@
 ﻿using nl.SWEG.RPGWizardry.Entities.Enemies;
+using UnityEngine.SceneManagement;
 using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
 using System.Collections.Generic;
+using nl.SWEG.RPGWizardry.Utils;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace nl.SWEG.RPGWizardry.UI.Dialogue
 {
@@ -20,17 +23,17 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public DialogueData enteredNewSpell;
         public DialogueData entersPuzzle;
 
-
-
         private void Start()
         {
             startTutorialDialogue();
+            DialogueManager.Instance.toggleTextBox(false);
+
+            
 
             Room.clearedRoom += roomClearedSlimes;
             PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
             PlayerManager.Instance.Inventory.AddPageListener(pickedUpPageDialogue);
-            MenuManager.Instance.AddMenuEnterListener(enteredMenuDialogue);
-            MenuManager.Instance.AddSpellMenuListener(enteredNewSpellDialogue);
+            SceneManager.sceneLoaded += loadMainMenu;
         }
 
         public void startTutorialDialogue()
@@ -61,23 +64,25 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public void pickedUpPageDialogue(uint newAmount, int change)
         {
             DialogueManager.Instance.StartDialogue(pickedUpPage);
-            PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
             PlayerManager.Instance.MovementManager.ToggleMovement(true);
             DialogueManager.Instance.toggleTextBox(true);
         }
         public void enteredMenuDialogue()
         {
-
-            DialogueManager.Instance.StartDialogue(enteredMenu);
             DialogueManager.Instance.toggleTextBox(false);
+            DialogueManager.Instance.StartDialogue(enteredMenu);
             PlayerManager.Instance.MovementManager.ToggleMovement(false);
-            MenuManager.Instance.RemoveMenuEnterListener(enteredMenuDialogue);
+            SceneManager.sceneLoaded -= loadMainMenu;
         }
         public void enteredSpellListDialogue()
         {       
             DialogueManager.Instance.StartDialogue(enteredSpellList);
-            MenuManager.Instance.RemoveMenuEnterListener(enteredNewSpellDialogue);
+
+            Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
+            Button btn = spellUTF.GetComponent<Button>();
+            btn.onClick.RemoveListener(enteredSpellListDialogue);
         }
+
         public void enteredNewSpellDialogue()
         {
             DialogueManager.Instance.StartDialogue(enteredNewSpell);
@@ -85,6 +90,18 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public void entersPuzzleDialogue()
         {
             DialogueManager.Instance.StartDialogue(entersPuzzle);
+        }
+
+        private void loadMainMenu(Scene arg0, LoadSceneMode arg1)
+        {
+            if(arg0.name != Constants.MainMenuSceneName)
+            {
+                return;
+            }
+            Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
+            Button btn = spellTF.GetComponent<Button>();
+            btn.onClick.AddListener(enteredSpellListDialogue);
+            enteredMenuDialogue();
         }
     }
 }
