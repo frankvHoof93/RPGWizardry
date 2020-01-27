@@ -16,6 +16,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         public Queue<string> sentences;
 
+        private Coroutine currentCoroutine;
+
         /// <summary>
         /// Check if right mouse button is pressed
         /// </summary>
@@ -36,7 +38,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {
             if (dialogue.name != null)
             {
-                nameText.text = dialogue.name;
+                nameText.text = dialogue.Name;
             }
             else
             {
@@ -81,10 +83,10 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             string sentence = sentences.Dequeue();
 
             // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
-            StopCoroutine(TypeSentence(sentence));
+            StopCoroutine(currentCoroutine);
 
             // Type queued sentence
-            StartCoroutine(TypeSentence(sentence));
+            currentCoroutine = StartCoroutine(TypeSentence(sentence));
         }
 
         /// <summary>
