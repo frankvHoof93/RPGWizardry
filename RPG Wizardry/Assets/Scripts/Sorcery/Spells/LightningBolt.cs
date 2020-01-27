@@ -33,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             //Build a raycast
             RaycastHit2D hit;
             //CircleCast to make the hit more generous
-            hit = Physics2D.CircleCast(transform.position, 1, transform.up, data.LifeTime, collisionLayer);
+            hit = Physics2D.CircleCast(transform.position, 0.7f, transform.up, data.LifeTime, collisionLayer);
             //Does the ray intersect any objects in the collision layer
             //Yes, it hit something
             if (hit)
