@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: '[2] Casted bookerang'
   m_EditorClassIdentifier: 
   characterName: Greg
-  characterSprite: {fileID: 0}
+  characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
   - "I regret doing this\u2026 At least now you know of a way to defend yourself."
   - I sense that in the next room are some enemies.
