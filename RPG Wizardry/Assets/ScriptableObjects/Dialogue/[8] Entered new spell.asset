@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: '[8] Entered new spell'
   m_EditorClassIdentifier: 
   characterName: Greg
-  characterSprite: {fileID: 0}
+  characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
   - "As you can see, you can read more about what this spell does. Like it\u2019s
     name, description, how strong it is, and the cooldown it has!"
