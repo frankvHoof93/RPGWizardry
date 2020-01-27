@@ -82,8 +82,11 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             // Get sentence from list
             string sentence = sentences.Dequeue();
 
-            // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
-            StopCoroutine(currentCoroutine);
+            if (currentCoroutine != null)
+            {
+                // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
+                StopCoroutine(currentCoroutine);
+            }
 
             // Type queued sentence
             currentCoroutine = StartCoroutine(TypeSentence(sentence));
