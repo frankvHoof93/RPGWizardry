@@ -88,7 +88,10 @@
 
 				// Check if SeeThrough-Alpha should be applied
 				if (UNITY_ACCESS_INSTANCED_PROP(Props, _UseSeeThrough) == 1 && IsInCircle(IN.vertex, UNITY_ACCESS_INSTANCED_PROP(Props, _SeeThroughCenter).xy, _SeeThroughRadius))
+				{
+					c.rgb *= c.a; // Apply alpha from texture
 					c.a = _SeeThroughAlpha; // TRUE: Apply Alpha
+				}
 				c.rgb *= c.a; // Apply Alpha to RGB (copied from Sprites-Default)
 				return c;
 			}
