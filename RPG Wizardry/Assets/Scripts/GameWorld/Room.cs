@@ -16,6 +16,10 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// Whether the Room has been Cleared (No more Enemies)
         /// </summary>
         public bool Cleared { get; private set; }
+
+        /// <summary>
+        /// Roomcleared event
+        /// </summary>
         public static roomClear clearedRoom;
         #endregion
 

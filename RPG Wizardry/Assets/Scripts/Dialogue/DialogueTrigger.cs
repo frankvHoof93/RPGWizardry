@@ -78,9 +78,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {       
             DialogueManager.Instance.StartDialogue(enteredSpellList);
 
-           // Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
-           // Button btn = spellUTF.GetComponent<Button>();
-            //btn.onClick.RemoveListener(enteredSpellListDialogue);
+           Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"); //Looking for the button Spell List in Main Menu
+           Button btn = spellUTF.GetComponent<Button>();
+           btn.onClick.RemoveListener(enteredSpellListDialogue);
         }
 
         public void enteredNewSpellDialogue()
@@ -99,10 +99,22 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 return;
             }
             enteredMenuDialogue();
+            StartCoroutine(AttachToButton());
+       
+        }
 
-           /* Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Spell List"); //Looking for the button Spell List in Main Menu
+        private IEnumerator AttachToButton()
+        {
+            yield return null;
+
+            Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"); //Looking for the button Spell List in Main Menu
+            //Debug.Log("tf:" + MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"));
+
             Button btn = spellTF.GetComponent<Button>();
-            btn.onClick.AddListener(enteredSpellListDialogue);*/
+            btn.onClick.AddListener(enteredSpellListDialogue);
+            //Debug.Log(btn);
+
+
         }
     }
 }
