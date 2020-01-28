@@ -84,7 +84,10 @@
 
 					// Check if Pixel is inside a Circle
 					if (IsInAnyCircleLarge(IN.vertex, midpoints, radii, _SeeThroughLength))
+					{
+						c.rgb *= c.a; // Apply alpha from texture
 						c.a = _SeeThroughAlpha; // TRUE: Apply Alpha
+					}
 				}
 				c.rgb *= c.a; // Apply Alpha to RGB (copied from Sprites-Default)
 				return c;

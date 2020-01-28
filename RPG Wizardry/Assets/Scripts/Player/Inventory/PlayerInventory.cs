@@ -217,7 +217,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
-                pageChangeEvent.Invoke(Dust, 1);
+                pageChangeEvent?.Invoke(Dust, 1);
                 return true;
             }
             else return false;
