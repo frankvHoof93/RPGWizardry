@@ -21,7 +21,7 @@ MonoBehaviour:
   spellCooldown: 2
   projectileLifeTime: 4
   projectileSpeed: 0
-  knockback: 350
+  knockback: 250
   spellSprite: {fileID: 21300000, guid: 0f9c8334dc9eb74468c9e0c3d92f649f, type: 3}
   cooldownSprite: {fileID: 21300000, guid: 165c1a33c12a0ce4c94cd5512b6dab5b, type: 3}
   spawnClip: {fileID: 0}
