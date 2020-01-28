@@ -1,5 +1,4 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery
     public class SpellPageManager : MonoBehaviour
     {
         #region Variables
+        /// <summary>
+        /// Amount of Symbols Displayed in Rect
+        /// </summary>
         private const int SymbolCount = 9;
 
         /// <summary>
@@ -59,11 +61,17 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [SerializeField]
         [Tooltip("TextBox for Description")]
         private TextMeshProUGUI description;
+        /// <summary>
+        /// Prefab for TextBox displaying a Symbol inside the Graphic
+        /// </summary>
         [SerializeField]
-        [Tooltip("")]
+        [Tooltip("Prefab for TextBox displaying a Symbol inside the Graphic")]
         private GameObject symbolPrefab;
+        /// <summary>
+        /// Parent for TextBox displaying a Symbol inside the Graphic
+        /// </summary>
         [SerializeField]
-        [Tooltip("")]
+        [Tooltip("Parent for TextBox displaying a Symbol inside the Graphic")]
         private Transform symbolParent;
         #endregion
 
@@ -131,7 +139,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery
                 symbol.transform.localPosition = pos; // Set y-position
             }
         }
-
+        /// <summary>
+        /// Destroys Existing Symbols on Page
+        /// </summary>
         private void OnDisable()
         {
             foreach (Transform child in symbolParent)
