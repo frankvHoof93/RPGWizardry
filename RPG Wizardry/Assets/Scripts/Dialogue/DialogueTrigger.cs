@@ -72,6 +72,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {
             DialogueManager.Instance.StartDialogue(pickedUpPage);
             PlayerManager.Instance.MovementManager.ToggleMovement(true);
+            PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
             GameUIManager.Instance.ToggelPause(true);
             DialogueManager.Instance.toggleTextBox(true);
         }
