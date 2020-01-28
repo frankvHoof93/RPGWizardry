@@ -9,6 +9,17 @@ namespace nl.SWEG.RPGWizardry.UI
 {
     public class MenuManager : SingletonBehaviour<MenuManager>
     {
+        #region Inner Types
+        /// <summary>
+        /// Delegate for Entering Main Menu event
+        /// </summary>
+        public delegate void OnMenu();
+        /// <summary>
+        /// Delegate for Entering Main Menu event
+        /// </summary>
+        public delegate void OnSpellMenu();
+        #endregion
+
         #region Variables
         /// <summary>
         /// Background for Menu. Only shown if Game is not running
@@ -33,6 +44,7 @@ namespace nl.SWEG.RPGWizardry.UI
         #endregion
 
         #region GameMenu
+        public GameObject GameMenu => gameMenuPanel;
         [Header("Game Menu")]
         /// <summary>
         /// Panel with PauseMenu-Options
@@ -88,6 +100,14 @@ namespace nl.SWEG.RPGWizardry.UI
         #endregion
 
         #region Private
+
+        /// <summary>
+        /// Event called when Main Menu is entered
+        /// </summary>
+        private event OnMenu onMenuEnter;
+        private event OnMenu onMenuExit;
+        private event OnSpellMenu onSpellMenuEnter;
+
         private void InitGameMenu()
         {
             gameMenuPanel.SetActive(true);
@@ -98,6 +118,72 @@ namespace nl.SWEG.RPGWizardry.UI
             mainMenuPanel.SetActive(true);
             loadGameButton.interactable = SaveManager.HasSave();
         }
+        #endregion
+
+        #region EventListeners
+        #region Main Menu Event Listener
+
+            #region Main Menu Enter
+            /// <summary>
+            /// Adds Listener to Main Menu Enter Event
+            /// </summary>
+            /// <param name="listener">Listener to Add</param>
+            public void AddMenuEnterListener(OnMenu listener)
+                {
+                    onMenuEnter += listener;
+                }
+
+            /// <summary>
+            /// Removes Listener to Main Menu Enter Event 
+            /// </summary>
+            /// <param name="listener">Listener to Add</param>
+            public void RemoveMenuEnterListener(OnMenu listener)
+            {
+                onMenuEnter -= listener;
+            }
+        #endregion
+
+            #region Main Menu Exit
+            /// <summary>
+            ///Add Listener to Main Menu Exit Event
+            /// </summary>
+            /// <param name="listener">Listener to Add</param>
+            public void AddMenuExitListener(OnMenu listener)
+                    {
+                        onMenuExit += listener;
+                    }
+
+            /// <summary>
+            ///Removes Listener to Main Menu Exit Event
+            /// </summary>
+            /// <param name="listener">Listener to Add</param>
+            public void RemoveMenuExitListener(OnMenu listener)
+                {
+                    onMenuExit -= listener;
+                }
+            #endregion
+
+        #endregion
+
+        #region SpellCrafting Menu Event Listener
+        /// <summary>
+        /// Adds Listener to Spell Creating Menu Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddSpellMenuListener(OnSpellMenu listener)
+                {
+                    onSpellMenuEnter += listener;
+                }
+
+                /// <summary>
+                ///Removes Listener to Spell Creating Menu Event
+                /// </summary>
+                /// <param name="listener">Listener to Add</param>
+                public void RemoveSpellMenuListener(OnSpellMenu listener)
+                {
+                    onSpellMenuEnter -= listener;
+                }
+                #endregion
         #endregion
         #endregion
     }

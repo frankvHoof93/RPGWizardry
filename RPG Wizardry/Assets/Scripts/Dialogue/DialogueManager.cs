@@ -13,6 +13,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public TextMeshProUGUI dialogueText;
         public Image characterImage;
         public Animator animator;
+        public Animator animatorTextbox;
+
+        [SerializeField] public GameObject textBox;
 
         public Queue<string> sentences;
 
@@ -26,7 +29,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             // Check if key is pressed to display the next sentence in the dialogue
             if (Input.GetMouseButtonDown(1))
             {
-                    DisplayNextSentence();
+                DisplayNextSentence();
             }
         }
 
@@ -108,6 +111,13 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 dialogueText.text += letter;
                 yield return null;
             }
+        }
+
+        public void toggleTextBox(bool value)
+        {
+
+            textBox.SetActive(value);
+            animatorTextbox.SetBool("isOpened", value);
         }
 
         /// <summary>
