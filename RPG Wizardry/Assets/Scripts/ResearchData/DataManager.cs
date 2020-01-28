@@ -8,6 +8,10 @@ namespace nl.SWEG.RPGWizardry.ResearchData
 {
     public class DataManager : MonoBehaviour
     {
+        #region Inner Types
+        public delegate void SpellUnlock();
+        #endregion
+
         #region Variables
         /// <summary>
         /// Current bin to be used for minigames/research
@@ -47,6 +51,11 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         private Button checkButton;
 
         private bool started = false;
+
+        /// <summary>
+        /// Roomcleared event
+        /// </summary>
+        public static SpellUnlock spellunlocked;
         #endregion
         #region Methods
 
@@ -92,6 +101,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 spellManager.UnlockSpell();
                 message.enabled = true;
                 checkButton.enabled = false;
+                spellunlocked();
                 StartCoroutine(CoroutineMethods.RunDelayed(SwitchToSpellPage, 3f));
             }
             else

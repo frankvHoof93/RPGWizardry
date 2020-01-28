@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &357032318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7072635279950784410, guid: d28c03212e88bdf4aa93393c384237f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1698780244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &387410525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -930,6 +936,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 905302724}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &905302726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5244897387688183720, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+    type: 3}
+  m_PrefabInstance: {fileID: 905302724}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1099776622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1099776622, guid: bd5f006d2cd3e01478d7888a63615884,
@@ -1202,7 +1214,7 @@ PrefabInstance:
     - target: {fileID: 7072635281116298754, guid: d28c03212e88bdf4aa93393c384237f6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7072635281116298758, guid: d28c03212e88bdf4aa93393c384237f6,
         type: 3}
@@ -1895,6 +1907,9 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 1099776622}
   loadGameButton: {fileID: 1861509154}
   gameMenuPanel: {fileID: 1634994127}
+  SpellListCanvas: {fileID: 905302726}
+  SpellCanvas: {fileID: 357032318}
+  ScrollpageCanvas: {fileID: 2009691954}
 --- !u!4 &2092474730
 Transform:
   m_ObjectHideFlags: 0

@@ -293,7 +293,7 @@ PrefabInstance:
         type: 3}
       propertyPath: animatorTextbox
       value: 
-      objectReference: {fileID: 316177186}
+      objectReference: {fileID: 316177185}
     - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
       propertyPath: startTutorial
@@ -347,6 +347,12 @@ PrefabInstance:
       propertyPath: entersPuzzle
       value: 
       objectReference: {fileID: 11400000, guid: a2f9be0e949f36b4d8e82610aabed7f2,
+        type: 2}
+    - target: {fileID: 6550134646416185706, guid: 9982ab285efe3424599873d44e4be121,
+        type: 3}
+      propertyPath: finishPuzzle
+      value: 
+      objectReference: {fileID: 11400000, guid: d96b18116607f2a40b26dc3215994169,
         type: 2}
     - target: {fileID: 6550134647194851825, guid: 9982ab285efe3424599873d44e4be121,
         type: 3}
@@ -420,31 +426,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9982ab285efe3424599873d44e4be121, type: 3}
---- !u!1 &316177185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 379591659351298265, guid: 9982ab285efe3424599873d44e4be121,
+--- !u!95 &316177185 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2110065432154998214, guid: 9982ab285efe3424599873d44e4be121,
     type: 3}
   m_PrefabInstance: {fileID: 316177184}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &316177186
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316177185}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3603b345e43396a47bc598f906bb6628, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &407514231 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6550134646595526801, guid: 9982ab285efe3424599873d44e4be121,

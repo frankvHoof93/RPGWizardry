@@ -24,6 +24,8 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
 
+        private bool PauseAllowed = false;
+
         /// <summary>
         /// Event called when menu is opened
         /// </summary>
@@ -66,7 +68,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         private void CheckPlayerInput()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (PauseAllowed && Input.GetKeyDown(KeyCode.Escape))
             {
                 GameManager.Instance.TogglePause();
                 if (GameManager.Instance.Paused) // Game was running, open Menu
@@ -75,6 +77,15 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                     SceneLoader.Instance.LoadGameScene();
             }
         }
+        #endregion
+
+        #region Public
+
+        public void ToggelPause(bool value)
+        {
+            PauseAllowed = value;
+        }
+
         #endregion
         #endregion
     }

@@ -45,12 +45,23 @@ namespace nl.SWEG.RPGWizardry.UI
 
         #region GameMenu
         public GameObject GameMenu => gameMenuPanel;
+
+
+
         [Header("Game Menu")]
         /// <summary>
         /// Panel with PauseMenu-Options
         /// </summary>
         [SerializeField]
         private GameObject gameMenuPanel;
+        #endregion
+
+        #region 
+        [Header("Spell Canvases")]
+
+        public GameObject SpellListCanvas;
+        public GameObject SpellCanvas;
+        public GameObject ScrollpageCanvas;
         #endregion
         #endregion
 
@@ -120,71 +131,8 @@ namespace nl.SWEG.RPGWizardry.UI
         }
         #endregion
 
-        #region EventListeners
-        #region Main Menu Event Listener
+       
 
-            #region Main Menu Enter
-            /// <summary>
-            /// Adds Listener to Main Menu Enter Event
-            /// </summary>
-            /// <param name="listener">Listener to Add</param>
-            public void AddMenuEnterListener(OnMenu listener)
-                {
-                    onMenuEnter += listener;
-                }
-
-            /// <summary>
-            /// Removes Listener to Main Menu Enter Event 
-            /// </summary>
-            /// <param name="listener">Listener to Add</param>
-            public void RemoveMenuEnterListener(OnMenu listener)
-            {
-                onMenuEnter -= listener;
-            }
-        #endregion
-
-            #region Main Menu Exit
-            /// <summary>
-            ///Add Listener to Main Menu Exit Event
-            /// </summary>
-            /// <param name="listener">Listener to Add</param>
-            public void AddMenuExitListener(OnMenu listener)
-                    {
-                        onMenuExit += listener;
-                    }
-
-            /// <summary>
-            ///Removes Listener to Main Menu Exit Event
-            /// </summary>
-            /// <param name="listener">Listener to Add</param>
-            public void RemoveMenuExitListener(OnMenu listener)
-                {
-                    onMenuExit -= listener;
-                }
-            #endregion
-
-        #endregion
-
-        #region SpellCrafting Menu Event Listener
-        /// <summary>
-        /// Adds Listener to Spell Creating Menu Event
-        /// </summary>
-        /// <param name="listener">Listener to Add</param>
-        public void AddSpellMenuListener(OnSpellMenu listener)
-                {
-                    onSpellMenuEnter += listener;
-                }
-
-                /// <summary>
-                ///Removes Listener to Spell Creating Menu Event
-                /// </summary>
-                /// <param name="listener">Listener to Add</param>
-                public void RemoveSpellMenuListener(OnSpellMenu listener)
-                {
-                    onSpellMenuEnter -= listener;
-                }
-                #endregion
-        #endregion
         #endregion
     }
 }

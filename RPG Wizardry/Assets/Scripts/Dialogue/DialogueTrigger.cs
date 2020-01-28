@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
 using System.Collections;
+using nl.SWEG.RPGWizardry.UI.GameUI;
 using System.Collections.Generic;
 using nl.SWEG.RPGWizardry.Utils;
+using nl.SWEG.RPGWizardry.ResearchData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,17 +24,22 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public DialogueData enteredSpellList;
         public DialogueData enteredNewSpell;
         public DialogueData entersPuzzle;
+        public DialogueData finishPuzzle;
 
         private void Start()
         {
             startTutorialDialogue();
             DialogueManager.Instance.toggleTextBox(false);
 
-            
 
+            DataManager.spellunlocked += finishPuzzleDialogue;
             Room.clearedRoom += roomClearedSlimes;
+            
+            //Adding the Event Listeneres for the Page casting and Page Pickup
             PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
             PlayerManager.Instance.Inventory.AddPageListener(pickedUpPageDialogue);
+
+            //Adding Event listener which checks for the scene load
             SceneManager.sceneLoaded += loadMainMenu;
         }
 
@@ -65,31 +72,58 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         {
             DialogueManager.Instance.StartDialogue(pickedUpPage);
             PlayerManager.Instance.MovementManager.ToggleMovement(true);
+            GameUIManager.Instance.ToggelPause(true);
             DialogueManager.Instance.toggleTextBox(true);
         }
         public void enteredMenuDialogue()
         {
+            GameUIManager.Instance.ToggelPause(false);
             DialogueManager.Instance.toggleTextBox(false);
             DialogueManager.Instance.StartDialogue(enteredMenu);
-            PlayerManager.Instance.MovementManager.ToggleMovement(false);
             SceneManager.sceneLoaded -= loadMainMenu;
         }
         public void enteredSpellListDialogue()
         {       
             DialogueManager.Instance.StartDialogue(enteredSpellList);
 
-           Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"); //Looking for the button Spell List in Main Menu
+           Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items/Spell List"); //Looking for the button Spell List in Main Menu
            Button btn = spellUTF.GetComponent<Button>();
            btn.onClick.RemoveListener(enteredSpellListDialogue);
+           StartCoroutine(AttachToButtonUnlock());
         }
 
         public void enteredNewSpellDialogue()
         {
             DialogueManager.Instance.StartDialogue(enteredNewSpell);
+
+
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu     
+            Button btn = buttonunlock.GetComponent<Button>();
+            btn.onClick.RemoveListener(enteredNewSpellDialogue);
+
+            StartCoroutine(AttachToSpellCrafting());
+
+
         }
         public void entersPuzzleDialogue()
         {
+            
             DialogueManager.Instance.StartDialogue(entersPuzzle);
+
+
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Button btn = spellcrafting.GetComponent<Button>();
+            btn.onClick.RemoveListener(entersPuzzleDialogue);
+        }
+
+        public void finishPuzzleDialogue()
+        {
+
+            DialogueManager.Instance.StartDialogue(finishPuzzle);
+            PlayerManager.Instance.MovementManager.ToggleMovement(false);
+            DataManager.spellunlocked -= finishPuzzleDialogue;
+            GameUIManager.Instance.ToggelPause(true);
+
         }
 
         private void loadMainMenu(Scene arg0, LoadSceneMode arg1)
@@ -99,21 +133,37 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 return;
             }
             enteredMenuDialogue();
-            StartCoroutine(AttachToButton());
-       
+            StartCoroutine(AttachToButtonSpell());
         }
 
-        private IEnumerator AttachToButton()
+        private IEnumerator AttachToButtonSpell()
         {
             yield return null;
 
-            Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"); //Looking for the button Spell List in Main Menu
-            //Debug.Log("tf:" + MenuManager.Instance.GameMenu.transform.Find("Menu-Items").Find("Spell List"));
-
+            Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items/Spell List"); //Looking for the button Spell List in Main Menu
             Button btn = spellTF.GetComponent<Button>();
             btn.onClick.AddListener(enteredSpellListDialogue);
-            //Debug.Log(btn);
 
+
+        }
+
+        private IEnumerator AttachToButtonUnlock()
+        {
+            yield return null;
+
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu
+            Button btn = buttonunlock.GetComponent<Button>();
+            btn.onClick.AddListener(enteredNewSpellDialogue);
+
+        }
+
+        private IEnumerator AttachToSpellCrafting()
+        {
+            yield return null;
+
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Button btn = spellcrafting.GetComponent<Button>();
+            btn.onClick.AddListener(entersPuzzleDialogue);
 
         }
     }
