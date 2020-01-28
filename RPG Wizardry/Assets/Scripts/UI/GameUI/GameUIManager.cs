@@ -24,6 +24,9 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
 
+        /// <summary>
+        /// Creating a bool to check for Game Pause
+        /// </summary>
         private bool PauseAllowed = false;
 
         /// <summary>
@@ -68,7 +71,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         private void CheckPlayerInput()
         {
-            if (PauseAllowed && Input.GetKeyDown(KeyCode.Escape))
+            if (PauseAllowed && Input.GetKeyDown(KeyCode.Escape)) //Added the Pause Allowed check
             {
                 GameManager.Instance.TogglePause();
                 if (GameManager.Instance.Paused) // Game was running, open Menu
@@ -81,6 +84,9 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 
         #region Public
 
+        /// <summary>
+        /// Toggles the ESC button value (true and false) using the Pauseallowed Event
+        /// </summary>
         public void ToggelPause(bool value)
         {
             PauseAllowed = value;
