@@ -241,6 +241,9 @@ MonoBehaviour:
   opacityRadius: 100
   opacityOffset: {x: 0, y: 0.4}
   invincibilityFrames: 60
+  healthPotionLayer:
+    serializedVersion: 2
+    m_Bits: 262144
 --- !u!114 &1649351625787668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,8 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentSpells:
   - {fileID: 11400000, guid: a989aeb625692a84dadc005d92ab04b1, type: 2}
-  - {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
-  - {fileID: 11400000, guid: 2775c80015b255c4ca3445fd59b75a0a, type: 2}
   spawnLocation: {fileID: 1649351625540714799}
   targetingMask:
     serializedVersion: 2

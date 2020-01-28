@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;

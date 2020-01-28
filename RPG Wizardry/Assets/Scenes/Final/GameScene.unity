@@ -954,6 +954,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 760088091628967822, guid: f864e08a743eadc4cb322fe7efa7d216,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 868694543722371811, guid: f864e08a743eadc4cb322fe7efa7d216,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1265,10 +1270,32 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[2].Array.data[7].x
       value: -16.999994
       objectReference: {fileID: 0}
-    - target: {fileID: 2081598353420904167, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+    - target: {fileID: 3635978257333188469, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
         type: 3}
-      propertyPath: m_Name
-      value: tutorialSlimeEnemyBaby
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199,
+        type: 2}
+    - target: {fileID: 3635978257333188469, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+        type: 3}
+      propertyPath: attackAngleMargin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635978257333188469, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+        type: 3}
+      propertyPath: turnSpeedModifier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133850365828243983, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+        type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 11400000, guid: 2775c80015b255c4ca3445fd59b75a0a,
+        type: 2}
+    - target: {fileID: 4133850365828243983, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
+        type: 3}
+      propertyPath: attackAngleMargin
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4172273050135231719, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
         type: 3}
@@ -1675,17 +1702,6 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.data[13].x
       value: -16.999994
       objectReference: {fileID: 0}
-    - target: {fileID: 4198785308909199986, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
-        type: 3}
-      propertyPath: m_Name
-      value: tutorialSlimeEnemyBaby (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5342837298591400280, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
-        type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 3820683a3379cf04b8f0e39ebd078ca1,
-        type: 2}
     - target: {fileID: 7395716478338022466, guid: 95c134c6c6e5d1944a6d343c3740c0aa,
         type: 3}
       propertyPath: m_LocalPosition.x
