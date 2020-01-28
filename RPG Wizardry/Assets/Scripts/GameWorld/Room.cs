@@ -123,7 +123,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 return;
             if (EnemyHolder.transform.childCount == 0)
             {
-                clearedRoom();
+                clearedRoom?.Invoke();
                 Cleared = true;
                 OpenDoors();
             }

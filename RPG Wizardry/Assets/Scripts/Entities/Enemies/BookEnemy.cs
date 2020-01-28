@@ -1,4 +1,4 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
+using nl.SWEG.RPGWizardry.GameWorld;
 using nl.SWEG.RPGWizardry.Player;
 using nl.SWEG.RPGWizardry.Sorcery.Spells;
 using nl.SWEG.RPGWizardry.Utils.Functions;
@@ -31,14 +31,19 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [SerializeField]
         [Tooltip("Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)")]
         private float attackAngleMargin = 5f;
+
+        [SerializeField]
+        [Tooltip("Modifies the turning speed of the book")]
+        private float turnSpeedModifier = 0;
         #endregion
 
         #region Private
         /// <summary>
         /// Cooldown-Timer for Attacking
         /// </summary>
-        private float attackTimer;
-        /// <summary>
+        private float attackTimer;
+
+        /// <summary>
         /// Has this enemy died?
         /// </summary>
         private bool dead;
@@ -60,7 +65,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
             toPlayer.Normalize();
             float rotationAngle = Vector2.SignedAngle(transform.right, toPlayer);
-            float maxAngle = data.Speed * Time.deltaTime;
+            float maxAngle = (data.Speed + turnSpeedModifier) * Time.deltaTime;
 
             if (Mathf.Abs(rotationAngle) <= maxAngle) // Full rotation
             {
@@ -159,9 +164,9 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Destroys book after animation has been preformed
         /// </summary>
-        private void DeathAnimationEnd()
-        {
-            Destroy(gameObject);
+        private void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
         }
 
         /// <summary>

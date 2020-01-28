@@ -16,11 +16,8 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
   - Ahh.. home sweet home. Oh Willow, this is your first time in the tower right?
-  - Let me teach you a bit about how this place works.
   - "I don\u2019t know if anyone gave you the memo, but this place is filled with
     many different monsters that probably love to have a taste of living meat."
-  - So yes, you will probably be hunted down in here, BUT! I will personally make
-    sure you get out of here before you actually will die.
   - "I\u2019d rather not die in here as well and I need a vessel to be able to cast
     magic."
   - "The only spell I\u2019ve retained is\u2026 bookerang\u2026 well, please try using
