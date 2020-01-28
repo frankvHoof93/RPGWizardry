@@ -103,7 +103,10 @@
 					float radii[4] = {radius.x, radius.y, radius.z, radius.w};
 					// Check if Pixel is inside a Circle
 					if (IsInAnyCircle(IN.vertex, positions, radii, len))
+					{
+						c.rgb *= c.a; // Apply alpha from texture
 						c.a = _SeeThroughAlpha; // TRUE: Apply Alpha
+					}
 				}
 				c.rgb *= c.a; // Apply Alpha to RGB (copied from Sprites-Default)
 				return c;
