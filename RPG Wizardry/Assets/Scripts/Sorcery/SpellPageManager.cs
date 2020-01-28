@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.RPGWizardry.Player;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ namespace nl.SWEG.RPGWizardry.Sorcery
     public class SpellPageManager : MonoBehaviour
     {
         #region Variables
+        private const int SymbolCount = 9;
+
         /// <summary>
         /// Spell targeted for unlocking
         /// </summary>
@@ -56,6 +59,12 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [SerializeField]
         [Tooltip("TextBox for Description")]
         private TextMeshProUGUI description;
+        [SerializeField]
+        [Tooltip("")]
+        private GameObject symbolPrefab;
+        [SerializeField]
+        [Tooltip("")]
+        private Transform symbolParent;
         #endregion
 
         #region Methods
@@ -66,6 +75,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         public void SetSelectedSpell(SpellPage target)
         {
             selectedSpell = target;
+            OnDisable(); // Delete old Info
             OnEnable(); // Set new Info
         }
         /// <summary>
@@ -106,6 +116,26 @@ namespace nl.SWEG.RPGWizardry.Sorcery
                 button.enabled = false;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
             }
+            // Seed Random with Hash of Spell-Name (for consistency)
+            System.Random r = new System.Random(selectedSpell.Spell.Name.GetHashCode());
+            for (int i = 0; i < SymbolCount; i++) // Create Symbols
+            {
+                GameObject symbolInstance = Instantiate(symbolPrefab); // Create Instance
+                symbolInstance.SetActive(true);
+                symbolInstance.transform.SetParent(symbolParent); // Set to Parent 
+                symbolInstance.transform.localScale = Vector3.one;
+                TextMeshProUGUI symbol = symbolInstance.GetComponentInChildren<TextMeshProUGUI>(true);                
+                symbol.SetText($"<sprite={r.Next(0, 6)}>"); // Set Symbol
+                Vector3 pos = symbol.transform.localPosition;
+                pos.y = (float)r.NextDouble() * 150f - 75f; // Set to random Y-pos between lower & upper bound of rect
+                symbol.transform.localPosition = pos; // Set y-position
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (Transform child in symbolParent)
+                Destroy(child.gameObject);
         }
         #endregion
     }
