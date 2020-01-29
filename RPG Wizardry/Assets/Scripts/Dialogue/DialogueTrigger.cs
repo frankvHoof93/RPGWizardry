@@ -9,47 +9,52 @@ using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.ResearchData;
 using UnityEngine;
 using UnityEngine.UI;
+using nl.SWEG.RPGWizardry.Player.Inventory;
 
 namespace nl.SWEG.RPGWizardry.UI.Dialogue
 {
+    
+
     public class DialogueTrigger : MonoBehaviour
     {
+        private enum DialoguePrompts
+        {
+            start = 0,
+            castedBookerang = 1,
+            slimeRoomCleared = 2,
+            bookKilled = 3,
+            pickedUpPage = 4,
+            enteredMenu = 5,
+            enteredSpellList = 6,
+            enteredNewSpell = 7,
+            entersPuzzle = 8,
+            finishPuzzle = 9
+        }
+
         // Set Dialogue variables
-        public DialogueData startTutorial;
-        public DialogueData castedBookerang;
-        public DialogueData slimeRoomCleared;
-        public DialogueData bookKilled;
-        public DialogueData pickedUpPage;
-        public DialogueData enteredMenu;
-        public DialogueData enteredSpellList;
-        public DialogueData enteredNewSpell;
-        public DialogueData entersPuzzle;
-        public DialogueData finishPuzzle;
+        [SerializeField]
+        private DialogueData[] dialogues;
 
         private void Start()
         {
             startTutorialDialogue(); //Run the Dialogue Queue function
-
-            DialogueManager.Instance.toggleTextBox(false); //Turn off the Textbox used for Referencing
+            
             SceneManager.sceneLoaded += loadMainMenu;  //Adding Event listener which checks for the scene load
-            DataManager.spellunlocked += finishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
+            PlayerInventory.spellunlocked += finishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
             Room.clearedRoom += roomClearedSlimes; //Adding the listener to checking for the room clear
 
             //Adding the Event Listeneres for the Page casting and Page Pickup
             PlayerManager.Instance.CastingManager.AddCastListener(castedBookerangDialogue);
             PlayerManager.Instance.Inventory.AddPageListener(pickedUpPageDialogue);
-
-           
-
         }
 
         /// <summary>
         ///Runs the start tutorial sentences queue
         /// </summary>
-        public void startTutorialDialogue()
+        private void startTutorialDialogue()
         {
             // Find the Dialogue Manager and start dialogue with given Dialogue variable
-            DialogueManager.Instance.StartDialogue(startTutorial);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.start]);
         }
 
         /// <summary>
@@ -57,7 +62,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// </summary>
         public void castedBookerangDialogue(ushort index, float cooldown)
         {
-            DialogueManager.Instance.StartDialogue(castedBookerang);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.castedBookerang]);
             PlayerManager.Instance.CastingManager.RemoveCastListener(castedBookerangDialogue); //Removes the listener so this function isn't called again
         }
 
@@ -66,7 +71,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// </summary>
         public void roomClearedSlimes()
         {
-            DialogueManager.Instance.StartDialogue(slimeRoomCleared);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.slimeRoomCleared]);
             Room.clearedRoom -= roomClearedSlimes;
             Room.clearedRoom += bookKilledDialogue; //Adds the listener, which checks for the room cleared, to the book room
         }
@@ -77,27 +82,29 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// </summary>
         public void bookKilledDialogue()
         {
-            DialogueManager.Instance.StartDialogue(bookKilled);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.bookKilled]);
             Room.clearedRoom -= bookKilledDialogue;
         }
         public void pickedUpPageDialogue(uint newAmount, int change)
         {
-            DialogueManager.Instance.StartDialogue(pickedUpPage);
-            PlayerManager.Instance.MovementManager.ToggleMovement(true);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.pickedUpPage]);
+            PlayerManager.Instance.MovementManager.SetStunned(true);
             PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
-            GameUIManager.Instance.ToggelPause(true);
-            DialogueManager.Instance.toggleTextBox(true);
+            //enable GameUIManager to allow pausing
+            GameUIManager.Instance.enabled = true;
+            DialogueManager.Instance.SetTextboxVisibility(true);
         }
         public void enteredMenuDialogue()
         {
-            GameUIManager.Instance.ToggelPause(false);
-            DialogueManager.Instance.toggleTextBox(false);
-            DialogueManager.Instance.StartDialogue(enteredMenu);
+            //disable GameUIManager to disallow pausing
+            GameUIManager.Instance.enabled = false;
+            DialogueManager.Instance.SetTextboxVisibility(false);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.enteredMenu]);
             SceneManager.sceneLoaded -= loadMainMenu;
         }
         public void enteredSpellListDialogue()
         {
-            DialogueManager.Instance.StartDialogue(enteredSpellList);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.enteredSpellList]);
 
             Transform spellUTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items/Spell List"); //Looking for the button Spell List in Main Menu
             Button btn = spellUTF.GetComponent<Button>();
@@ -107,10 +114,10 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         public void enteredNewSpellDialogue()
         {
-            DialogueManager.Instance.StartDialogue(enteredNewSpell);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.enteredNewSpell]);
 
 
-            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu     
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the second spell in the spell list    
             Button btn = buttonunlock.GetComponent<Button>();
             btn.onClick.RemoveListener(enteredNewSpellDialogue);
 
@@ -121,7 +128,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public void entersPuzzleDialogue()
         {
 
-            DialogueManager.Instance.StartDialogue(entersPuzzle);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.entersPuzzle]);
 
 
             Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
@@ -132,10 +139,11 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         public void finishPuzzleDialogue()
         {
 
-            DialogueManager.Instance.StartDialogue(finishPuzzle);
-            PlayerManager.Instance.MovementManager.ToggleMovement(false);
-            DataManager.spellunlocked -= finishPuzzleDialogue;
-            GameUIManager.Instance.ToggelPause(true);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.finishPuzzle]);
+            PlayerManager.Instance.MovementManager.SetStunned(false);
+            PlayerInventory.spellunlocked -= finishPuzzleDialogue;
+            //enable GameUIManager to allow pausing
+            GameUIManager.Instance.enabled = true;
 
         }
 
@@ -151,7 +159,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         private IEnumerator AttachToButtonSpell()
         {
-            yield return null;
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
 
             Transform spellTF = MenuManager.Instance.GameMenu.transform.Find("Menu-Items/Spell List"); //Looking for the button Spell List in Main Menu
             Button btn = spellTF.GetComponent<Button>();
@@ -162,7 +171,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         private IEnumerator AttachToButtonUnlock()
         {
-            yield return null;
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
 
             Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu
             Button btn = buttonunlock.GetComponent<Button>();
@@ -172,7 +182,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         private IEnumerator AttachToSpellCrafting()
         {
-            yield return null;
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
 
             Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
             Button btn = spellcrafting.GetComponent<Button>();

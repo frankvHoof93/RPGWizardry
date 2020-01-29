@@ -82,7 +82,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// </summary>
         private void OnEnable()
         {
-            uint? dust = PlayerManager.Instance?.Inventory?.Dust;
+            uint? dust = PlayerManager.Instance.Inventory?.Dust;
             if (selectedSpell == null)
                 return;
             title.text = selectedSpell.SpellTitle;

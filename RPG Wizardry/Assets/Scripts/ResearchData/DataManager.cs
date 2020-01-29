@@ -9,10 +9,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
     public class DataManager : MonoBehaviour
     {
         #region Inner Types
-        /// <summary>
-        /// Creating event array to check for spellunlocking
-        /// </summary>
-        public delegate void SpellUnlock();
+        
         #endregion
 
         #region Variables
@@ -54,11 +51,7 @@ namespace nl.SWEG.RPGWizardry.ResearchData
         private Button checkButton;
 
         private bool started = false;
-
-        /// <summary>
-        /// Spellunlocked event
-        /// </summary>
-        public static SpellUnlock spellunlocked;
+        
         #endregion
         #region Methods
 
@@ -104,7 +97,6 @@ namespace nl.SWEG.RPGWizardry.ResearchData
                 spellManager.UnlockSpell();
                 message.enabled = true;
                 checkButton.enabled = false;
-                spellunlocked?.Invoke();
                 StartCoroutine(CoroutineMethods.RunDelayed(SwitchToSpellPage, 3f));
             }
             else

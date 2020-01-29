@@ -23,6 +23,14 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         #region Variables
         #region Public
         /// <summary>
+        /// Creating event array to check for spellunlocking
+        /// </summary>
+        public delegate void SpellUnlock();
+        /// <summary>
+        /// Spellunlocked event
+        /// </summary>
+        public static SpellUnlock spellunlocked;
+        /// <summary>
         /// Amount of Dust in Inventory
         /// </summary>
         public uint Dust { get; private set; }
@@ -134,6 +142,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             if (Dust >= page.DustCost)
             {
                 page.UnlockSpell();
+                spellunlocked?.Invoke();
                 Dust -= page.DustCost;
                 dustChangeEvent(Dust, (int)page.DustCost);
             }

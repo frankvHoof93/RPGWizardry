@@ -51,11 +51,11 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
             StartCoroutine(StunLoop(duration));
         }
 
-        public void ToggleMovement(bool value)
+        public void SetStunned(bool stunned)
         {
-            stunned = value;
+            this.stunned = stunned;
             
-            if(value)
+            if(stunned)
             {
                 animator.SetFloat("Speed", 0);
             }

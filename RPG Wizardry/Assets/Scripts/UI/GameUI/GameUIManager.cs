@@ -25,11 +25,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         private PlayerHUD hud;
 
         /// <summary>
-        /// Creating a bool to check for Game Pause
-        /// </summary>
-        private bool PauseAllowed = false;
-
-        /// <summary>
         /// Event called when menu is opened
         /// </summary>
         private event openMenu openMenuTutorial;
@@ -56,11 +51,18 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 
         #region Methods
         #region Unity
+
+        private void Start()
+        {
+            enabled = false;
+        }
+
         /// <summary>
         /// Checks for Input
         /// </summary>
         private void Update()
         {
+            //if this script is disabled, you cannot pause
             CheckPlayerInput();
         }
         #endregion
@@ -71,7 +73,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         private void CheckPlayerInput()
         {
-            if (PauseAllowed && Input.GetKeyDown(KeyCode.Escape)) //Added the Pause Allowed check
+            if (Input.GetKeyDown(KeyCode.Escape)) //Added the Pause Allowed check
             {
                 GameManager.Instance.TogglePause();
                 if (GameManager.Instance.Paused) // Game was running, open Menu
@@ -80,18 +82,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                     SceneLoader.Instance.LoadGameScene();
             }
         }
-        #endregion
-
-        #region Public
-
-        /// <summary>
-        /// Toggles the ESC button value (true and false) using the Pauseallowed Event
-        /// </summary>
-        public void ToggelPause(bool value)
-        {
-            PauseAllowed = value;
-        }
-
         #endregion
         #endregion
     }
