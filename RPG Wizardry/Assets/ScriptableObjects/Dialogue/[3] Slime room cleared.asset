@@ -15,8 +15,6 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - Do you see that shiny purple stuff those slimes dropped? That's magic dust.
-  - "If we want to use new magic spells, you\u2019ll need to gather enough magic dust
-    so we can craft these spells."
-  - But first we need to find a spell page, and I have a feeling we can get one in
-    the next room.
+  - Do you see that purple stuff those slimes dropped? That's magic dust.
+  - "If we want to create new magic spells, you\u2019ll need to gather lots of it."
+  - Next we'll need to find a spell page.
