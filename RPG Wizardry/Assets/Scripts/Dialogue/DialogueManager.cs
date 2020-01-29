@@ -17,10 +17,10 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
         [SerializeField] public GameObject textBox;
 
-        public Queue<string> sentences;
+        private readonly Queue<string> sentences = new Queue<string>();
 
         private Coroutine currentCoroutine;
-
+        
         /// <summary>
         /// Check if right mouse button is pressed
         /// </summary>
@@ -39,7 +39,9 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// <param name="dialogue">Scriptable dialogue object</param>
         public void StartDialogue(DialogueData dialogue)
         {
-            if (dialogue.name != null)
+            ShowInstructionPrompt(false); //Turn off the Textbox
+
+            if (dialogue.Name != null)
             {
                 nameText.text = dialogue.Name;
             }
@@ -48,18 +50,11 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
                 nameText.text = "";
             }
 
-            if (dialogue.Sprite != null)
-            {
-                characterImage.sprite = dialogue.Sprite;
-            }
-            else
-            {
-                characterImage.sprite = null;
-            }
+            characterImage.sprite = dialogue.Sprite;
 
             // Open the dialogue box and clear the previous sentences that could be in the sentences array
             animator.SetBool("IsOpen", true);
-            sentences = new Queue<string>();
+            sentences.Clear();
 
             // Queue dialogue to sentences array
             foreach (string sentence in dialogue.Sentences)
@@ -113,9 +108,8 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             }
         }
 
-        public void toggleTextBox(bool value)
+        public void ShowInstructionPrompt(bool value)
         {
-
             textBox.SetActive(value);
             animatorTextbox.SetBool("isOpened", value);
         }
@@ -123,7 +117,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// <summary>
         /// End dialogue and clear queue
         /// </summary>
-        void EndDialogue()
+        private void EndDialogue()
         {
             // Closes dialogue box
             animator.SetBool("IsOpen", false);

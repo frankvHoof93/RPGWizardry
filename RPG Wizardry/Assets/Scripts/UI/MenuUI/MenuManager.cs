@@ -13,10 +13,6 @@ namespace nl.SWEG.RPGWizardry.UI
         /// <summary>
         /// Delegate for Entering Main Menu event
         /// </summary>
-        public delegate void OnMenu();
-        /// <summary>
-        /// Delegate for Entering Main Menu event
-        /// </summary>
         public delegate void OnSpellMenu();
         #endregion
 
@@ -115,8 +111,6 @@ namespace nl.SWEG.RPGWizardry.UI
         /// <summary>
         /// Event called when Main Menu is entered
         /// </summary>
-        private event OnMenu onMenuEnter;
-        private event OnMenu onMenuExit;
         private event OnSpellMenu onSpellMenuEnter;
 
         private void InitGameMenu()
@@ -130,9 +124,6 @@ namespace nl.SWEG.RPGWizardry.UI
             loadGameButton.interactable = SaveManager.HasSave();
         }
         #endregion
-
-       
-
         #endregion
     }
 }
