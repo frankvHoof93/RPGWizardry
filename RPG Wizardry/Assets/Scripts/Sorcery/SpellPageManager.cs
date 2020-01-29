@@ -9,6 +9,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery
     {
         #region Variables
         /// <summary>
+        /// Amount of Symbols Displayed in Rect
+        /// </summary>
+        private const int SymbolCount = 9;
+
+        /// <summary>
         /// Spell targeted for unlocking
         /// </summary>
         [SerializeField]
@@ -56,6 +61,18 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         [SerializeField]
         [Tooltip("TextBox for Description")]
         private TextMeshProUGUI description;
+        /// <summary>
+        /// Prefab for TextBox displaying a Symbol inside the Graphic
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Prefab for TextBox displaying a Symbol inside the Graphic")]
+        private GameObject symbolPrefab;
+        /// <summary>
+        /// Parent for TextBox displaying a Symbol inside the Graphic
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Parent for TextBox displaying a Symbol inside the Graphic")]
+        private Transform symbolParent;
         #endregion
 
         #region Methods
@@ -66,6 +83,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         public void SetSelectedSpell(SpellPage target)
         {
             selectedSpell = target;
+            OnDisable(); // Delete old Info
             OnEnable(); // Set new Info
         }
         /// <summary>
@@ -106,6 +124,28 @@ namespace nl.SWEG.RPGWizardry.Sorcery
                 button.enabled = false;
                 button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
             }
+            // Seed Random with Hash of Spell-Name (for consistency)
+            System.Random r = new System.Random(selectedSpell.Spell.Name.GetHashCode());
+            for (int i = 0; i < SymbolCount; i++) // Create Symbols
+            {
+                GameObject symbolInstance = Instantiate(symbolPrefab); // Create Instance
+                symbolInstance.SetActive(true);
+                symbolInstance.transform.SetParent(symbolParent); // Set to Parent 
+                symbolInstance.transform.localScale = Vector3.one;
+                TextMeshProUGUI symbol = symbolInstance.GetComponentInChildren<TextMeshProUGUI>(true);                
+                symbol.SetText($"<sprite={r.Next(0, 6)}>"); // Set Symbol
+                Vector3 pos = symbol.transform.localPosition;
+                pos.y = (float)r.NextDouble() * 150f - 75f; // Set to random Y-pos between lower & upper bound of rect
+                symbol.transform.localPosition = pos; // Set y-position
+            }
+        }
+        /// <summary>
+        /// Destroys Existing Symbols on Page
+        /// </summary>
+        private void OnDisable()
+        {
+            foreach (Transform child in symbolParent)
+                Destroy(child.gameObject);
         }
         #endregion
     }
