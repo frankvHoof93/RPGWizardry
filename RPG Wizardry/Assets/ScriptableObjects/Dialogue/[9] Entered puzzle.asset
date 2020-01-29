@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - You see all those little dust particles on those bars? It is up to you to align
-    the dust particles on the horizontal line.
-  - "Once you\u2019ve aligned them all you can try unlocking it by clicking the rune
-    circle. Left click to close this window."
+  - You see all those little dust particles? Your goal is to put them as close to
+    the line as possible.
+  - "Once you\u2019ve aligned them all you can activate the spell by clicking the
+    rune circle."

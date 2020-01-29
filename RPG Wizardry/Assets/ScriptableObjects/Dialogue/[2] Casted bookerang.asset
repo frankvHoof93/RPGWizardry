@@ -15,5 +15,4 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - "I regret doing this\u2026 At least now you know of a way to defend yourself."
-  - I sense that in the next room are some enemies.
+  - "I regret doing this\u2026 At least now you are able to defend yourself."

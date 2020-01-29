@@ -15,4 +15,4 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - "Please go to the \u2018Spell List\u2019 page."
+  - Please go to the Spell List.
