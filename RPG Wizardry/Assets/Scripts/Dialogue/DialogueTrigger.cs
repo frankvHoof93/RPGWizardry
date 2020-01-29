@@ -40,7 +40,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             startTutorialDialogue(); //Run the Dialogue Queue function
             
             SceneManager.sceneLoaded += loadMainMenu;  //Adding Event listener which checks for the scene load
-            PlayerInventory.spellunlocked += finishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
+            PlayerManager.Instance.Inventory.spellunlocked += finishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
             Room.clearedRoom += roomClearedSlimes; //Adding the listener to checking for the room clear
 
             //Adding the Event Listeneres for the Page casting and Page Pickup
@@ -92,13 +92,13 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             PlayerManager.Instance.Inventory.RemovePageListener(pickedUpPageDialogue);
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
-            DialogueManager.Instance.SetTextboxVisibility(true);
+            DialogueManager.Instance.ShowInstructionPrompt(true);
         }
         public void enteredMenuDialogue()
         {
             //disable GameUIManager to disallow pausing
             GameUIManager.Instance.enabled = false;
-            DialogueManager.Instance.SetTextboxVisibility(false);
+            DialogueManager.Instance.ShowInstructionPrompt(false);
             DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.enteredMenu]);
             SceneManager.sceneLoaded -= loadMainMenu;
         }
@@ -141,7 +141,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
 
             DialogueManager.Instance.StartDialogue(dialogues[(int)DialoguePrompts.finishPuzzle]);
             PlayerManager.Instance.MovementManager.SetStunned(false);
-            PlayerInventory.spellunlocked -= finishPuzzleDialogue;
+            PlayerManager.Instance.Inventory.spellunlocked -= finishPuzzleDialogue;
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
 

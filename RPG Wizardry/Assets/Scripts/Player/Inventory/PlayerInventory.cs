@@ -29,7 +29,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         /// <summary>
         /// Spellunlocked event
         /// </summary>
-        public static SpellUnlock spellunlocked;
+        public SpellUnlock spellunlocked;
         /// <summary>
         /// Amount of Dust in Inventory
         /// </summary>

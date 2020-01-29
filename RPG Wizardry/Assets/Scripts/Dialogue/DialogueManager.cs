@@ -39,7 +39,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
         /// <param name="dialogue">Scriptable dialogue object</param>
         public void StartDialogue(DialogueData dialogue)
         {
-            SetTextboxVisibility(false); //Turn off the Textbox
+            ShowInstructionPrompt(false); //Turn off the Textbox
 
             if (dialogue.Name != null)
             {
@@ -108,7 +108,7 @@ namespace nl.SWEG.RPGWizardry.UI.Dialogue
             }
         }
 
-        public void SetTextboxVisibility(bool value)
+        public void ShowInstructionPrompt(bool value)
         {
             textBox.SetActive(value);
             animatorTextbox.SetBool("isOpened", value);
