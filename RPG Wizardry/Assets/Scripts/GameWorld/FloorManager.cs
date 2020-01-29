@@ -24,7 +24,8 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Currently Loaded Room
         /// </summary>
-        private Room activeRoom;
+        [HideInInspector]
+        public Room activeRoom;
         #endregion
 
         #region Methods

@@ -5,12 +5,24 @@ namespace nl.SWEG.RPGWizardry.GameWorld
 {
     public class Room : MonoBehaviour
     {
+        #region Inner Types
+        /// <summary>
+        /// Creating Array for event that checks for Room Clear
+        /// </summary>
+        public delegate void roomClear();
+
+        #endregion
         #region Variables
         #region Public
         /// <summary>
         /// Whether the Room has been Cleared (No more Enemies)
         /// </summary>
         public bool Cleared { get; private set; }
+
+        /// <summary>
+        /// Roomcleared event
+        /// </summary>
+        public static roomClear clearedRoom;
         #endregion
 
         #region Editor
@@ -113,6 +125,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
                 return;
             if (EnemyHolder.transform.childCount == 0)
             {
+                clearedRoom?.Invoke(); //Runs event when room is cleared
                 Cleared = true;
                 OpenDoors();
             }

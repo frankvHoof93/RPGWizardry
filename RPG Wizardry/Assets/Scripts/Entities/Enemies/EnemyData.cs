@@ -22,6 +22,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             //public LootSpawn page;
             [SerializeField]
             public LootSpawn potion;
+           
         }
         /// <summary>
         /// Chance-Value for spawning Loot

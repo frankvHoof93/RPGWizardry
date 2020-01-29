@@ -9,6 +9,17 @@ namespace nl.SWEG.RPGWizardry.UI
 {
     public class MenuManager : SingletonBehaviour<MenuManager>
     {
+        #region Inner Types
+        /// <summary>
+        /// Delegate for Entering Main Menu event
+        /// </summary>
+        public delegate void OnMenu();
+        /// <summary>
+        /// Delegate for Entering Main Menu event
+        /// </summary>
+        public delegate void OnSpellMenu();
+        #endregion
+
         #region Variables
         /// <summary>
         /// Background for Menu. Only shown if Game is not running
@@ -33,12 +44,24 @@ namespace nl.SWEG.RPGWizardry.UI
         #endregion
 
         #region GameMenu
+        public GameObject GameMenu => gameMenuPanel;
+
+
+
         [Header("Game Menu")]
         /// <summary>
         /// Panel with PauseMenu-Options
         /// </summary>
         [SerializeField]
         private GameObject gameMenuPanel;
+        #endregion
+
+        #region 
+        [Header("Spell Canvases")]
+
+        public GameObject SpellListCanvas;
+        public GameObject SpellCanvas;
+        public GameObject ScrollpageCanvas;
         #endregion
         #endregion
 
@@ -88,6 +111,14 @@ namespace nl.SWEG.RPGWizardry.UI
         #endregion
 
         #region Private
+
+        /// <summary>
+        /// Event called when Main Menu is entered
+        /// </summary>
+        private event OnMenu onMenuEnter;
+        private event OnMenu onMenuExit;
+        private event OnSpellMenu onSpellMenuEnter;
+
         private void InitGameMenu()
         {
             gameMenuPanel.SetActive(true);
@@ -99,6 +130,9 @@ namespace nl.SWEG.RPGWizardry.UI
             loadGameButton.interactable = SaveManager.HasSave();
         }
         #endregion
+
+       
+
         #endregion
     }
 }

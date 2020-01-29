@@ -4,8 +4,10 @@ using nl.SWEG.RPGWizardry.UI;
 using nl.SWEG.RPGWizardry.UI.GameUI;
 using nl.SWEG.RPGWizardry.Utils;
 using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using nl.SWEG.RPGWizardry.UI.Dialogue;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace nl.SWEG.RPGWizardry.Loading
 {
@@ -111,6 +113,8 @@ namespace nl.SWEG.RPGWizardry.Loading
         {
             if (CameraManager.Exists)
                 Destroy(CameraManager.Instance.gameObject);
+            if (DialogueManager.Exists)
+                Destroy(DialogueManager.Instance.gameObject);
             if (CameraMover.Exists)
                 Destroy(CameraMover.Instance.gameObject);
             if (FloorManager.Exists)
