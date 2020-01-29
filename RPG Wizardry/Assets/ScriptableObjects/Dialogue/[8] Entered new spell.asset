@@ -15,10 +15,8 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - "As you can see, you can read more about what this spell does. Like it\u2019s
-    name, description, how strong it is, and the cooldown it has!"
-  - Do you see the rune graph on the right?
-  - If you want to use this spell, we need to solve the rune graph first.
-  - Solving a rune graph will cost you magic dust, luckily we obtained enough from
-    those slimes before.
-  - Press the rune circle so we can start the process. Left click to close this window.
+  - Here you can see more details about the spell you just collected.
+  - If you want to use this spell, we need to activate the rune graph first.
+  - Solving a rune graph costs magic dust. Luckily we obtained enough from those slimes
+    before.
+  - Press the rune circle so we can start activating.

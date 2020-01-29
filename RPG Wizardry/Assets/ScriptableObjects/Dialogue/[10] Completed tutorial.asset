@@ -15,5 +15,5 @@ MonoBehaviour:
   characterName: Greg
   characterSprite: {fileID: 21300000, guid: a6bf9914f852f734eb40e4d97140e8b4, type: 3}
   sentenceStrings:
-  - Wow, you did it. You can now stop throwing me and use the spell you just unlocked.
-  - Press "ESC" to close the book and use your new spell!
+  - Great! Now you can stop throwing me and use the spell instead.
+  - Press "ESC" to close the book and use your new spell.
