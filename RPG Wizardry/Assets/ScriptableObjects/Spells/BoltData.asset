@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BoltData
   m_EditorClassIdentifier: 
   spellName: Bolt
-  spellDescription: Test Description
+  spellDescription: Fire a lightning bolt in a straight line in front of you, dealing
+    damage to a single target.
   spellCost: 0
   spellPattern: 0
   spellDamage: 15

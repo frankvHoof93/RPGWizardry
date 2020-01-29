@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BookerangData
   m_EditorClassIdentifier: 
   spellName: Bookerang
-  spellDescription: 'Test Description: Basic Attack. Yeet Greg at your enemies'
+  spellDescription: Basic Attack. Yeet Greg at your enemies
   spellCost: 0
   spellPattern: 0
   spellDamage: 10
