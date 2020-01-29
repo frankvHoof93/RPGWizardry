@@ -75,8 +75,6 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         public void AddDustListener(OnInventoryChange listener)
         {
             dustChangeEvent += listener;
-            // Set Initial Value
-            listener.Invoke(Dust, 0);
         }
         /// <summary>
         /// Removes Listener from Dust-Event
@@ -103,6 +101,24 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
         public void RemoveGoldListener(OnInventoryChange listener)
         {
             goldChangeEvent -= listener;
+        }
+
+        /// <summary>
+        /// Add Listener from Page-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddPageListener(OnInventoryChange listener)
+        {
+            pageChangeEvent += listener;
+        }
+
+        /// <summary>
+        /// Remove Listener from Page-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemovePageListener(OnInventoryChange listener)
+        {
+            pageChangeEvent -= listener;
         }
         #endregion
 
@@ -201,6 +217,7 @@ namespace nl.SWEG.RPGWizardry.Player.Inventory
             if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
+                pageChangeEvent?.Invoke(Dust, 1);
                 return true;
             }
             else return false;

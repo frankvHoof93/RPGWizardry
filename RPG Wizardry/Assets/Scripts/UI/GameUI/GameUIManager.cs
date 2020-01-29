@@ -6,6 +6,12 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 {
     public class GameUIManager : SingletonBehaviour<GameUIManager>
     {
+        #region Inner Types
+        /// <summary>
+        /// Creating openmenu event
+        /// </summary>
+        public delegate void openMenu();
+        #endregion
         #region Variables
         /// <summary>
         /// Heads-Up Display for Player
@@ -17,6 +23,35 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [SerializeField]
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
+
+        /// <summary>
+        /// Creating a bool to check for Game Pause
+        /// </summary>
+        private bool PauseAllowed = false;
+
+        /// <summary>
+        /// Event called when menu is opened
+        /// </summary>
+        private event openMenu openMenuTutorial;
+        #endregion
+
+        #region Eventlisteners
+        /// <summary>
+        /// Adds Listener to openMenu-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddMenuListener(openMenu listener)
+        {
+            openMenuTutorial += listener;
+        }
+        /// <summary>
+        /// Removes Listener from OpenMenu-event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveMenuListener(openMenu listener)
+        {
+            openMenuTutorial -= listener;
+        }
         #endregion
 
         #region Methods
@@ -36,7 +71,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// </summary>
         private void CheckPlayerInput()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (PauseAllowed && Input.GetKeyDown(KeyCode.Escape)) //Added the Pause Allowed check
             {
                 GameManager.Instance.TogglePause();
                 if (GameManager.Instance.Paused) // Game was running, open Menu
@@ -45,6 +80,18 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                     SceneLoader.Instance.LoadGameScene();
             }
         }
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// Toggles the ESC button value (true and false) using the Pauseallowed Event
+        /// </summary>
+        public void ToggelPause(bool value)
+        {
+            PauseAllowed = value;
+        }
+
         #endregion
         #endregion
     }

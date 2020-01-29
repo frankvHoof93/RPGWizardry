@@ -50,6 +50,16 @@ namespace nl.SWEG.RPGWizardry.Player.Movement
         {
             StartCoroutine(StunLoop(duration));
         }
+
+        public void ToggleMovement(bool value)
+        {
+            stunned = value;
+            
+            if(value)
+            {
+                animator.SetFloat("Speed", 0);
+            }
+        }
         #endregion
 
         #region Unity
