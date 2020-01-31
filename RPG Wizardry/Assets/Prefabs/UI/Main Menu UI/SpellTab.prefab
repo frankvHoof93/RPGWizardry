@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 1619206942705119286}
   - component: {fileID: 8948586781729809118}
   - component: {fileID: 7465172041745730699}
+  - component: {fileID: 566530577210362774}
   m_Layer: 5
   m_Name: SpellTab
   m_TagString: Untagged
@@ -219,17 +220,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: {fileID: 7937324198192516330}
-  checkSprites:
-  - {fileID: 21300000, guid: 05c4c5ca6bf75cd4c90762841b78cc9c, type: 3}
-  - {fileID: 21300000, guid: da939091c85eed24b8f8470112c8c685, type: 3}
   elementSprites:
   - {fileID: 21300000, guid: 85b5f089c21d44942bffcb9315c1e6f7, type: 3}
   - {fileID: 21300000, guid: 18516009198460249abdbd6706963d86, type: 3}
   - {fileID: 21300000, guid: 79a599063acc57545816ddf5af5f847a, type: 3}
   - {fileID: 21300000, guid: 9ed3a159f1c2b6e4aa37275a2656da63, type: 3}
   - {fileID: 21300000, guid: 94445a3e8e3c8684b84819291c31a3ce, type: 3}
-  title: {fileID: 6993104913001018254}
   check: {fileID: 3585641594884517991}
+  checkSprites:
+  - {fileID: 21300000, guid: 05c4c5ca6bf75cd4c90762841b78cc9c, type: 3}
+  - {fileID: 21300000, guid: da939091c85eed24b8f8470112c8c685, type: 3}
+  title: {fileID: 6993104913001018254}
+--- !u!114 &566530577210362774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208081757801960166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 200
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4135634461420745988
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -335,10 +356,10 @@ RectTransform:
   m_Father: {fileID: 3916573774739721852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6416234880536168625
 CanvasRenderer:
@@ -362,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -408,10 +429,10 @@ RectTransform:
   m_Father: {fileID: 7331828033413893414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 100}
+  m_SizeDelta: {x: 150, y: -50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2064232790969220934
 CanvasRenderer:
@@ -435,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -468,7 +489,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.25
+  m_fontSize: 18
   m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -485,7 +506,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0

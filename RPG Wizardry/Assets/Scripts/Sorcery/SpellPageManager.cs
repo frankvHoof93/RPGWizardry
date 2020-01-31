@@ -11,7 +11,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// <summary>
         /// Amount of Symbols Displayed in Rect
         /// </summary>
-        private const int SymbolCount = 9;
+        private const int SymbolCount = 8;
 
         /// <summary>
         /// Spell targeted for unlocking
