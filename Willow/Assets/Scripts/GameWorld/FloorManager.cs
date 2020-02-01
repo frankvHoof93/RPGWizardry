@@ -1,11 +1,11 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using nl.SWEG.RPGWizardry.UI.GameUI;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Behaviours;
+using nl.SWEG.Willow.UI.Game;
 using System.Collections;
 using UnityEngine;
-using static nl.SWEG.RPGWizardry.GameWorld.RoomData;
+using static nl.SWEG.Willow.GameWorld.RoomData;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     public class FloorManager : SingletonBehaviour<FloorManager>
     {

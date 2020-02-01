@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace nl.SWEG.RPGWizardry.Utils
+namespace nl.SWEG.Willow.Utils
 {
+    /// <summary>
+    /// Extension-Functions for Arrays
+    /// </summary>
     public static class ArrayExtensions
     {
         /// <summary>
         /// Retrieves a Row from an Array
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="array"></param>
-        /// <param name="row"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of Object in Array (Must be Primitive)</typeparam>
+        /// <param name="array">Source-Array to retrieve row from</param>
+        /// <param name="row">Index for row to retrieve</param>
+        /// <returns>Single row from Array</returns>
         public static T[] GetRow<T>(this T[,] array, int row)
         {
             if (!typeof(T).IsPrimitive)

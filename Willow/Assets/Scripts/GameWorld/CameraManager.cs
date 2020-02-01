@@ -1,9 +1,9 @@
-using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Behaviours;
 using UnityEngine;
 using System.Collections;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     [RequireComponent(typeof(Camera), typeof(AudioListener), typeof(ScreenFade))]
     public class CameraManager : SingletonBehaviour<CameraManager>

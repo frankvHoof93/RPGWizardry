@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace nl.SWEG.RPGWizardry.ResearchData
+namespace nl.SWEG.Willow.ResearchData
 {
     public class DataStubBin
     {

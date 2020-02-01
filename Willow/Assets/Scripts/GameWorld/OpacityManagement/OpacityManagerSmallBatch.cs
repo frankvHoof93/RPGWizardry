@@ -1,8 +1,8 @@
-﻿using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     /// <summary>
     /// To be used with the OpacitySmallShader

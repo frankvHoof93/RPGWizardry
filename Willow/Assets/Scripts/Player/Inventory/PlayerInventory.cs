@@ -1,13 +1,13 @@
-﻿using nl.SWEG.RPGWizardry.Sorcery;
-using nl.SWEG.RPGWizardry.Sorcery.Spells;
-using nl.SWEG.RPGWizardry.Utils.Storage;
+﻿using nl.SWEG.Willow.Sorcery;
+using nl.SWEG.Willow.Sorcery.Spells;
+using nl.SWEG.Willow.Utils.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player.Inventory
+namespace nl.SWEG.Willow.Player.Inventory
 {
     public class PlayerInventory : MonoBehaviour, IStorable, IJSON<PlayerInventory>
     {

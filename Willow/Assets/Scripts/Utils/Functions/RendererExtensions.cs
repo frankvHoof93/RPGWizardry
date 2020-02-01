@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils
+namespace nl.SWEG.Willow.Utils
 {
+    /// <summary>
+    /// Extension-Functions for Unity Renderer
+    /// </summary>
     public static class RendererExtensions
     {
         /// <summary>

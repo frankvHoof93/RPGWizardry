@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Collectables;
-using nl.SWEG.RPGWizardry.Sorcery.Spells;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
+﻿using nl.SWEG.Willow.Entities.Collectables;
+using nl.SWEG.Willow.Sorcery.Spells;
+using nl.SWEG.Willow.Utils.Behaviours;
 using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     public class LootSpawner : SingletonBehaviour<LootSpawner>
     {

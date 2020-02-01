@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.Utils;
+﻿using nl.SWEG.Willow.Utils;
 using System.Collections.Generic;
 
-namespace nl.SWEG.RPGWizardry.ResearchData
+namespace nl.SWEG.Willow.ResearchData
 {
     public class DataBin
     {

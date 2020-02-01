@@ -1,10 +1,13 @@
-﻿using nl.SWEG.RPGWizardry.Sorcery.Spells;
+﻿using nl.SWEG.Willow.Sorcery.Spells;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.UI.GameUI
+namespace nl.SWEG.Willow.UI.Game
 {
+    /// <summary>
+    /// Displays currently selected Spells and their Cooldowns
+    /// </summary>
     public class SpellHUD : MonoBehaviour
     {
         #region Variables
@@ -30,7 +33,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [Tooltip("Image-Object for Selection-Outline (KeyBoard)")]
         private Image selectionOutlineKeyBoard;
         /// <summary>
-        /// Panel which shows Button (Controller)
+        /// TODO: Panel which shows Controller-Button
         /// </summary>
         [SerializeField]
         [Tooltip("Panel which shows Button (Controller)")]
@@ -54,6 +57,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         {
             selectionOutlineKeyBoard.enabled = true;
         }
+
         /// <summary>
         /// Deselects this spell (Disables Selection-Outline)
         /// </summary>
@@ -61,6 +65,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         {
             selectionOutlineKeyBoard.enabled = false;
         }
+
         /// <summary>
         /// Sets Spell-Data to UI-Elements
         /// </summary>
@@ -83,6 +88,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 cooldownOverlay.enabled = false;
             }
         }
+
         /// <summary>
         /// Runs UI-Cooldown on Spell
         /// </summary>

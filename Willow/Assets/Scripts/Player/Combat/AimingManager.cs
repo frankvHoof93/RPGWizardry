@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
+﻿using nl.SWEG.Willow.Player.PlayerInput;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player.Combat
+namespace nl.SWEG.Willow.Player.Combat
 {
     [RequireComponent(typeof(PlayerManager))]
     public class AimingManager : MonoBehaviour

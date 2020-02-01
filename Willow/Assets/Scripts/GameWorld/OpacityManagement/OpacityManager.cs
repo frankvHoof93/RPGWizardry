@@ -1,9 +1,9 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
+﻿using nl.SWEG.Willow.GameWorld.OpacityManagement;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     [RequireComponent(typeof(Collider2D))]
     public abstract class OpacityManager : MonoBehaviour

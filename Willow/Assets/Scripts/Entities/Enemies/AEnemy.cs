@@ -1,15 +1,19 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.GameWorld;
+﻿using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.GameWorld.OpacityManagement;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.UI;
+using nl.SWEG.Willow.UI.Popups;
+using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
-using static nl.SWEG.RPGWizardry.Entities.Enemies.EnemyData;
-using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
-using nl.SWEG.RPGWizardry.UI;
-using nl.SWEG.RPGWizardry.Utils;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+using static nl.SWEG.Willow.Entities.Enemies.EnemyData;
 
-namespace nl.SWEG.RPGWizardry.Entities.Enemies
+namespace nl.SWEG.Willow.Entities.Enemies
 {
+    /// <summary>
+    /// Base Class for an Enemy
+    /// </summary>
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Renderer))]
     public abstract class AEnemy : MonoBehaviour, IHealth, IOpacity
@@ -21,7 +25,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// </summary>
         public ushort Health { get; private set; }
         /// <summary>
-        /// Opacity-Radius in Pixels (for 720p)
+        /// Opacity-Radius in Pixels (for 720p resolution)
         /// </summary>
         public virtual float OpacityRadius => data?.OpacityRadius ?? 0;
         /// <summary>
@@ -32,11 +36,17 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// Opacity-Offset from Transform (in World-Space)
         /// </summary>
         public Vector2 OpacityOffset => data?.OpacityOffset ?? Vector2.zero;
-        public delegate void Kill();
-        public Kill Killed;
         #endregion
 
         #region Protected
+        /// <summary>
+        /// Animator for this Enemy
+        /// </summary>
+        protected Animator enemyAnimator;
+        /// <summary>
+        /// Renderer for this Enemy
+        /// </summary>
+        protected Renderer enemyRenderer;
         /// <summary>
         /// Default values for this Enemy
         /// </summary>
@@ -44,27 +54,25 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [Tooltip("Default values for this Enemy")]
         protected EnemyData data;
         /// <summary>
-        /// Animator for Enemy
-        /// </summary>
-        protected Animator animator;
-        /// <summary>
-        /// Renderer for Enemy
-        /// </summary>
-        protected Renderer renderer;
-        /// <summary>
-        /// LayerMask for Attacks
+        /// LayerMask for Attacks performed by this Enemy
         /// </summary>
         [SerializeField]
-        [Tooltip("LayerMask for Attacks")]
+        [Tooltip("LayerMask for Attacks performed by this Enemy")]
         protected LayerMask attackCollisionMask;
         #endregion
 
         #region Private
         /// <summary>
-        /// Time at which Updates are enabled for this Enemy. This time is determined at Start by grabbing a random Cooldown-Value from the EnemyData
+        /// Time at which Updates are enabled for this Enemy
+        /// <para>
+        /// This time is determined at Start by grabbing a random Cooldown-Value from the EnemyData
+        /// </para>
         /// </summary>
         private float enableTime;
-        
+        /// <summary>
+        /// Event fired when Enemy Dies
+        /// </summary>
+        public Die Death; // TODOCLEAN: make private
         #endregion
         #endregion
 
@@ -74,6 +82,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// No Implementation (Enemies cannot Heal)
         /// </summary>
         /// <param name="amount">N.A.</param>
+        /// <returns>False (Always)</returns>
         public bool Heal(ushort amount)
         {
             return false; // Enemies cannot heal
@@ -92,25 +101,24 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
             {
                 Health -= amount;
             }
-
-            renderer.SetSpriteColor(Color.red);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red);
-            StartCoroutine(CoroutineMethods.RunDelayed(() => renderer.SetSpriteColor(Color.white), .1f));
+            enemyRenderer.SetSpriteColor(Color.red);
+            PopupFactory.CreateDamageUI(transform.position, amount, enemyRenderer, Color.red);
+            StartCoroutine(CoroutineMethods.RunDelayed(() => enemyRenderer.SetSpriteColor(Color.white), .1f));
         }
         #endregion
 
         #region Unity
         /// <summary>
-        /// Grabs reference to Animator
+        /// Grabs references to Animator & Renderer
         /// </summary>
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-            renderer = GetComponent<Renderer>();
+            enemyAnimator = GetComponent<Animator>();
+            enemyRenderer = GetComponent<Renderer>();
         }
 
         /// <summary>
-        /// Sets default values
+        /// Sets default values from Data
         /// </summary>
         protected virtual void Start()
         {
@@ -119,7 +127,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
 
         /// <summary>
-        /// Runs Update-Implementation if Player Exists
+        /// Runs Update-Implementation (if Player Exists)
+        /// <para>
+        /// Animates Enemy (Always)
+        /// </para>
         /// </summary>
         private void Update()
         {
@@ -131,36 +142,47 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         #endregion
 
         #region Protected
+        /// <summary>
+        /// Updates Enemy
+        /// </summary>
+        /// <param name="player">Reference To Player</param>
         protected abstract void UpdateEnemy(PlayerManager player);
+        /// <summary>
+        /// Animates Enemy
+        /// </summary>
         protected abstract void AnimateEnemy();
+        /// <summary>
+        /// Handles Enemy Death (e.g. Animation)
+        /// </summary>
         protected abstract void OnDeath();
         #endregion
 
         #region Private
         /// <summary>
-        /// Kills this Enemy, running Animations & dropping Loot
+        /// Kills this Enemy, dropping Loot and calling OnDeath
         /// </summary>
         private void Die()
         {
             float rng = Random.Range(0f, 1f);
             LootTable loot = data.Loot;
-            LootSpawn spawn = loot.dust;
+            LootSpawn spawn = loot.dust; // Dust
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.amount);
-            spawn = loot.gold;
+            spawn = loot.gold; // Gold
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
-            spawn = loot.potion;
+            spawn = loot.potion; // Potion
             if (spawn.amount > 0 && spawn.chance >= rng)
                 LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
-
-            // TODO: Death Animation & Audio
+            // Spawning of SpellPage handled seperately by BookEnemy
             OnDeath();
         }
-
+        /// <summary>
+        /// Fires Death-Event for Enemy
+        /// </summary>
         private void OnDestroy()
         {
-            Killed?.Invoke();
+            Death?.Invoke();
         }
         #endregion
         #endregion

@@ -1,4 +1,4 @@
-﻿namespace nl.SWEG.RPGWizardry.ResearchData
+﻿namespace nl.SWEG.Willow.ResearchData
 {
 
     public class ControlFragment : Fragment

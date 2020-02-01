@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld.OpacityManagement
+namespace nl.SWEG.Willow.GameWorld.OpacityManagement
 {
     public interface IOpacity
     {

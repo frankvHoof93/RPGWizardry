@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils.Functions
+namespace nl.SWEG.Willow.Utils.Functions
 {
+    /// <summary>
+    /// Math for re-calculating positions based on Resolution
+    /// </summary>
     public static class ResolutionMath
     {
         #region Variables

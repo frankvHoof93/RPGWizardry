@@ -1,8 +1,8 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     [RequireComponent(typeof(Camera))]
     public class ScreenFade : MonoBehaviour

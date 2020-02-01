@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Loading
+namespace nl.SWEG.Willow.Loading
 {
     public class GameOverManager : MonoBehaviour
     {

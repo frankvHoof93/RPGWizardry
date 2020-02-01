@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.Player.Inventory;
+﻿using nl.SWEG.Willow.Player.Inventory;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Entities.Collectables
+namespace nl.SWEG.Willow.Entities.Collectables
 {
     /// <summary>
     /// Pile of Magic Dust in GameWorld
@@ -28,9 +28,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         }
 
         /// <summary>
-        /// Adds Dust to Inventory, then Destroys this Object
+        /// Adds Dust to Inventory
         /// </summary>
         /// <param name="target">Inventory to Add to</param>
+        /// <returns>True if adding was successful</returns>
         protected override bool OnCollect(PlayerInventory target)
         {
             target.AddDust(Amount);

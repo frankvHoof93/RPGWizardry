@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using nl.SWEG.RPGWizardry.GameWorld;
-using static nl.SWEG.RPGWizardry.GameManager;
+using nl.SWEG.Willow.GameWorld;
+using static nl.SWEG.Willow.GameManager;
 
-namespace nl.SWEG.RPGWizardry.Player.PlayerInput
+namespace nl.SWEG.Willow.Player.PlayerInput
 {
     public class InputManager : MonoBehaviour
     {

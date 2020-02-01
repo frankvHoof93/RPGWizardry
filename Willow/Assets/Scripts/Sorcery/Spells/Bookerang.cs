@@ -1,24 +1,46 @@
-﻿using nl.SWEG.RPGWizardry.Audio;
-using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Audio;
+using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery.Spells
+namespace nl.SWEG.Willow.Sorcery.Spells
 {
+    /// <summary>
+    /// Bookerang is the most basic attack. The player throws Greg straight ahead
+    /// </summary>
     public class Bookerang : Projectile
     {
         #region Variables
+        #region Editor
         /// <summary>
         /// Speed at which the book rotates in flight
         /// </summary>
         [SerializeField]
+        [Tooltip("Speed at which the book rotates in flight")]
         private float SpinSpeed;
         /// <summary>
         /// Duration for which the book pauses before returning
         /// </summary>
         [SerializeField]
+        [Tooltip("Duration for which the book pauses before returning")]
         private float hangTime = 0.3f;
+        /// <summary>
+        /// Transform of the object that contains the sprite
+        /// (in a separate object so we can spin it independently)
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Transform of the object that contains the sprite")]
+        private Transform spriteTransform;
+        /// <summary>
+        /// Sound played when the book returns without hitting anything
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Sound played when the book returns without hitting anything")]
+        private AudioClip returnSound;
+        #endregion
+
+        #region Private
         /// <summary>
         /// Bool for whether the book is moving forwards (false) or returning (true)
         /// </summary>
@@ -34,13 +56,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Sprite of the "crosshair" book
         /// </summary>
-        private SpriteRenderer bookRenderer;
-        /// <summary>
-        /// Transform of the object that contains the sprite
-        /// (in a separate object so we can spin it independently)
-        /// </summary>
-        [SerializeField]
-        private Transform spriteTransform;
+        private SpriteRenderer bookRenderer;        
         /// <summary>
         /// Current location of the player, so we can return to it
         /// </summary>
@@ -49,11 +65,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// Position where we ended the forward movement
         /// </summary>
         private Vector3 savedPosition;
-        /// <summary>
-        /// Sound played when the book returns without hitting anything
-        /// </summary>
-        [SerializeField]
-        private AudioClip returnSound;
+        #endregion
         #endregion
 
         #region Methods
@@ -83,9 +95,10 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         protected override void Move()
         {
+            // TODOCLEAN: 
+
             //SPIN TO WIN
             spriteTransform.Rotate(Vector3.forward, SpinSpeed * Time.deltaTime,Space.World);
-
             //If not paused in mid-air
             if (!pause)
             {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player.PlayerInput
+namespace nl.SWEG.Willow.Player.PlayerInput
 {
     public struct InputState
     {

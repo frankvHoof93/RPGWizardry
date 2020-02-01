@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Utils.Attributes;
+﻿using nl.SWEG.Willow.Utils.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.Player.PlayerInput
+namespace nl.SWEG.Willow.Player.PlayerInput
 {
     public class SpellCraftingInput : MonoBehaviour
     {

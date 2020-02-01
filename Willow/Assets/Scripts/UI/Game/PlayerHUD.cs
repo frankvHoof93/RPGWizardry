@@ -1,11 +1,14 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Sorcery.Spells;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Sorcery.Spells;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.UI.GameUI
+namespace nl.SWEG.Willow.UI.Game
 {
+    /// <summary>
+    /// Heads-up Display for player. This controls the Overlay that is shown to the player during gameplay
+    /// </summary>
     public class PlayerHUD : MonoBehaviour
     {
         #region Variables
@@ -17,12 +20,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         [SerializeField]
         [Tooltip("Fill-UI for HealthBar")]
         private Image healthFillBar;
-        /// <summary>
-        /// DEBUG Text-UI for HealthBar
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Text-UI for HealthBar")]
-        private TextMeshProUGUI healthText;
         #endregion
 
         #region Items
@@ -47,17 +44,8 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// HUD-Objects for Selected Spells
         /// </summary>
         [SerializeField]
-        [Tooltip("")]
+        [Tooltip("HUD-Objects for Selected Spells")]
         private SpellHUD[] spellHuds;
-        #endregion
-
-        #region Tutorial
-        /// <summary>
-        /// Canvas for tutorial-text
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Canvas for tutorial-text")]
-        private GameObject tutorialCanvas;
         #endregion
         #endregion
 
@@ -87,9 +75,9 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.AddSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.AddSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.AddCastListener(UpdateSpellCooldown);
-                //tutorialCanvas.SetActive(true);
             }
         }
+
         /// <summary>
         /// Unregisters this UI from Events
         /// </summary>
@@ -104,7 +92,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 player.CastingManager?.RemoveSelectionListener(UpdateSpellSelection);
                 player.CastingManager?.RemoveSpellChangeListener(UpdateSpellUI);
                 player.CastingManager?.RemoveCastListener(UpdateSpellCooldown);
-                //tutorialCanvas.SetActive(false);
             }
         }
         #endregion
@@ -119,7 +106,6 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="change">Change in Value from previous</param>
         private void UpdateHealthBar(ushort newHealth, ushort maxHealth, short change)
         {
-            healthText.text = newHealth + "/" + maxHealth;
             float healthPercentage = (float)newHealth / (float)maxHealth;
             healthFillBar.fillAmount = healthPercentage;
             if (change != 0)
@@ -173,6 +159,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                     spellHuds[i].Deselect();
             }
         }
+
         /// <summary>
         /// Updates UI after a Spell has been switched out
         /// </summary>
@@ -183,6 +170,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
             spellHuds[index].SetSpell(spellData);
             UpdateSpellCooldown(index, 0); // Set cooldown to 0 after switching
         }
+
         /// <summary>
         /// Updates UI for Cooldown after Casting a Spell
         /// </summary>

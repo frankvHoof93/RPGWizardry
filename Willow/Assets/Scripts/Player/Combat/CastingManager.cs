@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Player.PlayerInput;
-using nl.SWEG.RPGWizardry.Sorcery.Spells;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Player.PlayerInput;
+using nl.SWEG.Willow.Sorcery.Spells;
+using nl.SWEG.Willow.Utils.Functions;
 using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player.Combat
+namespace nl.SWEG.Willow.Player.Combat
 {
     [RequireComponent(typeof(PlayerManager))]
     public class CastingManager : MonoBehaviour

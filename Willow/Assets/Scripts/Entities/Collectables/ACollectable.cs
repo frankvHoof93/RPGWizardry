@@ -1,8 +1,8 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
-using nl.SWEG.RPGWizardry.Player.Inventory;
+﻿using nl.SWEG.Willow.GameWorld.OpacityManagement;
+using nl.SWEG.Willow.Player.Inventory;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Entities.Collectables
+namespace nl.SWEG.Willow.Entities.Collectables
 {
     /// <summary>
     /// Base Class for a Collectable Object
@@ -38,7 +38,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// </summary>
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
-        private Vector2 opacityOffset;
+        private Vector2 opacityOffset = Vector2.zero;
         #endregion
         #endregion
 
@@ -47,7 +47,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Collectables
         /// Called when Collectable is Collected
         /// </summary>
         /// <param name="target">Inventory-Target for Collection</param>
-        /// <returns>True if Collection was successfull</returns>
+        /// <returns>True if Collection was successful</returns>
         protected abstract bool OnCollect(PlayerInventory target);
 
         /// <summary>

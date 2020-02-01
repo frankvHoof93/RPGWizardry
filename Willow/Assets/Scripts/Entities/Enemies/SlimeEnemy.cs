@@ -1,82 +1,77 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Functions;
 using System.Collections;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Entities.Enemies
+namespace nl.SWEG.Willow.Entities.Enemies
 {
+    /// <summary>
+    /// Slime Enemy
+    /// <para>
+    /// This enemy tries to damage the Player by running into them
+    /// </para>
+    /// </summary>
     public class SlimeEnemy : AEnemy
     {
         #region Variables
         #region Public
         /// <summary>
-        /// Opacity-Radius in Pixels (for 720p)
+        /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
         public override float OpacityRadius
         {
             get
             {
-                float defaultRadius = base.OpacityRadius;
+                float radius = base.OpacityRadius;
                 if (!big)
-                    defaultRadius *= 0.5f;
-                return defaultRadius;
+                    radius *= 0.5f;
+                return radius;
             }
         }
         #endregion
 
         #region Editor
         /// <summary>
-        /// Is this a momma or a babbu slime?
+        /// Whether this is a big slime (Big slimes spawn smaller slimes upon death)
         /// </summary>
         [SerializeField]
-        [Tooltip("Should this slime spawn babies?")]
+        [Tooltip("Whether this is a big slime (Big slimes spawn smaller slimes upon death)")]
         private bool big;
-        /// <summary>
-        /// Baby slime prefab for spawning purposes
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Baby slime prefab to spawn on death")]
-        private GameObject babySlime;
         #endregion
 
         #region Private
         /// <summary>
-        /// Current movement, to send to animator
+        /// Movement during current frame (sent to animator)
         /// </summary>
-        private Vector2 movement;
-        /// <summary>
-        /// Has this enemy died?
-        /// </summary>
-        private bool dead;
+        private Vector2 movement = Vector2.zero;
         /// <summary>
         /// Amount opponent flies back on hit
         /// </summary>
         [SerializeField]
-        private int knockback;
+        private int knockback; // TODOCLEAN: move to ScriptableObject
         #endregion
         #endregion
 
         #region Methods
         #region Protected
         /// <summary>
-        /// Sends current movement to animator, to change animations
+        /// Sends current movement to animator
         /// </summary>
-        /// <param name="player">Reference to Player</param>
         protected override void AnimateEnemy()
         {
-            animator.SetFloat("Horizontal", movement.x);
-            animator.SetFloat("Vertical", movement.y);
+            enemyAnimator.SetFloat("Horizontal", movement.x);
+            enemyAnimator.SetFloat("Vertical", movement.y);
         }
 
         /// <summary>
-        /// Runs AI for BookEnemy; always approach the player
+        /// Runs AI for BookEnemy. Attempts to approach the player
         /// </summary>
         /// <param name="player">Reference to Player</param>
         protected override void UpdateEnemy(PlayerManager player)
         {
-            //cant move if you're dead
-            if(!dead)
+            // Can't move if you're dead
+            if(Health > 0)
             {
                 //Move to Player
                 movement = (Vector2)player.transform.position - (Vector2)transform.position;
@@ -88,27 +83,42 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
 
         /// <summary>
-        /// Triggered when slime dies, plays death animation
+        /// Triggered when slime dies, starts death animation
         /// </summary>
-        /// <param name="player">Reference to Player</param>
         protected override void OnDeath()
         {
-            dead = true;
             StartCoroutine(DieAnimation());
         }
         #endregion
 
-        #region Private
-
+        #region Unity
         /// <summary>
-        /// Little bit of delay (for knockback)
-        /// Then disables collider, plays death animation, and spawns babies if big
+        /// If it touches an object in the target layer, it damages it
+        /// </summary>
+        /// <param name="collision">Collision that occurred</param>
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (attackCollisionMask.HasLayer(collision.gameObject.layer))
+            {
+                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
+                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                body?.AddForce(movement * knockback);
+            }
+        }
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Disables collider, plays death animation, and spawns babies if big
+        /// <para>
+        /// Small delay of .3 seconds (for knockback to run) before running
+        /// </para>
         /// </summary>
         private IEnumerator DieAnimation()
         {
             yield return new WaitForSeconds(0.3f);
             GetComponent<Collider2D>().enabled = false;
-            animator.SetBool("Dead", true);
+            enemyAnimator.SetBool("Dead", true);
             if (big)
             {
                 SpawnBabies();
@@ -118,7 +128,7 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         /// <summary>
         /// Spawns two baby slimes at current position
         /// </summary>
-        private void SpawnBabies()
+        private void SpawnBabies() // TODOCLEAN: Instantiate copy of self
         {
             AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
             Transform enemyParent = transform.parent;
@@ -134,26 +144,15 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         }
 
         /// <summary>
-        /// Destroys self at the end of the death animation
+        /// Destroys this object
+        /// <para>
+        /// Called by Unity Animator
+        /// </para>
         /// </summary>
         private void DestroySelf()
         {
-            transform.parent = null;
+            transform.parent = null; // Set parent null before death-event is invoked
             Destroy(gameObject);
-        }
-        
-        /// <summary>
-        /// If it touches an object in the target layer, it damages it
-        /// </summary>
-        /// <param name="collision"></param>
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (attackCollisionMask.HasLayer(collision.gameObject.layer))
-            {
-                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
-                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
-                body.AddForce(movement * knockback);
-            }
         }
         #endregion
         #endregion

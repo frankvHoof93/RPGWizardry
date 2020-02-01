@@ -1,31 +1,38 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Player.Combat;
-using nl.SWEG.RPGWizardry.Sorcery;
-using nl.SWEG.RPGWizardry.UI.GameUI;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Player.Combat;
+using nl.SWEG.Willow.Sorcery;
+using nl.SWEG.Willow.UI.Game;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.UI.MenuUI
+namespace nl.SWEG.Willow.UI.Spells
 {
+    /// <summary>
+    /// Displays list of current Spells in Inventory
+    /// </summary>
     public class SpellListController : MonoBehaviour
     {
         #region Variables
         #region Editor
         [Header("Spell-Details")]
+        #region SpellDetails
         /// <summary>
-        /// Spell-Info Prefab
+        /// Prefab for Spell-Info
         /// </summary>
         [SerializeField]
-        [Tooltip("Spell-Info Prefab")]
+        [Tooltip("Prefab for Spell-Info")]
         private GameObject spellInfo;
         /// <summary>
         /// Menu for Spell-Details
         /// </summary>
         [SerializeField]
         [Tooltip("Menu for Spell-Details")]
-        private GameObject SpellCanvas;
+        private SpellPageManager SpellCanvas;
+        #endregion
+
         [Header("List")]
+        #region List
         /// <summary>
         /// Left Page for List
         /// </summary>
@@ -50,7 +57,10 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         [SerializeField]
         [Tooltip("Next Page-Button")]
         private GameObject nextPageButton;
+        #endregion
+
         [Header("Equipping")]
+        #region Equipping
         /// <summary>
         /// UI for currently selected Spells
         /// </summary>
@@ -58,10 +68,11 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         [Tooltip("UI for currently selected Spells")]
         private SpellHUD[] currSpells;
         #endregion
+        #endregion
 
         #region Private
         /// <summary>
-        /// List of spells in the book.
+        /// List of spells in Inventory
         /// </summary>
         private List<SpellPage> pages = new List<SpellPage>();
         /// <summary>
@@ -75,11 +86,11 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         /// <summary>
         /// Current Selection for Equipping
         /// </summary>
-        private int? equipSelection;
+        private int? equipSelection = null;
         /// <summary>
         /// UI-Objects in List
         /// </summary>
-        private readonly List<GameObject> SpellTabs = new List<GameObject>();
+        private readonly List<SpellTab> spellTabs = new List<SpellTab>();
         #endregion
         #endregion
 
@@ -94,6 +105,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             currentPage = Mathf.Clamp(--currentPage, 1, totalPages);
             OnEnable();
         }
+
         /// <summary>
         /// Moves to Next Page in List
         /// </summary>
@@ -103,6 +115,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             currentPage = Mathf.Clamp(++currentPage, 1, totalPages);
             OnEnable();
         }
+
         /// <summary>
         /// Selects Target for Equipping
         /// </summary>
@@ -121,6 +134,7 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             equipSelection = index;
             currSpells[index].Select();
         }
+
         /// <summary>
         /// Deselects Target for Equipping
         /// </summary>
@@ -139,16 +153,17 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
         /// <param name="page">Clicked SpellPage</param>
         internal void OnSpellClick(SpellPage page)
         {
-            if (equipSelection.HasValue)
+            if (equipSelection.HasValue) // Check if a position has been selected for the spell
             {
-                if (page.Unlocked)
+                if (page.Unlocked) // Check if page has been Unlocked
                 {
+                    // Set Spell to Position
                     PlayerManager.Instance.CastingManager.SetSpell(page.Spell, (ushort)equipSelection.Value);
                     UpdateSpellHUD();
                     DeselectEquipTarget();
                 }
             }
-            else SwitchCanvas(page);
+            else OpenDetails(page); // Open Details Page for Spell
         }
         #endregion
 
@@ -163,48 +178,52 @@ namespace nl.SWEG.RPGWizardry.UI.MenuUI
             for (int i = (currentPage - 1) * 16; i < pages.Count && i < currentPage * 16; i++)
             {
                 SpellPage page = pages[i];
-                GameObject newSpellInfo = Instantiate(spellInfo);
-                newSpellInfo.GetComponent<SpellTabManager>().Populate(page, this);
+                SpellTab newSpellInfo = Instantiate(spellInfo).GetComponent<SpellTab>();
+                newSpellInfo.SetController(this);
+                newSpellInfo.Populate(page);
                 if (i >= (currentPage - 1) * 16 + 8)
                     newSpellInfo.transform.SetParent(rightPage);
                 else
                     newSpellInfo.transform.SetParent(leftPage);
-                SpellTabs.Add(newSpellInfo);
+                spellTabs.Add(newSpellInfo);
             }
             // Set Page-Switch Buttons
             prevPageButton.SetActive(currentPage > 1); // Activate Previous Page-Button if on Page > first
             nextPageButton.SetActive(currentPage < totalPages); // Activate Next Page-Button if on Page < last
         }
+
         /// <summary>
         /// Destroys List
         /// </summary>
         private void OnDisable()
         {
-            foreach (GameObject o in SpellTabs)
-                Destroy(o);
-            SpellTabs.Clear();
+            foreach (SpellTab o in spellTabs)
+                Destroy(o.gameObject);
+            spellTabs.Clear();
         }
+
         /// <summary>
         /// Handles Right-Click for Deselecting Equip-Target
         /// </summary>
         private void Update()
         {
-            if (Input.GetMouseButtonDown(1))
+            if (equipSelection != null && Input.GetMouseButtonDown(1))
                 DeselectEquipTarget();
         }
         #endregion
 
         #region Private
         /// <summary>
-        /// Switches to Detail-Page
+        /// Switches to Details-Page
         /// </summary>
-        /// <param name="page">Selected SpellPage</param>
-        private void SwitchCanvas(SpellPage page)
+        /// <param name="page">SpellPage to display details for</param>
+        private void OpenDetails(SpellPage page)
         {
-            SpellCanvas.SetActive(true);
-            SpellCanvas.GetComponent<SpellPageManager>().SetSelectedSpell(page);
+            SpellCanvas.gameObject.SetActive(true);
+            SpellCanvas.SetSelectedSpell(page);
             transform.gameObject.SetActive(false);
         }
+
         /// <summary>
         /// Updates UI for Equipped Spells
         /// </summary>

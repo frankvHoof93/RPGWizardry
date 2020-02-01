@@ -1,18 +1,20 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.GameWorld;
-using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
-using nl.SWEG.RPGWizardry.Player.Combat;
-using nl.SWEG.RPGWizardry.Player.Inventory;
-using nl.SWEG.RPGWizardry.Player.Movement;
-using nl.SWEG.RPGWizardry.Player.PlayerInput;
-using nl.SWEG.RPGWizardry.UI;
-using nl.SWEG.RPGWizardry.UI.GameUI;
-using nl.SWEG.RPGWizardry.Utils;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
+﻿using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.GameWorld.OpacityManagement;
+using nl.SWEG.Willow.Player.Combat;
+using nl.SWEG.Willow.Player.Inventory;
+using nl.SWEG.Willow.Player.Movement;
+using nl.SWEG.Willow.Player.PlayerInput;
+using nl.SWEG.Willow.UI;
+using nl.SWEG.Willow.UI.CameraEffects;
+using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.UI.Popups;
+using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Behaviours;
 using System.Collections;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player
+namespace nl.SWEG.Willow.Player
 {
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
     [RequireComponent(typeof(Renderer))]
@@ -164,13 +166,11 @@ namespace nl.SWEG.RPGWizardry.Player
                 return false;
             }
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
-
             if (Health == maxHealth)
             {
                 //ignore potions since health is full
                 Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), true);
             }
-
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
             PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green, 50);
             return true;

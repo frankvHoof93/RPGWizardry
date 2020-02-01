@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     [CreateAssetMenu(fileName = "RoomData", menuName = "")]
     public class RoomData : ScriptableObject

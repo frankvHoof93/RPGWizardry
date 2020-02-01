@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils.Behaviours
+namespace nl.SWEG.Willow.Utils.Behaviours
 {
     /// <summary>
     /// Turns any MonoBehaviour into a Singleton (Static Instance-Reference)
@@ -68,12 +68,12 @@ namespace nl.SWEG.RPGWizardry.Utils.Behaviours
         {
             if (instance != null && !ReferenceEquals(instance, this))
             {
-                Debug.LogError("Singleton<" + typeof(T).Name + "> already exists! Existing Object: " + instance.gameObject.name + ". Destroying new object " + gameObject.name, gameObject);
+                Debug.LogError($"Singleton<{typeof(T).Name}> already exists! Existing Object: {instance.gameObject.name}. Destroying new object {gameObject.name}", gameObject);
                 Destroy(gameObject);
                 return;
             }
             if (!hasRootObject && transform.parent != null)
-                Debug.LogError("Singleton<" + typeof(T).Name + "> on " + gameObject.name + " is not a root-object. Did you mean to set HasRootObject?");
+                Debug.LogError($"Singleton<{typeof(T).Name}> on {gameObject.name} is not a root-object. Did you mean to set HasRootObject?");
             if (!hasRootObject)
                 DontDestroyOnLoad(gameObject);
             else

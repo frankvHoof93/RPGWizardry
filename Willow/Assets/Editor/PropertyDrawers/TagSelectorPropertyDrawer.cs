@@ -1,10 +1,16 @@
-﻿using nl.SWEG.RPGWizardry.Utils.Attributes;
+﻿using nl.SWEG.Willow.Utils.Attributes;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Editor.PropertyDrawers
+namespace nl.SWEG.Willow.Editor.PropertyDrawers
 {
+    /// <summary>
+    /// Custom Inspector-Drawer for TagSelector-Attribute.
+    /// <para>
+    /// Used to select one or more Tags in Serialized Field
+    /// </para>
+    /// </summary>
     [CustomPropertyDrawer(typeof(TagSelectorAttribute))]
     public class TagSelectorPropertyDrawer : PropertyDrawer
     {

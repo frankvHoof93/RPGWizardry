@@ -1,15 +1,15 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
-using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.UI;
-using nl.SWEG.RPGWizardry.UI.GameUI;
-using nl.SWEG.RPGWizardry.Utils;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using nl.SWEG.RPGWizardry.UI.Dialogue;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.UI;
+using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Behaviours;
+using nl.SWEG.Willow.UI.Dialogue;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using nl.SWEG.Willow.UI.Menu;
 
-
-namespace nl.SWEG.RPGWizardry.Loading
+namespace nl.SWEG.Willow.Loading
 {
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {
@@ -70,7 +70,7 @@ namespace nl.SWEG.RPGWizardry.Loading
         public void LoadBossScene()
         {
             UnloadGameSceneSingletons();
-            SceneManager.LoadScene(Constants.BossSceneName, LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.VictorySceneName, LoadSceneMode.Single);
         }
         #endregion
 

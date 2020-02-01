@@ -1,7 +1,7 @@
-﻿using nl.SWEG.RPGWizardry.Loading;
+﻿using nl.SWEG.Willow.Loading;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils
+namespace nl.SWEG.Willow.Utils
 {
     public class InitGame : MonoBehaviour
     {

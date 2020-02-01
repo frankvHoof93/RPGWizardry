@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Player.Movement
+namespace nl.SWEG.Willow.Player.Movement
 {
     [RequireComponent(typeof(Animator), typeof(PlayerManager))]
     public class MovementManager : MonoBehaviour

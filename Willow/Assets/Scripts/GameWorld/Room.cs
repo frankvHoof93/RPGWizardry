@@ -1,17 +1,17 @@
-﻿using nl.SWEG.RPGWizardry.Entities.Enemies;
+﻿using nl.SWEG.Willow.Entities.Enemies;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     public class Room : MonoBehaviour
     {
         #region Inner Types
         /// <summary>
-        /// Creating Array for event that checks for Room Clear
+        /// Delegate for RoomClear-Event
         /// </summary>
-        public delegate void roomClear();
-
+        public delegate void RoomClear();
         #endregion
+
         #region Variables
         #region Public
         /// <summary>
@@ -22,7 +22,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
         /// <summary>
         /// Roomcleared event
         /// </summary>
-        public static roomClear clearedRoom;
+        public static RoomClear clearedRoom; // TODOCLEAN:
         #endregion
 
         #region Editor
@@ -108,7 +108,7 @@ namespace nl.SWEG.RPGWizardry.GameWorld
             if (enemies.Length > 0)
             {
                 foreach (AEnemy enemy in enemies)
-                    enemy.Killed += CheckRoomClear;
+                    enemy.Death += CheckRoomClear;
             }
             else
                 Cleared = true;

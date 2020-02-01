@@ -1,5 +1,8 @@
-﻿namespace nl.SWEG.RPGWizardry.Entities.Collectables
+﻿namespace nl.SWEG.Willow.Entities.Collectables
 {
+    /// <summary>
+    /// Collectable Objects in GameWorld
+    /// </summary>
     public enum Collectables
     {
         /// <summary>

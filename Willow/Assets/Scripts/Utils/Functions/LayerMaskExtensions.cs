@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils.Functions
+namespace nl.SWEG.Willow.Utils.Functions
 {
+    /// <summary>
+    /// Extension-Functions for Unity LayerMask
+    /// </summary>
     public static class LayerMaskExtensions
     {
         /// <summary>

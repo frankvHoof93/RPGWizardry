@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils.Enums
+namespace nl.SWEG.Willow.Utils.Enums
 {
     /// <summary>
     /// Direction in 2D-Space
@@ -14,7 +14,9 @@ namespace nl.SWEG.RPGWizardry.Utils.Enums
         Left = 4,
         Right = 8
     }
-
+    /// <summary>
+    /// Extensions-Functions for Direction
+    /// </summary>
     public static class DirectionExtensions
     {
         /// <summary>

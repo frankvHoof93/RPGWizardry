@@ -1,11 +1,11 @@
-﻿using nl.SWEG.RPGWizardry.Utils.Behaviours;
-using System.Collections;
-using System.Collections.Generic;
+﻿using nl.SWEG.Willow.Utils.Behaviours;
 using UnityEngine;
 
-
-namespace nl.SWEG.RPGWizardry.Audio
+namespace nl.SWEG.Willow.Audio
 {
+    /// <summary>
+    /// Plays Background-Music and Audio-Effects
+    /// </summary>
     [RequireComponent(typeof(AudioSource))]
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
@@ -14,14 +14,6 @@ namespace nl.SWEG.RPGWizardry.Audio
         /// </summary>
         [SerializeField]
         private AudioSource musicSource;
-
-        /// <summary>
-        /// Starts music when entering a scene that contains this script
-        /// </summary>
-        private void Start()
-        {
-            musicSource.Play();
-        }
 
         /// <summary>
         /// Creates an audio source, plays a clip at a slightly randomized pitch,
@@ -37,6 +29,13 @@ namespace nl.SWEG.RPGWizardry.Audio
             effectSource.PlayOneShot(clip);
             Destroy(effectSource, clip.length);
         }
+
+        /// <summary>
+        /// Starts music when entering a scene that contains this script
+        /// </summary>
+        private void Start()
+        {
+            musicSource.Play();
+        }
     }
 }
-

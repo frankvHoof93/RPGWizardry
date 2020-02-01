@@ -1,47 +1,58 @@
-﻿using nl.SWEG.RPGWizardry.Sorcery.Spells;
+﻿using nl.SWEG.Willow.Sorcery.Spells;
+using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery
+namespace nl.SWEG.Willow.Sorcery
 {
-    [System.Serializable]
+    /// <summary>
+    /// A SpellPage is an item which holds a Spell
+    /// <para>
+    /// The Page also contains data related to unlocking the Spell
+    /// </para>
+    /// </summary>
+    [Serializable]
     public class SpellPage
     {
         #region Variables
-        /// <summary>
-        /// Whether the Spell on this Page has been Unlocked
-        /// </summary>
-        public bool Unlocked { get; private set; }
-
-        /// <summary>
-        /// The dust cost for the spell to unlock.  
-        /// </summary>
-        public uint DustCost { get => spell.SpellCost; }
+        #region Public
         /// <summary>
         /// Data for Spell
         /// </summary>
         public SpellData Spell => spell;
+        /// <summary>
+        /// Name of Spell
+        /// </summary>
+        public string SpellTitle { get => spell.Name; }
+        /// <summary>
+        /// Description of Spell
+        /// </summary>
+        public string SpellDescription { get => spell.Description; }
+        /// <summary>
+        /// Whether the Spell on this Page has been Unlocked
+        /// </summary>
+        public bool Unlocked { get; private set; }
+        /// <summary>
+        /// Dust-Cost for unlocking Spell  
+        /// </summary>
+        public uint DustCost { get => spell.SpellCost; }
+        #endregion
+
+        #region Editor
         /// <summary>
         /// Data for Spell
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
         private SpellData spell;
-
-        /// <summary>
-        /// Spell title returned from the spell object.
-        /// </summary>
-        public string SpellTitle { get => spell.Name; }
-
-        public string SpellDescription { get => spell.Description; }
         #endregion
-
+        #endregion
 
         #region Methods
         /// <summary>
         /// Constructor for a SpellPage
         /// </summary>
-        /// <param name="spell"></param>
-        /// <param name="unlocked"></param>
+        /// <param name="spell">Spell on Page</param>
+        /// <param name="unlocked">Whether the Spell has been unlocked (defaults to False)</param>
         public SpellPage(SpellData spell, bool unlocked = false)
         {
             this.spell = spell;

@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Utils.Behaviours;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.UI.GameUI
+namespace nl.SWEG.Willow.UI.Game
 {
     public class CameraMover : SingletonBehaviour<CameraMover>
     {

@@ -1,9 +1,9 @@
-﻿using nl.SWEG.RPGWizardry.Player;
+﻿using nl.SWEG.Willow.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.Sorcery
+namespace nl.SWEG.Willow.Sorcery
 {
     public class SpellPageManager : MonoBehaviour
     {
@@ -41,19 +41,19 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         /// Element text box
         /// </summary>
         [SerializeField]
-        [Tooltip("Spell element")]
+        [Tooltip("Element text box")]
         private TextMeshProUGUI element;
         /// <summary>
         /// Damage text box
         /// </summary>
         [SerializeField]
-        [Tooltip("Spell damage")]
+        [Tooltip("Damage text box")]
         private TextMeshProUGUI damage;
         /// <summary>
         /// Cooldown text box
         /// </summary>
         [SerializeField]
-        [Tooltip("Spell cooldown")]
+        [Tooltip("Cooldown text box")]
         private TextMeshProUGUI cooldown;
         /// <summary>
         /// TextBox for Description
@@ -86,6 +86,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             OnDisable(); // Delete old Info
             OnEnable(); // Set new Info
         }
+
         /// <summary>
         /// Unlocks current spell in Inventory
         /// </summary>
@@ -95,6 +96,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             PlayerManager.Instance.CastingManager?.TryEquipSpell(selectedSpell.Spell);
             button.enabled = false;
         }
+
         /// <summary>
         /// Sets info for Current Spell to UI
         /// </summary>
@@ -109,20 +111,16 @@ namespace nl.SWEG.RPGWizardry.Sorcery
             element.text = "Element: " + selectedSpell.Spell.Element;
             damage.text = "Damage: " + selectedSpell.Spell.Damage;
             cooldown.text = "Cooldown: " + selectedSpell.Spell.Cooldown +"s";
-            if(selectedSpell.Unlocked)
+            button.enabled = false;
+            TextMeshProUGUI dustText = button.GetComponentInChildren<TextMeshProUGUI>();
+            dustText.text = $"{dust}/{selectedSpell.DustCost}";
+            if (selectedSpell.Unlocked)
             {
-                button.enabled = false;
-                button.GetComponentInChildren<TextMeshProUGUI>().text = "Unlocked";
+                dustText.text = "Unlocked";
             }
-            else if(dust >= selectedSpell.DustCost)
+            else if (dust >= selectedSpell.DustCost)
             {
                 button.enabled = !selectedSpell.Unlocked;
-                button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
-            }
-            else
-            {
-                button.enabled = false;
-                button.GetComponentInChildren<TextMeshProUGUI>().text = dust + "/ " + selectedSpell.DustCost;
             }
             // Seed Random with Hash of Spell-Name (for consistency)
             System.Random r = new System.Random(selectedSpell.Spell.Name.GetHashCode());
@@ -139,6 +137,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery
                 symbol.transform.localPosition = pos; // Set y-position
             }
         }
+
         /// <summary>
         /// Destroys Existing Symbols on Page
         /// </summary>
@@ -150,4 +149,3 @@ namespace nl.SWEG.RPGWizardry.Sorcery
         #endregion
     }
 }
-

@@ -1,10 +1,14 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Utils.Functions;
+using System;
 using TMPro;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.UI.GameUI
+namespace nl.SWEG.Willow.UI.Popups
 {
+    /// <summary>
+    /// Displays Text, fading out & moving upwards
+    /// </summary>
     [RequireComponent(typeof(Canvas))]
     public class PopupUI : MonoBehaviour
     {
@@ -20,6 +24,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// Speed at which Canvas moves upward
         /// </summary>
         [SerializeField]
+        [Tooltip("Speed at which Canvas moves upward")]
         private float movementSpeed = .5f;
         /// <summary>
         /// TweenType for Alpha-FadeOut
@@ -39,6 +44,10 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 
         #region Methods
         #region Public
+        /// <summary>
+        /// Sets TextSize for text based on Camera-Size
+        /// </summary>
+        /// <param name="pixelsHeight">Height for text in Pixels (ScreenSpace)</param>
         public void SetTextSize(uint pixelsHeight)
         {
             if (CameraManager.Exists)
@@ -49,6 +58,8 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 RectTransform textTf = (RectTransform)textField.transform;
                 textTf.sizeDelta = new Vector2(realworldSize * 5f, realworldSize);
             }
+            else
+                throw new InvalidOperationException("No Camera Exists. TextSize cannot be determined");
         }
 
         /// <summary>
@@ -66,6 +77,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
                 textField.color = toSet;
             }
         }
+
         /// <summary>
         /// Sets Render-Order for Text
         /// </summary>
@@ -73,10 +85,13 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         /// <param name="orderInLayer">Order within Layer</param>
         public void SetRenderOrder(int layer, int orderInLayer)
         {
+            if (canvas == null)
+                canvas = GetComponentInParent<Canvas>();
             canvas.overrideSorting = true;
             canvas.sortingLayerID = layer;
             canvas.sortingOrder = orderInLayer;
         }
+
         /// <summary>
         /// Sets Alpha for Text
         /// </summary>
@@ -85,6 +100,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
         {
             textField.alpha = alpha;
         }
+
         /// <summary>
         /// Sets timeout for PopupUI. Fades to Alpha-0 then destroys itself
         /// </summary>
@@ -99,14 +115,7 @@ namespace nl.SWEG.RPGWizardry.UI.GameUI
 
         #region Unity
         /// <summary>
-        /// Grabs reference to Canvas
-        /// </summary>
-        private void Awake()
-        {
-            canvas = GetComponentInParent<Canvas>();
-        }
-        /// <summary>
-        /// Moves UI upwards
+        /// Moves UI upwards (WorldSpace)
         /// </summary>
         private void Update()
         {

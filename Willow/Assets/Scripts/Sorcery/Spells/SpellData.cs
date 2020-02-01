@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery.Spells
+namespace nl.SWEG.Willow.Sorcery.Spells
 {
+    /// <summary>
+    /// Holds (Default) Data for a Spell
+    /// </summary>
     [CreateAssetMenu(fileName = "SpellData", menuName = "ScriptableObjects/SpellData", order = 1)]
     public class SpellData : ScriptableObject
     {
@@ -116,6 +119,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         #region Methods
         /// <summary>
         /// Spawns Projectiles for Spell
+        /// TODO: Add more SpellPatterns
         /// </summary>
         /// <param name="position">(Base) position for spawning</param>
         /// <param name="direction">Direction in which spell is Cast</param>
@@ -127,7 +131,7 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
             direction.Normalize();
             switch (spellPattern)
             {
-                case SpellPattern.line:
+                case SpellPattern.Line:
                     GameObject projectile = Instantiate(projectilePrefab);
                     projectile.transform.position = position;
                     projectile.transform.up = direction;
@@ -135,9 +139,9 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
                     p.SetData(this, targetingMask);
                     returnVal.Add(p);
                     break;
-                case SpellPattern.cone:
+                case SpellPattern.Cone:
                     break;
-                case SpellPattern.circle:
+                case SpellPattern.Circle:
                     break;
                 default:
                     break;

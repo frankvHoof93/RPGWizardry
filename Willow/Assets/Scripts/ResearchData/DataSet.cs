@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace nl.SWEG.RPGWizardry.ResearchData
+namespace nl.SWEG.Willow.ResearchData
 {
     public class DataSet
     {

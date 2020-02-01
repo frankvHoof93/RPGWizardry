@@ -6,7 +6,7 @@
 ///     These Objects are not used in the Application itself (or only used for analysis)
 /// </para>
 /// </summary>
-namespace nl.SWEG.RPGWizardry.Utils.Tools
+namespace nl.SWEG.Willow.Utils.Tools
 {
     /// <summary>
     /// Adds notes a Game Object, in order to document things for yourself or for others
@@ -22,13 +22,14 @@ namespace nl.SWEG.RPGWizardry.Utils.Tools
         private string author;
 
         /// <summary>
-        /// <b>Editor</b>: The actual Notes
+        /// <b>Editor</b>: The notes in this Notepad
         /// <para>
         ///     Displayed using 3-15 lines (before scrollbar appears)
         /// </para>
         /// </summary>
         [TextArea(3, 15)]
         [SerializeField]
+        [Tooltip("The notes in this Notepad")]
         private string notes;
         #endregion
 

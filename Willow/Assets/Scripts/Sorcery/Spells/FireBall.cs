@@ -1,24 +1,27 @@
-﻿using nl.SWEG.RPGWizardry.Audio;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery.Spells
+namespace nl.SWEG.Willow.Sorcery.Spells
 {
+    /// <summary>
+    /// A FireBall is a Ball of fire that travels through the air until it hits an object, then explodes
+    /// </summary>
     public class FireBall : Projectile
     {
         /// <summary>
-        /// The object that contains the splash animation and collider
+        /// Explosion-Object
         /// </summary>
         [SerializeField]
-        private GameObject SplashObject;
+        [Tooltip("Explosion-Object")]
+        private GameObject splashObject;
 
         /// <summary>
-        /// In addition to deleting self, spawn an explosion that does splash damage
+        /// Spawns an explosion
         /// </summary>
-        /// <param name="collision"></param>
+        /// <param name="collision">Collision that occurred</param>
         protected override void Effect(Collider2D collision)
         {
             //EXPLODE
-            GameObject splash = Instantiate(SplashObject, transform.position, transform.rotation);
+            GameObject splash = Instantiate(splashObject, transform.position, transform.rotation);
             splash.transform.localScale = transform.localScale; // Scale relative to Fireball-size
             base.Effect(collision);
         }

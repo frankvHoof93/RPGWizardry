@@ -1,9 +1,12 @@
-﻿using nl.SWEG.RPGWizardry.Utils.DataTypes;
+﻿using nl.SWEG.Willow.Utils.DataTypes;
 using System;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Entities.Enemies
+namespace nl.SWEG.Willow.Entities.Enemies
 {
+    /// <summary>
+    /// Scriptable Object containing default (base) Data for Enemy
+    /// </summary>
     [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData", order = 1)]
     public class EnemyData : ScriptableObject
     {
@@ -14,15 +17,26 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [Serializable]
         public struct LootTable
         {
+            /// <summary>
+            /// Loot-Values for Dust-Pile
+            /// </summary>
             [SerializeField]
+            [Tooltip("Loot-Values for Dust-Pile")]
             public LootSpawn dust;
+            /// <summary>
+            /// Loot-Values for Gold-Pile
+            /// </summary>
             [SerializeField]
+            [Tooltip("Loot-Values for Gold-Pile")]
             public LootSpawn gold;
             //[SerializeField] // Removed, as Pages require Spells to spawn (not every enemy has a spell)
             //public LootSpawn page;
+            /// <summary>
+            /// Loot-Values for Health-Potion(s)
+            /// </summary>
             [SerializeField]
-            public LootSpawn potion;
-           
+            [Tooltip("Loot-Values for Health-Potion(s)")]
+            public LootSpawn potion;           
         }
         /// <summary>
         /// Chance-Value for spawning Loot
@@ -30,10 +44,18 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [Serializable]
         public struct LootSpawn
         {
+            /// <summary>
+            /// Amount for spawned Loot
+            /// </summary>
             [SerializeField]
+            [Tooltip("Amount for spawned Loot")]
             public uint amount;
+            /// <summary>
+            /// Chance for spawning Loot (0-1)
+            /// </summary>
             [SerializeField]
             [Range(0, 1)]
+            [Tooltip("Chance for spawning Loot (0-1)")]
             public float chance;
         }
         #endregion
@@ -136,10 +158,10 @@ namespace nl.SWEG.RPGWizardry.Entities.Enemies
         [Tooltip("Priority for rendering Opacity")]
         private int opacityPriority = 1;
         /// <summary>
-        /// Opacity-Radius in Pixels (for 720p)
+        /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
         [SerializeField]
-        [Tooltip("Opacity-Radius in Pixels (for 720p)")]
+        [Tooltip("Opacity-Radius in Pixels (for 720p-Resolution)")]
         private float opacityRadius;
         /// <summary>
         /// Opacity-Offset from Transform (in World-Space)

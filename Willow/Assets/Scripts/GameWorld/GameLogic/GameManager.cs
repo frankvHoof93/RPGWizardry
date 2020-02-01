@@ -1,15 +1,15 @@
-﻿using nl.SWEG.RPGWizardry.GameWorld;
-using nl.SWEG.RPGWizardry.Loading;
-using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Player.Movement;
-using nl.SWEG.RPGWizardry.UI.GameUI;
-using nl.SWEG.RPGWizardry.Utils;
-using nl.SWEG.RPGWizardry.Utils.Behaviours;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Loading;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Player.Movement;
+using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Behaviours;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace nl.SWEG.RPGWizardry
+namespace nl.SWEG.Willow
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {

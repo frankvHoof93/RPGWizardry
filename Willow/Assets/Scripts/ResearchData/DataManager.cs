@@ -1,10 +1,10 @@
-﻿using nl.SWEG.RPGWizardry.Sorcery;
+﻿using nl.SWEG.Willow.Sorcery;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using nl.SWEG.RPGWizardry.Utils.Functions;
-namespace nl.SWEG.RPGWizardry.ResearchData
+using nl.SWEG.Willow.Utils.Functions;
+namespace nl.SWEG.Willow.ResearchData
 {
     public class DataManager : MonoBehaviour
     {

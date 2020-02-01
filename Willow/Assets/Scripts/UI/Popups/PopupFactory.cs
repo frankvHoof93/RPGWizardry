@@ -1,9 +1,11 @@
-﻿using nl.SWEG.RPGWizardry.UI.GameUI;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+﻿using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.UI
+namespace nl.SWEG.Willow.UI.Popups
 {
+    /// <summary>
+    /// Used to create Popups during gameplay
+    /// </summary>
     public static class PopupFactory
     {
         #region Variables
@@ -13,7 +15,7 @@ namespace nl.SWEG.RPGWizardry.UI
         /// </summary>
         private const float DefaultTimeOut = 1.5f;
         /// <summary>
-        /// Default Height for DamageUI (in Pixels, based on 720p)
+        /// Default Height for DamageUI (in Pixels, based on 720p-resolution)
         /// </summary>
         private const uint DefaultDamageHeight = 25;
         #endregion
@@ -27,9 +29,9 @@ namespace nl.SWEG.RPGWizardry.UI
 
         #region RuntimeVariables
         /// <summary>
-        /// ID of top-most RenderLayer in Project. Filled when first required
+        /// ID of top-most RenderLayer in Game. Filled when first required
         /// </summary>
-        private static int? topMostLayerInProject;
+        private static int? topMostRenderLayer;
         #endregion
         #endregion
 
@@ -42,12 +44,12 @@ namespace nl.SWEG.RPGWizardry.UI
         /// <param name="posWorld"></param>
         /// <param name="damage"></param>
         /// <param name="color">Color for Text. Defaults to Black</param>
-        /// <returns></returns>
+        /// <returns>Created Popup</returns>
         public static PopupUI CreateDamageUI(Vector3 posWorld, ushort damage, Color? color, uint height = DefaultDamageHeight, float timeOut = DefaultTimeOut)
         {
-            if (!topMostLayerInProject.HasValue)
-                FindTopMostLayerInProject();
-            return CreateDamageUI(posWorld, damage, topMostLayerInProject.Value, short.MaxValue, color, height, timeOut);
+            if (!topMostRenderLayer.HasValue)
+                FindTopMostRenderLayer();
+            return CreateDamageUI(posWorld, damage, topMostRenderLayer.Value + 1, short.MaxValue, color, height, timeOut);
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace nl.SWEG.RPGWizardry.UI
         /// <param name="owner">Renderer for target that was hit (for RenderOrder)</param>
         /// <param name="color">Color for Text (Defaults to Black)</param>
         /// <param name="timeOut">Duration to display UI for (defaults to 1.5s)</param>
-        /// <returns>Created UI</returns>
+        /// <returns>Created Popup</returns>
         public static PopupUI CreateDamageUI(Vector3 posWorld, ushort damage, Renderer owner, Color? color, uint height = DefaultDamageHeight, float timeOut = DefaultTimeOut)
         {
             return CreateDamageUI(posWorld, damage, owner.sortingLayerID, owner.sortingOrder + 1, color, height, timeOut);
@@ -91,9 +93,9 @@ namespace nl.SWEG.RPGWizardry.UI
 
         #region Private
         /// <summary>
-        /// Finds and stores ID for Top-Most RenderLayer in Project
+        /// Finds and stores ID for Top-Most RenderLayer in the Game
         /// </summary>
-        private static void FindTopMostLayerInProject()
+        private static void FindTopMostRenderLayer()
         {
             int lowest = 0;
             SortingLayer[] layers = SortingLayer.layers;
@@ -101,7 +103,7 @@ namespace nl.SWEG.RPGWizardry.UI
                 if (layers[i].value < lowest)
                 {
                     lowest = layers[i].value;
-                    topMostLayerInProject = layers[i].id;
+                    topMostRenderLayer = layers[i].id;
                 }
         }
         #endregion

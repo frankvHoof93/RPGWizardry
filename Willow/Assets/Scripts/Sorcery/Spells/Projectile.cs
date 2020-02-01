@@ -1,11 +1,15 @@
-using nl.SWEG.RPGWizardry.Audio;
-using nl.SWEG.RPGWizardry.Entities.Stats;
-using nl.SWEG.RPGWizardry.GameWorld.OpacityManagement;
-using nl.SWEG.RPGWizardry.Utils.Functions;
+using nl.SWEG.Willow.Audio;
+using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.GameWorld.OpacityManagement;
+using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery.Spells
+namespace nl.SWEG.Willow.Sorcery.Spells
 {
+    /// <summary>
+    /// Base Class for Projectiles
+    /// </summary>
+    [RequireComponent(typeof(Collider2D))]
     public abstract class Projectile : MonoBehaviour, IOpacity
     {
         #region Variables
@@ -33,11 +37,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         private LayerMask wallLayer;
         [Header("Opacity")]
         /// <summary>
-        /// Opacity-Radius in Pixels (for 720p)
+        /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
         [SerializeField]
         [Range(1, 10000)]
-        [Tooltip("Opacity-Radius in Pixels (for 720p)")]
+        [Tooltip("Opacity-Radius in Pixels (for 720p-Resolution)")]
         private int opacityPriority = 2;
         /// <summary>
         /// Priority for rendering Opacity
@@ -51,10 +55,6 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
-        /// <summary>
-        /// Current LifeTime for Projectile. Used for Destruction
-        /// </summary>
-        private float lifeTime;
         #endregion
 
         #region Protected
@@ -67,9 +67,20 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         protected LayerMask targetLayer;
         /// <summary>
-        /// Combined layermask for all things to collide with
+        /// Combined layermask of all objects to collide with
         /// </summary>
         protected LayerMask collisionLayer;
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Collider for Projectile
+        /// </summary>
+        private Collider2D coll;
+        /// <summary>
+        /// Current LifeTime for Projectile. Used for Destruction
+        /// </summary>
+        private float lifeTime;
         #endregion
         #endregion
 
@@ -85,10 +96,19 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         {
             data = spellData;
             targetLayer = targetingLayer;
+            collisionLayer = targetLayer | wallLayer;
         }
         #endregion
 
         #region Unity
+        /// <summary>
+        /// Grabs reference to Collider
+        /// </summary>
+        private void Awake()
+        {
+            coll = GetComponent<Collider2D>();
+        }
+
         /// <summary>
         /// Combines layermasks
         /// </summary>
@@ -96,13 +116,11 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         {
             collisionLayer = targetLayer | wallLayer;
             if (data.SpawnClip != null)
-            {
                 AudioManager.Instance.PlaySound(data.SpawnClip);
-            }
         }
 
         /// <summary>
-        /// Move forward based on the subclass' instantiation of Move
+        /// Moves Projectile
         /// </summary>
         private void FixedUpdate()
         {
@@ -111,21 +129,19 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         }
 
         /// <summary>
-        /// When the spell comes in contact with something
+        /// Handles Collisions with Objects
         /// </summary>
-        /// <param name="collision"></param>
+        /// <param name="collision">Collision that occurred</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collisionLayer.HasLayer(collision.gameObject.layer))
-            {
                 Effect(collision);
-            }
         }
         #endregion
 
         #region Protected
         /// <summary>
-        /// Basic movement that can be edited by a subclass
+        /// Basic movement that can be expanded upon by a subclass
         /// </summary>
         protected virtual void Move()
         {
@@ -139,21 +155,18 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// <summary>
         /// Applies the spell's effect to the colliding object (usually damage)
         /// </summary>
-        /// <param name="collision"></param>
+        /// <param name="collision">Collision that occurred</param>
         protected virtual void Effect(Collider2D collision)
         {
             //play impact sound
             if (data.ImpactClip != null)
-            {
                 AudioManager.Instance.PlaySound(data.ImpactClip);
-            }
-            GetComponent<Collider2D>().enabled = false;
+            coll.enabled = false;
             //apply knockback
             Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
             body.AddForce(transform.up * data.Knockback);
             //oh man i can feel the effect
             collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
-
             Destroy(gameObject); // TODO: Animation?
         }
         #endregion

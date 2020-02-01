@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Utils.Behaviours
+namespace nl.SWEG.Willow.Utils.Behaviours
 {
+    /// <summary>
+    /// Destroys Object (For usage with Unity Animator)
+    /// </summary>
     public class DestroySelf : MonoBehaviour
     {
         /// <summary>

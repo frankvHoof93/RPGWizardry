@@ -1,5 +1,8 @@
-﻿namespace nl.SWEG.RPGWizardry.Utils.Functions
+﻿namespace nl.SWEG.Willow.Utils.Functions
 {
+    /// <summary>
+    /// Various Mathematical Functions used throughout the Game
+    /// </summary>
     public static class MathFunctions
     {
         /// <summary>

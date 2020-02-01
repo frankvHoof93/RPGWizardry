@@ -1,9 +1,12 @@
-﻿using nl.SWEG.RPGWizardry.Player;
-using nl.SWEG.RPGWizardry.Player.Inventory;
+﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Player.Inventory;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Entities.Collectables
+namespace nl.SWEG.Willow.Entities.Collectables
 {
+    /// <summary>
+    /// Health-Potion in GameWorld
+    /// </summary>
     public class HealthPotion : ACollectable
     {
         #region Variables

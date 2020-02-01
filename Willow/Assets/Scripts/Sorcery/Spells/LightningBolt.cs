@@ -1,11 +1,13 @@
-﻿using nl.SWEG.RPGWizardry.Audio;
-using nl.SWEG.RPGWizardry.Entities.Stats;
-using System.Collections;
-using System.Collections.Generic;
+﻿using nl.SWEG.Willow.Audio;
+using nl.SWEG.Willow.Entities.Stats;
 using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.Sorcery.Spells
+namespace nl.SWEG.Willow.Sorcery.Spells
 {
+    /// <summary>
+    /// A LightningBolt shoots out a line from the Player, hitting enemies in its path
+    /// </summary>
+    [RequireComponent(typeof(LineRenderer))]
     public class LightningBolt : Projectile
     {
         /// <summary>
@@ -21,46 +23,39 @@ namespace nl.SWEG.RPGWizardry.Sorcery.Spells
         /// </summary>
         protected override void Start()
         {
-            //Call base start so we have the collision layer
+            // Call base start so we have the collision layer
             base.Start();
-
-            //play sound effect
+            // Play Impact Sound effect
             AudioManager.Instance.PlaySound(data.ImpactClip);
-
-            //Get the line renderer
+            // Get the line renderer
             lineRenderer = GetComponent<LineRenderer>();
-
-            //Build a raycast
+            // Set Starting-Point for Line
+            lineRenderer.SetPosition(0, transform.localPosition);
+            // Build a raycast
             RaycastHit2D hit;
-            //CircleCast to make the hit more generous
-            hit = Physics2D.CircleCast(transform.position, 0.7f, transform.up, data.LifeTime, collisionLayer);
-            //Does the ray intersect any objects in the collision layer
-            //Yes, it hit something
+            // CircleCast to make the hit more generous
+            hit = Physics2D.CircleCast(transform.position, 0.6f, transform.up, data.LifeTime, collisionLayer);
+            // Does the ray intersect any objects in the collision layer
+            // Yes, it hit something
             if (hit)
             {
                 //if it's an object with a rigidbody, apply knockback
                 Rigidbody2D body = hit.transform.GetComponent<Rigidbody2D>();
-                body.AddForce(transform.up * data.Knockback);
+                body?.AddForce(transform.up * data.Knockback);
                 //If it's an object with health, damage it
                 hit.transform.GetComponent<IHealth>()?.Damage(data.Damage);
                 //Set the line to end at the object
-                lineRenderer.SetPosition(0, transform.localPosition);
                 lineRenderer.SetPosition(1, hit.point);
             }
             //No, it didn't hit anything
             else
             {
                 //Set the line to end at the max distance
-                lineRenderer.SetPosition(0, transform.localPosition);
                 lineRenderer.SetPosition(1, transform.position + transform.up * data.LifeTime);
             }
-
-            //enable renderer so line appears
             lineRenderer.enabled = true;
-            //attack complete; destroy self
+            // Attack complete; destroy self after displaying for a short time
             Destroy(gameObject,0.1f);
         }
     }
 }
-
-

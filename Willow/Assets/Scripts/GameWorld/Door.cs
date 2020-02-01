@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace nl.SWEG.RPGWizardry.GameWorld
+namespace nl.SWEG.Willow.GameWorld
 {
     [RequireComponent(typeof(Collider2D))]
     public class Door : MonoBehaviour

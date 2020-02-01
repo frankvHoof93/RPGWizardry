@@ -1,22 +1,243 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.UI.Menu;
+using nl.SWEG.Willow.Utils;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-namespace nl.SWEG.RPGWizardry.Tutorial
+namespace nl.SWEG.Willow.UI.Dialogue
 {
-
+    /// <summary>
+    /// Handles Tutorial-Messages
+    /// </summary>
     public class TutorialManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        // TODOCLEAN: Check when delegates are added/removed
+
+        #region InnerTypes
+        /// <summary>
+        /// Steps in Tutorial
+        /// </summary>
+        private enum TutorialSteps
         {
+            Start = 0,
+            CastedBookerang = 1,
+            SlimeRoomCleared = 2,
+            BookKilled = 3,
+            PickedUpPage = 4,
+            EnteredMenu = 5,
+            EnteredSpellList = 6,
+            EnteredNewSpell = 7,
+            EntersPuzzle = 8,
+            FinishPuzzle = 9
+        }
+        #endregion
+
+        #region Variables
+        /// <summary>
+        /// Data for Dialogues attached to Tutorial-Steps
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Data for Dialogues attached to Tutorial-Steps")]
+        private DialogueData[] dialogues;
+        #endregion
+
+        #region Methods
+        #region Unity
+        /// <summary>
+        /// Sets initial listeners
+        /// </summary>
+        private void Start()
+        {
+            StartTutorialDialogue(); //Run the Dialogue Queue function
+            
+            SceneManager.sceneLoaded += LoadMainMenu;  //Adding Event listener which checks for the scene load
+            PlayerManager.Instance.Inventory.spellunlocked += FinishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
+            Room.clearedRoom += RoomClearedSlimes; //Adding the listener to checking for the room clear
+
+            //Adding the Event Listeneres for the Page casting and Page Pickup
+            PlayerManager.Instance.CastingManager.AddCastListener(CastedBookerangDialogue);
+            PlayerManager.Instance.Inventory.AddPageListener(PickedUpPageDialogue);
+        }
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Runs the Bookerang casting sentences queue
+        /// </summary>
+        private void CastedBookerangDialogue(ushort index, float cooldown)
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.CastedBookerang]);
+            PlayerManager.Instance.CastingManager.RemoveCastListener(CastedBookerangDialogue); //Removes the listener so this function isn't called again
+        }
+
+        /// <summary>
+        /// Runs the sentences queue for when the slimes are cleared (Room clear)
+        /// </summary>
+        private void RoomClearedSlimes()
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.SlimeRoomCleared]);
+            Room.clearedRoom -= RoomClearedSlimes;
+            Room.clearedRoom += BookKilledDialogue; //Adds the listener, which checks for the room cleared, to the book room
+        }
+
+        /// <summary>
+        /// Runs the sentences queue when the book is killed
+        /// </summary>
+        private void BookKilledDialogue()
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.BookKilled]);
+            Room.clearedRoom -= BookKilledDialogue;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newAmount"></param>
+        /// <param name="change"></param>
+        private void PickedUpPageDialogue(uint newAmount, int change)
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.PickedUpPage]);
+            PlayerManager.Instance.MovementManager.SetStunned(true);
+            PlayerManager.Instance.Inventory.RemovePageListener(PickedUpPageDialogue);
+            //enable GameUIManager to allow pausing
+            GameUIManager.Instance.enabled = true;
+            DialogueManager.Instance.ShowInstructionPrompt(true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EnteredMenuDialogue()
+        {
+            //disable GameUIManager to disallow pausing
+            GameUIManager.Instance.enabled = false;
+            DialogueManager.Instance.ShowInstructionPrompt(false);
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredMenu]);
+            SceneManager.sceneLoaded -= LoadMainMenu;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EnteredSpellListDialogue()
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellList]);
+
+            Transform spellUTF = MenuManager.Instance.SpellListCanvas; //Looking for the button Spell List in Main Menu
+            Button btn = spellUTF.GetComponent<Button>();
+            btn.onClick.RemoveListener(EnteredSpellListDialogue);
+            StartCoroutine(AttachToButtonUnlock());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EnteredNewSpellDialogue()
+        {
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredNewSpell]);
+
+
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the second spell in the spell list    
+            Button btn = buttonunlock.GetComponent<Button>();
+            btn.onClick.RemoveListener(EnteredNewSpellDialogue);
+
+            StartCoroutine(AttachToSpellCrafting());
+
 
         }
 
-        // Update is called once per frame
-        void Update()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EntersPuzzleDialogue()
         {
 
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EntersPuzzle]);
+
+
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Button btn = spellcrafting.GetComponent<Button>();
+            btn.onClick.RemoveListener(EntersPuzzleDialogue);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void FinishPuzzleDialogue()
+        {
+
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishPuzzle]);
+            PlayerManager.Instance.MovementManager.SetStunned(false);
+            PlayerManager.Instance.Inventory.spellunlocked -= FinishPuzzleDialogue;
+            //enable GameUIManager to allow pausing
+            GameUIManager.Instance.enabled = true;
+
+        }
+        /// <summary>
+        /// Runs the start tutorial sentences queue
+        /// </summary>
+        private void StartTutorialDialogue()
+        {
+            // Find the Dialogue Manager and start dialogue with given Dialogue variable
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.Start]);
+        }
+
+        /// <summary>
+        /// Attaches delegate after Menu-Scene loads
+        /// </summary>
+        /// <param name="arg0"></param>
+        /// <param name="arg1"></param>
+        private void LoadMainMenu(Scene arg0, LoadSceneMode arg1)
+        {
+            if (arg0.name != Constants.MainMenuSceneName)
+            {
+                return;
+            }
+            EnteredMenuDialogue();
+            StartCoroutine(AttachToButtonSpell());
+        }
+
+        /// <summary>
+        /// Attaches delegate to Spell-Button
+        /// </summary>
+        private IEnumerator AttachToButtonSpell()
+        {
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
+
+            Transform spellTF = MenuManager.Instance.SpellListCanvas;
+            Button btn = spellTF.GetComponent<Button>();
+            btn.onClick.AddListener(EnteredSpellListDialogue);
+        }
+
+        /// <summary>
+        /// Attaches delegate to Unlock
+        /// </summary>
+        private IEnumerator AttachToButtonUnlock()
+        {
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu
+            Button btn = buttonunlock.GetComponent<Button>();
+            btn.onClick.AddListener(EnteredNewSpellDialogue);
+        }
+
+        /// <summary>
+        /// Attaches delegate to SpellCrafting-Menu
+        /// </summary>
+        private IEnumerator AttachToSpellCrafting()
+        {
+            // Wait until there's a MenuManager (race condition)
+            yield return new WaitUntil(() => MenuManager.Exists);
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Button btn = spellcrafting.GetComponent<Button>();
+            btn.onClick.AddListener(EntersPuzzleDialogue);
+        }
+        #endregion
+        #endregion
     }
-
-
 }
