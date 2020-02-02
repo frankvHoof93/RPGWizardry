@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.Willow.Research.Data;
 using nl.SWEG.Willow.Research.Data.DebugData;
 using nl.SWEG.Willow.Research.IO;
-using nl.SWEG.Willow.Sorcery;
+using nl.SWEG.Willow.UI.Spells;
 using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 using TMPro;

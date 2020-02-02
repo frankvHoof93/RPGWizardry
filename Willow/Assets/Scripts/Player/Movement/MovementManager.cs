@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using nl.SWEG.Willow.GameWorld;
+using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Player.Movement

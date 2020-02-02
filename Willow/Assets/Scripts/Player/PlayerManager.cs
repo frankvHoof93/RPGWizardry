@@ -7,8 +7,8 @@ using nl.SWEG.Willow.Player.PlayerInput;
 using nl.SWEG.Willow.UI.CameraEffects;
 using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.UI.Popups;
-using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
+using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Player

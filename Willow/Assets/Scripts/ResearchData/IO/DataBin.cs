@@ -1,5 +1,5 @@
 ﻿using nl.SWEG.Willow.Research.Data;
-using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 
 namespace nl.SWEG.Willow.Research.IO

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace nl.SWEG.Willow.Research
-{ 
+{
     /// <summary>
     /// Handles User-Input for Research MiniGame
     /// </summary>

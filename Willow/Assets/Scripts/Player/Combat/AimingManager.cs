@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.Player.PlayerInput;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Player.PlayerInput;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Player.Combat

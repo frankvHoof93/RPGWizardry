@@ -4,7 +4,7 @@ using UnityEngine;
 namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
 {
     /// <summary>
-    /// A door functions as a gateway between Rooms
+    /// A Door functions as a gateway between Rooms
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public class Door : MonoBehaviour

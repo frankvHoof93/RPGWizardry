@@ -1,6 +1,7 @@
 ﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.Sorcery;
+using nl.SWEG.Willow.UI.Dialogue;
 using nl.SWEG.Willow.UI.Game;
 using nl.SWEG.Willow.UI.Menu;
 using nl.SWEG.Willow.Utils;
@@ -9,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace nl.SWEG.Willow.UI.Dialogue
+namespace nl.SWEG.Willow.Tutorial
 {
     /// <summary>
     /// Handles Tutorial-Messages

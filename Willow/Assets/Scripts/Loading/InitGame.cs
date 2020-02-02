@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.Willow.Loading;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.Utils
+namespace nl.SWEG.Willow.Loading
 {
     /// <summary>
     /// Initializes Game

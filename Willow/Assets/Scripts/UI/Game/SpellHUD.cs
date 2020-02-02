@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.Sorcery.Spells;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Sorcery.Spells;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;

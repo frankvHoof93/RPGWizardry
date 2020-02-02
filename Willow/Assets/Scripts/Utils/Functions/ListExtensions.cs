@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace nl.SWEG.Willow.Utils
+namespace nl.SWEG.Willow.Utils.Functions
 {
     /// <summary>
     /// Extension-Functions for Lists

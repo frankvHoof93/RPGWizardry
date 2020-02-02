@@ -5,7 +5,7 @@ using UnityEngine;
 namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
 {
     /// <summary>
-    /// A room is an environment within a Floor. When a Player enters a Room containing Enemies, its Doors are closed until all Enemies have been defeated
+    /// A Room is an environment within a Floor. When a Player enters a Room containing Enemies, its Doors are closed until all Enemies have been defeated
     /// </summary>
     public class Room : MonoBehaviour
     {

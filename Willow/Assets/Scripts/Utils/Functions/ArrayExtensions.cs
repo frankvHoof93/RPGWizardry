@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace nl.SWEG.Willow.Utils
+namespace nl.SWEG.Willow.Utils.Functions
 {
     /// <summary>
     /// Extension-Functions for Arrays

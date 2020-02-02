@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace nl.SWEG.Willow.UI.Dialogue
 {
+    /// <summary>
+    /// Handles Dialogue-Popups
+    /// </summary>
     public class DialogueManager : SingletonBehaviour<DialogueManager>
     {
         // TODOCLEAN: Move UI-objects to seperate class & object

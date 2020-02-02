@@ -1,10 +1,14 @@
 ﻿using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Sorcery;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace nl.SWEG.Willow.Sorcery
+namespace nl.SWEG.Willow.UI.Spells
 {
+    /// <summary>
+    /// Displays Details for Spell
+    /// </summary>
     public class SpellPageManager : MonoBehaviour
     {
         #region Variables

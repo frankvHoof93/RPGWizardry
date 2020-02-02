@@ -1,6 +1,6 @@
 ﻿using nl.SWEG.Willow.GameWorld;
 using UnityEngine;
-using static nl.SWEG.Willow.GameManager;
+using static nl.SWEG.Willow.GameWorld.GameManager;
 
 namespace nl.SWEG.Willow.Player.PlayerInput
 {

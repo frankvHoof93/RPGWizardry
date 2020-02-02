@@ -1,4 +1,4 @@
-﻿using nl.SWEG.Willow.Utils;
+﻿using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 using System.Linq;
 

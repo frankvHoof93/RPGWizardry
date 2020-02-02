@@ -1,7 +1,7 @@
 ﻿using nl.SWEG.Willow.Utils.Behaviours;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.Audio
+namespace nl.SWEG.Willow.UI
 {
     /// <summary>
     /// Plays Background-Music and Audio-Effects

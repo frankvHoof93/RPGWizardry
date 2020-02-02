@@ -1,5 +1,5 @@
-﻿using nl.SWEG.Willow.Audio;
-using nl.SWEG.Willow.Entities.Stats;
+﻿using nl.SWEG.Willow.Entities.Stats;
+using nl.SWEG.Willow.UI;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Sorcery.Spells

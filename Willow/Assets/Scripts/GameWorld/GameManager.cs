@@ -1,7 +1,4 @@
-﻿using nl.SWEG.Willow.GameWorld;
-using nl.SWEG.Willow.Loading;
-using nl.SWEG.Willow.Player;
-using nl.SWEG.Willow.Player.Movement;
+﻿using nl.SWEG.Willow.Loading;
 using nl.SWEG.Willow.UI.Game;
 using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
@@ -9,8 +6,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace nl.SWEG.Willow
+namespace nl.SWEG.Willow.GameWorld
 {
+    /// <summary>
+    /// Handles GameState (e.g. Initialization, EndGame, etc.)
+    /// </summary>
     public class GameManager : SingletonBehaviour<GameManager>
     {
         #region InnerTypes
