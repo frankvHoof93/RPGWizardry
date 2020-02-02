@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.Willow.Utils.Attributes;
+using UnityEngine;
 
-namespace nl.SWEG.Willow.GameWorld
+namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
 {
+    /// <summary>
+    /// A door functions as a gateway between Rooms
+    /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public class Door : MonoBehaviour
     {
         #region Variables
         #region Public
         /// <summary>
-        /// The room the door is leading to.
+        /// The room this Door is a part of
         /// </summary>
         public Room Room
         {
@@ -19,38 +23,44 @@ namespace nl.SWEG.Willow.GameWorld
                 return room;
             }
         }
-
         /// <summary>
-        /// The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)
+        /// The place where the player spawns when they enter the room through this Door
         /// </summary>
         public Transform Spawn { get { return spawn; } }
         #endregion
 
         #region Editor
         /// <summary>
-        /// The place where the player spawns when they enter the room.
+        /// Tag for Player
+        /// </summary>
+        [TagSelector]
+        [SerializeField]
+        [Tooltip("Tag for Player")]
+        protected string playerTag;
+        /// <summary>
+        /// The place where the player spawns when they enter the room through this Door
         /// </summary>
         [SerializeField]
-        [Tooltip("The place where the player spawns when they enter the room. (Or when the player is spawned/respawned)")]
+        [Tooltip("The place where the player spawns when they enter the room through this Door")]
         private Transform spawn;
         /// <summary>
-        /// The other side of the door, in a different room.
+        /// The other side of the door, in a different room
         /// </summary>
         [SerializeField]
-        [Tooltip("The other side of the door, in a different room.")]
+        [Tooltip("The other side of the door, in a different room")]
         private Door destination;
         /// <summary>
-        /// The opened door sprite.
+        /// Sprite displayed when Door is Opened
         /// </summary>
         [Space]
         [SerializeField]
-        [Tooltip("The opened door sprite.")]
+        [Tooltip("Sprite displayed when Door is Opened")]
         private GameObject openSprite;
         /// <summary>
-        /// The closed door sprite.
+        /// Sprite displayed when Door is Closed
         /// </summary>
         [SerializeField]
-        [Tooltip("The closed door sprite.")]
+        [Tooltip("Sprite displayed when Door is Closed")]
         private GameObject closedSprite;
         #endregion
 
@@ -58,7 +68,7 @@ namespace nl.SWEG.Willow.GameWorld
         /// <summary>
         /// The trigger which teleports the player to the other room.
         /// </summary>
-        private Collider2D collider;
+        private Collider2D coll;
         /// <summary>
         /// Room this door is a part of
         /// </summary>
@@ -69,7 +79,7 @@ namespace nl.SWEG.Willow.GameWorld
         #region Methods
         #region Public
         /// <summary>.
-        /// Opens the door.
+        /// Opens this Door
         /// </summary>
         public void Open()
         {
@@ -78,7 +88,7 @@ namespace nl.SWEG.Willow.GameWorld
         }
 
         /// <summary>
-        /// Closes the door.
+        /// Closes this Door
         /// </summary>
         public void Close()
         {
@@ -89,7 +99,7 @@ namespace nl.SWEG.Willow.GameWorld
 
         #region Unity
         /// <summary>
-        /// Gets TargetRoom
+        /// Gets Room this Door is a part of
         /// </summary>
         private void Awake()
         {
@@ -105,12 +115,13 @@ namespace nl.SWEG.Willow.GameWorld
         }
 
         /// <summary>
-        /// Checks if the player is hitting the room switch trigger.
+        /// Switches to different Room if Player hits collider
         /// </summary>
-        /// <param name="collision"></param>
+        /// <param name="collision">Collider with which collision occurred</param>
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            FloorManager.Instance.SwitchTo(destination);
+            if (collision.gameObject.tag.Equals(playerTag)) // Make sure it's a player
+                FloorManager.Instance.SwitchTo(destination);
         }
         #endregion
         #endregion

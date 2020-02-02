@@ -1,23 +1,26 @@
 ﻿using nl.SWEG.Willow.Entities.Stats;
 using nl.SWEG.Willow.GameWorld;
-using nl.SWEG.Willow.GameWorld.OpacityManagement;
 using nl.SWEG.Willow.Player.Combat;
 using nl.SWEG.Willow.Player.Inventory;
 using nl.SWEG.Willow.Player.Movement;
 using nl.SWEG.Willow.Player.PlayerInput;
-using nl.SWEG.Willow.UI;
 using nl.SWEG.Willow.UI.CameraEffects;
-using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.UI.Popups;
 using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
-using System.Collections;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Player
 {
+    /// <summary>
+    /// Main Controller for Player-Avatar
+    /// <para>
+    /// Handles Health & Death, and holds references to Player-Scripts (e.g. Inventory)
+    /// </para>
+    /// </summary>
     [RequireComponent(typeof(PlayerInventory), typeof(CastingManager), typeof(InputManager))]
-    [RequireComponent(typeof(Renderer))]
+    [RequireComponent(typeof(Renderer), typeof(Collider2D))]
     public class PlayerManager : SingletonBehaviour<PlayerManager>, IHealth, IOpacity
     {
         #region Variables
@@ -27,11 +30,11 @@ namespace nl.SWEG.Willow.Player
         /// </summary>
         public ushort Health { get; private set; }
         /// <summary>
-        /// Renderer of the "crosshair" book, necessary for bookerang spell
+        /// Renderer for Greg, necessary for bookerang spell
         /// </summary>
         public SpriteRenderer BookRenderer => bookRenderer;
         /// <summary>
-        /// Opacity-Radius in Pixels (for 720p)
+        /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
         public float OpacityRadius => opacityRadius;
         /// <summary>
@@ -113,14 +116,18 @@ namespace nl.SWEG.Willow.Player
         /// <summary>
         /// Renderer for Player
         /// </summary>
-        private Renderer renderer;
+        private Renderer playerRenderer;
+        /// <summary>
+        /// Collider for Player
+        /// </summary>
+        private Collider2D coll;
         /// <summary>
         /// Whether the Player is currently Invincible
         /// </summary>
         private bool isInvincible;
         #endregion
         #endregion
-
+        
         #region Methods
         #region Public
         #region Stats
@@ -134,25 +141,20 @@ namespace nl.SWEG.Willow.Player
             {
                 isInvincible = true;
                 if (amount >= Health)
-                {
                     Die();
-                }
-
-                //stop ignoring potions
+                // Stop ignoring HealthPotions, 
                 Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), false);
-
                 Health = (ushort)Mathf.Clamp(Health - amount, 0, Health);
-                PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.red, 50);
+                PopupFactory.CreateDamageUI(transform.position, amount, playerRenderer, Color.red, 50);
                 healthChangeEvent?.Invoke(Health, maxHealth, (short)-amount);
                 // Tween to Red
-                LeanTween.value(gameObject, col => renderer.SetSpriteColor(col), Color.white, Color.red, (invincibilityFrames / 60f) / 6f)
-                    .setLoopPingPong(3).setOnComplete(() => isInvincible = false);
-                
+                LeanTween.value(gameObject, col => playerRenderer.SetSpriteColor(col), Color.white, Color.red, (invincibilityFrames / 60f) / 6f)
+                    .setLoopPingPong(3).setOnComplete(() => isInvincible = false);                
+                // Shake Screen
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
+                // Stun Player
                 MovementManager.Stun(0.2f);
             }
-
-
         }
 
         /// <summary>
@@ -162,17 +164,15 @@ namespace nl.SWEG.Willow.Player
         public bool Heal(ushort amount)
         {
             if (Health == maxHealth)
-            {
                 return false;
-            }
             Health = (ushort)Mathf.Clamp(Health + amount, Health, maxHealth);
             if (Health == maxHealth)
             {
-                //ignore potions since health is full
+                // Ignore HealthPotions, since Health is full
                 Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), true);
             }
             healthChangeEvent?.Invoke(Health, maxHealth, (short)amount);
-            PopupFactory.CreateDamageUI(transform.position, amount, renderer, Color.green, 50);
+            PopupFactory.CreateDamageUI(transform.position, amount, playerRenderer, Color.green, 50);
             return true;
         }
         #endregion
@@ -188,6 +188,7 @@ namespace nl.SWEG.Willow.Player
             // Set Initial Value
             listener.Invoke(Health, maxHealth, 0);
         }
+
         /// <summary>
         /// Removes a Listener from the HealthChangeEvent
         /// </summary>
@@ -201,7 +202,7 @@ namespace nl.SWEG.Willow.Player
 
         #region Unity
         /// <summary>
-        /// Grabs reference to Inventory and sets Health
+        /// Grabs references and sets Health
         /// </summary>
         protected override void Awake()
         {
@@ -209,26 +210,22 @@ namespace nl.SWEG.Willow.Player
             CastingManager = GetComponent<CastingManager>();
             InputManager = GetComponent<InputManager>();
             MovementManager = GetComponent<MovementManager>();
-            renderer = GetComponent<Renderer>();
+            playerRenderer = GetComponent<Renderer>();
+            coll = GetComponent<Collider2D>();
             base.Awake();
             Health = maxHealth;
-            //ignore potions since health is full
+            // Ignore HealthPotions, since Health is full
             Physics2D.IgnoreLayerCollision(gameObject.layer, (int)Mathf.Log(healthPotionLayer.value, 2), true);
         }
         #endregion
 
         #region Private
         /// <summary>
-        /// Performs death-animation for player, and respawns
+        /// Performs death-animation for player, and starts Run-End
         /// </summary>
         private void Die()
         {
-            GetComponent<Collider2D>().enabled = false;
-            EndGame();
-        }
-
-        private void EndGame()
-        {
+            coll.enabled = false;
             if (CameraManager.Exists)
                 CameraManager.Instance.Fade(0.7f, 0, 2f);
             GameManager.Instance.EndGame(true);

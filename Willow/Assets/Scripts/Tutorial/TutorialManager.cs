@@ -1,5 +1,6 @@
-﻿using nl.SWEG.Willow.GameWorld;
+﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
+using nl.SWEG.Willow.Sorcery;
 using nl.SWEG.Willow.UI.Game;
 using nl.SWEG.Willow.UI.Menu;
 using nl.SWEG.Willow.Utils;
@@ -16,7 +17,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
     public class TutorialManager : MonoBehaviour
     {
         // TODOCLEAN: Check when delegates are added/removed
-
+        // TODOCLEAN: Could the Menu-Part of the SpellCrafting-Tutorial be turned into a (manully run) Coroutine? (IEnumerator.Next())
         #region InnerTypes
         /// <summary>
         /// Steps in Tutorial
@@ -52,12 +53,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// </summary>
         private void Start()
         {
-            StartTutorialDialogue(); //Run the Dialogue Queue function
-            
+            StartTutorialDialogue(); //Run the Dialogue Queue function            
             SceneManager.sceneLoaded += LoadMainMenu;  //Adding Event listener which checks for the scene load
             PlayerManager.Instance.Inventory.spellunlocked += FinishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
             Room.clearedRoom += RoomClearedSlimes; //Adding the listener to checking for the room clear
-
             //Adding the Event Listeneres for the Page casting and Page Pickup
             PlayerManager.Instance.CastingManager.AddCastListener(CastedBookerangDialogue);
             PlayerManager.Instance.Inventory.AddPageListener(PickedUpPageDialogue);
@@ -94,11 +93,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue after picking up Page
         /// </summary>
-        /// <param name="newAmount"></param>
-        /// <param name="change"></param>
-        private void PickedUpPageDialogue(uint newAmount, int change)
+        /// <param name="page">Page that was picked up</param>
+        private void PickedUpPageDialogue(SpellPage page)
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.PickedUpPage]);
             PlayerManager.Instance.MovementManager.SetStunned(true);
@@ -109,7 +107,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue after entering PauseMenu
         /// </summary>
         private void EnteredMenuDialogue()
         {
@@ -121,7 +119,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue after Entering SpellList
         /// </summary>
         private void EnteredSpellListDialogue()
         {
@@ -134,51 +132,42 @@ namespace nl.SWEG.Willow.UI.Dialogue
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue for ...
         /// </summary>
         private void EnteredNewSpellDialogue()
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredNewSpell]);
-
-
             Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the second spell in the spell list    
             Button btn = buttonunlock.GetComponent<Button>();
             btn.onClick.RemoveListener(EnteredNewSpellDialogue);
-
             StartCoroutine(AttachToSpellCrafting());
-
-
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue for Entering Puzzle
         /// </summary>
         private void EntersPuzzleDialogue()
         {
-
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EntersPuzzle]);
-
-
             Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
             Button btn = spellcrafting.GetComponent<Button>();
             btn.onClick.RemoveListener(EntersPuzzleDialogue);
         }
 
         /// <summary>
-        /// 
+        /// Runs Dialogue after finishing Puzzle
         /// </summary>
-        private void FinishPuzzleDialogue()
+        private void FinishPuzzleDialogue(SpellPage spellPage)
         {
-
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishPuzzle]);
             PlayerManager.Instance.MovementManager.SetStunned(false);
             PlayerManager.Instance.Inventory.spellunlocked -= FinishPuzzleDialogue;
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
-
         }
+
         /// <summary>
-        /// Runs the start tutorial sentences queue
+        /// Runs the StartTutorial Dialogue
         /// </summary>
         private void StartTutorialDialogue()
         {
@@ -189,14 +178,12 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// <summary>
         /// Attaches delegate after Menu-Scene loads
         /// </summary>
-        /// <param name="arg0"></param>
-        /// <param name="arg1"></param>
-        private void LoadMainMenu(Scene arg0, LoadSceneMode arg1)
+        /// <param name="loadedScene">Scene that was loaded</param>
+        /// <param name="loadMode">Mode in which Scene was loaded</param>
+        private void LoadMainMenu(Scene loadedScene, LoadSceneMode loadMode)
         {
-            if (arg0.name != Constants.MainMenuSceneName)
-            {
+            if (loadedScene.name != Constants.MainMenuSceneName)
                 return;
-            }
             EnteredMenuDialogue();
             StartCoroutine(AttachToButtonSpell());
         }

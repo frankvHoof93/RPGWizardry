@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace nl.SWEG.Willow.Utils
 {
+    /// <summary>
+    /// Initializes Game
+    /// </summary>
     public class InitGame : MonoBehaviour
     {
         /// <summary>

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace nl.SWEG.Willow.Player.PlayerInput
 {
-    public class SpellCraftingInput : MonoBehaviour
+    public class ResearchInput : MonoBehaviour
     {
         #region Variables
         #region Editor

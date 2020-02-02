@@ -13,14 +13,10 @@ namespace nl.SWEG.Willow
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {
-        [SerializeField]
-        private Texture2D crosshair;
-        [SerializeField]
-        private Texture2D cursor;
-
-        private Vector2 crosshairHotspot;
-
         #region InnerTypes
+        /// <summary>
+        /// State of GamePlay
+        /// </summary>
         public enum GameState
         {
             Menu = 0,
@@ -61,6 +57,7 @@ namespace nl.SWEG.Willow
             player.transform.position = position;
             GameUIManager.Instance.HUD.Initialize();
         }
+
         /// <summary>
         /// Toggles Game-Pause
         /// </summary>
@@ -71,16 +68,16 @@ namespace nl.SWEG.Willow
                 LeanTween.pauseAll(); 
             else
                 LeanTween.resumeAll(); // Resumes ALL tweens (including the ones that are NOT in GameState.Playing
-            if (Paused && PlayerManager.Exists)
-                PlayerManager.Instance.GetComponent<MovementManager>().FreezeMovement();
-            //Set cursor to cursor if paused, crosshair if unpaused
-            Cursor.SetCursor(Paused ? cursor : crosshair, Paused ? Vector2.zero : crosshairHotspot, CursorMode.Auto);
         }
-
+        
+        /// <summary>
+        /// Ends current Run
+        /// </summary>
+        /// <param name="gameOver">Whether to move to the GameOver-Scene (Player Died)</param>
         public void EndGame(bool gameOver)
         {
             State = GameState.GameOver;
-            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+            GameUIManager.Instance.SetCursor(GameUIManager.CursorType.Cursor);
             if (gameOver)
             {
                 StartCoroutine(GameOver());
@@ -97,43 +94,36 @@ namespace nl.SWEG.Willow
         /// <summary>
         /// Initiazes Game after GameScene has finished Loading
         /// </summary>
-        /// <param name="arg0">Scene that was Loaded</param>
-        /// <param name="arg1"></param>
-        internal void InitGame(Scene arg0, LoadSceneMode arg1)
+        /// <param name="loadedScene">Scene that was Loaded</param>
+        /// <param name="loadMode">Way in which Scene was loaded</param>
+        internal void InitGame(Scene loadedScene, LoadSceneMode loadMode)
         {
             SceneManager.sceneLoaded -= InitGame;
-            if (arg0.name != Constants.GameSceneName)
+            if (loadedScene.name != Constants.GameSceneName)
                 return; // GameScene was not loaded Scene
-            if (arg1 != LoadSceneMode.Single)
+            if (loadMode != LoadSceneMode.Single)
                 return; // GameScene was not loaded Single (Menu-Exit)
-            FloorManager.Instance.LoadFloor();
             State = GameState.GamePlay;
             Paused = false;
-            Cursor.SetCursor(crosshair,crosshairHotspot,CursorMode.Auto);
         }
 
         /// <summary>
         /// Restarts game (un-pauses) after menu-exit
         /// </summary>
-        /// <param name="arg0">Scene that was unloaded (Menu-Scene)</param>
-        /// <param name="arg1">Loading-Mode for unloaded scene</param>
-        internal void OnExitMenu(Scene arg0)
-        {
+        /// <param name="unloadedScene">Scene that was unloaded (Menu-Scene)</param>
+        internal void OnExitMenu(Scene unloadedScene)
+        { // TODOCLEAN: Check this
             SceneManager.sceneUnloaded -= OnExitMenu;
             Paused = false;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
         }
         #endregion
-
-        #region Unity
-        private void Start()
-        {
-            crosshairHotspot = new Vector2(crosshair.width / 2f, crosshair.height / 2f);
-        }
-        #endregion
-
+        
         #region Private
+        /// <summary>
+        /// Handles End of Game at Player Death
+        /// </summary>
         private IEnumerator GameOver()
         {
             // TODO: Animation

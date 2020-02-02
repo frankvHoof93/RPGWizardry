@@ -6,12 +6,11 @@ using TMPro;
 using nl.SWEG.Willow.Utils.Functions;
 namespace nl.SWEG.Willow.ResearchData
 {
+    /// <summary>
+    /// Manages Research-Data, and renders 
+    /// </summary>
     public class DataManager : MonoBehaviour
     {
-        #region Inner Types
-        
-        #endregion
-
         #region Variables
         /// <summary>
         /// Current bin to be used for minigames/research
@@ -50,43 +49,35 @@ namespace nl.SWEG.Willow.ResearchData
         [SerializeField]
         private Button checkButton;
 
-        private bool started = false;
-        
         #endregion
+
         #region Methods
-
-        private void Start()
-        {
-            UpdateBars();
-            started = true;
-
-        }
         /// <summary>
         /// Perform start when page is enabled again.
         /// </summary>
         private void OnEnable()
         {
-            if(started)
-            UpdateBars();
+                UpdateBars();
         }
-
-        // Update is called once per frame
-        void Update()
+        /// <summary>
+        /// Re-Applies UI if Game regains Focus on Device
+        /// </summary>
+        /// <param name="focus">True for gain of Focus, False for loss of Focus</param>
+        private void OnApplicationFocus(bool focus)
         {
-           
+            if (true)
+                UpdateBars();
         }
 
         private void UpdateBars()
         {
-            //TODO: Currently the null check is mainly used to circumvent the constant reloading of the datastub
             if (CurrentBin == null)
-            {
                 CurrentBin = LoadDataBin();
-            }
             PopulateUI();
             checkButton.enabled = true;
             message.enabled = false;
         }
+
         /// <summary>
         /// Used to check if the player has solved the research Set
         /// </summary>
@@ -106,7 +97,7 @@ namespace nl.SWEG.Willow.ResearchData
         }
 
         /// <summary>
-        /// Switch to the Spell page, only call when unlocked
+        /// Switches to the Spell page
         /// </summary>
         private void SwitchToSpellPage()
         {
@@ -162,26 +153,7 @@ namespace nl.SWEG.Willow.ResearchData
             }
 
         }
-
-
-        /// <summary>
-        /// Cleares the images and reset it to their base state.
-        /// </summary>
-        /// <param name="tex">Target texture</param>
-        private void ClearTextures(Texture2D tex)
-        {
-          //  for (int x = 0; x < tex.width; x++)
-          //      for (int y = 0; y < tex.height; y++)
-           //         tex.SetPixel(x, y, new Color(0,0,0,0));
-           // tex.Apply();
-        }
-
-        private void OnApplicationQuit()
-        {
-            for (int i = 0; i < images.Count; i++)
-                ClearTextures((Texture2D)images[i].mainTexture);
-        }
-
+        
         /// <summary>
         /// loads the next dataset when the previous ones are solved.
         /// </summary>

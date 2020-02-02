@@ -1,5 +1,5 @@
-﻿using nl.SWEG.Willow.GameWorld.OpacityManagement;
-using nl.SWEG.Willow.Player.Inventory;
+﻿using nl.SWEG.Willow.Player.Inventory;
+using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.Entities.Collectables

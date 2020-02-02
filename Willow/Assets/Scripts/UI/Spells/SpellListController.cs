@@ -74,7 +74,7 @@ namespace nl.SWEG.Willow.UI.Spells
         /// <summary>
         /// List of spells in Inventory
         /// </summary>
-        private List<SpellPage> pages = new List<SpellPage>();
+        private IReadOnlyList<SpellPage> pages;
         /// <summary>
         /// Currently Displayed Page for List
         /// </summary>

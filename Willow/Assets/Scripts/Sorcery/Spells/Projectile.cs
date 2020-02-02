@@ -1,6 +1,6 @@
 using nl.SWEG.Willow.Audio;
 using nl.SWEG.Willow.Entities.Stats;
-using nl.SWEG.Willow.GameWorld.OpacityManagement;
+using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 

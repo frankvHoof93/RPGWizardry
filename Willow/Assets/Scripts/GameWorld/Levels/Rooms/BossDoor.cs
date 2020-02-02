@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using nl.SWEG.Willow.Loading;
+using System.Collections;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.GameWorld
+namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
 {
     /// <summary>
     /// A special door that loads into the boss scene
@@ -15,7 +15,8 @@ namespace nl.SWEG.Willow.GameWorld
         /// <param name="collision">The object entering the trigger</param>
         protected override void OnTriggerEnter2D(Collider2D collision)
         {
-            StartCoroutine(LoadScene());
+            if (collision.gameObject.tag.Equals(playerTag)) // Make sure it's a player
+                StartCoroutine(LoadScene());
         }
 
         /// <summary>
@@ -28,14 +29,12 @@ namespace nl.SWEG.Willow.GameWorld
                 GameManager.Instance.TogglePause();
 
             //Fade the screen out
-
             CameraManager.Instance.Fade(1, 0);
             while (CameraManager.Instance.Fading)
             {
                 yield return null;
             }
-
-            Loading.SceneLoader.Instance.LoadBossScene();
+            SceneLoader.Instance.LoadBossScene();
         }
     }
 }

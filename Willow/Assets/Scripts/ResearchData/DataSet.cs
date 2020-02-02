@@ -31,6 +31,7 @@ namespace nl.SWEG.Willow.ResearchData
 
         }
         #endregion
+
         #region Check
         /// <summary>
         /// Checks if all the control fragments in the fragment list are solved or not.

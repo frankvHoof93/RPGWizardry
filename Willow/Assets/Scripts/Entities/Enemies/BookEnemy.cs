@@ -135,17 +135,17 @@ namespace nl.SWEG.Willow.Entities.Enemies
             string stateName = "BookFaceRight";
             switch (spell.Element)
             {
-                case Sorcery.Element.Fire:
+                case Element.Fire:
                     stateName = "Fire" + stateName;
                     break;
-                case Sorcery.Element.Water:
+                case Element.Water:
                     stateName = "Water" + stateName;
                     break;
-                case Sorcery.Element.Electricity:
+                case Element.Electricity:
                     stateName = "Electric" + stateName;
                     break;
-                case Sorcery.Element.None:
-                case Sorcery.Element.Earth:
+                case Element.None:
+                case Element.Earth:
                     stateName = "Earth" + stateName;
                     break;
             }

@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace nl.SWEG.Willow.Player.Inventory
 {
+    /// <summary>
+    /// Inventory for Player, containing Dust, Gold and SpellPages
+    /// </summary>
     public class PlayerInventory : MonoBehaviour, IStorable, IJSON<PlayerInventory>
     {
         #region InnerTypes
@@ -18,18 +21,15 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <param name="newAmount">Amount after Change</param>
         /// <param name="change">Change that was applied</param>
         public delegate void OnInventoryChange(uint newAmount, int change);
+        /// <summary>
+        /// Delegate for Inventory-Events with a SpellPage
+        /// </summary>
+        /// <param name="page">SpellPage for Event</param>
+        public delegate void OnInventorySpell(SpellPage page);
         #endregion
 
         #region Variables
         #region Public
-        /// <summary>
-        /// Creating event array to check for spellunlocking
-        /// </summary>
-        public delegate void SpellUnlock();
-        /// <summary>
-        /// Spellunlocked event
-        /// </summary>
-        public SpellUnlock spellunlocked;
         /// <summary>
         /// Amount of Dust in Inventory
         /// </summary>
@@ -41,7 +41,16 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Pages in Inventory
         /// </summary>
-        public List<SpellPage> Pages { get { return pages; } }
+        public IReadOnlyList<SpellPage> Pages { get { return pages.AsReadOnly(); } }
+        #endregion
+
+        #region Editor
+        /// <summary>
+        /// Base spell the player has access too
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Base spell the player has access too")]
+        private SpellData baseSpell;
         #endregion
 
         #region Private
@@ -49,12 +58,6 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// Pages in Inventory
         /// </summary>
         private readonly List<SpellPage> pages = new List<SpellPage>();
-
-        /// <summary>
-        /// Base spell the player has access too.
-        /// </summary>
-        [SerializeField]
-        private SpellData baseSpell;
 
         #region Events
         /// <summary>
@@ -68,7 +71,11 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Event called when Page-Amount changes
         /// </summary>
-        private event OnInventoryChange pageChangeEvent;
+        private event OnInventorySpell pageChangeEvent;
+        /// <summary>
+        /// Event called when Spell is Unlocked
+        /// </summary>
+        public event OnInventorySpell spellunlocked; // TODOCLEAN:
         #endregion
         #endregion
         #endregion
@@ -84,6 +91,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         {
             dustChangeEvent += listener;
         }
+
         /// <summary>
         /// Removes Listener from Dust-Event
         /// </summary>
@@ -92,6 +100,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         {
             dustChangeEvent -= listener;
         }
+
         /// <summary>
         /// Adds Listener to Gold-Event
         /// </summary>
@@ -102,6 +111,7 @@ namespace nl.SWEG.Willow.Player.Inventory
             // Set Initial Value
             listener.Invoke(Gold, 0);
         }
+
         /// <summary>
         /// Removes Listener from Gold-Event
         /// </summary>
@@ -115,7 +125,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// Add Listener from Page-Event
         /// </summary>
         /// <param name="listener">Listener to Add</param>
-        public void AddPageListener(OnInventoryChange listener)
+        public void AddPageListener(OnInventorySpell listener)
         {
             pageChangeEvent += listener;
         }
@@ -124,35 +134,34 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// Remove Listener from Page-Event
         /// </summary>
         /// <param name="listener">Listener to Remove</param>
-        public void RemovePageListener(OnInventoryChange listener)
+        public void RemovePageListener(OnInventorySpell listener)
         {
             pageChangeEvent -= listener;
         }
         #endregion
 
         #region Spells
-
         /// <summary>
-        /// Unlocks a Page in the Inventory, only if you can pay the costs needed for it.
+        /// Unlocks a Page in the Inventory, but only if there is enough dust to pay for its cost
         /// </summary>
         /// <param name="page">Page to unlock</param>
-        /// <returns></returns>
+        /// <returns>True if unlock was successful</returns>
         public bool UnlockSpell(SpellPage page)
         {
             if (Dust >= page.DustCost)
             {
                 page.UnlockSpell();
-                spellunlocked?.Invoke();
+                spellunlocked?.Invoke(page);
                 Dust -= page.DustCost;
                 dustChangeEvent(Dust, (int)page.DustCost);
             }
-
             return page.Unlocked;
         }
         #endregion
 
         #region Storage
         /// <summary>
+        /// TODO:
         /// Loads Inventory from File
         /// </summary>
         /// <param name="path">Path to load from</param>
@@ -164,16 +173,19 @@ namespace nl.SWEG.Willow.Player.Inventory
             // Called with 0 to not perform animation
             dustChangeEvent?.Invoke(Dust, 0);
             goldChangeEvent?.Invoke(Gold, 0);
-
         }
+
         /// <summary>
+        /// TODO:
         /// Saves Inventory to File
         /// </summary>
         public void Save(string path)
         {
             File.WriteAllText(path, ToJSON());
         }
+
         /// <summary>
+        /// TODO:
         /// Creates JSON-representation for this Object
         /// </summary>
         /// <returns>JSON-String for this Inventory</returns>
@@ -181,7 +193,9 @@ namespace nl.SWEG.Willow.Player.Inventory
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
+        /// TODO:
         /// Loads Inventory-Values from JSON
         /// </summary>
         /// <returns>JSON-string to load from</returns>
@@ -196,7 +210,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// Whether the player has this spell in his/her inventory (does not check for Unlocking)
         /// </summary>
         /// <param name="spell">Spell to check against</param>
-        /// <returns></returns>
+        /// <returns>True if Spell exists in Inventory</returns>
         public bool HasSpell(SpellData spell)
         {
             return Pages.Any(p => ReferenceEquals(spell, p.Spell));
@@ -226,11 +240,12 @@ namespace nl.SWEG.Willow.Player.Inventory
             if (page != null && !HasSpell(page.Spell))
             {
                 pages.Add(page);
-                pageChangeEvent?.Invoke(Dust, 1);
+                pageChangeEvent?.Invoke(page);
                 return true;
             }
             else return false;
         }
+
         /// <summary>
         /// Adds Dust to Inventory
         /// </summary>
@@ -240,6 +255,7 @@ namespace nl.SWEG.Willow.Player.Inventory
             Dust += amount;
             dustChangeEvent.Invoke(Dust, (int)amount);
         }
+
         /// <summary>
         /// Adds Gold to Inventory
         /// </summary>

@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace nl.SWEG.Willow.ResearchData
 {
     public class DataStubBin
     {
-        public DataBin Bin = new DataBin(new List<Fragment>
+        public readonly DataBin Bin = new DataBin(new List<Fragment>
         {
             new Fragment()
             {

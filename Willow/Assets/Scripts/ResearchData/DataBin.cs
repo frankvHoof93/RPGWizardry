@@ -47,13 +47,12 @@ namespace nl.SWEG.Willow.ResearchData
         /// <returns>A true or false based on the outcome</returns>
         public bool IsDataBinSolved()
         {
-            int solvedCount = 0;
             for (int i = 0; i < this.setSize; i++)
             {
-                if (DataSets[i].IsSolved)
-                    solvedCount++;
+                if (!DataSets[i].IsSolved)
+                    return false;
             }
-            return solvedCount == setSize;
+            return true;
         }
         /// <summary>
         /// Returns the first unsolved Dataset

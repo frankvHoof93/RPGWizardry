@@ -1,9 +1,16 @@
-﻿using nl.SWEG.Willow.Utils.Functions;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.GameWorld
+namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
 {
+    /// <summary>
+    /// Manages Opacity for Large Objects. This can handle many Opacity-Objects (Max 64), but is heavier on the GPU
+    /// <para>
+    /// To be used with the OpacityLargeShader
+    /// </para>
+    /// </summary>
     public class OpacityManagerLargeBatch : OpacityManager
     {
         #region Variables
@@ -19,6 +26,25 @@ namespace nl.SWEG.Willow.GameWorld
         /// Materials to apply Opacity to
         /// </summary>
         private Material[] materials;
+
+        #region ShaderProperties
+        /// <summary>
+        /// ID for _UseSeeThrough-Property
+        /// </summary>
+        private int useSeeThroughID = Shader.PropertyToID("_UseSeeThrough");
+        /// <summary>
+        /// ID for _SeeThroughLength-Property
+        /// </summary>
+        private int seeThroughLengthID = Shader.PropertyToID("_SeeThroughLength");
+        /// <summary>
+        /// ID for centers-Property
+        /// </summary>
+        private int centersID = Shader.PropertyToID("centers");
+        /// <summary>
+        /// ID for radii-Property
+        /// </summary>
+        private int radiiID = Shader.PropertyToID("radii");
+        #endregion
         #endregion
 
         #region Methods
@@ -34,6 +60,7 @@ namespace nl.SWEG.Willow.GameWorld
                 renderers[i].material = materials[i]; // Break Batching, Create Materials
             }
         }
+
         /// <summary>
         /// Sets Opacity to Materials
         /// </summary>
@@ -56,10 +83,10 @@ namespace nl.SWEG.Willow.GameWorld
             for (int i = 0; i < materials.Length; i++)
             {
                 Material mat = materials[i];
-                mat.SetInt("_UseSeeThrough", 1);
-                mat.SetInt("_SeeThroughLength", amount);
-                mat.SetFloatArray("centers", cachedPos);
-                mat.SetFloatArray("radii", cachedRad);
+                mat.SetInt(useSeeThroughID, 1);
+                mat.SetInt(seeThroughLengthID, amount);
+                mat.SetFloatArray(centersID, cachedPos);
+                mat.SetFloatArray(radiiID, cachedRad);
             }
         }
         #endregion

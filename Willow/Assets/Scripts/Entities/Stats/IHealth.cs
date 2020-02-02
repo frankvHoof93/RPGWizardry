@@ -7,7 +7,11 @@
     /// <param name="maxHealth">Max Health for Entity</param>
     /// <param name="change">Change that occurred</param>
     public delegate void OnHealthChange(ushort newHealth, ushort maxHealth, short change);
+    /// <summary>
+    /// Delegate for Death
+    /// </summary>
     public delegate void Die();
+
     /// <summary>
     /// Interface for Entities with Health
     /// </summary>

@@ -1,10 +1,12 @@
-﻿using nl.SWEG.Willow.GameWorld.OpacityManagement;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.GameWorld
+namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
 {
+    /// <summary>
+    /// Manages Opacity for Objects
+    /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public abstract class OpacityManager : MonoBehaviour
     {
@@ -14,7 +16,13 @@ namespace nl.SWEG.Willow.GameWorld
         /// </summary>
         protected class OpacityObject
         {
+            /// <summary>
+            /// Transform to Position Opacity around
+            /// </summary>
             public Transform transform;
+            /// <summary>
+            /// Settings for Opacity
+            /// </summary>
             public IOpacity opacity;
         }
         #endregion
@@ -34,9 +42,9 @@ namespace nl.SWEG.Willow.GameWorld
 
         #region Methods
         /// <summary>
-        /// Checks if the thing entering the trigger is a player, and if it's fhe first thing to enter it, makes the walls transparent.
+        /// Adds Opacity-Objects to list when they enter the collider
         /// </summary>
-        /// <param name="collision">The thing entering the collider.</param>
+        /// <param name="collision">Collider with which collision occurred</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
             IOpacity opacity = collision.gameObject.GetComponent<IOpacity>();
@@ -45,13 +53,14 @@ namespace nl.SWEG.Willow.GameWorld
         }
 
         /// <summary>
-        /// Check if it's the last thing leaving the trigger, and if so, makes walls opague.
+        /// Removes Opacity-Objects from list when they leave the collider
         /// </summary>
-        /// <param name="collision">the thing leaving the collider.</param>
+        /// <param name="collision">Collider for Object leaving trigger</param>
         private void OnTriggerExit2D(Collider2D collision)
         {
             objects.RemoveWhere(n => ReferenceEquals(n.transform, collision.transform));
         }
+
         /// <summary>
         /// Sets Opacity to Renderer
         /// </summary>
@@ -60,6 +69,7 @@ namespace nl.SWEG.Willow.GameWorld
             objects.RemoveWhere(o => o == null || o.transform == null);
             SetToShader(objects.OrderBy(n => n.opacity.OpacityPriority).ToList());
         }
+
         /// <summary>
         /// Sets Opacity to Material/Shader
         /// </summary>

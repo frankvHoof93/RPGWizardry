@@ -1,16 +1,49 @@
-﻿using nl.SWEG.Willow.Utils.Functions;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.Utils.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace nl.SWEG.Willow.GameWorld
+namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
 {
     /// <summary>
+    /// Manages Opacity for Small Objects. This can handle few Opacity-Objects (Max 4), but works with GPU-Instancing
+    /// <para>
     /// To be used with the OpacitySmallShader
+    /// </para>
     /// </summary>
     public class OpacityManagerSmallBatch : OpacityManager
     {
-        MaterialPropertyBlock[] propertyBlocks;
+        #region Variables
+        /// <summary>
+        /// PropertyBlocks for Materials being managed
+        /// </summary>
+        private MaterialPropertyBlock[] propertyBlocks;
+        /// <summary>
+        /// ID for _UseSeeThrough-Property
+        /// </summary>
+        private int useSeeThroughID = Shader.PropertyToID("_UseSeeThrough");
+        /// <summary>
+        /// ID for _SeeThroughLength-Property
+        /// </summary>
+        private int seeThroughLengthID = Shader.PropertyToID("_SeeThroughLength");
+        /// <summary>
+        /// ID for _SeeThroughRadii-Property
+        /// </summary>
+        private int seeThroughRadiiID = Shader.PropertyToID("_SeeThroughRadii");
+        /// <summary>
+        /// ID for _SeeThroughCenter1-Property
+        /// </summary>
+        private int seeThroughCenter1ID = Shader.PropertyToID("_SeeThroughCenter1");
+        /// <summary>
+        /// ID for _SeeThroughCenter2-Property
+        /// </summary>
+        private int seeThroughCenter2ID = Shader.PropertyToID("_SeeThroughCenter2");
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Sets up MaterialPropertyBlocks
+        /// </summary>
         private void Start()
         {
             propertyBlocks = new MaterialPropertyBlock[renderers.Length];
@@ -21,7 +54,10 @@ namespace nl.SWEG.Willow.GameWorld
                 propertyBlocks[i] = block;
             }
         }
-
+        /// <summary>
+        /// Sets Opacity-Values to Shader
+        /// </summary>
+        /// <param name="objects">List of Objects to handle</param>
         protected override void SetToShader(List<OpacityObject> objects)
         {
             if (!CameraManager.Exists)
@@ -56,13 +92,14 @@ namespace nl.SWEG.Willow.GameWorld
             {
                 MaterialPropertyBlock mpb = propertyBlocks[i];
                 renderers[i].GetPropertyBlock(mpb);
-                mpb.SetInt("_UseSeeThrough", 1);
-                mpb.SetInt("_SeeThroughLength", amount);
-                mpb.SetVector("_SeeThroughRadii", radius);
-                mpb.SetVector("_SeeThroughCenter1", vec);
-                mpb.SetVector("_SeeThroughCenter2", vec2);
+                mpb.SetInt(useSeeThroughID, 1);
+                mpb.SetInt(seeThroughLengthID, amount);
+                mpb.SetVector(seeThroughRadiiID, radius);
+                mpb.SetVector(seeThroughCenter1ID, vec);
+                mpb.SetVector(seeThroughCenter2ID, vec2);
                 renderers[i].SetPropertyBlock(mpb);
             }
         }
+        #endregion
     }
 }

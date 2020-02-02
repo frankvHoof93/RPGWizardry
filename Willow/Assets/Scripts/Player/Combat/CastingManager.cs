@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace nl.SWEG.Willow.Player.Combat
 {
+    /// <summary>
+    /// Handles Casting of Spells for Player
+    /// </summary>
     [RequireComponent(typeof(PlayerManager))]
     public class CastingManager : MonoBehaviour
     {
@@ -37,19 +40,12 @@ namespace nl.SWEG.Willow.Player.Combat
         public const ushort SelectableSpellAmount = 4;
         #endregion
 
-        #region Public
-        /// <summary>
-        /// DEBUG Prototype projectile; fill this with selected spell later
-        /// </summary>
-        public SpellData[] CurrentSpells;
-        #endregion
-
         #region Editor
         /// <summary>
-        /// Transform of the object the projectiles need to spawn from
+        /// Transform for position the projectiles need to spawn from
         /// </summary>
         [SerializeField]
-        [Tooltip("Transform of the object the projectiles need to spawn from")]
+        [Tooltip("Transform for position the projectiles need to spawn from")]
         private Transform spawnLocation;
         /// <summary>
         /// LayerMask for Entities that can be hit by cast objects
@@ -67,6 +63,7 @@ namespace nl.SWEG.Willow.Player.Combat
         /// Timeout for Scrolling (timeout between Selections)
         /// </summary>
         [SerializeField]
+        [Tooltip("Timeout for Scrolling (timeout between Selections)")]
         private float scrollTimeOut;
         #endregion
 
@@ -121,6 +118,7 @@ namespace nl.SWEG.Willow.Player.Combat
         {
             castEvent += listener;
         }
+
         /// <summary>
         /// Removes Listener from Cast-Event
         /// </summary>
@@ -129,6 +127,7 @@ namespace nl.SWEG.Willow.Player.Combat
         {
             castEvent -= listener;
         }
+
         /// <summary>
         /// Adds Listener to Selection-Event
         /// </summary>
@@ -139,6 +138,7 @@ namespace nl.SWEG.Willow.Player.Combat
             // Set initial value
             listener.Invoke(selectedSpellIndex);
         }
+
         /// <summary>
         /// Removes Listener from Selection-Event
         /// </summary>
@@ -147,6 +147,7 @@ namespace nl.SWEG.Willow.Player.Combat
         {
             selectionEvent -= listener;
         }
+
         /// <summary>
         /// Adds Listener to SpellChange-Event
         /// </summary>
@@ -155,6 +156,7 @@ namespace nl.SWEG.Willow.Player.Combat
         {
             spellChangeEvent += listener;
         }
+
         /// <summary>
         /// Removes Listener from SpellChange-Event
         /// </summary>
@@ -176,6 +178,7 @@ namespace nl.SWEG.Willow.Player.Combat
                 throw new ArgumentOutOfRangeException("index", "Value larger than total amount of possible Spells");
             return selectedSpells[index];
         }
+
         /// <summary>
         /// Selects next available Spell in SelectedSpells
         /// </summary>
@@ -189,6 +192,7 @@ namespace nl.SWEG.Willow.Player.Combat
             SelectSpell(newIndex);
             currScrollTimeout = scrollTimeOut;
         }
+
         /// <summary>
         /// Selects previous available Spell in SelectedSpells
         /// </summary>
@@ -202,6 +206,7 @@ namespace nl.SWEG.Willow.Player.Combat
             SelectSpell(newIndex);
             currScrollTimeout = scrollTimeOut;
         }
+
         /// <summary>
         /// Selects Spell by Index (if not null)
         /// </summary>
@@ -238,11 +243,12 @@ namespace nl.SWEG.Willow.Player.Combat
             spellCooldown[index] = 0;
             spellChangeEvent?.Invoke(index, spell);
         }
+
         /// <summary>
         /// Attemps to Equip Spell in first available (Empty) slot
         /// </summary>
         /// <param name="spell">Spell to Equip</param>
-        /// <returns>True if successfull (Empty slot was avilable)</returns>
+        /// <returns>True if successful (Empty slot was avilable)</returns>
         internal bool TryEquipSpell(SpellData spell)
         {
             for (int i = 0; i < selectedSpells.Length; i++)
@@ -264,13 +270,6 @@ namespace nl.SWEG.Willow.Player.Combat
         private void Start()
         {
             player = GetComponent<PlayerManager>();
-            //DEBUG (Set serialized spell to position 0 in SelectedSpells)
-            for (int i = 3; i >= 0; i--)
-            {
-                if (i >= CurrentSpells.Length)
-                    continue;
-                SetSpell(CurrentSpells[i], (ushort)i);
-            }
         }
 
         /// <summary>
@@ -332,6 +331,7 @@ namespace nl.SWEG.Willow.Player.Combat
                 spellCooldown[selectedSpellIndex] = spell.Cooldown;
             }
         }
+
         /// <summary>
         /// Casts Spell by Index (If Spell is Equipped for Index)
         /// </summary>

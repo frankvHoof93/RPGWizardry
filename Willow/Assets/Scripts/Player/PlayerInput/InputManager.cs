@@ -1,9 +1,12 @@
-﻿using UnityEngine;
-using nl.SWEG.Willow.GameWorld;
+﻿using nl.SWEG.Willow.GameWorld;
+using UnityEngine;
 using static nl.SWEG.Willow.GameManager;
 
 namespace nl.SWEG.Willow.Player.PlayerInput
 {
+    /// <summary>
+    /// Reads and Stores Input from Input-Devices
+    /// </summary>
     public class InputManager : MonoBehaviour
     {
         #region Variables
@@ -13,27 +16,30 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         /// </summary>
         public InputState State { get; private set; }
         #endregion
-        #region Private
-        /// <summary>
-        /// Pivot on which the book rotates; necessary to aim at the mouse properly
-        /// </summary>
-        [SerializeField]
-        private Transform BookPivot;
-        #endregion
+
         #region Editor
         /// <summary>
         /// ControlScheme for Input-Reading
         /// </summary>
         [SerializeField]
-        [Tooltip("ControlScheme for InputReading")]
+        [Tooltip("ControlScheme for Input-Reading")]
         private ControlScheme controlScheme = ControlScheme.Keyboard;
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Pivot on which the book rotates; Necessary to aim at the mouse properly
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Pivot on which the book rotates")]
+        private Transform bookPivot;
         #endregion
         #endregion
 
         #region Methods
         #region Unity
         /// <summary>
-        /// Checks inputs based on gamestate
+        /// Checks Input-Devices based on GameState
         /// </summary>
         private void Update()
         {
@@ -54,11 +60,11 @@ namespace nl.SWEG.Willow.Player.PlayerInput
 
         #region Private
         /// <summary>
-        /// collects unity movement input while in gameplay state and saves in inputstate
+        /// Collects Movement-Input
         /// </summary>
         private void MovementInputs(ref InputState inputState)
         {
-            //same for keyboard and controller
+            // Same implementation for keyboard and controller
             Vector2 movementDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             // Normalize if needed (Can have length <= 1)
             if (movementDir.magnitude > 1)
@@ -67,22 +73,23 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         }
 
         /// <summary>
-        /// collects unity aiming input while in gameplay state and saves in inputstate
+        /// Collects Aiming-Input
         /// </summary>
+        /// <param name="inputState">InputState to write to</param>
         private void AimingInputs(ref InputState inputState)
         {
             switch (controlScheme)
             {
-                // on controller, use the right stick
+                // On controller, use the right stick
                 case ControlScheme.Controller:
                     inputState.AimDirection = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
                     break;
-                //on keyboard, use the mouse
+                // On keyboard, use the mouse
                 case ControlScheme.Keyboard:
                 default:
                     Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                     Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
-                    inputState.AimDirection = (lookPos - (Vector2)BookPivot.transform.position).normalized;
+                    inputState.AimDirection = (lookPos - (Vector2)bookPivot.transform.position).normalized;
                     break;
             }
         }
@@ -90,6 +97,7 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         /// <summary>
         /// Collects button/key states
         /// </summary>
+        /// <param name="inputState">InputState to write to</param>
         private void ButtonInputs(ref InputState inputState)
         {
             switch (controlScheme)

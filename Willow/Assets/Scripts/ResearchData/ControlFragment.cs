@@ -18,7 +18,7 @@
         /// </summary> 
         private float range;
         #region Methods
-        public ControlFragment(float correctPosition, float range) : base()
+        public ControlFragment(float correctPosition, float range)
         {
             CorrectPosition = correctPosition;
             Solved = false;

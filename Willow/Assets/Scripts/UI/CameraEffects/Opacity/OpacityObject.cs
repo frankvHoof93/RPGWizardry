@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-
-namespace nl.SWEG.Willow.GameWorld.OpacityManagement
+namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
 {
-
+    /// <summary>
+    /// Object that turns specific parts of the environment transparent when it is behind them
+    /// </summary>
     public class OpacityObject : MonoBehaviour, IOpacity
     {
         #region Public

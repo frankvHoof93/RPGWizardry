@@ -1,4 +1,5 @@
 ﻿using nl.SWEG.Willow.Entities.Collectables;
+using nl.SWEG.Willow.Sorcery;
 using nl.SWEG.Willow.Sorcery.Spells;
 using nl.SWEG.Willow.Utils.Behaviours;
 using System;
@@ -6,13 +7,17 @@ using UnityEngine;
 
 namespace nl.SWEG.Willow.GameWorld
 {
+    /// <summary>
+    /// Spawns Loot within the GameWorld
+    /// </summary>
     public class LootSpawner : SingletonBehaviour<LootSpawner>
     {
         #region Variables
         /// <summary>
-        /// Prefabs in order of Collectables enum
+        /// Prefabs in order of Collectables-Enum
         /// </summary>
         [SerializeField]
+        [Tooltip("Prefabs in order of Collectables-Enum")]
         private GameObject[] lootPrefabs = new GameObject[4];
         /// <summary>
         /// Holds Loot, so it can be destroyed when a new Room is loaded
@@ -59,10 +64,12 @@ namespace nl.SWEG.Willow.GameWorld
                     spawnedObject.GetComponent<DustPile>().SetAmount(amount);
                     break;
                 case Collectables.Gold:
+                    // TODO:
                     break;
                 case Collectables.Page:
                     throw new ArgumentException("Call SpawnPage instead");
                 case Collectables.Potion:
+                    // TODOCLEAN: Check this
                     break;
                 default:
                     break;
@@ -77,7 +84,7 @@ namespace nl.SWEG.Willow.GameWorld
         public void SpawnPage(Vector3 position, SpellData spell)
         {
             GameObject spawnedObject = Instantiate(lootPrefabs[(int)Collectables.Page]);
-            spawnedObject.GetComponent<PageObject>().Page = new Sorcery.SpellPage(spell);
+            spawnedObject.GetComponent<PageObject>().Page = new SpellPage(spell);
             spawnedObject.transform.position = position;
             spawnedObject.transform.SetParent(lootHolder, true);
         }

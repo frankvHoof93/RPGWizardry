@@ -1,16 +1,19 @@
 ﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.GameWorld.Levels;
 using nl.SWEG.Willow.Player;
-using nl.SWEG.Willow.UI;
+using nl.SWEG.Willow.UI.Dialogue;
 using nl.SWEG.Willow.UI.Game;
+using nl.SWEG.Willow.UI.Menu;
 using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
-using nl.SWEG.Willow.UI.Dialogue;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using nl.SWEG.Willow.UI.Menu;
 
 namespace nl.SWEG.Willow.Loading
 {
+    /// <summary>
+    /// Handles Loading & Unloading of Scenes
+    /// </summary>
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {
         #region Methods
@@ -18,6 +21,7 @@ namespace nl.SWEG.Willow.Loading
         /// <summary>
         /// Loads MainMenu-Scene
         /// </summary>
+        /// <param name="forceLoad">Force full reload of Main Menu (Unloads current Run)</param>
         public void LoadMenuScene(bool forceLoad = false)
         {
             if (forceLoad)
@@ -42,6 +46,7 @@ namespace nl.SWEG.Willow.Loading
                 }
             }
         }
+
         /// <summary>
         /// Loads Game-Scene
         /// </summary>
@@ -56,20 +61,22 @@ namespace nl.SWEG.Willow.Loading
             }
             UnloadMenuScene(); // Unload Menu-Scene
         }
+
         /// <summary>
         /// Loads GameOver-Scene
         /// </summary>
         public void LoadGameOverScene()
         {
-            SceneManager.LoadScene(Constants.GameOverSceneName, LoadSceneMode.Additive);
             UnloadGameSceneSingletons();
+            SceneManager.LoadScene(Constants.GameOverSceneName, LoadSceneMode.Additive);
         }
+
         /// <summary>
         /// Loads the boss scene
         /// </summary>
         public void LoadBossScene()
         {
-            UnloadGameSceneSingletons();
+            UnloadGameSceneSingletons(); // TODO: Remove this if actually spawning a Boss
             SceneManager.LoadScene(Constants.VictorySceneName, LoadSceneMode.Single);
         }
         #endregion
@@ -78,18 +85,19 @@ namespace nl.SWEG.Willow.Loading
         /// <summary>
         /// Initializes MainMenu after Scene-Load
         /// </summary>
-        /// <param name="arg0">Scene that was loaded (Menu-Scene)</param>
-        /// <param name="arg1">LoadSceneMode for Scene-Load (Single/Additive)</param>
-        private void InitMenu(Scene arg0, LoadSceneMode arg1)
+        /// <param name="loadedScene">Scene that was loaded (Menu-Scene)</param>
+        /// <param name="loadMode">LoadSceneMode for Scene-Load (Single/Additive)</param>
+        private void InitMenu(Scene loadedScene, LoadSceneMode loadMode)
         {
-            if (arg0.name != Constants.MainMenuSceneName)
+            if (loadedScene.name != Constants.MainMenuSceneName)
                 return;
-            bool isAdditive = arg1 == LoadSceneMode.Additive;
+            bool isAdditive = loadMode == LoadSceneMode.Additive;
             if (isAdditive)
-                SceneManager.SetActiveScene(arg0);
-            MenuManager.Instance.Init(arg1 == LoadSceneMode.Additive);
+                SceneManager.SetActiveScene(loadedScene);
+            MenuManager.Instance.Init(loadMode == LoadSceneMode.Additive);
             SceneManager.sceneLoaded -= InitMenu;
         }
+
         /// <summary>
         /// Unloads Menu-Scene, destroying appropriate Singletons
         /// </summary>
@@ -115,8 +123,6 @@ namespace nl.SWEG.Willow.Loading
                 Destroy(CameraManager.Instance.gameObject);
             if (DialogueManager.Exists)
                 Destroy(DialogueManager.Instance.gameObject);
-            if (CameraMover.Exists)
-                Destroy(CameraMover.Instance.gameObject);
             if (FloorManager.Exists)
                 Destroy(FloorManager.Instance.gameObject);
             if (GameUIManager.Exists)

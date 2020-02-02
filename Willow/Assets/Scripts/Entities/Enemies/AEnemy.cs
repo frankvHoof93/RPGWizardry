@@ -1,8 +1,7 @@
 ﻿using nl.SWEG.Willow.Entities.Stats;
 using nl.SWEG.Willow.GameWorld;
-using nl.SWEG.Willow.GameWorld.OpacityManagement;
 using nl.SWEG.Willow.Player;
-using nl.SWEG.Willow.UI;
+using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.UI.Popups;
 using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Functions;
@@ -72,7 +71,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Event fired when Enemy Dies
         /// </summary>
-        public Die Death; // TODOCLEAN: make private
+        public event Die Death; // TODOCLEAN: make private
         #endregion
         #endregion
 
