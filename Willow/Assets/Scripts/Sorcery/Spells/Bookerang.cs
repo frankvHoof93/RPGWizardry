@@ -18,7 +18,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// </summary>
         [SerializeField]
         [Tooltip("Speed at which the book rotates in flight")]
-        private float SpinSpeed;
+        private float spinSpeed;
         /// <summary>
         /// Duration for which the book pauses before returning
         /// </summary>
@@ -79,9 +79,9 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             if (PlayerManager.Exists)
             {
                 PlayerManager player = PlayerManager.Instance;
-                //Get the location of the player (to return to later)
+                // Get the location of the player (to return to later)
                 playerLocation = player.transform;
-                //Turn the "crosshair" book invisible so it looks like this projectile IS the book
+                // Turn the "crosshair" book invisible so it looks like this projectile IS the book
                 bookRenderer = player.BookRenderer;
                 bookRenderer.enabled = false;
             }
@@ -95,47 +95,17 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// </summary>
         protected override void Move()
         {
-            // TODOCLEAN: 
-
-            //SPIN TO WIN
-            spriteTransform.Rotate(Vector3.forward, SpinSpeed * Time.deltaTime,Space.World);
-            //If not paused in mid-air
+            // Spin Book
+            spriteTransform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime,Space.World);
+            // If not paused in mid-air
             if (!pause)
             {
-                //If not returning to player
+                // If not returning to player
                 if (!back)
-                {
-                    //If we haven't flown our full range yet
-                    if (movedSpace < data.LifeTime)
-                    {
-                        //Fly in a straight line
-                        base.Move();
-                        movedSpace += Time.deltaTime * data.ProjectileSpeed;
-                    }
-                    else
-                    {
-                        //play return sound
-                        AudioManager.Instance.PlaySound(returnSound);
-                        //Start returning to the player
-                        Return();
-                    }
-                }
-                //If returning to the player
+                    FlyForward();
+                // If returning to the player
                 else
-                {
-                    //Use a lerp so we always target the player's current position
-                    transform.position = Vector3.Lerp(savedPosition, playerLocation.position, movedSpace);
-                    //Set speed so we always make it in time
-                    movedSpace += Time.deltaTime * 5;
-
-                    //If we've made it
-                    if (movedSpace >= 1)
-                    {
-                        //Make the "crosshair" book reappear and delete this projectile
-                        bookRenderer.enabled = true;
-                        Destroy(gameObject);
-                    }
-                }
+                    ReturnToPlayer();
             }
         }
 
@@ -154,13 +124,11 @@ namespace nl.SWEG.Willow.Sorcery.Spells
                     AudioManager.Instance.PlaySound(data.ImpactClip);
                 }
 
-                //apply knockback
+                // Apply knockback
                 Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
                 body.AddForce(transform.up * data.Knockback);
-
                 //apply damage
                 collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
-
                 Return();
             }
         }
@@ -177,6 +145,41 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             movedSpace = 0;
             pause = true;
             StartCoroutine(CoroutineMethods.RunDelayed(() => { pause = false; }, hangTime));
+        }
+
+        /// <summary>
+        /// Fly Forward in a straight line until range is met
+        /// </summary>
+        private void FlyForward()
+        {
+            //Fly in a straight line
+            base.Move();
+            movedSpace += Time.deltaTime * data.ProjectileSpeed;
+            if (movedSpace >= data.LifeTime) // Range has been met
+            {
+                // Play return sound
+                AudioManager.Instance.PlaySound(returnSound);
+                // Start returning to the player
+                Return();
+            }
+        }
+
+        /// <summary>
+        /// Fly back towards the Player
+        /// </summary>
+        private void ReturnToPlayer()
+        {
+            // Use a lerp so we always target the player's current position
+            transform.position = Vector3.Lerp(savedPosition, playerLocation.position, movedSpace);
+            // Set speed so we always make it in time
+            movedSpace += Time.deltaTime * 5;
+            // If we've made it
+            if (movedSpace >= 1)
+            {
+                // Make the "crosshair" book reappear and delete this projectile
+                bookRenderer.enabled = true;
+                Destroy(gameObject);
+            }
         }
         #endregion
         #endregion
