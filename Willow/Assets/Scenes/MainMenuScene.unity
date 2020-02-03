@@ -127,6 +127,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9147742328306217416, guid: bd5f006d2cd3e01478d7888a63615884,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Menu Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147742328306217416, guid: bd5f006d2cd3e01478d7888a63615884,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22069546, guid: bd5f006d2cd3e01478d7888a63615884, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -325,16 +335,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9147742328306217416, guid: bd5f006d2cd3e01478d7888a63615884,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Menu Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 9147742328306217416, guid: bd5f006d2cd3e01478d7888a63615884,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9147742328306217420, guid: bd5f006d2cd3e01478d7888a63615884,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -448,6 +448,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 387410525}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &387410527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7716475042289643382, guid: bd5f006d2cd3e01478d7888a63615884,
+    type: 3}
+  m_PrefabInstance: {fileID: 387410525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387410526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954a68e4b7090904aaded421cc52325d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &839536561
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,10 +548,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5244897388212724462, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_Name
+      value: Spell List Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244897388212724462, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
@@ -570,6 +592,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 387410527}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Init
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774359509434507037, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4645698982122848947, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
@@ -711,16 +763,6 @@ PrefabInstance:
       propertyPath: SpellCanvas
       value: 
       objectReference: {fileID: 1698780247}
-    - target: {fileID: 5244897388212724462, guid: e9112d8fc51d8f8439672d4ca9da3b87,
-        type: 3}
-      propertyPath: m_Name
-      value: Spell List Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5244897388212724462, guid: e9112d8fc51d8f8439672d4ca9da3b87,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5880972677460015652, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -951,6 +993,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7072635281116298754, guid: d28c03212e88bdf4aa93393c384237f6,
+        type: 3}
+      propertyPath: m_Name
+      value: Spell Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072635281116298754, guid: d28c03212e88bdf4aa93393c384237f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1568541005, guid: d28c03212e88bdf4aa93393c384237f6, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1
@@ -1068,16 +1120,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7072635281116298754, guid: d28c03212e88bdf4aa93393c384237f6,
-        type: 3}
-      propertyPath: m_Name
-      value: Spell Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7072635281116298754, guid: d28c03212e88bdf4aa93393c384237f6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7072635281116298758, guid: d28c03212e88bdf4aa93393c384237f6,
         type: 3}
@@ -1290,6 +1332,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3222417033037486707, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_Name
+      value: Scroll Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222417033037486707, guid: 07d0f5e35778a854d8b822838367f5d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3222417031624936695, guid: 07d0f5e35778a854d8b822838367f5d8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1475,16 +1527,6 @@ PrefabInstance:
       propertyPath: spellManager
       value: 
       objectReference: {fileID: 1698780247}
-    - target: {fileID: 3222417033037486707, guid: 07d0f5e35778a854d8b822838367f5d8,
-        type: 3}
-      propertyPath: m_Name
-      value: Scroll Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 3222417033037486707, guid: 07d0f5e35778a854d8b822838367f5d8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3222417033037486708, guid: 07d0f5e35778a854d8b822838367f5d8,
         type: 3}
       propertyPath: m_SortingOrder
