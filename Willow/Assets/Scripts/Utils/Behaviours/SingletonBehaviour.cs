@@ -32,6 +32,7 @@ namespace nl.SWEG.Willow.Utils.Behaviours
             {
                 if (instance != null)
                     return instance;
+                Debug.LogWarning("Creating Instance");
                 GameObject obj = new GameObject
                 {
                     name = typeof(T).Name + "-Singleton"

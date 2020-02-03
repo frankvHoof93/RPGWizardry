@@ -129,7 +129,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 3000
+  m_SortingOrder: 2000
   m_TargetDisplay: 0
 --- !u!114 &2317831609092635815
 MonoBehaviour:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u201CPress ESC to open Greg\u201D"
+  m_text: Please press "ESC" to open Greg
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c77e6d2109e165b468b47d7c30e085e1, type: 2}
   m_sharedMaterial: {fileID: -5311160240617638485, guid: c77e6d2109e165b468b47d7c30e085e1,
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.1
-  m_fontSizeBase: 33.1
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -287,14 +287,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 4623909205503861216}
-    characterCount: 24
+    characterCount: 31
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
     lineCount: 1
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -991,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6550134647194851837
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1031,7 +1031,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2000
+  m_SortingOrder: 2001
   m_TargetDisplay: 0
 --- !u!114 &6550134647194851827
 MonoBehaviour:
@@ -1064,10 +1064,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8687309457777540055}
-  - component: {fileID: 5914036509923825177}
   - component: {fileID: 7422908371560812959}
+  - component: {fileID: 5914036509923825177}
   m_Layer: 0
-  m_Name: DialoguePrefab
+  m_Name: TutorialPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1089,6 +1089,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7422908371560812959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7921008985492895571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1cefab97a28cd4f83d5dcccceb5ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogues:
+  - {fileID: 11400000, guid: dc7f004dba0c62140a289089b6ddf1de, type: 2}
+  - {fileID: 11400000, guid: eb124f09667455947830d11d3059413e, type: 2}
+  - {fileID: 11400000, guid: 95e4204cad44ec4479fe50a8256d9c2a, type: 2}
+  - {fileID: 11400000, guid: d8ddc53ab15872d4b937d21930c650cb, type: 2}
+  - {fileID: 11400000, guid: e7b2a07f9ab7e4c4a9d1d37bfca0c648, type: 2}
+  - {fileID: 11400000, guid: a3da59fd5984472469d81b7040818b72, type: 2}
+  - {fileID: 11400000, guid: fd71b0a7b6b7f8c4eb25bcf12b3c619b, type: 2}
+  - {fileID: 11400000, guid: e59420c3c3706184197e3c8a52cf27f1, type: 2}
+  - {fileID: 11400000, guid: a2f9be0e949f36b4d8e82610aabed7f2, type: 2}
+  - {fileID: 11400000, guid: d96b18116607f2a40b26dc3215994169, type: 2}
 --- !u!114 &5914036509923825177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,29 +1131,6 @@ MonoBehaviour:
   animator: {fileID: 6550134645526149275}
   animatorTextbox: {fileID: 2110065432154998214}
   textBox: {fileID: 379591659351298265}
---- !u!114 &7422908371560812959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921008985492895571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d043a56e7de6c2d40a7ec8d72d2fa2d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogues:
-  - {fileID: 11400000, guid: dc7f004dba0c62140a289089b6ddf1de, type: 2}
-  - {fileID: 11400000, guid: eb124f09667455947830d11d3059413e, type: 2}
-  - {fileID: 11400000, guid: 95e4204cad44ec4479fe50a8256d9c2a, type: 2}
-  - {fileID: 11400000, guid: d8ddc53ab15872d4b937d21930c650cb, type: 2}
-  - {fileID: 11400000, guid: e7b2a07f9ab7e4c4a9d1d37bfca0c648, type: 2}
-  - {fileID: 11400000, guid: a3da59fd5984472469d81b7040818b72, type: 2}
-  - {fileID: 11400000, guid: fd71b0a7b6b7f8c4eb25bcf12b3c619b, type: 2}
-  - {fileID: 11400000, guid: e59420c3c3706184197e3c8a52cf27f1, type: 2}
-  - {fileID: 11400000, guid: a2f9be0e949f36b4d8e82610aabed7f2, type: 2}
-  - {fileID: 11400000, guid: d96b18116607f2a40b26dc3215994169, type: 2}
 --- !u!1 &9112248685307472075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ Animator:
   m_GameObject: {fileID: 9112248685307472075}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0572e1172b0779849bc9241cf03f506e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3603b345e43396a47bc598f906bb6628, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

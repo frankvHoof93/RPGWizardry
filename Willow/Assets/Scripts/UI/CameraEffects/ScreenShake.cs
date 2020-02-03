@@ -50,11 +50,10 @@ namespace nl.SWEG.Willow.UI.CameraEffects
         {
             while (duration > 0)
             {
-                camTransform.localPosition = Random.insideUnitSphere * intensity;
+                camTransform.localPosition += Random.insideUnitSphere * intensity;
                 duration -= Time.deltaTime;
                 yield return null;
             }
-            camTransform.localPosition = Vector3.zero;
         }
         #endregion
     }

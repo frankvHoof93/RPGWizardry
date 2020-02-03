@@ -1,7 +1,9 @@
 ﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.Utils.Behaviours;
+using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.GameWorld.Levels
@@ -38,6 +40,15 @@ namespace nl.SWEG.Willow.GameWorld.Levels
         {
             StartCoroutine(SwitchRoom(destination));
         }
+
+        /// <summary>
+        /// Returns SpawnPoint for current Floor
+        /// </summary>
+        /// <returns>WorldPosition for SpawnPoint, or Vector3.Zero if no Point could be found</returns>
+        public Vector3 GetSpawnPoint()
+        {
+            return rooms.OfType<StartingRoom>().First()?.SpawnPoint.position ?? Vector3.zero;
+        }
         #endregion
 
         #region Unity
@@ -49,7 +60,8 @@ namespace nl.SWEG.Willow.GameWorld.Levels
             base.Awake();
             for (int i = 0; i < rooms.Length; i++)
                 rooms[i].Disable();
-            rooms[0].Enable();
+            activeRoom = rooms[0];
+            activeRoom.Enable();
         }
         #endregion
 

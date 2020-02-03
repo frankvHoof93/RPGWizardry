@@ -681,7 +681,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5244897388212724462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a01cffd5cb34643afb136f3efd14ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 6096ae83cb15063438eda3f1caa54a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spellInfo: {fileID: 2208081757801960166, guid: 5657104f4eb59474bbb31e372bf5b3c6,
@@ -836,11 +836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5244897387055504171}
     m_Modifications:
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_Name
-      value: Back Button
-      objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -976,6 +971,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Back Button
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}
 --- !u!224 &3774359509434507036 stripped
@@ -991,15 +991,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5244897387055504171}
     m_Modifications:
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+    - target: {fileID: 2512907819543227242, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
-      propertyPath: m_Name
-      value: Button Next Page
-      objectReference: {fileID: 0}
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_LocalScale.x
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
@@ -1136,10 +1131,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2512907819543227242, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.7
+      propertyPath: m_Name
+      value: Button Next Page
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}
@@ -1826,11 +1826,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5244897387055504171}
     m_Modifications:
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_Name
-      value: Button Previous Page
-      objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1965,6 +1960,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Button Previous Page
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}

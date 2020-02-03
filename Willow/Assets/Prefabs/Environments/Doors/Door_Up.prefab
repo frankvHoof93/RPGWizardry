@@ -42,7 +42,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261892829062464302}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -70,10 +70,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 261892829062464302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71cd3af1f8844f449ca1eac36bb03b8, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c06f2fa818da14fb3981466d8cfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {fileID: 3379270674557569101}
+  playerTag: Player
+  spawn: {fileID: 6284721180043635593}
   destination: {fileID: 0}
   openSprite: {fileID: 7112739847533114154}
   closedSprite: {fileID: 445928103994605580}
@@ -146,7 +147,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -969025261
   m_SortingLayer: 2
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: -7472293895197479623, guid: 14c128eda78304542a7d4617a971a388,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -253,7 +254,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -969025261
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: 0
   m_Sprite: {fileID: -5129958085129962503, guid: 14c128eda78304542a7d4617a971a388,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -334,7 +335,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -969025261
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: 0
   m_Sprite: {fileID: -5129958085129962503, guid: 14c128eda78304542a7d4617a971a388,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

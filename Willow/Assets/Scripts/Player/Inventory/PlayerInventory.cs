@@ -226,6 +226,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         {
             SpellPage bookerang = new SpellPage(baseSpell, true);
             pages.Add(bookerang);
+            PlayerManager.Instance.CastingManager.TryEquipSpell(bookerang.Spell);
         }
         #endregion
 

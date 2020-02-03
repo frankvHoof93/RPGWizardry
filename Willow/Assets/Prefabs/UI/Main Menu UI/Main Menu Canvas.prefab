@@ -401,7 +401,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466101391}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: EndRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &467354273
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +881,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 551911335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &582902038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,7 +1517,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1077066144}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: OpenSettingsMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1099776622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1788,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1142377964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: QuitGame
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1195409322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,7 +2156,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1231783325}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9147742328306217416}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1349660176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,7 +2569,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1435236094}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: OpenSettingsMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1608338103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,7 +2781,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1608338106}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7716475042289643382}
+        m_MethodName: QuitGame
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1634994127
 GameObject:
   m_ObjectHideFlags: 0
@@ -4507,6 +4584,7 @@ GameObject:
   - component: {fileID: 9147742328306217420}
   - component: {fileID: 9147742328306217421}
   - component: {fileID: 9147742328306217418}
+  - component: {fileID: 7716475042289643382}
   m_Layer: 5
   m_Name: Main Menu Canvas
   m_TagString: Untagged
@@ -4577,6 +4655,26 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &7716475042289643382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147742328306217416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954a68e4b7090904aaded421cc52325d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRootObject: 0
+  background: {fileID: 0}
+  mainMenuPanel: {fileID: 1099776622}
+  loadGameButton: {fileID: 1861509154}
+  pauseMenuPanel: {fileID: 1634994127}
+  spellListCanvas: {fileID: 0}
+  spellDetailsCanvas: {fileID: 0}
+  researchCanvas: {fileID: 0}
 --- !u!1 &9147742329031890290
 GameObject:
   m_ObjectHideFlags: 0

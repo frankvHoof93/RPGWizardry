@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 5853471375508002895}
   - component: {fileID: 7059108630761428913}
   m_Layer: 17
-  m_Name: Door Down
+  m_Name: Door_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,9 +294,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5853471375508002866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71cd3af1f8844f449ca1eac36bb03b8, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c06f2fa818da14fb3981466d8cfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: Player
   spawn: {fileID: 7258009586387297898}
   destination: {fileID: 0}
   openSprite: {fileID: 3471250726151645238}
@@ -327,8 +328,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6100576698860411664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.475, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.487, z: 0}
+  m_LocalScale: {x: 1, y: 0.979, z: 1}
   m_Children: []
   m_Father: {fileID: 5853471375508002865}
   m_RootOrder: 0

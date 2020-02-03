@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1995003616468145728}
   - component: {fileID: 1995003616468142527}
   m_Layer: 5
-  m_Name: txtDamager
+  m_Name: txtDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995003617133647630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6a43bfb89d6a349897451aec18dd80, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bd06f578dcc3b14f8b62373b4c42cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 1995003616468142527}

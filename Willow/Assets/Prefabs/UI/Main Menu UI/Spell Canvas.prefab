@@ -1477,7 +1477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7072635280120097546
@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedSpell:
-    spell: {fileID: 0}
+    spell: {fileID: 11400000, guid: cba68e82073cac64e9feeaafa8a5c199, type: 2}
   title: {fileID: 7072635279858129477}
   button: {fileID: 7072635279834969283}
   spellImage: {fileID: 7072635280241727141}
@@ -2332,11 +2332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7072635280054248361}
     m_Modifications:
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_Name
-      value: Back Button
-      objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2471,6 +2466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Back Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}

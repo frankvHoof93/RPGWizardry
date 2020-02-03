@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.Loading;
+﻿using nl.SWEG.Willow.GameWorld.Levels;
+using nl.SWEG.Willow.Loading;
 using nl.SWEG.Willow.UI.Game;
 using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
@@ -103,6 +104,8 @@ namespace nl.SWEG.Willow.GameWorld
                 return; // GameScene was not loaded Scene
             if (loadMode != LoadSceneMode.Single)
                 return; // GameScene was not loaded Single (Menu-Exit)
+            CameraManager.instance.Fade(0, 1);
+            SpawnPlayer(FloorManager.Instance.GetSpawnPoint());
             State = GameState.GamePlay;
             Paused = false;
         }

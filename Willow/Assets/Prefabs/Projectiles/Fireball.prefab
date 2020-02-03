@@ -121,7 +121,7 @@ MonoBehaviour:
   opacityPriority: 2
   opacityRadius: 60
   opacityOffset: {x: 0, y: 0}
-  SplashObject: {fileID: 6031568290108856524, guid: b0a893c8b2ed1214c9fcb9380b28e388,
+  splashObject: {fileID: 6031568290108856524, guid: b0a893c8b2ed1214c9fcb9380b28e388,
     type: 3}
 --- !u!58 &5857493217555144017
 CircleCollider2D:

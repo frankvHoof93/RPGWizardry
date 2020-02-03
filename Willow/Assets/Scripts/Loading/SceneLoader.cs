@@ -58,8 +58,13 @@ namespace nl.SWEG.Willow.Loading
             {
                 SceneManager.sceneLoaded += GameManager.Instance.InitGame; // Start a new Game (when scene is loaded)
                 SceneManager.LoadSceneAsync(Constants.GameSceneName, LoadSceneMode.Single); // Single-Load Scene
+                if (MenuManager.Exists)
+                    Destroy(MenuManager.Instance.gameObject);
             }
-            UnloadMenuScene(); // Unload Menu-Scene
+            else
+            {
+                UnloadMenuScene(); // Unload Menu-Scene
+            }
         }
 
         /// <summary>
@@ -109,8 +114,6 @@ namespace nl.SWEG.Willow.Loading
             if (menuScene.isLoaded)
             {
                 SceneManager.UnloadSceneAsync(menuScene);
-                if (GameManager.Exists)
-                    SceneManager.sceneUnloaded += GameManager.Instance.OnExitMenu;
             }
         }
 

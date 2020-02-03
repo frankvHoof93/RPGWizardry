@@ -282,8 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdafd6e0f9c30d3489b72c4b69c97ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BookPivot: {fileID: 1649351625646304831}
   controlScheme: 0
+  bookPivot: {fileID: 1649351625646304831}
 --- !u!114 &1649351625787668026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f558b5a58381abb4fbb0aa6f2921ca78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BookPivot: {fileID: 1649351625646304831}
+  bookPivot: {fileID: 1649351625646304831}
   bookAnimator: {fileID: 4558486416647510740}
 --- !u!114 &1649351625787668004
 MonoBehaviour:
@@ -310,8 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b502e15b04e74da490a5a2662ec01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSpells:
-  - {fileID: 11400000, guid: a989aeb625692a84dadc005d92ab04b1, type: 2}
   spawnLocation: {fileID: 1649351625540714799}
   targetingMask:
     serializedVersion: 2

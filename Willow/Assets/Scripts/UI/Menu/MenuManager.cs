@@ -107,6 +107,7 @@ namespace nl.SWEG.Willow.UI.Menu
         /// </summary>
         public void StartGame()
         {
+            background.SetActive(false);
             SceneLoader.Instance.LoadGameScene();
         }
 

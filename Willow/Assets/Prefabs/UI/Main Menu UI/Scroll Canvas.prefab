@@ -1408,6 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8927b7c6a32e69d4986bcc5653211405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellManager: {fileID: 0}
   images:
   - {fileID: 3222417033284552374}
   - {fileID: 3222417032801045235}
@@ -1419,8 +1420,7 @@ MonoBehaviour:
   - {fileID: 3222417033078149890}
   - {fileID: 3222417031650014669}
   - {fileID: 3222417032186506970}
-  spellManager: {fileID: 0}
-  message: {fileID: 3222417031819548186}
+  unlockMsg: {fileID: 3222417031819548186}
   splatTex: {fileID: 2800000, guid: 74e48d27e69dd6948aae777ab8cd8f87, type: 3}
   checkButton: {fileID: 3222417032891464091}
 --- !u!114 &3222417033037486704
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caster: {fileID: 3222417033037486710}
   eventSystem: {fileID: 0}
-  tag: Bar
+  barTag: Bar
 --- !u!1 &3222417033078149916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,11 +1664,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3222417033037486709}
     m_Modifications:
-    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_Name
-      value: Back Button
-      objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1803,6 +1798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512907820030608311, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Back Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}
