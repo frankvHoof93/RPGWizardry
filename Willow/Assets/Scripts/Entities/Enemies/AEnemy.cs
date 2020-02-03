@@ -71,7 +71,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Event fired when Enemy Dies
         /// </summary>
-        public event Die Death; // TODOCLEAN: make private
+        private event Die Death; // TODOCLEAN: make private
         #endregion
         #endregion
 
@@ -104,6 +104,14 @@ namespace nl.SWEG.Willow.Entities.Enemies
             enemyRenderer.SetSpriteColor(Color.red);
             PopupFactory.CreateDamageUI(transform.position, amount, enemyRenderer, Color.red);
             StartCoroutine(CoroutineMethods.RunDelayed(() => enemyRenderer.SetSpriteColor(Color.white), .1f));
+        }
+        /// <summary>
+        /// Adds Listener to Death-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddDeathListener(Die listener)
+        {
+            Death += listener;
         }
         #endregion
 

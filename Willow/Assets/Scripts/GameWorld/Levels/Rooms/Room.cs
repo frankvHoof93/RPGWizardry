@@ -122,7 +122,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
             if (enemies.Length > 0)
             {
                 foreach (AEnemy enemy in enemies)
-                    enemy.Death += CheckRoomClear; // TODOCLEAN: Spawn Enemies
+                    enemy.AddDeathListener(CheckRoomClear); // TODOCLEAN: Spawn Enemies
             }
         }
         #endregion
