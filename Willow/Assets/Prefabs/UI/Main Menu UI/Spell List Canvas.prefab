@@ -509,7 +509,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 200, y: 100}
-  m_Spacing: {x: 25, y: 15}
+  m_Spacing: {x: 5, y: 15}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &5244897388195181224
@@ -991,11 +991,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5244897387055504171}
     m_Modifications:
-    - target: {fileID: 2512907819543227242, guid: 1874e3f5c155fd04cb9e68009767b3fb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 2512907820030608304, guid: 1874e3f5c155fd04cb9e68009767b3fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1141,6 +1136,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2512907819543227242, guid: 1874e3f5c155fd04cb9e68009767b3fb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1874e3f5c155fd04cb9e68009767b3fb, type: 3}
 --- !u!1 &7367292285764344229 stripped
@@ -1162,10 +1162,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6042038742940019350}
     m_Modifications:
-    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_Name
-      value: HUDSpellPanel (2)
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3552722949554757123, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
@@ -1272,10 +1272,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
+      propertyPath: m_Name
+      value: HUDSpellPanel (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a410925e064f67341b707c04dd9424da, type: 3}
@@ -1328,10 +1328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6042038742940019350}
     m_Modifications:
-    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_Name
-      value: HUDSpellPanel
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3552722949554757123, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
@@ -1438,10 +1438,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
+      propertyPath: m_Name
+      value: HUDSpellPanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a410925e064f67341b707c04dd9424da, type: 3}
@@ -1494,10 +1494,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6042038742940019350}
     m_Modifications:
-    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_Name
-      value: HUDSpellPanel (3)
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3552722949554757123, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
@@ -1604,10 +1604,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
+      propertyPath: m_Name
+      value: HUDSpellPanel (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a410925e064f67341b707c04dd9424da, type: 3}
@@ -1660,10 +1660,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6042038742940019350}
     m_Modifications:
-    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_Name
-      value: HUDSpellPanel (1)
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3552722949554757123, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
@@ -1770,10 +1770,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6075632135828048010, guid: a410925e064f67341b707c04dd9424da,
+    - target: {fileID: 181994626924741433, guid: a410925e064f67341b707c04dd9424da,
         type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
+      propertyPath: m_Name
+      value: HUDSpellPanel (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a410925e064f67341b707c04dd9424da, type: 3}

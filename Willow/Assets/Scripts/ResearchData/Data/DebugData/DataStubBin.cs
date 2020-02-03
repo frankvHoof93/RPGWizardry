@@ -68,32 +68,8 @@ namespace nl.SWEG.Willow.Research.Data.DebugData
             new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
             {
                 OriginalRow = 13
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 14
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 15
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 16
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 17
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 18
-            },
-            new Fragment(new float[]{0.410f, 0.375f, 0.350f, 0.475f, 0.460f, 0.500f, 0.380f, 0.410f, 0.510f, 0.395f, 0.415f })
-            {
-                OriginalRow = 19
             }
-        }, 10
+        }, 2
         );
     }
 }

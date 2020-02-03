@@ -3,6 +3,7 @@ using nl.SWEG.Willow.Research.Data.DebugData;
 using nl.SWEG.Willow.Research.IO;
 using nl.SWEG.Willow.UI.Spells;
 using nl.SWEG.Willow.Utils.Functions;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -109,7 +110,16 @@ namespace nl.SWEG.Willow.Research
         private void OnApplicationFocus(bool focus)
         {
             if (focus)
-                UpdateResearch();
+            {
+                try
+                {
+                    PopulateUI();
+                }
+                catch (NullReferenceException)
+                {
+                    OnEnable();
+                }
+            }
         }
         #endregion
 
@@ -121,6 +131,7 @@ namespace nl.SWEG.Willow.Research
         {
             if (CurrentBin == null)
                 CurrentBin = LoadDataBin();
+            LoadNextDataSet();
             PopulateUI();
             checkButton.enabled = true;
             unlockMsg.enabled = false;
@@ -162,7 +173,6 @@ namespace nl.SWEG.Willow.Research
         /// </summary>
         private void PopulateUI()
         {
-            LoadNextDataSet();
             for (int i = 0; i < 10; i++)
             {
                 // Set UI-Image to Fragment
@@ -177,12 +187,13 @@ namespace nl.SWEG.Willow.Research
                 renderer.material = m;
                 // Calculate tiling for Points in Fragment
                 Vector4[] vectors = new Vector4[(int)targetScale];
+                float xPos = (imgTex.width - 30f) / CurrentSet.Fragments[i].ImgData.Length;
                 for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length; j++)
                 {
                     Vector2 tiling = new Vector2(((float)imgTex.width / splatTex.width), ((float)imgTex.height / splatTex.height));
                     // base offset to corner:
                     Vector2 offset = new Vector2(.5f, .5f);
-                    Vector2 posOnTarget = new Vector2(Random.Range(0, imgTex.width - 20), (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
+                    Vector2 posOnTarget = new Vector2(xPos * j, (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
                     posOnTarget = new Vector2(posOnTarget.x / splatTex.width, posOnTarget.y / splatTex.height);
                     offset += posOnTarget;
                     offset *= -1f;

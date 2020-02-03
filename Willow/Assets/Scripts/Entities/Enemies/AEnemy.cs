@@ -94,6 +94,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             if (amount >= Health)
             {
+                Health = 0;
                 Die();
             }
             else
