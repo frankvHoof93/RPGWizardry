@@ -16,6 +16,7 @@ MonoBehaviour:
   enemyHealth: 10
   enemyAttack: 20
   enemySpeed: 2
+  knockback: 300
   spawnCooldown:
     Min: 0
     Max: 3

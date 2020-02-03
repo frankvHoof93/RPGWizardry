@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6119535784290699785}
   - component: {fileID: 179637227273427223}
   m_Layer: 12
-  m_Name: TutorialSlime (1)
+  m_Name: Enemy_Slime_Baby_Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7902838426870240571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.52, y: -2.63, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -142,7 +142,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   big: 0
-  knockback: 250
 --- !u!70 &179637227273427223
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

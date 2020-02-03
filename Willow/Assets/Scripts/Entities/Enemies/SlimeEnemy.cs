@@ -123,17 +123,17 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Spawns two baby slimes at current position
         /// </summary>
-        private void SpawnBabies() // TODOCLEAN: Instantiate copy of self
+        private void SpawnBabies()
         {
-            AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
             Transform enemyParent = transform.parent;
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < 2; i++)
             {
-                if (enemies[i] != this)
-                {
-                    enemies[i].transform.SetParent(enemyParent, true);
-                    enemies[i].gameObject.SetActive(true);
-                }
+                SlimeEnemy baby = Instantiate(gameObject).GetComponent<SlimeEnemy>();
+                baby.big = false;
+                baby.transform.SetParent(enemyParent);
+                baby.transform.position = transform.position + (Vector3)(Random.insideUnitCircle * .2f);
+                baby.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+                baby.GetComponent<Collider2D>().enabled = true;
             }
             transform.SetParent(null);
         }
