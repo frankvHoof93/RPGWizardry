@@ -54,7 +54,7 @@ namespace nl.SWEG.Willow.Research.Data
         public void SetImage(Image img)
         {
             FragmentImage = img;
-            ImageTransform = img.transform.parent; // TODOCLEAN: Check if this should still be parent now that Draw On is gone
+            ImageTransform = img.transform;
         }
         #endregion
     }

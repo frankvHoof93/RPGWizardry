@@ -52,7 +52,7 @@ namespace nl.SWEG.Willow.Research.Data
         {
             IEnumerable<ControlFragment> controlFragments = fragments.OfType<ControlFragment>();
             foreach (ControlFragment control in controlFragments)
-                if (!control.Solved)
+                if (!control.IsSolved())
                     return false;
             return true;
         }
@@ -64,13 +64,13 @@ namespace nl.SWEG.Willow.Research.Data
         private List<ControlFragment> GenerateControlFragments()
         {
             return new List<ControlFragment> {
-            new ControlFragment(40, 1500,
+            new ControlFragment(40, 15,
                 new float[] { 0.150f, 0.175f, 0.150f, 0.175f, 0.160f, 0.120f, 0.180f, 0.125f, 0.130f, 0.195f, 0.145f }
             ),
-            new ControlFragment(20, 1500,
+            new ControlFragment(20, 15,
                 new float[] { 0.180f, 0.175f, 0.190f, 0.175f, 0.210f, 0.220f, 0.180f, 0.210f, 0.210f, 0.185f, 0.115f }
             ),
-            new ControlFragment(-30, 1500,
+            new ControlFragment(-30, 15,
                 new float[] { 0.610f, 0.675f, 0.650f, 0.675f, 0.660f, 0.600f, 0.680f, 0.610f, 0.610f, 0.695f, 0.615f }
             ) };
         }
