@@ -78,6 +78,10 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// </summary>
         public float Speed => enemySpeed;
         /// <summary>
+        /// Base Knockback for this Enemy
+        /// </summary>
+        public int Knockback => knockback;
+        /// <summary>
         /// Cooldown after Spawning for this Enemy (time until its AI and attacks are enabled)
         /// </summary>
         public FloatRange SpawnCooldown => spawnCooldown;
@@ -126,6 +130,12 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [SerializeField]
         [Tooltip("Base Speed for this Enemy")]
         private float enemySpeed;
+        /// <summary>
+        /// Base Knockback for this Enemy
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Base Speed for this Enemy")]
+        private int knockback;
         #endregion
 
         [Header("Spawning")]

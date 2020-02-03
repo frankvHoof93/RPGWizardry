@@ -45,11 +45,6 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// Movement during current frame (sent to animator)
         /// </summary>
         private Vector2 movement = Vector2.zero;
-        /// <summary>
-        /// Amount opponent flies back on hit
-        /// </summary>
-        [SerializeField]
-        private int knockback; // TODOCLEAN: move to ScriptableObject
         #endregion
         #endregion
 
@@ -102,7 +97,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
             {
                 collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
                 Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
-                body?.AddForce(movement * knockback);
+                body?.AddForce(movement * (big ? data.Knockback : (data.Knockback * 0.75f)));
             }
         }
         #endregion

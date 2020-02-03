@@ -71,7 +71,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Event fired when Enemy Dies
         /// </summary>
-        private event Die Death; // TODOCLEAN: make private
+        private event Die Death;
         #endregion
         #endregion
 
