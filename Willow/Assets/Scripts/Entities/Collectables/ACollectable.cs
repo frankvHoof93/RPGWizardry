@@ -27,10 +27,10 @@ namespace nl.SWEG.Willow.Entities.Collectables
 
         #region Editor
         #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
-        [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Tooltip("Opacity-Radius in Pixels (for 720p)")]
         private float opacityRadius = 40f;

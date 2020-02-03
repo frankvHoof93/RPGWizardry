@@ -38,10 +38,10 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [Tooltip("Spell to use when Attacking")]
         private SpellData spell;
         /// <summary>
-        /// Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)
+        /// Margin of error for Attacking (how much the angle between fwd and player-lookAt can differ when attacking)
         /// </summary>
         [SerializeField]
-        [Tooltip("Margin of error for Attacking (how much the angle between fwd and player-lookat can differ when attacking)")]
+        [Tooltip("Margin of error for Attacking (how much the angle between fwd and player-lookAt can differ when attacking)")]
         private float attackAngleMargin = 5f;
         /// <summary>
         /// Modifier for turning-speed of Book

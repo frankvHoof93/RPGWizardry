@@ -145,8 +145,6 @@ namespace nl.SWEG.Willow.Sorcery.Spells
                     break;
                 case SpellPattern.Circle:
                     break;
-                default:
-                    break;
             }
             return returnVal;
         }

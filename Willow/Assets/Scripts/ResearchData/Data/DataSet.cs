@@ -25,7 +25,7 @@ namespace nl.SWEG.Willow.Research.Data
         /// </summary>
         public readonly int OriginalIndex;
         /// <summary>
-        /// List of fragments for this dataset
+        /// List of fragments for this DataSet
         /// </summary>
         private readonly List<Fragment> fragments;
         #endregion
@@ -65,13 +65,13 @@ namespace nl.SWEG.Willow.Research.Data
         {
             return new List<ControlFragment> {
             new ControlFragment(40, 15,
-                new float[] { 0.150f, 0.175f, 0.150f, 0.175f, 0.160f, 0.120f, 0.180f, 0.125f, 0.130f, 0.195f, 0.145f }
+                new [] { 0.150f, 0.175f, 0.150f, 0.175f, 0.160f, 0.120f, 0.180f, 0.125f, 0.130f, 0.195f, 0.145f }
             ),
             new ControlFragment(20, 15,
-                new float[] { 0.180f, 0.175f, 0.190f, 0.175f, 0.210f, 0.220f, 0.180f, 0.210f, 0.210f, 0.185f, 0.115f }
+                new [] { 0.180f, 0.175f, 0.190f, 0.175f, 0.210f, 0.220f, 0.180f, 0.210f, 0.210f, 0.185f, 0.115f }
             ),
             new ControlFragment(-30, 15,
-                new float[] { 0.610f, 0.675f, 0.650f, 0.675f, 0.660f, 0.600f, 0.680f, 0.610f, 0.610f, 0.695f, 0.615f }
+                new [] { 0.610f, 0.675f, 0.650f, 0.675f, 0.660f, 0.600f, 0.680f, 0.610f, 0.610f, 0.695f, 0.615f }
             ) };
         }
 

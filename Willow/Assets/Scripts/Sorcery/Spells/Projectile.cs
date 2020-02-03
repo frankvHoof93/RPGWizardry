@@ -37,10 +37,10 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         [SerializeField]
         [Tooltip("Mask of layer containing walls and other obstructions")]
         private LayerMask wallLayer;
-        [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Range(1, 10000)]
         [Tooltip("Opacity-Radius in Pixels (for 720p-Resolution)")]
@@ -70,7 +70,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// </summary>
         protected LayerMask targetLayer;
         /// <summary>
-        /// Combined layermask of all objects to collide with
+        /// Combined LayerMask of all objects to collide with
         /// </summary>
         protected LayerMask collisionLayer;
         #endregion
@@ -90,10 +90,9 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         #region Methods
         #region Internal
         /// <summary>
-        /// Sets Speed and TargetingLayer
+        /// Sets Spell-Data and TargetingLayer
         /// </summary>
-        /// <param name="speed">Speed for Projectile</param>
-        /// <param name="dmg">Amount of daamage inflicted by Projectile</param>
+        /// <param name="spellData">Data for Spell</param>
         /// <param name="targetingLayer">TargetingLayer(s) for Projectile</param>
         internal void SetData(SpellData spellData, LayerMask targetingLayer)
         {

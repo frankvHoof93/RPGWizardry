@@ -4792,14 +4792,14 @@ MonoBehaviour:
   - {fileID: 2712931456919779991}
   enemyHolder: {fileID: 1160622760690778907}
   enemiesInRoom:
-  - enemyPrefab: {fileID: 7902838426870240571, guid: dd1afe0acdf06a54ba71d194897a6579,
+  - EnemyPrefab: {fileID: 7902838426870240571, guid: dd1afe0acdf06a54ba71d194897a6579,
       type: 3}
-    spawnPosition: {x: -3.45, y: -0.63}
-    spawnRotation: 0
-  - enemyPrefab: {fileID: 7902838426870240571, guid: dd1afe0acdf06a54ba71d194897a6579,
+    SpawnPosition: {x: -3.45, y: -0.63}
+    SpawnRotation: 0
+  - EnemyPrefab: {fileID: 7902838426870240571, guid: dd1afe0acdf06a54ba71d194897a6579,
       type: 3}
-    spawnPosition: {x: -4.52, y: -2.63}
-    spawnRotation: 0
+    SpawnPosition: {x: -4.52, y: -2.63}
+    SpawnRotation: 0
 --- !u!1 &8499538626774509815
 GameObject:
   m_ObjectHideFlags: 0

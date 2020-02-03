@@ -3,7 +3,6 @@ using nl.SWEG.Willow.GameWorld;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.UI.Popups;
-using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 using static nl.SWEG.Willow.Entities.Enemies.EnemyData;
@@ -73,7 +72,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Event fired when Enemy Dies
         /// </summary>
-        private event Die Death;
+        private event Die death;
         #endregion
         #endregion
 
@@ -115,7 +114,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <param name="listener">Listener to Add</param>
         public void AddDeathListener(Die listener)
         {
-            Death += listener;
+            death += listener;
         }
         #endregion
 
@@ -177,16 +176,16 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             float rng = Random.Range(0f, 1f);
             LootTable loot = data.Loot;
-            LootSpawn spawn = loot.dust; // Dust
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.amount);
-            spawn = loot.gold; // Gold
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
-            spawn = loot.potion; // Potion
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
-            // Spawning of SpellPage handled seperately by BookEnemy
+            LootSpawn spawn = loot.Dust; // Dust
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.Amount);
+            spawn = loot.Gold; // Gold
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.Amount);
+            spawn = loot.Potion; // Potion
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.Amount);
+            // Spawning of SpellPage handled separately by BookEnemy
             OnDeath();
         }
         /// <summary>
@@ -194,7 +193,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// </summary>
         private void OnDestroy()
         {
-            Death?.Invoke();
+            death?.Invoke();
         }
         #endregion
         #endregion

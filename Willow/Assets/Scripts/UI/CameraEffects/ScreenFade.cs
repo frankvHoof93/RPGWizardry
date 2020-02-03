@@ -16,17 +16,17 @@ namespace nl.SWEG.Willow.UI.CameraEffects
         /// </summary>
         private Material mat;
         /// <summary>
-        /// Camera used to calculate between world- and screenspace
+        /// Camera used to calculate between world- and Screen-Space
         /// </summary>
         private Camera cam;
         /// <summary>
         /// ID for _PlayerPos-Property
         /// </summary>
-        private int playerPosID = Shader.PropertyToID("_PlayerPos");
+        private readonly int playerPosID = Shader.PropertyToID("_PlayerPos");
         /// <summary>
         /// ID for _CircleRadius-Property
         /// </summary>
-        private int circleRadiusID = Shader.PropertyToID("_CircleRadius");
+        private readonly int circleRadiusID = Shader.PropertyToID("_CircleRadius");
         #endregion
 
         #region Methods

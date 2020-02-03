@@ -11,7 +11,7 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         /// <summary>
         /// Inputs for Spell-Selection
         /// </summary>
-        public enum SpellSelection : int
+        public enum SpellSelection : byte
         {
             /// <summary>
             /// No Input

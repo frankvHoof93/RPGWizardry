@@ -17,10 +17,7 @@ namespace nl.SWEG.Willow.Utils.Behaviours
         /// <summary>
         /// Whether an instance exists
         /// </summary>
-        public static bool Exists
-        {
-            get { return instance != null; }
-        }
+        public static bool Exists => instance != null;
 
         /// <summary>
         /// Singleton-Reference
@@ -77,10 +74,7 @@ namespace nl.SWEG.Willow.Utils.Behaviours
             }
             if (!hasRootObject && transform.parent != null)
                 Debug.LogError($"Singleton<{typeof(T).Name}> on {gameObject.name} is not a root-object. Did you mean to set HasRootObject?");
-            if (!hasRootObject)
-                DontDestroyOnLoad(gameObject);
-            else
-                DontDestroyOnLoad(transform.root.gameObject);
+            DontDestroyOnLoad(!hasRootObject ? gameObject : transform.root.gameObject);
             instance = this as T;
         }
 

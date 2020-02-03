@@ -46,10 +46,10 @@ namespace nl.SWEG.Willow.UI.Menu
         private GameObject background;
 
         #region MainMenu
-        [Header("Main Menu")]
         /// <summary>
         /// Panel with MainMenu-Options
         /// </summary>
+        [Header("Main Menu")]
         [SerializeField]
         [Tooltip("Panel with MainMenu-Options")]
         private GameObject mainMenuPanel;
@@ -62,19 +62,19 @@ namespace nl.SWEG.Willow.UI.Menu
         #endregion
 
         #region GameMenu
-        [Header("Game Menu")]
         /// <summary>
         /// Panel with PauseMenu-Options
         /// </summary>
+        [Header("Game Menu")]
         [SerializeField]
         private GameObject pauseMenuPanel;
         #endregion
 
         #region Spell Canvases
-        [Header("Spell Canvases")]
         /// <summary>
         /// Transform for Canvas holding Spell-List
         /// </summary>
+        [Header("Spell Canvases")]
         [SerializeField]
         [Tooltip("Transform for Canvas holding Spell-List")]
         private Transform spellListCanvas;

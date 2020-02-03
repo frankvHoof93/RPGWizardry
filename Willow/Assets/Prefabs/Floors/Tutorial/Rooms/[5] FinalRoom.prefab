@@ -2346,22 +2346,22 @@ MonoBehaviour:
   - {fileID: 7710988994677193886}
   enemyHolder: {fileID: 6876620365234284225}
   enemiesInRoom:
-  - enemyPrefab: {fileID: 4437973590108185419, guid: 0e2af9d59076d8e43878677645c41076,
+  - EnemyPrefab: {fileID: 4437973590108185419, guid: 0e2af9d59076d8e43878677645c41076,
       type: 3}
-    spawnPosition: {x: -2.48, y: 7.25}
-    spawnRotation: 0
-  - enemyPrefab: {fileID: 4437973590108185419, guid: 0e2af9d59076d8e43878677645c41076,
+    SpawnPosition: {x: -2.48, y: 7.25}
+    SpawnRotation: 0
+  - EnemyPrefab: {fileID: 4437973590108185419, guid: 0e2af9d59076d8e43878677645c41076,
       type: 3}
-    spawnPosition: {x: 9.52, y: 7.25}
-    spawnRotation: 0
-  - enemyPrefab: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
+    SpawnPosition: {x: 9.52, y: 7.25}
+    SpawnRotation: 0
+  - EnemyPrefab: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
       type: 3}
-    spawnPosition: {x: 1.48, y: 20}
-    spawnRotation: 0
-  - enemyPrefab: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
+    SpawnPosition: {x: 1.48, y: 20}
+    SpawnRotation: 0
+  - EnemyPrefab: {fileID: 30696588968422746, guid: b37ad8b5fa2afba48a2070865fae4a2b,
       type: 3}
-    spawnPosition: {x: 5.52, y: 20}
-    spawnRotation: 0
+    SpawnPosition: {x: 5.52, y: 20}
+    SpawnRotation: 0
 --- !u!1 &4043499328911408837
 GameObject:
   m_ObjectHideFlags: 0

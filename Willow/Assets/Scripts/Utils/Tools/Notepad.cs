@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Tools are Objects that are used during development
-/// <para>
-///     These Objects are not used in the Application itself (or only used for analysis)
-/// </para>
-/// </summary>
 namespace nl.SWEG.Willow.Utils.Tools
 {
     /// <summary>

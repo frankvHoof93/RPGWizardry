@@ -23,7 +23,7 @@ namespace nl.SWEG.Willow.Utils.Functions
         /// Converts for current Resolution (squashed on axes)
         /// </summary>
         /// <param name="input">Vector to convert</param>
-        /// <returns>Converted Vector (Both axes handles seperately)s</returns>
+        /// <returns>Converted Vector (Both axes handles separately)s</returns>
         public static Vector2 ConvertToResolution(Vector2 input)
         {
             return new Vector2(ConvertForWidth(input.x), ConvertForHeight(input.y));

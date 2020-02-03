@@ -23,13 +23,13 @@ namespace nl.SWEG.Willow.Research.IO
         /// </summary>
         private readonly List<Fragment> bin;
         /// <summary>
-        /// Datasets after splitting the bin into managable pieces
+        /// DataSets after splitting the bin into manageable pieces
         /// </summary>
-        private readonly List<DataSet> DataSets;
+        private readonly List<DataSet> dataSets;
         /// <summary>
         /// Number of DataSets in Bin
         /// </summary>
-        private int numberOfSets;
+        private readonly int numberOfSets;
         #endregion
         #endregion
 
@@ -43,12 +43,12 @@ namespace nl.SWEG.Willow.Research.IO
         {
             this.bin = bin;
             this.numberOfSets = numberOfSets;
-            DataSets = new List<DataSet>();
+            dataSets = new List<DataSet>();
             List<List<Fragment>> sets = SplitBin();
             List<List<Fragment>> shuffledSets = new List<List<Fragment>>(sets); // Copy List
             shuffledSets.Shuffle(); // Shuffle List
             for (int i = 0; i < this.numberOfSets; i++)
-                DataSets.Add(new DataSet(shuffledSets[i], sets.IndexOf(shuffledSets[i]))); // Create DataSets
+                dataSets.Add(new DataSet(shuffledSets[i], sets.IndexOf(shuffledSets[i]))); // Create DataSets
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace nl.SWEG.Willow.Research.IO
         public bool IsDataBinSolved()
         {
             for (int i = 0; i < this.numberOfSets; i++)
-                if (!DataSets[i].CheckDataSolved())
+                if (!dataSets[i].CheckDataSolved())
                     return false;
             return true;
         }
@@ -70,8 +70,8 @@ namespace nl.SWEG.Willow.Research.IO
         public DataSet FirstUnsolvedDataSet()
         {
             for (int i = 0; i < this.numberOfSets; i++)
-                if (!DataSets[i].CheckDataSolved())
-                    return DataSets[i];
+                if (!dataSets[i].CheckDataSolved())
+                    return dataSets[i];
             return null;
         }
 
@@ -81,8 +81,8 @@ namespace nl.SWEG.Willow.Research.IO
         /// <returns>List of Sets</returns>
         private List<List<Fragment>> SplitBin()
         {
-            int batchsize = bin.Count / numberOfSets;
-            return bin.ChunkBy(batchsize);
+            int batchSize = bin.Count / numberOfSets;
+            return bin.ChunkBy(batchSize);
         }
         #endregion
     }

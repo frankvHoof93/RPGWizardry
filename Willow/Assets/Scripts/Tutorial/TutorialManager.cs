@@ -130,8 +130,8 @@ namespace nl.SWEG.Willow.Tutorial
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellList]);
 
-            Transform spellUTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
-            Button btn = spellUTF.GetComponent<Button>();
+            Transform spellTransform = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
+            Button btn = spellTransform.GetComponent<Button>();
             btn.onClick.RemoveListener(EnteredSpellListDialogue);
             StartCoroutine(AttachToButtonUnlock());
         }
@@ -200,8 +200,8 @@ namespace nl.SWEG.Willow.Tutorial
             // Wait until there's a MenuManager (race condition)
             yield return new WaitUntil(() => MenuManager.Exists);
 
-            Transform spellTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
-            Button btn = spellTF.GetComponent<Button>();
+            Transform spellTransform = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
+            Button btn = spellTransform.GetComponent<Button>();
             btn.onClick.AddListener(EnteredSpellListDialogue);
         }
 

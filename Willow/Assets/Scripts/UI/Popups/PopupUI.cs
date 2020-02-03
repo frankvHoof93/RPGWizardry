@@ -54,11 +54,11 @@ namespace nl.SWEG.Willow.UI.Popups
         {
             if (CameraManager.Exists)
             {
-                float realworldSize = CameraManager.Instance.Camera.orthographicSize * 2f; // Size of visible Height in WorldSpace
+                float cameraSize = CameraManager.Instance.Camera.orthographicSize * 2f; // Size of visible Height in WorldSpace
                 float percentage = pixelsHeight / ResolutionMath.DefaultHeight; // Convert to percentage of full Height
-                realworldSize = percentage * realworldSize;
+                cameraSize = percentage * cameraSize;
                 RectTransform textTf = (RectTransform)textField.transform;
-                textTf.sizeDelta = new Vector2(realworldSize * 5f, realworldSize);
+                textTf.sizeDelta = new Vector2(cameraSize * 5f, cameraSize);
             }
             else
                 throw new InvalidOperationException("No Camera Exists. TextSize cannot be determined");

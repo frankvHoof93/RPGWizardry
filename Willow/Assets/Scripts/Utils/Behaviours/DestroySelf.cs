@@ -8,7 +8,7 @@ namespace nl.SWEG.Willow.Utils.Behaviours
     public class DestroySelf : MonoBehaviour
     {
         /// <summary>
-        /// Destroys this object. Called from animationevent
+        /// Destroys this object. Called from Animation-Event
         /// </summary>
         public void OnAnimationEnd()
         {

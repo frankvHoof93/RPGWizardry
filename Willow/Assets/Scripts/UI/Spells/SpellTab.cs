@@ -35,15 +35,15 @@ namespace nl.SWEG.Willow.UI.Spells
         /// <summary>
         /// List of Sprites for Elements
         /// </summary>
-        [Tooltip("List of Sprites for Elements")]
+        [Tooltip("List of Sprites for Elements")] 
         [SerializeField]
-        private List<Sprite> elementSprites;
+        private List<Sprite> elementSprites = null;
         /// <summary>
         /// List of Sprites for Unlock-Status
         /// </summary>
         [Tooltip("List of Sprites for Unlock-Status")]
         [SerializeField]
-        private List<Sprite> checkSprites;
+        private List<Sprite> checkSprites = null;
         #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
@@ -61,16 +61,15 @@ namespace nl.SWEG.Willow.UI.Spells
 
         #region Methods
         /// <summary>
-        /// Updates the Spelltab with information from SpellPage
+        /// Updates the SpellTab with information from SpellPage
         /// </summary>
-        /// <param name="page">The spell page which this spell tab represents</param>
-        /// <param name="spellListController">Spell list controller used to navigate through the UI.</param>
-        public void Populate(SpellPage page)
+        /// <param name="toDisplay">The spell page which this spell tab represents</param>
+        public void Populate(SpellPage toDisplay)
         {
-            this.page = page;
-            element.sprite = elementSprites[(int)page.Spell.Element];
-            check.sprite = checkSprites[page.Unlocked ? 1 : 0];
-            title.text = page.Spell.Name;
+            this.page = toDisplay;
+            element.sprite = elementSprites[(int)toDisplay.Spell.Element];
+            check.sprite = checkSprites[toDisplay.Unlocked ? 1 : 0];
+            title.text = toDisplay.Spell.Name;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace nl.SWEG.Willow.Entities.Collectables
         /// </summary>
         [SerializeField]
         [Tooltip("Amount of Gold in Pile")]
-        private uint Amount = 0;
+        private uint amount;
         #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
@@ -23,10 +23,10 @@ namespace nl.SWEG.Willow.Entities.Collectables
         /// <summary>
         /// Sets amount of Gold in Pile
         /// </summary>
-        /// <param name="amount">Amount to Set</param>
-        internal void SetAmount(uint amount)
+        /// <param name="toSet">Amount to Set</param>
+        internal void SetAmount(uint toSet)
         {
-            Amount = amount;
+            amount = toSet;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace nl.SWEG.Willow.Entities.Collectables
         /// <returns>True if adding was successful</returns>
         protected override bool OnCollect(PlayerInventory target)
         {
-            target.AddGold(Amount);
+            target.AddGold(amount);
             return true;
         }
         #endregion

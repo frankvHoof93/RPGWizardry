@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opacityRadius: 40
   opacityOffset: {x: 0, y: 0}
-  Amount: 5
+  amount: 5
 --- !u!50 &-9150435255485176122
 Rigidbody2D:
   serializedVersion: 4

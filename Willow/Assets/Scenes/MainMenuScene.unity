@@ -763,6 +763,11 @@ PrefabInstance:
       propertyPath: SpellCanvas
       value: 
       objectReference: {fileID: 1698780247}
+    - target: {fileID: 5244897388212724459, guid: e9112d8fc51d8f8439672d4ca9da3b87,
+        type: 3}
+      propertyPath: spellCanvas
+      value: 
+      objectReference: {fileID: 1698780247}
     - target: {fileID: 5880972677460015652, guid: e9112d8fc51d8f8439672d4ca9da3b87,
         type: 3}
       propertyPath: m_AnchorMin.y

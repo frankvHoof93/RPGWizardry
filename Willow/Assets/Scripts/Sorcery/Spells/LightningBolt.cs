@@ -32,9 +32,8 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             // Set Starting-Point for Line
             lineRenderer.SetPosition(0, transform.localPosition);
             // Build a raycast
-            RaycastHit2D hit;
             // CircleCast to make the hit more generous
-            hit = Physics2D.CircleCast(transform.position, 0.6f, transform.up, data.LifeTime, collisionLayer);
+            RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.6f, transform.up, data.LifeTime, collisionLayer);
             // Does the ray intersect any objects in the collision layer
             // Yes, it hit something
             if (hit)

@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasRootObject: 0
-  FadeTime: 1
+  fadeTime: 1
   smoothTime: 0.3
 --- !u!114 &4183795250478487759
 MonoBehaviour:

@@ -51,8 +51,6 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                     AimingInputs(ref newState);
                     ButtonInputs(ref newState);
                     break;
-                default:
-                    break;
             }
             State = newState;
         }
@@ -85,7 +83,6 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                     inputState.AimDirection = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
                     break;
                 // On keyboard, use the mouse
-                case ControlScheme.Keyboard:
                 default:
                     Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                     Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
@@ -112,8 +109,7 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                         }
                     inputState.CastIndex = index;
                     break;
-                case ControlScheme.Keyboard:
-                default:
+                default: // Keyboard
                     inputState.Cast = Input.GetButton("Fire1");
                     // Spell-Selection
                     if (Input.GetKeyDown(KeyCode.Alpha1)) // Select Index 1

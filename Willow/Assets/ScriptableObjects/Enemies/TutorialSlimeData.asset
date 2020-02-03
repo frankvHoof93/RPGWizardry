@@ -16,19 +16,20 @@ MonoBehaviour:
   enemyHealth: 10
   enemyAttack: 2
   enemySpeed: 2
+  knockback: 0
   spawnCooldown:
     Min: 0
     Max: 0
   droppedLoot:
-    dust:
-      amount: 50
-      chance: 1
-    gold:
-      amount: 0
-      chance: 0
-    potion:
-      amount: 0
-      chance: 0
+    Dust:
+      Amount: 50
+      Chance: 1
+    Gold:
+      Amount: 0
+      Chance: 0
+    Potion:
+      Amount: 0
+      Chance: 0
   opacityPriority: 1
   opacityRadius: 100
   opacityOffset: {x: 0, y: 0}

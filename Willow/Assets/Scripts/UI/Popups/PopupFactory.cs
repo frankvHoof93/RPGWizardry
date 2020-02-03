@@ -4,7 +4,7 @@ using UnityEngine;
 namespace nl.SWEG.Willow.UI.Popups
 {
     /// <summary>
-    /// Used to create Popups during gameplay
+    /// Used to create Popups during Game-Play
     /// </summary>
     public static class PopupFactory
     {
@@ -44,6 +44,8 @@ namespace nl.SWEG.Willow.UI.Popups
         /// <param name="posWorld"></param>
         /// <param name="damage"></param>
         /// <param name="color">Color for Text. Defaults to Black</param>
+        /// <param name="height">Height for Text in Pixels (for 720p-Resolution)</param>
+        /// <param name="timeOut">Timeout before DamageUI is destroyed</param>
         /// <returns>Created Popup</returns>
         public static PopupUI CreateDamageUI(Vector3 posWorld, ushort damage, Color? color, uint height = DefaultDamageHeight, float timeOut = DefaultTimeOut)
         {
@@ -59,6 +61,7 @@ namespace nl.SWEG.Willow.UI.Popups
         /// <param name="damage">Damage to Display</param>
         /// <param name="owner">Renderer for target that was hit (for RenderOrder)</param>
         /// <param name="color">Color for Text (Defaults to Black)</param>
+        /// <param name="height">Height for Text in Pixels (for 720p-Resolution)</param>
         /// <param name="timeOut">Duration to display UI for (defaults to 1.5s)</param>
         /// <returns>Created Popup</returns>
         public static PopupUI CreateDamageUI(Vector3 posWorld, ushort damage, Renderer owner, Color? color, uint height = DefaultDamageHeight, float timeOut = DefaultTimeOut)
@@ -74,6 +77,7 @@ namespace nl.SWEG.Willow.UI.Popups
         /// <param name="renderLayer">RenderLayer for Text-Object</param>
         /// <param name="orderInRenderLayer">Order in RenderLayer</param>
         /// <param name="color">Color for Text (Defaults to Black)</param>
+        /// <param name="height">Height for Text in Pixels (for 720p-Resolution)</param>
         /// <param name="timeOut">Duration to display UI for (defaults to 1.5s)</param>
         /// <returns>Created UI</returns>
         public static PopupUI CreateDamageUI(Vector3 posWorld, ushort damage, int renderLayer, int orderInRenderLayer, Color? color, uint height = DefaultDamageHeight, float timeOut = DefaultTimeOut)

@@ -26,7 +26,8 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// The place where the player spawns when they enter the room through this Door
         /// </summary>
-        public Transform Spawn { get { return spawn; } }
+        public Transform Spawn => spawn;
+
         #endregion
 
         #region Editor
@@ -68,7 +69,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
 
         #region Private
         /// <summary>
-        /// The trigger which teleports the player to the other room.
+        /// The trigger which moves the player to the other room
         /// </summary>
         private Collider2D coll;
         /// <summary>

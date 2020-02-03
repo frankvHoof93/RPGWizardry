@@ -54,7 +54,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// <summary>
         /// Float to keep track of how far we've moved
         /// </summary>
-        private float movedSpace = 0;
+        private float movedSpace;
         /// <summary>
         /// Sprite of the "crosshair" book
         /// </summary>
@@ -117,7 +117,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// <param name="collision">Object the projectile collided with</param>
         protected override void Effect(Collider2D collision)
         {
-            //Bool check so it doesnt get stuck on anything on the way back
+            //Bool check so it doesn't get stuck on anything on the way back
             if (!back)
             {
                 //play impact sound

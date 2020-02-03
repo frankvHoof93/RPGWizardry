@@ -42,7 +42,7 @@ namespace nl.SWEG.Willow.UI.Game
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
         /// <summary>
-        /// Cursor during Gameplay
+        /// Cursor during Game-Play
         /// </summary>
         [SerializeField]
         [Tooltip("Cursor during Gameplay")]
@@ -65,18 +65,16 @@ namespace nl.SWEG.Willow.UI.Game
         /// <summary>
         /// Sets which Cursor to Display
         /// </summary>
-        /// <param name="cursor">CursorType for Cursor to Display</param>
-        public void SetCursor(CursorType cursor)
+        /// <param name="cursorType">CursorType for Cursor to Display</param>
+        public void SetCursor(CursorType cursorType)
         {
-            switch (cursor)
+            switch (cursorType)
             {
                 case CursorType.Cursor:
-                    Cursor.SetCursor(this.cursor, Vector2.zero, CursorMode.Auto);
+                    Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
                     break;
                 case CursorType.Crosshair:
                     Cursor.SetCursor(crosshair, crosshairHotspot, CursorMode.Auto);
-                    break;
-                default:
                     break;
             }
         }

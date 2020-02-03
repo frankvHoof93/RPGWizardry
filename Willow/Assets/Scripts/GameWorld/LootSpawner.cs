@@ -73,8 +73,6 @@ namespace nl.SWEG.Willow.GameWorld
                 case Collectables.Potion: 
                     // No Implementation, as there is no setting of amount for Potions
                     break;
-                default:
-                    break;
             }
         }
 

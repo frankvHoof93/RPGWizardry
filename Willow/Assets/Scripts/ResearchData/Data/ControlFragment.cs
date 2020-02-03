@@ -24,6 +24,7 @@ namespace nl.SWEG.Willow.Research.Data
         /// </summary>
         /// <param name="correctPosition">Correct Y-Position for Fragment</param>
         /// <param name="range">Range from <paramref name="correctPosition"/> that counts as Solved</param>
+        /// <param name="data">Data for Fragment</param>
         public ControlFragment(float correctPosition, float range, float[] data) : base(data)
         {
             CorrectPosition = correctPosition;

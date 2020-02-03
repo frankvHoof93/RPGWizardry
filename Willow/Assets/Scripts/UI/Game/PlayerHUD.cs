@@ -7,27 +7,27 @@ using UnityEngine.UI;
 namespace nl.SWEG.Willow.UI.Game
 {
     /// <summary>
-    /// Heads-up Display for player. This controls the Overlay that is shown to the player during gameplay
+    /// Heads-up Display for player. This controls the Overlay that is shown to the player during Game-Play
     /// </summary>
     public class PlayerHUD : MonoBehaviour
     {
         #region Variables
         #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         #region Health
-        [Header("Health")]
         /// <summary>
         /// Fill-UI for HealthBar
         /// </summary>
+        [Header("Health")]
         [SerializeField]
         [Tooltip("Fill-UI for HealthBar")]
         private Image healthFillBar;
         #endregion
 
         #region Items
-        [Header("Items")]
         /// <summary>
         /// Text-UI for Dust-Amount
         /// </summary>
+        [Header("Items")]
         [SerializeField]
         [Tooltip("Text-UI for Dust-Amount")]
         private TextMeshProUGUI dustText;
@@ -40,10 +40,10 @@ namespace nl.SWEG.Willow.UI.Game
         #endregion
 
         #region Spells
-        [Header("Spells")]
         /// <summary>
         /// HUD-Objects for Selected Spells
         /// </summary>
+        [Header("Spells")]
         [SerializeField]
         [Tooltip("HUD-Objects for Selected Spells")]
         private SpellHUD[] spellHuds;
@@ -54,7 +54,7 @@ namespace nl.SWEG.Willow.UI.Game
         #region Methods
         #region Public
         /// <summary>
-        /// Initiliazes HUD
+        /// Initializes HUD
         /// </summary>
         public void Initialize()
         {
@@ -108,7 +108,7 @@ namespace nl.SWEG.Willow.UI.Game
         /// <param name="change">Change in Value from previous</param>
         private void UpdateHealthBar(ushort newHealth, ushort maxHealth, short change)
         {
-            float healthPercentage = (float)newHealth / (float)maxHealth;
+            float healthPercentage = (float)newHealth / maxHealth;
             healthFillBar.fillAmount = healthPercentage;
             if (change != 0)
             {

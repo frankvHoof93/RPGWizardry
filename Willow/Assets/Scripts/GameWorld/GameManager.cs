@@ -34,7 +34,7 @@ namespace nl.SWEG.Willow.GameWorld
         /// <summary>
         /// Whether the Game is currently Paused
         /// </summary>
-        public bool Paused { get; private set; } = false;
+        public bool Paused { get; private set; }
 
         #region Editor
         #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
@@ -95,7 +95,7 @@ namespace nl.SWEG.Willow.GameWorld
 
         #region SceneLoad
         /// <summary>
-        /// Initiazes Game after GameScene has finished Loading
+        /// Initializes Game after GameScene has finished Loading
         /// </summary>
         /// <param name="loadedScene">Scene that was Loaded</param>
         /// <param name="loadMode">Way in which Scene was loaded</param>

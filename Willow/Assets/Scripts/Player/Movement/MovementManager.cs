@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.GameWorld;
+﻿using System;
+using nl.SWEG.Willow.GameWorld;
 using System.Collections;
 using UnityEngine;
 
@@ -83,7 +84,7 @@ namespace nl.SWEG.Willow.Player.Movement
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Speed", movement.magnitude);
-            if (!(movement.x == 0 && movement.y == 0))
+            if (!(Math.Abs(movement.x) < float.Epsilon && Math.Abs(movement.y) < float.Epsilon))
             {
                 if (movement.x > 0 && movement.x > movement.y) // East
                     animator.SetInteger("LastDirection", 0);

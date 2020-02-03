@@ -25,17 +25,17 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
             /// Prefab for Enemy to Spawn
             /// </summary>
             [Tooltip("Prefab for Enemy to Spawn")]
-            public GameObject enemyPrefab;
+            public GameObject EnemyPrefab;
             /// <summary>
             /// (Relative) Position to Spawn Enemy at
             /// </summary>
             [Tooltip("(Relative) Position to Spawn Enemy at")]
-            public Vector2 spawnPosition;
+            public Vector2 SpawnPosition;
             /// <summary>
             /// Rotation (around up) to Spawn Enemy at
             /// </summary>
             [Tooltip("Rotation (around up) to Spawn Enemy at")]
-            public float spawnRotation;
+            public float SpawnRotation;
         }
         #endregion
 
@@ -46,7 +46,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// </summary>
         public bool Cleared => enemyHolder.transform.childCount == 0;
         /// <summary>
-        /// Roomcleared event
+        /// RoomCleared event
         /// </summary>
         public static event RoomClear clearedRoom; // TODOCLEAN:
         #endregion
@@ -79,7 +79,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// Whether this Room has spawned its enemies (prevents duplicate spawning when re-entering Room)
         /// </summary>
-        private bool hasSpawnedEnemies = false;
+        private bool hasSpawnedEnemies;
         #endregion
         #endregion
 
@@ -159,10 +159,10 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
             for (int i = 0; i < enemiesInRoom.Length; i++)
             {
                 SpawnTemplate template = enemiesInRoom[i];
-                GameObject enemy = Instantiate(template.enemyPrefab);
+                GameObject enemy = Instantiate(template.EnemyPrefab);
                 enemy.transform.SetParent(enemyHolder.transform);
-                enemy.transform.localPosition = template.spawnPosition;
-                enemy.transform.rotation = Quaternion.Euler(0, 0, template.spawnRotation);
+                enemy.transform.localPosition = template.SpawnPosition;
+                enemy.transform.rotation = Quaternion.Euler(0, 0, template.SpawnRotation);
                 enemy.GetComponent<AEnemy>().AddDeathListener(CheckRoomClear);
             }
             hasSpawnedEnemies = true;

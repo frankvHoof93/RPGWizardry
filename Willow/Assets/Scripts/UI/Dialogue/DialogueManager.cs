@@ -57,16 +57,15 @@ namespace nl.SWEG.Willow.UI.Dialogue
         public void StartDialogue(DialogueData dialogue)
         {
             enabled = true;
-            HideInstructionPrompt(); //Turn off the Textbox
+            HideInstructionPrompt(); //Turn off the TextBox
             dialogueUI.StartDialogue(dialogue);
             animator.SetBool("IsOpen", true);
         }
 
-
         /// <summary>
         /// Shows Instruction Prompt
         /// </summary>
-        /// <param name="value">Show/Hide</param>
+        /// <param name="textToDisplay">Instruction-Text to display</param>
         public void ShowInstructionPrompt(string textToDisplay)
         {
             textBox.SetActive(true);

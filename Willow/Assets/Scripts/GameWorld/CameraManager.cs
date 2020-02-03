@@ -1,3 +1,4 @@
+using System;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.UI.CameraEffects;
 using nl.SWEG.Willow.Utils.Behaviours;
@@ -35,7 +36,7 @@ namespace nl.SWEG.Willow.GameWorld
         [SerializeField]
         [Range(0.00f, 2f)]
         [Tooltip("Duration for Fading In or Out")]
-        private float FadeTime;
+        private float fadeTime;
         /// <summary>
         /// Time-amount for Smoothing Movement
         /// </summary>
@@ -76,7 +77,7 @@ namespace nl.SWEG.Willow.GameWorld
         {
             Fading = true;
             screenFader.enabled = true;
-            LeanTween.value(gameObject, UpdateShader, from, to, FadeTime);
+            LeanTween.value(gameObject, UpdateShader, from, to, fadeTime);
         }
 
         /// <summary>
@@ -84,11 +85,12 @@ namespace nl.SWEG.Willow.GameWorld
         /// </summary>
         /// <param name="from">Starting Value for Fade</param>
         /// <param name="to">Ending Value for Fade</param>
-        public void Fade(float from, float to, float fadeTime)
+        /// <param name="duration">Duration of Fade</param>
+        public void Fade(float from, float to, float duration)
         {
             Fading = true;
             screenFader.enabled = true;
-            LeanTween.value(gameObject, UpdateShader, from, to, fadeTime);
+            LeanTween.value(gameObject, UpdateShader, from, to, duration);
         }
         #endregion
 
@@ -112,16 +114,16 @@ namespace nl.SWEG.Willow.GameWorld
             if (!PlayerManager.Exists)
                 return;
             // Round the position of the Player
-            Transform playerTF = PlayerManager.Instance.transform;
+            Transform playerTransform = PlayerManager.Instance.transform;
             Vector3 playerPos = new Vector3(
-                Mathf.Round(playerTF.position.x * 1000.0f) / 1000.0f,
-                Mathf.Round(playerTF.position.y * 1000.0f) / 1000.0f,
-                playerTF.position.z - 100.0f);
+                Mathf.Round(playerTransform.position.x * 1000.0f) / 1000.0f,
+                Mathf.Round(playerTransform.position.y * 1000.0f) / 1000.0f,
+                playerTransform.position.z - 100.0f);
             // Convert the mouse position to WorldSpace
             Vector3 mousePos = Camera.ScreenToWorldPoint(Input.mousePosition);
             // Place the Camera between the Player and Mouse
             Vector3 mouseDir = mousePos - playerPos;
-            mouseDir.z = playerTF.position.z - 100.0f;
+            mouseDir.z = playerTransform.position.z - 100.0f;
             if (mouseDir.magnitude < 1)
                 mouseDir.Normalize();
             // Set Camera to final Position
@@ -138,11 +140,11 @@ namespace nl.SWEG.Willow.GameWorld
         private void UpdateShader(float value)
         {
             screenFader.SetValue(value);
-            if (value == 0)
+            if (Math.Abs(value) < float.Epsilon)
             {
                 Fading = false;
             }
-            else if (value == 1)
+            else if (Math.Abs(value - 1) < float.Epsilon)
             {
                 Fading = false;
                 screenFader.enabled = false;

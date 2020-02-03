@@ -41,7 +41,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Pages in Inventory
         /// </summary>
-        public IReadOnlyList<SpellPage> Pages { get { return pages.AsReadOnly(); } }
+        public IReadOnlyList<SpellPage> Pages => pages.AsReadOnly();
         #endregion
 
         #region Editor
@@ -77,7 +77,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Event called when Spell is Unlocked
         /// </summary>
-        private event OnInventorySpell spellunlocked;
+        private event OnInventorySpell spellUnlocked;
         #endregion
         #endregion
         #endregion
@@ -147,7 +147,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <param name="listener">Listener to Add</param>
         public void AddUnlockListener(OnInventorySpell listener)
         {
-            spellunlocked += listener;
+            spellUnlocked += listener;
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <param name="listener">Listener to Remove</param>
         public void RemoveUnlockListener(OnInventorySpell listener)
         {
-            spellunlocked -= listener;
+            spellUnlocked -= listener;
         }
         #endregion
 
@@ -171,9 +171,9 @@ namespace nl.SWEG.Willow.Player.Inventory
             if (Dust >= page.DustCost)
             {
                 page.UnlockSpell();
-                spellunlocked?.Invoke(page);
+                spellUnlocked?.Invoke(page);
                 Dust -= page.DustCost;
-                dustChangeEvent(Dust, (int)page.DustCost);
+                dustChangeEvent?.Invoke(Dust, (int)page.DustCost);
             }
             return page.Unlocked;
         }
@@ -274,7 +274,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         internal void AddDust(uint amount)
         {
             Dust += amount;
-            dustChangeEvent.Invoke(Dust, (int)amount);
+            dustChangeEvent?.Invoke(Dust, (int)amount);
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         internal void AddGold(uint amount)
         {
             Gold += amount;
-            goldChangeEvent.Invoke(Gold, (int)amount);
+            goldChangeEvent?.Invoke(Gold, (int)amount);
         }
         #endregion
         #endregion

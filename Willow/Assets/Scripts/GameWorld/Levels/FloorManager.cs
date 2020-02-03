@@ -1,7 +1,6 @@
 ﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.Utils.Behaviours;
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;

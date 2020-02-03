@@ -80,11 +80,10 @@ namespace nl.SWEG.Willow.Player
         [SerializeField]
         [Tooltip("Renderer for Greg")]
         private SpriteRenderer bookRenderer;
-
-        [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Tooltip("Opacity-Radius in Pixels (for 720p)")]
         private float opacityRadius = 30f;
@@ -100,11 +99,10 @@ namespace nl.SWEG.Willow.Player
         [SerializeField]
         [Tooltip("Amount of FRAMES Player is invincible for after being damaged")]
         private uint invincibilityFrames = 60;
-
-        [Header("Layers")]
         /// <summary>
         /// Layer that contains health potions
         /// </summary>
+        [Header("Layers")]
         [SerializeField]
         private LayerMask healthPotionLayer;
         #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables

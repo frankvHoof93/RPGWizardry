@@ -25,13 +25,13 @@ namespace nl.SWEG.Willow.Research
         [SerializeField]
         [Tooltip("Manager for SpellPage-UI")]
         private SpellPageManager spellManager;
-        [Header("UI")]
         /// <summary>
         /// UI-Images to draw Points on
         /// </summary>
+        [Header("UI")]
         [SerializeField]
         [Tooltip("UI-Images to draw Points on")]
-        private List<Image> images;
+        private List<Image> images = null;
         /// <summary>
         /// Message to display after Unlock
         /// </summary>
@@ -55,25 +55,25 @@ namespace nl.SWEG.Willow.Research
 
         #region Private
         /// <summary>
-        /// Current DataBin to be used for minigames/research
+        /// Current DataBin to be used for mini-game/research
         /// </summary>
-        private DataBin CurrentBin;
+        private DataBin currentBin;
         /// <summary>
-        /// Current DataSet to be used for minigames/research
+        /// Current DataSet to be used for mini-game/research
         /// </summary>
-        private DataSet CurrentSet;
+        private DataSet currentSet;
         /// <summary>
         /// ID for _DecalTex-Property
         /// </summary>
-        private int decalTexID = Shader.PropertyToID("_DecalTex");
+        private readonly int decalTexID = Shader.PropertyToID("_DecalTex");
         /// <summary>
         /// ID for splatCount-Property
         /// </summary>
-        private int splatCountID = Shader.PropertyToID("splatCount");
+        private readonly int splatCountID = Shader.PropertyToID("splatCount");
         /// <summary>
         /// ID for UVs-Property
         /// </summary>
-        private int uvID = Shader.PropertyToID("UVs");
+        private readonly int uvID = Shader.PropertyToID("UVs");
         #endregion
         #endregion
 
@@ -84,7 +84,7 @@ namespace nl.SWEG.Willow.Research
         /// </summary>
         public void CheckIfSolved()
         {
-            if (CurrentSet.CheckDataSolved())
+            if (currentSet.CheckDataSolved())
             {
                 spellManager.UnlockSpell();
                 unlockMsg.enabled = true;
@@ -131,8 +131,8 @@ namespace nl.SWEG.Willow.Research
         /// </summary>
         private void UpdateResearch()
         {
-            if (CurrentBin == null)
-                CurrentBin = LoadDataBin();
+            if (currentBin == null)
+                currentBin = LoadDataBin();
             LoadNextDataSet();
             PopulateUI();
             checkButton.enabled = true;
@@ -145,8 +145,8 @@ namespace nl.SWEG.Willow.Research
         /// </summary>
         private void LoadNextDataSet()
         {
-            if (!CurrentBin.IsDataBinSolved())
-                CurrentSet = CurrentBin.FirstUnsolvedDataSet();
+            if (!currentBin.IsDataBinSolved())
+                currentSet = currentBin.FirstUnsolvedDataSet();
         }
 
         /// <summary>
@@ -178,24 +178,24 @@ namespace nl.SWEG.Willow.Research
             for (int i = 0; i < 10; i++)
             {
                 // Set UI-Image to Fragment
-                Image renderer = images[i];
-                Fragment fragment = CurrentSet.Fragments[i];
-                fragment.SetImage(renderer);
-                Texture2D imgTex = (Texture2D)renderer.mainTexture;
-                float targetScale = CurrentSet.Fragments[i].ImgData.Length;
+                Image imgRenderer = images[i];
+                Fragment fragment = currentSet.Fragments[i];
+                fragment.SetImage(imgRenderer);
+                Texture2D imgTex = (Texture2D)imgRenderer.mainTexture;
+                float targetScale = currentSet.Fragments[i].ImgData.Length;
                 // Create Material for Splatting (break batching on purpose)
                 Material m = new Material(Shader.Find("Custom/TextureDecal"));
                 m.SetTexture(decalTexID, splatTex);
-                renderer.material = m;
+                imgRenderer.material = m;
                 // Calculate tiling for Points in Fragment
                 Vector4[] vectors = new Vector4[(int)targetScale];
-                float xPos = (imgTex.width - 30f) / CurrentSet.Fragments[i].ImgData.Length;
-                for (int j = 0; j < CurrentSet.Fragments[i].ImgData.Length; j++)
+                float xPos = (imgTex.width - 30f) / currentSet.Fragments[i].ImgData.Length;
+                for (int j = 0; j < currentSet.Fragments[i].ImgData.Length; j++)
                 {
                     Vector2 tiling = new Vector2(((float)imgTex.width / splatTex.width), ((float)imgTex.height / splatTex.height));
                     // base offset to corner:
                     Vector2 offset = new Vector2(.5f, .5f);
-                    Vector2 posOnTarget = new Vector2(xPos * j, (int)(CurrentSet.Fragments[i].ImgData[j] * imgTex.height));
+                    Vector2 posOnTarget = new Vector2(xPos * j, (int)(currentSet.Fragments[i].ImgData[j] * imgTex.height));
                     posOnTarget = new Vector2(posOnTarget.x / splatTex.width, posOnTarget.y / splatTex.height);
                     offset += posOnTarget;
                     offset *= -1f;
