@@ -83,7 +83,7 @@ namespace nl.SWEG.Willow.Research.Data
         {
             List<Fragment> original = new List<Fragment>(fragments);
             fragments.AddRange(controls);
-            fragments.Shuffle();
+            fragments.Shuffle(); // TODOCLEAN: Check why this does nothing?
             for (int i = 0; i < fragments.Count; i++)
                 fragments[i].OriginalRow = original.IndexOf(fragments[i]);
         }
