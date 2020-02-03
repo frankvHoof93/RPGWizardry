@@ -106,7 +106,7 @@ namespace nl.SWEG.Willow.Tutorial
             PlayerManager.Instance.Inventory.RemovePageListener(PickedUpPageDialogue);
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
-            DialogueManager.Instance.ShowInstructionPrompt(true);
+            DialogueManager.Instance.ShowInstructionPrompt("Please press \"ESC\" to open Greg");
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             //disable GameUIManager to disallow pausing
             GameUIManager.Instance.enabled = false;
-            DialogueManager.Instance.ShowInstructionPrompt(false);
+            DialogueManager.Instance.HideInstructionPrompt();
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredMenu]);
             SceneManager.sceneLoaded -= LoadMainMenu;
         }

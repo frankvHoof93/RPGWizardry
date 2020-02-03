@@ -165,7 +165,7 @@ namespace nl.SWEG.Willow.Research
         private void SwitchToSpellPage()
         {
             spellManager.gameObject.SetActive(true);
-            transform.gameObject.SetActive(false); // TODOCLEAN: Check if this can be a call to MenuManager
+            transform.gameObject.SetActive(false);
         }
 
         /// <summary>

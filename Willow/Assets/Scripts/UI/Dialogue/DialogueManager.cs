@@ -64,6 +64,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// Coroutine for Sentence being typed
         /// </summary>
         private Coroutine currentCoroutine;
+        /// <summary>
+        /// Text-Object in InstructionPrompt
+        /// </summary>
+        private TextMeshProUGUI promptText;
         #endregion
         #endregion
 
@@ -76,7 +80,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         public void StartDialogue(DialogueData dialogue)
         {
             enabled = true;
-            ShowInstructionPrompt(false); //Turn off the Textbox
+            HideInstructionPrompt(); //Turn off the Textbox
             nameText.text = dialogue.Name;
             characterImage.sprite = dialogue.Sprite;
             // Open the dialogue box and clear the previous sentences that could be in the sentences array
@@ -111,17 +115,35 @@ namespace nl.SWEG.Willow.UI.Dialogue
         }
 
         /// <summary>
-        /// Shows/Hides Instruction Prompt
+        /// Shows Instruction Prompt
         /// </summary>
         /// <param name="value">Show/Hide</param>
-        public void ShowInstructionPrompt(bool value)
+        public void ShowInstructionPrompt(string textToDisplay)
         {
-            textBox.SetActive(value);
-            animatorTextbox.SetBool("isOpened", value);
+            textBox.SetActive(true);
+            promptText.text = textToDisplay;
+            animatorTextbox.SetBool("isOpened", true);
+        }
+
+        /// <summary>
+        /// Hides Instruction Prompt
+        /// </summary>
+        public void HideInstructionPrompt()
+        {
+            textBox.SetActive(false);
+            animatorTextbox.SetBool("isOpened", false);
         }
         #endregion
 
         #region Unity
+        /// <summary>
+        /// Finds reference to InstructionPrompt-Text
+        /// </summary>
+        private void Start()
+        {
+            promptText = textBox.GetComponentInChildren<TextMeshProUGUI>(true);
+        }
+
         /// <summary>
         /// Checks if right mouse button is pressed to display the next sentence in the dialogue
         /// </summary>

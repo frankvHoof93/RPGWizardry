@@ -115,7 +115,7 @@ namespace nl.SWEG.Willow.GameWorld
         /// </summary>
         /// <param name="unloadedScene">Scene that was unloaded (Menu-Scene)</param>
         internal void OnExitMenu(Scene unloadedScene)
-        { // TODOCLEAN: Check this
+        {
             SceneManager.sceneUnloaded -= OnExitMenu;
             Paused = false;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
