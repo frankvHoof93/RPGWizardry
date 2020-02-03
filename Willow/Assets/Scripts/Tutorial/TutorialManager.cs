@@ -56,7 +56,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             StartTutorialDialogue(); //Run the Dialogue Queue function            
             SceneManager.sceneLoaded += LoadMainMenu;  //Adding Event listener which checks for the scene load
-            PlayerManager.Instance.Inventory.spellunlocked += FinishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
+            PlayerManager.Instance.Inventory.AddUnlockListener(FinishPuzzleDialogue); //Adding the listener for the unlockpuzzle event
             Room.clearedRoom += RoomClearedSlimes; //Adding the listener to checking for the room clear
             //Adding the Event Listeneres for the Page casting and Page Pickup
             PlayerManager.Instance.CastingManager.AddCastListener(CastedBookerangDialogue);
@@ -162,7 +162,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishPuzzle]);
             PlayerManager.Instance.MovementManager.SetStunned(false);
-            PlayerManager.Instance.Inventory.spellunlocked -= FinishPuzzleDialogue;
+            PlayerManager.Instance.Inventory.RemoveUnlockListener(FinishPuzzleDialogue);
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
         }

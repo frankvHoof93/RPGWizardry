@@ -75,7 +75,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Event called when Spell is Unlocked
         /// </summary>
-        public event OnInventorySpell spellunlocked; // TODOCLEAN:
+        private event OnInventorySpell spellunlocked;
         #endregion
         #endregion
         #endregion
@@ -137,6 +137,24 @@ namespace nl.SWEG.Willow.Player.Inventory
         public void RemovePageListener(OnInventorySpell listener)
         {
             pageChangeEvent -= listener;
+        }
+
+        /// <summary>
+        /// Adds Listener to SpellUnlock-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddUnlockListener(OnInventorySpell listener)
+        {
+            spellunlocked += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from SpellUnlock-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveUnlockListener(OnInventorySpell listener)
+        {
+            spellunlocked -= listener;
         }
         #endregion
 
