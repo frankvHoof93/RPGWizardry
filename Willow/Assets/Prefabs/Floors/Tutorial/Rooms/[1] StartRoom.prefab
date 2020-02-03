@@ -5133,7 +5133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doors:
   - {fileID: 780901586410022549}
-  EnemyHolder: {fileID: 8907047729703470694}
+  enemyHolder: {fileID: 8907047729703470694}
+  enemiesInRoom:
+    enemyPrefab: {fileID: 0}
+    spawnPosition: {x: 0, y: 0}
+    spawnRotation: 0
   spawnPoint: {fileID: 6720882897092339722}
 --- !u!1 &8594446162763593156
 GameObject:
@@ -5555,6 +5559,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8594446162098450146}
     m_Modifications:
+    - target: {fileID: 3053657965340416418, guid: 3dffa27fcbf3aa74cb3875a938e14397,
+        type: 3}
+      propertyPath: m_Name
+      value: Door Right
+      objectReference: {fileID: 0}
     - target: {fileID: 3053657965340416417, guid: 3dffa27fcbf3aa74cb3875a938e14397,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5609,11 +5618,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053657965340416418, guid: 3dffa27fcbf3aa74cb3875a938e14397,
-        type: 3}
-      propertyPath: m_Name
-      value: Door Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dffa27fcbf3aa74cb3875a938e14397, type: 3}
