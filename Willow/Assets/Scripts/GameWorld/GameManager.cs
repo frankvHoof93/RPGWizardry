@@ -132,7 +132,8 @@ namespace nl.SWEG.Willow.GameWorld
             // TODO: Animation
             // TODO: Delete save game
             yield return new WaitForSeconds(2f);
-            CameraManager.Instance.ToggleAudio();
+            if (CameraManager.Exists && CameraManager.Instance.AudioListener.enabled)
+                CameraManager.Instance.ToggleAudio();
             SceneLoader.Instance.LoadGameOverScene();
         }
         #endregion

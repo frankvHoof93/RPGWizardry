@@ -102,7 +102,7 @@ namespace nl.SWEG.Willow.UI.Menu
         public void Init(bool loadPauseMenu)
         {
             background.SetActive(!loadPauseMenu);
-            if (CameraManager.Exists)
+            if (CameraManager.Exists && CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
             if (!loadPauseMenu)
                 InitMainMenu();
