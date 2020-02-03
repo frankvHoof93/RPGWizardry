@@ -26,6 +26,14 @@ namespace nl.SWEG.Willow.UI.Menu
         /// Transform for Canvas for Research-MiniGame
         /// </summary>
         public Transform ResearchCanvas => researchCanvas;
+        /// <summary>
+        /// Panel for Main Menu
+        /// </summary>
+        public Transform MainMenuPanel => mainMenuPanel.transform;
+        /// <summary>
+        /// Panel for Pause-Menu
+        /// </summary>
+        public Transform PauseMenuPanel => pauseMenuPanel.transform;
         #endregion
 
         #region Editor

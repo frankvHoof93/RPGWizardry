@@ -126,7 +126,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellList]);
 
-            Transform spellUTF = MenuManager.Instance.SpellListCanvas; //Looking for the button Spell List in Main Menu
+            Transform spellUTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
             Button btn = spellUTF.GetComponent<Button>();
             btn.onClick.RemoveListener(EnteredSpellListDialogue);
             StartCoroutine(AttachToButtonUnlock());
@@ -138,7 +138,7 @@ namespace nl.SWEG.Willow.Tutorial
         private void EnteredNewSpellDialogue()
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredNewSpell]);
-            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the second spell in the spell list    
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page").GetChild(1);  // Spell Tab for new Spell
             Button btn = buttonunlock.GetComponent<Button>();
             btn.onClick.RemoveListener(EnteredNewSpellDialogue);
             StartCoroutine(AttachToSpellCrafting());
@@ -150,7 +150,7 @@ namespace nl.SWEG.Willow.Tutorial
         private void EntersPuzzleDialogue()
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EntersPuzzle]);
-            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Book/Page Right/Spell Unlock Button"); // Unlock Button for Spell
             Button btn = spellcrafting.GetComponent<Button>();
             btn.onClick.RemoveListener(EntersPuzzleDialogue);
         }
@@ -197,7 +197,7 @@ namespace nl.SWEG.Willow.Tutorial
             // Wait until there's a MenuManager (race condition)
             yield return new WaitUntil(() => MenuManager.Exists);
 
-            Transform spellTF = MenuManager.Instance.SpellListCanvas;
+            Transform spellTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
             Button btn = spellTF.GetComponent<Button>();
             btn.onClick.AddListener(EnteredSpellListDialogue);
         }
@@ -209,7 +209,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             // Wait until there's a MenuManager (race condition)
             yield return new WaitUntil(() => MenuManager.Exists);
-            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.transform.GetChild(1); //Looking for the button Spell List in Main Menu
+            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page").GetChild(1); // Spell Tab for new Spell
             Button btn = buttonunlock.GetComponent<Button>();
             btn.onClick.AddListener(EnteredNewSpellDialogue);
         }
@@ -221,7 +221,7 @@ namespace nl.SWEG.Willow.Tutorial
         {
             // Wait until there's a MenuManager (race condition)
             yield return new WaitUntil(() => MenuManager.Exists);
-            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Spell Unlock Button"); //Looking for the button Spell List in Main Menu
+            Transform spellcrafting = MenuManager.Instance.SpellCanvas.Find("Book/Page Right/Spell Unlock Button"); // Unlock Button for Spell
             Button btn = spellcrafting.GetComponent<Button>();
             btn.onClick.AddListener(EntersPuzzleDialogue);
         }
