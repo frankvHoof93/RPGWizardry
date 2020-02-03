@@ -68,8 +68,8 @@ namespace nl.SWEG.Willow.GameWorld
                     break;
                 case Collectables.Page:
                     throw new ArgumentException("Call SpawnPage instead");
-                case Collectables.Potion:
-                    // TODOCLEAN: Check this
+                case Collectables.Potion: 
+                    // No Implementation, as there is no setting of amount for Potions
                     break;
                 default:
                     break;
