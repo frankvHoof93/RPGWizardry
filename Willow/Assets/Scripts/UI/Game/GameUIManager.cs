@@ -58,6 +58,10 @@ namespace nl.SWEG.Willow.UI.Game
 
         #region Methods
         #region Public
+        /// <summary>
+        /// Sets which Cursor to Display
+        /// </summary>
+        /// <param name="cursor">CursorType for Cursor to Display</param>
         public void SetCursor(CursorType cursor)
         {
             switch (cursor)
