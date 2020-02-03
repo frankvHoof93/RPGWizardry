@@ -1,9 +1,7 @@
 ﻿using nl.SWEG.Willow.Utils.Behaviours;
-using System.Collections;
-using System.Collections.Generic;
+using nl.SWEG.Willow.Utils.Functions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace nl.SWEG.Willow.UI.Dialogue
 {
@@ -12,29 +10,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
     /// </summary>
     public class DialogueManager : SingletonBehaviour<DialogueManager>
     {
-        // TODOCLEAN: Move UI-objects to seperate class & object
-        // TODOCLEAN: Clean up ShowInstructionPrompt
-
         #region Variables
         #region Editor
-        /// <summary>
-        /// Text-Object for Character-Name
-        /// </summary>
         [SerializeField]
-        [Tooltip("Text-Object for Character-Name")]
-        private TextMeshProUGUI nameText;
-        /// <summary>
-        /// Text-Object for Dialogue-Strings
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Text-Object for Dialogue-Strings")]
-        private TextMeshProUGUI dialogueText;
-        /// <summary>
-        /// Image for Character
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Image for Character")]
-        private Image characterImage;
+        private DialogueBox dialogueUI;
         /// <summary>
         /// Animator for Dialogue-Box
         /// </summary>
@@ -57,14 +36,6 @@ namespace nl.SWEG.Willow.UI.Dialogue
 
         #region Private
         /// <summary>
-        /// Sentences in current Dialogue
-        /// </summary>
-        private readonly Queue<string> sentences = new Queue<string>();
-        /// <summary>
-        /// Coroutine for Sentence being typed
-        /// </summary>
-        private Coroutine currentCoroutine;
-        /// <summary>
         /// Text-Object in InstructionPrompt
         /// </summary>
         private TextMeshProUGUI promptText;
@@ -81,38 +52,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         {
             enabled = true;
             HideInstructionPrompt(); //Turn off the Textbox
-            nameText.text = dialogue.Name;
-            characterImage.sprite = dialogue.Sprite;
-            // Open the dialogue box and clear the previous sentences that could be in the sentences array
+            dialogueUI.StartDialogue(dialogue);
             animator.SetBool("IsOpen", true);
-            sentences.Clear();
-            // Queue dialogue to sentences array
-            for (int i = 0; i < dialogue.Sentences.Length; i++)
-                sentences.Enqueue(dialogue.Sentences[i]);
-            DisplayNextSentence();
         }
 
-        /// <summary>
-        /// Get the next sentence from the queue, end dialogue if none remain
-        /// </summary>
-        public void DisplayNextSentence()
-        {
-            // Checks if there are sentences left to display
-            if (sentences.Count == 0)
-            {
-                EndDialogue();
-                return;
-            }
-            // Get sentence from list
-            string sentence = sentences.Dequeue();
-            if (currentCoroutine != null)
-            {
-                // Prevents sentences from displaying correctly when spamming the DisplayNextSentence key
-                StopCoroutine(currentCoroutine);
-            }
-            // Type queued sentence
-            currentCoroutine = StartCoroutine(TypeSentence(sentence));
-        }
 
         /// <summary>
         /// Shows Instruction Prompt
@@ -150,26 +93,12 @@ namespace nl.SWEG.Willow.UI.Dialogue
         private void Update()
         {
             if (Input.GetMouseButtonDown(1))
-                DisplayNextSentence();
+                if (dialogueUI.DisplayNextSentence())
+                    EndDialogue();
         }
         #endregion
 
         #region Private
-        /// <summary>
-        /// Display string one character at a time
-        /// </summary>
-        /// <param name="sentence">String to display</param>
-        private IEnumerator TypeSentence(string sentence)
-        {
-            // Reset the dialogue box text to blank
-            dialogueText.text = string.Empty;
-            // Makes an array of each character in sentence and adds each letter to the text 
-            foreach (char letter in sentence)
-            {
-                yield return null;
-                dialogueText.text += letter;
-            }
-        }
 
         /// <summary>
         /// Ends dialogue and clears queue
@@ -178,7 +107,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         {
             // Closes dialogue box
             animator.SetBool("IsOpen", false);
-            sentences.Clear();
+            StartCoroutine(CoroutineMethods.RunDelayed(() => dialogueUI.ClearDialogue(), .25f));
             enabled = false;
         }
         #endregion
