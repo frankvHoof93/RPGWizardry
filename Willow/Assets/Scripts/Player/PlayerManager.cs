@@ -137,6 +137,8 @@ namespace nl.SWEG.Willow.Player
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
+            if (Health == 0)
+                return; // Already Dead
             if (!isInvincible)
             {
                 isInvincible = true;

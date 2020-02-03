@@ -92,6 +92,8 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <param name="amount">Amount of Damage to inflict</param>
         public void Damage(ushort amount)
         {
+            if (Health == 0)
+                return; // Already Dead. Hit while animating death
             if (amount >= Health)
             {
                 Health = 0;
