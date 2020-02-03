@@ -1,7 +1,9 @@
 ﻿using nl.SWEG.Willow.GameWorld;
 using nl.SWEG.Willow.Loading;
+using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace nl.SWEG.Willow.UI.Game
 {
@@ -99,16 +101,19 @@ namespace nl.SWEG.Willow.UI.Game
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GameManager.Instance.TogglePause(); // TODOCLEAN: Unhook Menu-Open from Game-Pause
-                if (GameManager.Instance.Paused) // Game was running, open Menu // TODOCLEAN: Check active scene instead
+                if (SceneManager.GetActiveScene().name == Constants.GameSceneName) // Game was running, open Menu
                 {
                     SceneLoader.Instance.LoadMenuScene();
                     SetCursor(CursorType.Cursor);
+                    if (!GameManager.Instance.Paused)
+                        GameManager.Instance.TogglePause(); // Pause Game
                 }
-                else // Game was Paused. Close Menu
+                else if (SceneManager.GetActiveScene().name == Constants.MainMenuSceneName) // Game was Paused. Close Menu
                 {
                     SceneLoader.Instance.LoadGameScene();
                     SetCursor(CursorType.Crosshair);
+                    if (GameManager.Instance.Paused)
+                        GameManager.Instance.TogglePause(); // Unpause Game
                 }
             }
         }

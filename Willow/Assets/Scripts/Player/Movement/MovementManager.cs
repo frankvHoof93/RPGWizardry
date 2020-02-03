@@ -46,17 +46,6 @@ namespace nl.SWEG.Willow.Player.Movement
         {
             StartCoroutine(StunLoop(duration));
         }
-
-        /// <summary>
-        /// Sets Stunned-Value for Player
-        /// </summary>
-        /// <param name="stunned">True to stun Player</param>
-        public void SetStunned(bool stunned)
-        {
-            this.stunned = stunned;            
-            if(stunned)
-                animator.SetFloat("Speed", 0);
-        }
         #endregion
 
         #region Unity

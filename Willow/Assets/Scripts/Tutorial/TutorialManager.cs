@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
+﻿using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.Sorcery;
 using nl.SWEG.Willow.UI.Dialogue;
@@ -100,7 +101,8 @@ namespace nl.SWEG.Willow.Tutorial
         private void PickedUpPageDialogue(SpellPage page)
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.PickedUpPage]);
-            PlayerManager.Instance.MovementManager.SetStunned(true);
+            if (!GameManager.Instance.Paused)
+                GameManager.Instance.TogglePause();
             PlayerManager.Instance.Inventory.RemovePageListener(PickedUpPageDialogue);
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
@@ -161,7 +163,6 @@ namespace nl.SWEG.Willow.Tutorial
         private void FinishPuzzleDialogue(SpellPage spellPage)
         {
             DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishPuzzle]);
-            PlayerManager.Instance.MovementManager.SetStunned(false);
             PlayerManager.Instance.Inventory.RemoveUnlockListener(FinishPuzzleDialogue);
             //enable GameUIManager to allow pausing
             GameUIManager.Instance.enabled = true;
