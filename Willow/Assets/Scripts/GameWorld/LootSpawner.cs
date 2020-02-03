@@ -13,12 +13,14 @@ namespace nl.SWEG.Willow.GameWorld
     public class LootSpawner : SingletonBehaviour<LootSpawner>
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Prefabs in order of Collectables-Enum
         /// </summary>
         [SerializeField]
         [Tooltip("Prefabs in order of Collectables-Enum")]
         private GameObject[] lootPrefabs = new GameObject[4];
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         /// <summary>
         /// Holds Loot, so it can be destroyed when a new Room is loaded
         /// </summary>

@@ -40,12 +40,14 @@ namespace nl.SWEG.Willow.Tutorial
         #endregion
 
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Data for Dialogues attached to Tutorial-Steps
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Dialogues attached to Tutorial-Steps")]
         private DialogueData[] dialogues;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods
@@ -75,7 +77,7 @@ namespace nl.SWEG.Willow.Tutorial
             PlayerManager.Instance.CastingManager.RemoveCastListener(CastedBookerangDialogue); //Removes the listener so this function isn't called again
         }
 
-        /// <summary>
+        /// <summary> 
         /// Runs the sentences queue for when the slimes are cleared (Room clear)
         /// </summary>
         private void RoomClearedSlimes()

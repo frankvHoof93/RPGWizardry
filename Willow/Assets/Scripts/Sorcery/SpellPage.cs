@@ -38,12 +38,14 @@ namespace nl.SWEG.Willow.Sorcery
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Data for Spell
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
         private SpellData spell;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

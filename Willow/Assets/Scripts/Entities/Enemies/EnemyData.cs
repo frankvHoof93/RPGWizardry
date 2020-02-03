@@ -104,6 +104,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         [Header("Stats")]
         #region Stats
         /// <summary>
@@ -180,6 +181,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
     }
 }

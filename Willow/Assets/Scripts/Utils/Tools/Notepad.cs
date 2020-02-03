@@ -14,6 +14,7 @@ namespace nl.SWEG.Willow.Utils.Tools
     public class Notepad : MonoBehaviour
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// <b>Editor</b>: The Author of the note(s)
         /// </summary>
@@ -31,6 +32,7 @@ namespace nl.SWEG.Willow.Utils.Tools
         [SerializeField]
         [Tooltip("The notes in this Notepad")]
         private string notes;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

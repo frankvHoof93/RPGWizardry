@@ -30,8 +30,8 @@ namespace nl.SWEG.Willow.UI.CameraEffects
         public void Shake(float intensity, float duration)
         {
             if (currentShake != null)
-                StopCoroutine(ShakeLoop(intensity, duration));
-            StartCoroutine(ShakeLoop(intensity, duration));
+                StopCoroutine(currentShake);
+            currentShake = StartCoroutine(ShakeLoop(intensity, duration));
         }
 
         /// <summary>

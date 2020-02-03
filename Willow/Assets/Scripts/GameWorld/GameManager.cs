@@ -37,12 +37,14 @@ namespace nl.SWEG.Willow.GameWorld
         public bool Paused { get; private set; } = false;
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Prefab for Player
         /// </summary>
         [SerializeField]
         [Tooltip("Prefab for Player")]
         private GameObject playerPrefab;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

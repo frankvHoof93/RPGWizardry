@@ -37,6 +37,7 @@ namespace nl.SWEG.Willow.UI.Menu
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Background for Menu. Only shown if Game is not running
         /// </summary>
@@ -90,6 +91,7 @@ namespace nl.SWEG.Willow.UI.Menu
         [Tooltip("Transform for Canvas for Research-MiniGame")]
         private Transform researchCanvas;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

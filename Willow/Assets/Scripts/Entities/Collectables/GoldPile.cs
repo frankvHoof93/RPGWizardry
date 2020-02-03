@@ -9,12 +9,14 @@ namespace nl.SWEG.Willow.Entities.Collectables
     public class GoldPile : ACollectable
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Amount of Gold in Pile
         /// </summary>
         [SerializeField]
         [Tooltip("Amount of Gold in Pile")]
         private uint Amount = 0;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

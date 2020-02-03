@@ -14,6 +14,7 @@ namespace nl.SWEG.Willow.UI.Popups
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// TextField to Display Text
         /// </summary>
@@ -32,6 +33,7 @@ namespace nl.SWEG.Willow.UI.Popups
         [SerializeField]
         [Tooltip("TweenType for Alpha-FadeOut")]
         private LeanTweenType fadeOutType = LeanTweenType.easeInBack;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

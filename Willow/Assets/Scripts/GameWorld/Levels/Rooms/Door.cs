@@ -30,6 +30,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Tag for Player
         /// </summary>
@@ -62,6 +63,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         [SerializeField]
         [Tooltip("Sprite displayed when Door is Closed")]
         private GameObject closedSprite;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

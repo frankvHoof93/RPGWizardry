@@ -28,12 +28,14 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         #endregion
 
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Renderers to apply Opacity to
         /// </summary>
         [SerializeField]
         [Tooltip("Renderers to apply Opacity to")]
         protected Renderer[] renderers;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         /// <summary>
         /// (Current) Objects to get Opacity from
         /// </summary>

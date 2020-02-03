@@ -19,12 +19,14 @@ namespace nl.SWEG.Willow.Entities.Collectables
             set { page = value; }
         }
 
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// SpellPage in Object
         /// </summary>
         [SerializeField]
         [Tooltip("SpellPage in Object")]
         private SpellPage page;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

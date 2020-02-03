@@ -30,6 +30,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Mask of layer containing walls and other obstructions
         /// </summary>
@@ -56,6 +57,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Protected

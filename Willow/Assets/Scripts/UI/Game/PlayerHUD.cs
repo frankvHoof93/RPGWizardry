@@ -12,6 +12,7 @@ namespace nl.SWEG.Willow.UI.Game
     public class PlayerHUD : MonoBehaviour
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         #region Health
         [Header("Health")]
         /// <summary>
@@ -47,6 +48,7 @@ namespace nl.SWEG.Willow.UI.Game
         [Tooltip("HUD-Objects for Selected Spells")]
         private SpellHUD[] spellHuds;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

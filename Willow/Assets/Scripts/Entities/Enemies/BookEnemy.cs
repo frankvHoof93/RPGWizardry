@@ -27,6 +27,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Spell to use when Attacking
         /// <para>
@@ -51,6 +52,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [SerializeField]
         [Tooltip("Modifies the turning speed of the book (Angle (in degrees per second) added to base speed)")]
         private float turnSpeedModifier = 0;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

@@ -46,6 +46,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// Renderer for this Enemy
         /// </summary>
         protected Renderer enemyRenderer;
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Default values for this Enemy
         /// </summary>
@@ -58,6 +59,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [SerializeField]
         [Tooltip("LayerMask for Attacks performed by this Enemy")]
         protected LayerMask attackCollisionMask;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

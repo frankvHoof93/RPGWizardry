@@ -13,6 +13,7 @@ namespace nl.SWEG.Willow.UI.Spells
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Spell Title Text
         /// </summary>
@@ -43,6 +44,7 @@ namespace nl.SWEG.Willow.UI.Spells
         [Tooltip("List of Sprites for Unlock-Status")]
         [SerializeField]
         private List<Sprite> checkSprites;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

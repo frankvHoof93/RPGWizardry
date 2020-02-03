@@ -45,12 +45,14 @@ namespace nl.SWEG.Willow.Player.Inventory
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Base spell the player has access too
         /// </summary>
         [SerializeField]
         [Tooltip("Base spell the player has access too")]
         private SpellData baseSpell;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

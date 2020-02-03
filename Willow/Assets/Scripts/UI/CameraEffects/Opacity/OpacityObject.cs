@@ -23,6 +23,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Radius for Opacity-Circle
         /// </summary>
@@ -41,6 +42,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         [SerializeField]
         [Tooltip("Offset for Opacity-Circle (from Transform, in WorldSpace)")]
         private Vector2 opacityOffset;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
     }
 }

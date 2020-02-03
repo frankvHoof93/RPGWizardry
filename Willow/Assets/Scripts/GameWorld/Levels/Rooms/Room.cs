@@ -52,6 +52,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// All doors in the room.
         /// </summary>
@@ -71,6 +72,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         [SerializeField]
         [Tooltip("Enemies to Spawn in Room")]
         private SpawnTemplate[] enemiesInRoom;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

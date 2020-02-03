@@ -34,6 +34,7 @@ namespace nl.SWEG.Willow.UI.Game
         /// Heads-Up Display for Player
         /// </summary>
         public PlayerHUD HUD => hud;
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Heads-Up Display for Player
         /// </summary>
@@ -44,12 +45,15 @@ namespace nl.SWEG.Willow.UI.Game
         /// Cursor during Gameplay
         /// </summary>
         [SerializeField]
+        [Tooltip("Cursor during Gameplay")]
         private Texture2D crosshair;
         /// <summary>
         /// Cursor for Menus
         /// </summary>
         [SerializeField]
+        [Tooltip("Cursor for Menus")]
         private Texture2D cursor;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         /// <summary>
         /// Hotspot for Crosshair-Cursor
         /// </summary>

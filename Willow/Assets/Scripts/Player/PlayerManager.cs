@@ -67,6 +67,7 @@ namespace nl.SWEG.Willow.Player
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Max Health for Player
         /// </summary>
@@ -106,6 +107,7 @@ namespace nl.SWEG.Willow.Player
         /// </summary>
         [SerializeField]
         private LayerMask healthPotionLayer;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

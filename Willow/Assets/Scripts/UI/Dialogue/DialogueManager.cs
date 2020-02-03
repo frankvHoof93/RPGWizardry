@@ -12,7 +12,12 @@ namespace nl.SWEG.Willow.UI.Dialogue
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
+        /// <summary>
+        /// UI-Object for Dialogue
+        /// </summary>
         [SerializeField]
+        [Tooltip("UI-Object for Dialogue")]
         private DialogueBox dialogueUI;
         /// <summary>
         /// Animator for Dialogue-Box
@@ -32,6 +37,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         [SerializeField]
         [Tooltip("Instruction-Prompt")]
         private GameObject textBox;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

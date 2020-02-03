@@ -17,6 +17,7 @@ namespace nl.SWEG.Willow.UI.Spells
         /// </summary>
         private const int SymbolCount = 8;
 
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Spell targeted for unlocking
         /// </summary>
@@ -77,6 +78,7 @@ namespace nl.SWEG.Willow.UI.Spells
         [SerializeField]
         [Tooltip("Parent for TextBox displaying a Symbol inside the Graphic")]
         private Transform symbolParent;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

@@ -15,6 +15,7 @@ namespace nl.SWEG.Willow.UI.Spells
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         [Header("Spell-Details")]
         #region SpellDetails
         /// <summary>
@@ -68,6 +69,7 @@ namespace nl.SWEG.Willow.UI.Spells
         [Tooltip("UI for currently selected Spells")]
         private SpellHUD[] currSpells;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

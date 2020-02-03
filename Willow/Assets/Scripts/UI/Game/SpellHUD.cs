@@ -13,6 +13,7 @@ namespace nl.SWEG.Willow.UI.Game
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         [Header("UI")]
         /// <summary>
         /// Image-Object for Spell
@@ -39,6 +40,7 @@ namespace nl.SWEG.Willow.UI.Game
         [SerializeField]
         [Tooltip("Panel which shows Button (Controller)")]
         private GameObject buttonPanelController;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

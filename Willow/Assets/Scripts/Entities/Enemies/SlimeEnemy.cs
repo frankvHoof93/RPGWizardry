@@ -32,12 +32,14 @@ namespace nl.SWEG.Willow.Entities.Enemies
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Whether this is a big slime (Big slimes spawn smaller slimes upon death)
         /// </summary>
         [SerializeField]
         [Tooltip("Whether this is a big slime (Big slimes spawn smaller slimes upon death)")]
         private bool big;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

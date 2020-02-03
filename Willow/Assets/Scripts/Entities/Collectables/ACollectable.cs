@@ -26,6 +26,7 @@ namespace nl.SWEG.Willow.Entities.Collectables
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
@@ -39,6 +40,7 @@ namespace nl.SWEG.Willow.Entities.Collectables
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset = Vector2.zero;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

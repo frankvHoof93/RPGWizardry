@@ -42,6 +42,7 @@ namespace nl.SWEG.Willow.Player.Combat
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Transform for position the projectiles need to spawn from
         /// </summary>
@@ -66,6 +67,7 @@ namespace nl.SWEG.Willow.Player.Combat
         [SerializeField]
         [Tooltip("Timeout for Scrolling (timeout between Selections)")]
         private float scrollTimeOut;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

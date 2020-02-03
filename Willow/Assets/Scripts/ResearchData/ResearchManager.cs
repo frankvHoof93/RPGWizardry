@@ -18,6 +18,7 @@ namespace nl.SWEG.Willow.Research
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Manager for SpellPage-UI
         /// </summary>
@@ -49,6 +50,7 @@ namespace nl.SWEG.Willow.Research
         [SerializeField]
         [Tooltip("Button to check Research for completion")]
         private Button checkButton;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

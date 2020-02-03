@@ -13,6 +13,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Text-Object for Character-Name
         /// </summary>
@@ -31,6 +32,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         [SerializeField]
         [Tooltip("Image for Character")]
         private Image characterImage;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

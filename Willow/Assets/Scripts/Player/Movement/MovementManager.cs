@@ -12,12 +12,14 @@ namespace nl.SWEG.Willow.Player.Movement
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// MovementSpeed for Player
         /// </summary>
         [SerializeField]
         [Tooltip("MovementSpeed for Player")]
         private float speed = 1f;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

@@ -17,12 +17,14 @@ namespace nl.SWEG.Willow.GameWorld.Levels
     public class FloorManager : SingletonBehaviour<FloorManager>
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// All Rooms on the Floor
         /// </summary>
         [SerializeField]
         [Tooltip("All Rooms on the Floor")]
         private Room[] rooms;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
 
         /// <summary>
         /// Currently Loaded Room

@@ -18,21 +18,21 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// ControlScheme for Input-Reading
         /// </summary>
         [SerializeField]
         [Tooltip("ControlScheme for Input-Reading")]
         private ControlScheme controlScheme = ControlScheme.Keyboard;
-        #endregion
-
-        #region Private
+        
         /// <summary>
         /// Pivot on which the book rotates; Necessary to aim at the mouse properly
         /// </summary>
         [SerializeField]
         [Tooltip("Pivot on which the book rotates")]
         private Transform bookPivot;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

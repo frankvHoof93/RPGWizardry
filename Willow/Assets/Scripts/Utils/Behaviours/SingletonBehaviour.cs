@@ -52,12 +52,14 @@ namespace nl.SWEG.Willow.Utils.Behaviours
         #endregion
 
         #region Instance
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Whether this Singleton has a Root-Object. If true, root-Object will be added to DontDestroyOnLoad instead
         /// </summary>
         [SerializeField]
         [Tooltip("Whether this Singleton has a Root-Object. If true, root-Object will be added to DontDestroyOnLoad instead")]
         protected bool hasRootObject;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

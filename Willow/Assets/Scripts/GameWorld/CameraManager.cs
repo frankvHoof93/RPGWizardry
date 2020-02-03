@@ -28,6 +28,7 @@ namespace nl.SWEG.Willow.GameWorld
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Duration for Fading In or Out
         /// </summary>
@@ -41,6 +42,7 @@ namespace nl.SWEG.Willow.GameWorld
         [SerializeField]
         [Range(0f, 1f)]
         private float smoothTime = .3f;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private

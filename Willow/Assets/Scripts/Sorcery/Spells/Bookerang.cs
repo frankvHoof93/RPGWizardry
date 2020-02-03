@@ -13,6 +13,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Speed at which the book rotates in flight
         /// </summary>
@@ -38,6 +39,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         [SerializeField]
         [Tooltip("Sound played when the book returns without hitting anything")]
         private AudioClip returnSound;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
