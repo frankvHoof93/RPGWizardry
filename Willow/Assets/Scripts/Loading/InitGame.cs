@@ -1,5 +1,4 @@
-﻿using nl.SWEG.Willow.Loading;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace nl.SWEG.Willow.Loading
 {

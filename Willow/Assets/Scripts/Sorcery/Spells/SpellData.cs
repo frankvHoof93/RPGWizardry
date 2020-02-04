@@ -10,6 +10,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
     public class SpellData : ScriptableObject
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Name for Spell
         /// </summary>
@@ -114,6 +115,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         [SerializeField]
         [Tooltip("Prefab for Projectile")]
         private GameObject projectilePrefab;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods
@@ -142,8 +144,6 @@ namespace nl.SWEG.Willow.Sorcery.Spells
                 case SpellPattern.Cone:
                     break;
                 case SpellPattern.Circle:
-                    break;
-                default:
                     break;
             }
             return returnVal;

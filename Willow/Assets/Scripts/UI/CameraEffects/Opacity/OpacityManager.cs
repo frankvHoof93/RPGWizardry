@@ -19,21 +19,23 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
             /// <summary>
             /// Transform to Position Opacity around
             /// </summary>
-            public Transform transform;
+            public Transform Transform;
             /// <summary>
             /// Settings for Opacity
             /// </summary>
-            public IOpacity opacity;
+            public IOpacity Opacity;
         }
         #endregion
 
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Renderers to apply Opacity to
         /// </summary>
         [SerializeField]
         [Tooltip("Renderers to apply Opacity to")]
         protected Renderer[] renderers;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         /// <summary>
         /// (Current) Objects to get Opacity from
         /// </summary>
@@ -49,7 +51,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         {
             IOpacity opacity = collision.gameObject.GetComponent<IOpacity>();
             if (opacity != null)
-                objects.Add(new OpacityObject { transform = collision.transform, opacity = opacity });
+                objects.Add(new OpacityObject { Transform = collision.transform, Opacity = opacity });
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         /// <param name="collision">Collider for Object leaving trigger</param>
         private void OnTriggerExit2D(Collider2D collision)
         {
-            objects.RemoveWhere(n => ReferenceEquals(n.transform, collision.transform));
+            objects.RemoveWhere(n => ReferenceEquals(n.Transform, collision.transform));
         }
 
         /// <summary>
@@ -66,8 +68,8 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         /// </summary>
         private void LateUpdate()
         {
-            objects.RemoveWhere(o => o == null || o.transform == null);
-            SetToShader(objects.OrderBy(n => n.opacity.OpacityPriority).ToList());
+            objects.RemoveWhere(o => o == null || o.Transform == null);
+            SetToShader(objects.OrderBy(n => n.Opacity.OpacityPriority).ToList());
         }
 
         /// <summary>

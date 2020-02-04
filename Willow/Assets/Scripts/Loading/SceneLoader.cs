@@ -72,7 +72,8 @@ namespace nl.SWEG.Willow.Loading
         /// </summary>
         public void LoadGameOverScene()
         {
-            UnloadGameSceneSingletons();
+            GameUIManager.Instance.SetCursor(GameUIManager.CursorType.Cursor);
+            UnloadGameSceneSingletons();            
             SceneManager.LoadScene(Constants.GameOverSceneName, LoadSceneMode.Additive);
         }
 
@@ -81,7 +82,10 @@ namespace nl.SWEG.Willow.Loading
         /// </summary>
         public void LoadBossScene()
         {
-            UnloadGameSceneSingletons(); // TODO: Remove this if actually spawning a Boss
+            // TODO: Remove this if actually spawning a Boss
+            GameUIManager.Instance.SetCursor(GameUIManager.CursorType.Cursor);
+            UnloadGameSceneSingletons();
+            // TODOEND
             SceneManager.LoadScene(Constants.VictorySceneName, LoadSceneMode.Single);
         }
         #endregion

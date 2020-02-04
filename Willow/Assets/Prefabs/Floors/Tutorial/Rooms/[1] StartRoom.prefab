@@ -5133,7 +5133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doors:
   - {fileID: 780901586410022549}
-  EnemyHolder: {fileID: 8907047729703470694}
+  enemyHolder: {fileID: 8907047729703470694}
+  enemiesInRoom: []
   spawnPoint: {fileID: 6720882897092339722}
 --- !u!1 &8594446162763593156
 GameObject:

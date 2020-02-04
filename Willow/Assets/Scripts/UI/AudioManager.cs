@@ -9,15 +9,17 @@ namespace nl.SWEG.Willow.UI
     [RequireComponent(typeof(AudioSource))]
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
-        /// Audiosource that plays background music
+        /// Audio-Source that plays background music
         /// </summary>
         [SerializeField]
         private AudioSource musicSource;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
 
         /// <summary>
         /// Creates an audio source, plays a clip at a slightly randomized pitch,
-        /// Then starts a coroutine which deletes the audiosource after the clip
+        /// Then starts a coroutine which deletes the audio-source after the clip
         /// </summary>
         public void PlaySound(AudioClip clip)
         {

@@ -32,12 +32,14 @@ namespace nl.SWEG.Willow.Entities.Enemies
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Whether this is a big slime (Big slimes spawn smaller slimes upon death)
         /// </summary>
         [SerializeField]
         [Tooltip("Whether this is a big slime (Big slimes spawn smaller slimes upon death)")]
         private bool big;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -45,11 +47,6 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// Movement during current frame (sent to animator)
         /// </summary>
         private Vector2 movement = Vector2.zero;
-        /// <summary>
-        /// Amount opponent flies back on hit
-        /// </summary>
-        [SerializeField]
-        private int knockback; // TODOCLEAN: move to ScriptableObject
         #endregion
         #endregion
 
@@ -90,19 +87,20 @@ namespace nl.SWEG.Willow.Entities.Enemies
             StartCoroutine(DieAnimation());
         }
         #endregion
-
         #region Unity
         /// <summary>
         /// If it touches an object in the target layer, it damages it
         /// </summary>
         /// <param name="collision">Collision that occurred</param>
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
             {
-                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
-                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
-                body?.AddForce(movement * knockback);
+                if (collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f)) ?? false)
+                {
+                    Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                    body?.AddForce(movement * (big ? data.Knockback : (data.Knockback * 0.75f)));
+                }
             }
         }
         #endregion
@@ -128,17 +126,17 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Spawns two baby slimes at current position
         /// </summary>
-        private void SpawnBabies() // TODOCLEAN: Instantiate copy of self
+        private void SpawnBabies()
         {
-            AEnemy[] enemies = transform.GetComponentsInChildren<AEnemy>(true);
             Transform enemyParent = transform.parent;
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < 2; i++)
             {
-                if (enemies[i] != this)
-                {
-                    enemies[i].transform.SetParent(enemyParent, true);
-                    enemies[i].gameObject.SetActive(true);
-                }
+                SlimeEnemy baby = Instantiate(gameObject).GetComponent<SlimeEnemy>();
+                baby.big = false;
+                baby.transform.SetParent(enemyParent);
+                baby.transform.position = transform.position + (Vector3)(Random.insideUnitCircle * .2f);
+                baby.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+                baby.GetComponent<Collider2D>().enabled = true;
             }
             transform.SetParent(null);
         }

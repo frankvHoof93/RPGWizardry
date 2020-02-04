@@ -7,12 +7,14 @@ namespace nl.SWEG.Willow.Sorcery.Spells
     /// </summary>
     public class FireBall : Projectile
     {
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Explosion-Object
         /// </summary>
         [SerializeField]
         [Tooltip("Explosion-Object")]
         private GameObject splashObject;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
 
         /// <summary>
         /// Spawns an explosion

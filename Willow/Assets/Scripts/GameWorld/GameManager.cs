@@ -34,15 +34,17 @@ namespace nl.SWEG.Willow.GameWorld
         /// <summary>
         /// Whether the Game is currently Paused
         /// </summary>
-        public bool Paused { get; private set; } = false;
+        public bool Paused { get; private set; }
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Prefab for Player
         /// </summary>
         [SerializeField]
         [Tooltip("Prefab for Player")]
         private GameObject playerPrefab;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 
@@ -70,6 +72,24 @@ namespace nl.SWEG.Willow.GameWorld
             else
                 LeanTween.resumeAll(); // Resumes ALL tweens (including the ones that are NOT in GameState.Playing
         }
+
+        /// <summary>
+        /// Pauses Game (If not yet Paused)
+        /// </summary>
+        public void PauseGame()
+        {
+            if (!Paused)
+                TogglePause();
+        }
+
+        /// <summary>
+        /// Resumes Game (if Paused)
+        /// </summary>
+        public void ResumeGame()
+        {
+            if (Paused)
+                TogglePause();
+        }
         
         /// <summary>
         /// Ends current Run
@@ -93,17 +113,17 @@ namespace nl.SWEG.Willow.GameWorld
 
         #region SceneLoad
         /// <summary>
-        /// Initiazes Game after GameScene has finished Loading
+        /// Initializes Game after GameScene has finished Loading
         /// </summary>
         /// <param name="loadedScene">Scene that was Loaded</param>
         /// <param name="loadMode">Way in which Scene was loaded</param>
         internal void InitGame(Scene loadedScene, LoadSceneMode loadMode)
         {
-            SceneManager.sceneLoaded -= InitGame;
             if (loadedScene.name != Constants.GameSceneName)
                 return; // GameScene was not loaded Scene
             if (loadMode != LoadSceneMode.Single)
                 return; // GameScene was not loaded Single (Menu-Exit)
+            SceneManager.sceneLoaded -= InitGame;
             CameraManager.instance.Fade(0, 1);
             SpawnPlayer(FloorManager.Instance.GetSpawnPoint());
             State = GameState.GamePlay;
@@ -115,14 +135,26 @@ namespace nl.SWEG.Willow.GameWorld
         /// </summary>
         /// <param name="unloadedScene">Scene that was unloaded (Menu-Scene)</param>
         internal void OnExitMenu(Scene unloadedScene)
-        { // TODOCLEAN: Check this
+        {
+            if (unloadedScene.name != Constants.MainMenuSceneName)
+                return;
             SceneManager.sceneUnloaded -= OnExitMenu;
             Paused = false;
             if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
         }
         #endregion
-        
+
+        #region Unity
+        /// <summary>
+        /// Sets GameState to GameOver when Application Quits
+        /// </summary>
+        private void OnApplicationQuit()
+        {
+            State = GameState.GameOver;
+        }
+        #endregion
+
         #region Private
         /// <summary>
         /// Handles End of Game at Player Death
@@ -132,7 +164,8 @@ namespace nl.SWEG.Willow.GameWorld
             // TODO: Animation
             // TODO: Delete save game
             yield return new WaitForSeconds(2f);
-            CameraManager.Instance.ToggleAudio();
+            if (CameraManager.Exists && CameraManager.Instance.AudioListener.enabled)
+                CameraManager.Instance.ToggleAudio();
             SceneLoader.Instance.LoadGameOverScene();
         }
         #endregion

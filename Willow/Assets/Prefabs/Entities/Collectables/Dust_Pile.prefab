@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5175693010138246313}
   - component: {fileID: -9150435255485176122}
   m_Layer: 16
-  m_Name: DustPile
+  m_Name: Dust_Pile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opacityRadius: 40
   opacityOffset: {x: 0, y: 0}
-  Amount: 5
+  amount: 5
 --- !u!50 &-9150435255485176122
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +127,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.25
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

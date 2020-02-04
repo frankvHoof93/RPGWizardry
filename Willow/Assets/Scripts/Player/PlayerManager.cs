@@ -67,6 +67,7 @@ namespace nl.SWEG.Willow.Player
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Max Health for Player
         /// </summary>
@@ -79,11 +80,10 @@ namespace nl.SWEG.Willow.Player
         [SerializeField]
         [Tooltip("Renderer for Greg")]
         private SpriteRenderer bookRenderer;
-
-        [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p)
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Tooltip("Opacity-Radius in Pixels (for 720p)")]
         private float opacityRadius = 30f;
@@ -99,13 +99,13 @@ namespace nl.SWEG.Willow.Player
         [SerializeField]
         [Tooltip("Amount of FRAMES Player is invincible for after being damaged")]
         private uint invincibilityFrames = 60;
-
-        [Header("Layers")]
         /// <summary>
         /// Layer that contains health potions
         /// </summary>
+        [Header("Layers")]
         [SerializeField]
         private LayerMask healthPotionLayer;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -135,8 +135,10 @@ namespace nl.SWEG.Willow.Player
         /// Damages Player
         /// </summary>
         /// <param name="amount">Amount of Damage to inflict</param>
-        public void Damage(ushort amount)
+        public bool Damage(ushort amount)
         {
+            if (Health == 0)
+                return false; // Already Dead
             if (!isInvincible)
             {
                 isInvincible = true;
@@ -154,7 +156,9 @@ namespace nl.SWEG.Willow.Player
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
                 // Stun Player
                 MovementManager.Stun(0.2f);
+                return true;
             }
+            return false;
         }
 
         /// <summary>

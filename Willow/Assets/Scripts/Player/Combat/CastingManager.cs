@@ -42,6 +42,7 @@ namespace nl.SWEG.Willow.Player.Combat
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Transform for position the projectiles need to spawn from
         /// </summary>
@@ -66,6 +67,7 @@ namespace nl.SWEG.Willow.Player.Combat
         [SerializeField]
         [Tooltip("Timeout for Scrolling (timeout between Selections)")]
         private float scrollTimeOut;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -84,7 +86,7 @@ namespace nl.SWEG.Willow.Player.Combat
         /// <summary>
         /// Index for currently selected Spell (in selectedSpells)
         /// </summary>
-        private ushort selectedSpellIndex = 0;
+        private ushort selectedSpellIndex;
         /// <summary>
         /// Currently running Coroutine for Casting-Animation
         /// </summary>
@@ -104,7 +106,7 @@ namespace nl.SWEG.Willow.Player.Combat
         /// <summary>
         /// Current Timeout for Scrolling (Spell-Selection)
         /// </summary>
-        private float currScrollTimeout = 0f;
+        private float currScrollTimeout;
         #endregion
         #endregion
 
@@ -176,7 +178,7 @@ namespace nl.SWEG.Willow.Player.Combat
         public SpellData GetSpell(ushort index)
         {
             if (index > selectedSpells.Length)
-                throw new ArgumentOutOfRangeException("index", "Value larger than total amount of possible Spells");
+                throw new ArgumentOutOfRangeException(nameof(index), "Value larger than total amount of possible Spells");
             return selectedSpells[index];
         }
 
@@ -219,7 +221,7 @@ namespace nl.SWEG.Willow.Player.Combat
             if (selectedSpells[index] == null)
                 return; // No Spell in slot
             selectedSpellIndex = index;
-            selectionEvent.Invoke(selectedSpellIndex);
+            selectionEvent?.Invoke(selectedSpellIndex);
         }
         #endregion
 
@@ -246,10 +248,10 @@ namespace nl.SWEG.Willow.Player.Combat
         }
 
         /// <summary>
-        /// Attemps to Equip Spell in first available (Empty) slot
+        /// Attempts to Equip Spell in first available (Empty) slot
         /// </summary>
         /// <param name="spell">Spell to Equip</param>
-        /// <returns>True if successful (Empty slot was avilable)</returns>
+        /// <returns>True if successful (Empty slot was available)</returns>
         internal bool TryEquipSpell(SpellData spell)
         {
             for (int i = 0; i < selectedSpells.Length; i++)
@@ -266,7 +268,7 @@ namespace nl.SWEG.Willow.Player.Combat
 
         #region Unity
         /// <summary>
-        /// Grabs inputstate reference for button presses
+        /// Grabs InputState-reference for button presses
         /// </summary>
         private void Start()
         {
@@ -316,7 +318,7 @@ namespace nl.SWEG.Willow.Player.Combat
                 if (runningRoutine != null)
                     StopCoroutine(runningRoutine);
                 SpellData spell = selectedSpells[selectedSpellIndex];
-                if (spell == null) // Current spell is invalid (e.g. after changing spells, but not changing the selectedindex)
+                if (spell == null) // Current spell is invalid (e.g. after changing spells, but not changing the selected index)
                 {
                     SelectNextSpell();
                     spell = selectedSpells[selectedSpellIndex];

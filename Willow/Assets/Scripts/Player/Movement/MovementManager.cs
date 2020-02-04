@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.GameWorld;
+﻿using System;
+using nl.SWEG.Willow.GameWorld;
 using System.Collections;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ namespace nl.SWEG.Willow.Player.Movement
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// MovementSpeed for Player
         /// </summary>
         [SerializeField]
         [Tooltip("MovementSpeed for Player")]
         private float speed = 1f;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -45,17 +48,6 @@ namespace nl.SWEG.Willow.Player.Movement
         public void Stun(float duration)
         {
             StartCoroutine(StunLoop(duration));
-        }
-
-        /// <summary>
-        /// Sets Stunned-Value for Player
-        /// </summary>
-        /// <param name="stunned">True to stun Player</param>
-        public void SetStunned(bool stunned)
-        {
-            this.stunned = stunned;            
-            if(stunned)
-                animator.SetFloat("Speed", 0);
         }
         #endregion
 
@@ -92,7 +84,7 @@ namespace nl.SWEG.Willow.Player.Movement
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Speed", movement.magnitude);
-            if (!(movement.x == 0 && movement.y == 0))
+            if (!(Math.Abs(movement.x) < float.Epsilon && Math.Abs(movement.y) < float.Epsilon))
             {
                 if (movement.x > 0 && movement.x > movement.y) // East
                     animator.SetInteger("LastDirection", 0);

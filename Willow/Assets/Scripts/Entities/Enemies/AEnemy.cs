@@ -3,7 +3,6 @@ using nl.SWEG.Willow.GameWorld;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.UI.CameraEffects.Opacity;
 using nl.SWEG.Willow.UI.Popups;
-using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Functions;
 using UnityEngine;
 using static nl.SWEG.Willow.Entities.Enemies.EnemyData;
@@ -46,6 +45,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// Renderer for this Enemy
         /// </summary>
         protected Renderer enemyRenderer;
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Default values for this Enemy
         /// </summary>
@@ -58,6 +58,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [SerializeField]
         [Tooltip("LayerMask for Attacks performed by this Enemy")]
         protected LayerMask attackCollisionMask;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -71,7 +72,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// <summary>
         /// Event fired when Enemy Dies
         /// </summary>
-        public event Die Death; // TODOCLEAN: make private
+        private event Die death;
         #endregion
         #endregion
 
@@ -86,12 +87,16 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             return false; // Enemies cannot heal
         }
+
         /// <summary>
         /// Damages this Enemy
         /// </summary>
         /// <param name="amount">Amount of Damage to inflict</param>
-        public void Damage(ushort amount)
+        /// <returns>True if Damage was inflicted</returns>
+        public bool Damage(ushort amount)
         {
+            if (Health == 0)
+                return false; // Already Dead. Hit while animating death
             if (amount >= Health)
             {
                 Health = 0;
@@ -104,6 +109,25 @@ namespace nl.SWEG.Willow.Entities.Enemies
             enemyRenderer.SetSpriteColor(Color.red);
             PopupFactory.CreateDamageUI(transform.position, amount, enemyRenderer, Color.red);
             StartCoroutine(CoroutineMethods.RunDelayed(() => enemyRenderer.SetSpriteColor(Color.white), .1f));
+            return true;
+        }
+
+        /// <summary>
+        /// Adds Listener to Death-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddDeathListener(Die listener)
+        {
+            death += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from Death-event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveDeathListener(Die listener)
+        {
+            death -= listener;
         }
         #endregion
 
@@ -165,16 +189,16 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             float rng = Random.Range(0f, 1f);
             LootTable loot = data.Loot;
-            LootSpawn spawn = loot.dust; // Dust
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.amount);
-            spawn = loot.gold; // Gold
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.amount);
-            spawn = loot.potion; // Potion
-            if (spawn.amount > 0 && spawn.chance >= rng)
-                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.amount);
-            // Spawning of SpellPage handled seperately by BookEnemy
+            LootSpawn spawn = loot.Dust; // Dust
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Dust, transform.position, spawn.Amount);
+            spawn = loot.Gold; // Gold
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Gold, transform.position, spawn.Amount);
+            spawn = loot.Potion; // Potion
+            if (spawn.Amount > 0 && spawn.Chance >= rng)
+                LootSpawner.Instance.SpawnLoot(Collectables.Collectables.Potion, transform.position, spawn.Amount);
+            // Spawning of SpellPage handled separately by BookEnemy
             OnDeath();
         }
         /// <summary>
@@ -182,7 +206,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// </summary>
         private void OnDestroy()
         {
-            Death?.Invoke();
+            death?.Invoke(gameObject);
         }
         #endregion
         #endregion

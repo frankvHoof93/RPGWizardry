@@ -18,21 +18,21 @@ namespace nl.SWEG.Willow.Player.PlayerInput
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// ControlScheme for Input-Reading
         /// </summary>
         [SerializeField]
         [Tooltip("ControlScheme for Input-Reading")]
         private ControlScheme controlScheme = ControlScheme.Keyboard;
-        #endregion
-
-        #region Private
+        
         /// <summary>
         /// Pivot on which the book rotates; Necessary to aim at the mouse properly
         /// </summary>
         [SerializeField]
         [Tooltip("Pivot on which the book rotates")]
         private Transform bookPivot;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 
@@ -50,8 +50,6 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                     MovementInputs(ref newState);
                     AimingInputs(ref newState);
                     ButtonInputs(ref newState);
-                    break;
-                default:
                     break;
             }
             State = newState;
@@ -85,7 +83,6 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                     inputState.AimDirection = new Vector2(Input.GetAxis("RightX"), Input.GetAxis("RightY")).normalized;
                     break;
                 // On keyboard, use the mouse
-                case ControlScheme.Keyboard:
                 default:
                     Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                     Vector2 lookPos = CameraManager.Instance.Camera.ScreenToWorldPoint(mousePos);
@@ -112,8 +109,7 @@ namespace nl.SWEG.Willow.Player.PlayerInput
                         }
                     inputState.CastIndex = index;
                     break;
-                case ControlScheme.Keyboard:
-                default:
+                default: // Keyboard
                     inputState.Cast = Input.GetButton("Fire1");
                     // Spell-Selection
                     if (Input.GetKeyDown(KeyCode.Alpha1)) // Select Index 1

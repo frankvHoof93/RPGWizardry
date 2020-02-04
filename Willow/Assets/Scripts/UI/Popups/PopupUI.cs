@@ -14,6 +14,7 @@ namespace nl.SWEG.Willow.UI.Popups
     {
         #region Variables
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// TextField to Display Text
         /// </summary>
@@ -32,6 +33,7 @@ namespace nl.SWEG.Willow.UI.Popups
         [SerializeField]
         [Tooltip("TweenType for Alpha-FadeOut")]
         private LeanTweenType fadeOutType = LeanTweenType.easeInBack;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -52,11 +54,11 @@ namespace nl.SWEG.Willow.UI.Popups
         {
             if (CameraManager.Exists)
             {
-                float realworldSize = CameraManager.Instance.Camera.orthographicSize * 2f; // Size of visible Height in WorldSpace
+                float cameraSize = CameraManager.Instance.Camera.orthographicSize * 2f; // Size of visible Height in WorldSpace
                 float percentage = pixelsHeight / ResolutionMath.DefaultHeight; // Convert to percentage of full Height
-                realworldSize = percentage * realworldSize;
+                cameraSize = percentage * cameraSize;
                 RectTransform textTf = (RectTransform)textField.transform;
-                textTf.sizeDelta = new Vector2(realworldSize * 5f, realworldSize);
+                textTf.sizeDelta = new Vector2(cameraSize * 5f, cameraSize);
             }
             else
                 throw new InvalidOperationException("No Camera Exists. TextSize cannot be determined");
@@ -119,7 +121,8 @@ namespace nl.SWEG.Willow.UI.Popups
         /// </summary>
         private void Update()
         {
-            transform.Translate(Vector3.up * movementSpeed * Time.deltaTime);
+            if (!GameManager.Instance.Paused)
+                transform.Translate(Vector3.up * movementSpeed * Time.deltaTime);
         }
         #endregion
         #endregion

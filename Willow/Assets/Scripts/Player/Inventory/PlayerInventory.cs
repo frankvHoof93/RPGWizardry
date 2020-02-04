@@ -41,16 +41,18 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Pages in Inventory
         /// </summary>
-        public IReadOnlyList<SpellPage> Pages { get { return pages.AsReadOnly(); } }
+        public IReadOnlyList<SpellPage> Pages => pages.AsReadOnly();
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Base spell the player has access too
         /// </summary>
         [SerializeField]
         [Tooltip("Base spell the player has access too")]
         private SpellData baseSpell;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -75,7 +77,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         /// <summary>
         /// Event called when Spell is Unlocked
         /// </summary>
-        public event OnInventorySpell spellunlocked; // TODOCLEAN:
+        private event OnInventorySpell spellUnlocked;
         #endregion
         #endregion
         #endregion
@@ -138,6 +140,24 @@ namespace nl.SWEG.Willow.Player.Inventory
         {
             pageChangeEvent -= listener;
         }
+
+        /// <summary>
+        /// Adds Listener to SpellUnlock-Event
+        /// </summary>
+        /// <param name="listener">Listener to Add</param>
+        public void AddUnlockListener(OnInventorySpell listener)
+        {
+            spellUnlocked += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from SpellUnlock-Event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveUnlockListener(OnInventorySpell listener)
+        {
+            spellUnlocked -= listener;
+        }
         #endregion
 
         #region Spells
@@ -151,9 +171,9 @@ namespace nl.SWEG.Willow.Player.Inventory
             if (Dust >= page.DustCost)
             {
                 page.UnlockSpell();
-                spellunlocked?.Invoke(page);
+                spellUnlocked?.Invoke(page);
                 Dust -= page.DustCost;
-                dustChangeEvent(Dust, (int)page.DustCost);
+                dustChangeEvent?.Invoke(Dust, (int)page.DustCost);
             }
             return page.Unlocked;
         }
@@ -254,7 +274,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         internal void AddDust(uint amount)
         {
             Dust += amount;
-            dustChangeEvent.Invoke(Dust, (int)amount);
+            dustChangeEvent?.Invoke(Dust, (int)amount);
         }
 
         /// <summary>
@@ -264,7 +284,7 @@ namespace nl.SWEG.Willow.Player.Inventory
         internal void AddGold(uint amount)
         {
             Gold += amount;
-            goldChangeEvent.Invoke(Gold, (int)amount);
+            goldChangeEvent?.Invoke(Gold, (int)amount);
         }
         #endregion
         #endregion

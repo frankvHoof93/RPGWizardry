@@ -1,7 +1,9 @@
 ﻿using nl.SWEG.Willow.GameWorld;
 using nl.SWEG.Willow.Loading;
+using nl.SWEG.Willow.Utils;
 using nl.SWEG.Willow.Utils.Behaviours;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace nl.SWEG.Willow.UI.Game
 {
@@ -32,6 +34,7 @@ namespace nl.SWEG.Willow.UI.Game
         /// Heads-Up Display for Player
         /// </summary>
         public PlayerHUD HUD => hud;
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Heads-Up Display for Player
         /// </summary>
@@ -39,15 +42,18 @@ namespace nl.SWEG.Willow.UI.Game
         [Tooltip("Heads-Up Display for Player")]
         private PlayerHUD hud;
         /// <summary>
-        /// Cursor during Gameplay
+        /// Cursor during Game-Play
         /// </summary>
         [SerializeField]
+        [Tooltip("Cursor during Gameplay")]
         private Texture2D crosshair;
         /// <summary>
         /// Cursor for Menus
         /// </summary>
         [SerializeField]
+        [Tooltip("Cursor for Menus")]
         private Texture2D cursor;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         /// <summary>
         /// Hotspot for Crosshair-Cursor
         /// </summary>
@@ -56,17 +62,19 @@ namespace nl.SWEG.Willow.UI.Game
 
         #region Methods
         #region Public
-        public void SetCursor(CursorType cursor)
+        /// <summary>
+        /// Sets which Cursor to Display
+        /// </summary>
+        /// <param name="cursorType">CursorType for Cursor to Display</param>
+        public void SetCursor(CursorType cursorType)
         {
-            switch (cursor)
+            switch (cursorType)
             {
                 case CursorType.Cursor:
-                    Cursor.SetCursor(this.cursor, Vector2.zero, CursorMode.Auto);
+                    Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
                     break;
                 case CursorType.Crosshair:
                     Cursor.SetCursor(crosshair, crosshairHotspot, CursorMode.Auto);
-                    break;
-                default:
                     break;
             }
         }
@@ -99,16 +107,21 @@ namespace nl.SWEG.Willow.UI.Game
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GameManager.Instance.TogglePause(); // TODOCLEAN: Unhook Menu-Open from Game-Pause
-                if (GameManager.Instance.Paused) // Game was running, open Menu // TODOCLEAN: Check active scene instead
+                if (SceneManager.GetActiveScene().name == Constants.GameSceneName) // Game was running, open Menu
                 {
                     SceneLoader.Instance.LoadMenuScene();
                     SetCursor(CursorType.Cursor);
+                    if (!GameManager.Instance.Paused)
+                        GameManager.Instance.TogglePause(); // Pause Game
                 }
-                else // Game was Paused. Close Menu
+                else if (SceneManager.GetActiveScene().name == Constants.MainMenuSceneName) // Game was Paused. Close Menu
                 {
                     SceneLoader.Instance.LoadGameScene();
                     SetCursor(CursorType.Crosshair);
+                    if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
+                        CameraManager.Instance.ToggleAudio();
+                    if (GameManager.Instance.Paused)
+                        GameManager.Instance.TogglePause(); // Unpause Game
                 }
             }
         }

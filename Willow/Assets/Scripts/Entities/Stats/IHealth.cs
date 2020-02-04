@@ -1,4 +1,6 @@
-﻿namespace nl.SWEG.Willow.Entities.Stats
+﻿using UnityEngine;
+
+namespace nl.SWEG.Willow.Entities.Stats
 {
     /// <summary>
     /// Delegate for Health-Change
@@ -10,7 +12,7 @@
     /// <summary>
     /// Delegate for Death
     /// </summary>
-    public delegate void Die();
+    public delegate void Die(GameObject obj);
 
     /// <summary>
     /// Interface for Entities with Health
@@ -31,6 +33,7 @@
         /// Damages Entity
         /// </summary>
         /// <param name="amount">Amount to Damage for</param>
-        void Damage(ushort amount);
+        /// <returns>True if Damage was inflicted</returns>
+        bool Damage(ushort amount);
     }
 }

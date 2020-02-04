@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.Willow.Entities.Enemies;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
@@ -25,12 +26,17 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
             /// Prefab for Enemy to Spawn
             /// </summary>
             [Tooltip("Prefab for Enemy to Spawn")]
-            public GameObject enemyPrefab;
+            public GameObject EnemyPrefab;
             /// <summary>
             /// (Relative) Position to Spawn Enemy at
             /// </summary>
             [Tooltip("(Relative) Position to Spawn Enemy at")]
-            public Vector2 spawnPosition;
+            public Vector2 SpawnPosition;
+            /// <summary>
+            /// Rotation (around up) to Spawn Enemy at
+            /// </summary>
+            [Tooltip("Rotation (around up) to Spawn Enemy at")]
+            public float SpawnRotation;
         }
         #endregion
 
@@ -39,14 +45,15 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// Whether the Room has been Cleared (No more Enemies)
         /// </summary>
-        public bool Cleared => EnemyHolder.transform.childCount == 0;
+        public bool Cleared => enemies.Count == 0;
         /// <summary>
-        /// Roomcleared event
+        /// List of Enemies in Room
         /// </summary>
-        public static event RoomClear clearedRoom; // TODOCLEAN:
+        public IReadOnlyList<AEnemy> Enemies => enemies.AsReadOnly();
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// All doors in the room.
         /// </summary>
@@ -59,18 +66,50 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         [Space]
         [SerializeField]
         [Tooltip("Transform-Parent for Enemies in Room")]
-        private GameObject EnemyHolder;
+        private GameObject enemyHolder;
+        /// <summary>
+        /// Enemies to Spawn in Room
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Enemies to Spawn in Room")]
+        private SpawnTemplate[] enemiesInRoom;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
+        #endregion
+
+        #region Private
+        /// <summary>
+        /// Whether this Room has spawned its enemies (prevents duplicate spawning when re-entering Room)
+        /// </summary>
+        private bool hasSpawnedEnemies;
+        /// <summary>
+        /// RoomCleared event
+        /// </summary>
+        private event RoomClear clearedRoom;
+        /// <summary>
+        /// Enemies in Room (Instances)
+        /// </summary>
+        private readonly List<AEnemy> enemies = new List<AEnemy>();
         #endregion
         #endregion
 
         #region Methods
         #region Public
         /// <summary>
-        /// Opens/Closes Doors based on whether there are Enemies in the Room
+        /// Adds Listener to RoomClear-Event for this Room
         /// </summary>
-        public void CheckDoors()
+        /// <param name="listener">Listener to add</param>
+        public void AddRoomClearListener(RoomClear listener)
         {
-            CheckRoomClear();
+            clearedRoom += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from RoomClear-Event for this Room
+        /// </summary>
+        /// <param name="listener">Listener to remove</param>
+        public void RemoveRoomClearListener(RoomClear listener)
+        {
+            clearedRoom -= listener;
         }
         #endregion
 
@@ -81,6 +120,8 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         internal void Enable()
         {
             gameObject.SetActive(true);
+            if (!hasSpawnedEnemies)
+                SpawnEnemies();
             if (!Cleared)
                 CloseDoors();
         }
@@ -112,34 +153,39 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         }
         #endregion
 
-        #region Unity
-        /// <summary>
-        /// Adds Event-Listeners to Enemies
-        /// </summary>
-        private void Awake()
-        {
-            AEnemy[] enemies = EnemyHolder.GetComponentsInChildren<AEnemy>(true);
-            if (enemies.Length > 0)
-            {
-                foreach (AEnemy enemy in enemies)
-                    enemy.Death += CheckRoomClear; // TODOCLEAN: Spawn Enemies
-            }
-        }
-        #endregion
-
         #region Private
         /// <summary>
         /// Checks if the room still has enemies. if it doesn't, the doors open.
         /// </summary>
-        protected virtual void CheckRoomClear()
+        protected virtual void CheckRoomClear(GameObject deadEnemy)
         {
-            if (EnemyHolder == null)
-                return;
-            if (Cleared)
+            enemies.Remove(deadEnemy.GetComponent<AEnemy>());
+            if (GameManager.Exists && GameManager.Instance.State != GameManager.GameState.GameOver && Cleared)
             {
                 clearedRoom?.Invoke(); //Runs event when room is cleared
                 OpenDoors();
             }
+        }
+
+        /// <summary>
+        /// Spawns Enemies in Room
+        /// </summary>
+        private void SpawnEnemies()
+        {
+            if (hasSpawnedEnemies)
+                return;
+            for (int i = 0; i < enemiesInRoom.Length; i++)
+            {
+                SpawnTemplate template = enemiesInRoom[i];
+                GameObject enemy = Instantiate(template.EnemyPrefab);
+                enemy.transform.SetParent(enemyHolder.transform);
+                enemy.transform.localPosition = template.SpawnPosition;
+                enemy.transform.rotation = Quaternion.Euler(0, 0, template.SpawnRotation);
+                AEnemy script = enemy.GetComponent<AEnemy>();
+                enemies.Add(script);
+                script.AddDeathListener(CheckRoomClear);
+            }
+            hasSpawnedEnemies = true;
         }
         #endregion
         #endregion

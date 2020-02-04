@@ -1,4 +1,5 @@
-﻿using nl.SWEG.Willow.GameWorld;
+﻿using System;
+using nl.SWEG.Willow.GameWorld;
 using nl.SWEG.Willow.Sorcery.Spells;
 using System.Collections;
 using UnityEngine;
@@ -7,16 +8,17 @@ using UnityEngine.UI;
 namespace nl.SWEG.Willow.UI.Game
 {
     /// <summary>
-    /// Displays currently selected Spells and their Cooldowns
+    /// Displays currently selected Spells and their Cooldown
     /// </summary>
     public class SpellHUD : MonoBehaviour
     {
         #region Variables
         #region Editor
-        [Header("UI")]
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Image-Object for Spell
         /// </summary>
+        [Header("UI")]
         [SerializeField]
         [Tooltip("Image-Object for Spell")]
         private Image spellImage;
@@ -26,10 +28,10 @@ namespace nl.SWEG.Willow.UI.Game
         [SerializeField]
         [Tooltip("Image-Object for Spell-Cooldown")]
         private Image cooldownOverlay;
-        [Header("Controls")]
         /// <summary>
         /// Image-Object for Selection-Outline (KeyBoard)
         /// </summary>
+        [Header("Controls")]
         [SerializeField]
         [Tooltip("Image-Object for Selection-Outline (KeyBoard)")]
         private Image selectionOutlineKeyBoard;
@@ -39,6 +41,7 @@ namespace nl.SWEG.Willow.UI.Game
         [SerializeField]
         [Tooltip("Panel which shows Button (Controller)")]
         private GameObject buttonPanelController;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -98,7 +101,7 @@ namespace nl.SWEG.Willow.UI.Game
         {
             if (cooldownRoutine != null)
                 StopCoroutine(cooldownRoutine);
-            if (duration == 0)
+            if (Math.Abs(duration) < float.Epsilon)
                 cooldownOverlay.fillAmount = 0;
             else
                 cooldownRoutine = StartCoroutine(CooldownRoutine(duration));
@@ -113,13 +116,13 @@ namespace nl.SWEG.Willow.UI.Game
         private IEnumerator CooldownRoutine(float duration)
         {
             cooldownOverlay.fillAmount = 1;
-            float curr = 0;
-            while (curr < duration)
+            float current = 0;
+            while (current < duration)
             {
                 yield return null;
                 if (!GameManager.Instance.Paused) // Only update if not paused
-                    curr = Mathf.Clamp(curr + Time.deltaTime, 0, duration);
-                cooldownOverlay.fillAmount = 1 - (curr / duration);
+                    current = Mathf.Clamp(current + Time.deltaTime, 0, duration);
+                cooldownOverlay.fillAmount = 1 - (current / duration);
             }
             yield return null;
             cooldownOverlay.fillAmount = 0;            

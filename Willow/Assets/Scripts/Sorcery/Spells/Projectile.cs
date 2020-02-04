@@ -30,16 +30,17 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Mask of layer containing walls and other obstructions
         /// </summary>
         [SerializeField]
         [Tooltip("Mask of layer containing walls and other obstructions")]
         private LayerMask wallLayer;
-        [Header("Opacity")]
         /// <summary>
         /// Opacity-Radius in Pixels (for 720p-Resolution)
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Range(1, 10000)]
         [Tooltip("Opacity-Radius in Pixels (for 720p-Resolution)")]
@@ -56,6 +57,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         [SerializeField]
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Protected
@@ -68,7 +70,7 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// </summary>
         protected LayerMask targetLayer;
         /// <summary>
-        /// Combined layermask of all objects to collide with
+        /// Combined LayerMask of all objects to collide with
         /// </summary>
         protected LayerMask collisionLayer;
         #endregion
@@ -88,10 +90,9 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         #region Methods
         #region Internal
         /// <summary>
-        /// Sets Speed and TargetingLayer
+        /// Sets Spell-Data and TargetingLayer
         /// </summary>
-        /// <param name="speed">Speed for Projectile</param>
-        /// <param name="dmg">Amount of daamage inflicted by Projectile</param>
+        /// <param name="spellData">Data for Spell</param>
         /// <param name="targetingLayer">TargetingLayer(s) for Projectile</param>
         internal void SetData(SpellData spellData, LayerMask targetingLayer)
         {
@@ -136,7 +137,8 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collisionLayer.HasLayer(collision.gameObject.layer))
-                Effect(collision);
+                if (collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage) ?? false)
+                    Effect(collision);
         }
         #endregion
 
@@ -166,8 +168,6 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             //apply knockback
             Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
             body.AddForce(transform.up * data.Knockback);
-            //oh man i can feel the effect
-            collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
             Destroy(gameObject); // TODO: Animation?
         }
         #endregion

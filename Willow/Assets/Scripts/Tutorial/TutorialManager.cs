@@ -1,11 +1,17 @@
-﻿using nl.SWEG.Willow.GameWorld.Levels.Rooms;
+﻿using nl.SWEG.Willow.Entities.Enemies;
+using nl.SWEG.Willow.GameWorld;
+using nl.SWEG.Willow.GameWorld.Levels;
+using nl.SWEG.Willow.GameWorld.Levels.Rooms;
 using nl.SWEG.Willow.Player;
 using nl.SWEG.Willow.Sorcery;
 using nl.SWEG.Willow.UI.Dialogue;
 using nl.SWEG.Willow.UI.Game;
 using nl.SWEG.Willow.UI.Menu;
 using nl.SWEG.Willow.Utils;
+using nl.SWEG.Willow.Utils.Functions;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,214 +23,494 @@ namespace nl.SWEG.Willow.Tutorial
     /// </summary>
     public class TutorialManager : MonoBehaviour
     {
-        // TODOCLEAN: Check when delegates are added/removed
-        // TODOCLEAN: Could the Menu-Part of the SpellCrafting-Tutorial be turned into a (manully run) Coroutine? (IEnumerator.Next())
         #region InnerTypes
         /// <summary>
         /// Steps in Tutorial
         /// </summary>
         private enum TutorialSteps
         {
-            Start = 0,
-            CastedBookerang = 1,
-            SlimeRoomCleared = 2,
-            BookKilled = 3,
-            PickedUpPage = 4,
-            EnteredMenu = 5,
+            /// <summary>
+            /// Start of Game
+            /// </summary>
+            GameStart = 0,
+            /// <summary>
+            /// Bookerang-Spell casted for the first time
+            /// </summary>
+            FirstCastBookerang = 1,
+            /// <summary>
+            /// First Kill of a Slime
+            /// </summary>
+            KilledFirstSlime = 2,
+            /// <summary>
+            /// First Kill of a Book
+            /// </summary>
+            KilledFirstBook = 3,
+            /// <summary>
+            /// Pickup of first Spell-Page
+            /// </summary>
+            PagePickup = 4,
+            /// <summary>
+            /// Entered Pause-Menu
+            /// </summary>
+            EnteredPauseMenu = 5,
+            /// <summary>
+            /// Entered Spell-List in Pause-Menu
+            /// </summary>
             EnteredSpellList = 6,
-            EnteredNewSpell = 7,
-            EntersPuzzle = 8,
-            FinishPuzzle = 9
+            /// <summary>
+            /// Entered Spell-Details in Pause-Menu
+            /// </summary>
+            EnteredSpellDetails = 7,
+            /// <summary>
+            /// Entered MiniGame for Spell
+            /// </summary>
+            EnteredSpellPuzzle = 8,
+            /// <summary>
+            /// Finished MiniGame for Spell
+            /// </summary>
+            FinishedSpellPuzzle = 9
         }
         #endregion
 
         #region Variables
+        #region Constants
+        /// <summary>
+        /// Name of First Room
+        /// </summary>
+        private const string StartRoomName =        "StartRoom";
+        /// <summary>
+        /// Name of Room with first SlimeEnemy
+        /// </summary>
+        private const string FirstSlimeRoomName =   "FirstSlimeRoom";
+        /// <summary>
+        /// Name of Room with first BookEnemy
+        /// </summary>
+        private const string FirstBookRoomName =    "FirstBookRoom";
+        /// <summary>
+        /// Name of Room with Big Slime
+        /// </summary>
+        private const string BigSlimeRoomName =     "BigSlimeRoom";
+        /// <summary>
+        /// Name of Final Room in Tutorial
+        /// </summary>
+        private const string FinalRoomName =        "FinalRoom";
+        #endregion
+
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Data for Dialogues attached to Tutorial-Steps
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Dialogues attached to Tutorial-Steps")]
         private DialogueData[] dialogues;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods
         #region Unity
         /// <summary>
-        /// Sets initial listeners
+        /// Sets Listener for first Room-Load
         /// </summary>
         private void Start()
         {
-            StartTutorialDialogue(); //Run the Dialogue Queue function            
-            SceneManager.sceneLoaded += LoadMainMenu;  //Adding Event listener which checks for the scene load
-            PlayerManager.Instance.Inventory.spellunlocked += FinishPuzzleDialogue; //Adding the listener for the unlockpuzzle event
-            Room.clearedRoom += RoomClearedSlimes; //Adding the listener to checking for the room clear
-            //Adding the Event Listeneres for the Page casting and Page Pickup
-            PlayerManager.Instance.CastingManager.AddCastListener(CastedBookerangDialogue);
-            PlayerManager.Instance.Inventory.AddPageListener(PickedUpPageDialogue);
+            InitGameStartDialogue();
         }
         #endregion
 
         #region Private
+        #region GameStart
         /// <summary>
-        /// Runs the Bookerang casting sentences queue
+        /// Initializes Listeners for GameStartDialogue
         /// </summary>
-        private void CastedBookerangDialogue(ushort index, float cooldown)
+        private void InitGameStartDialogue()
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.CastedBookerang]);
-            PlayerManager.Instance.CastingManager.RemoveCastListener(CastedBookerangDialogue); //Removes the listener so this function isn't called again
+            // Attach Listener to RoomLoad
+            FloorManager.Instance.AddRoomLoadListener(RunGameStartDialogue);
         }
-
         /// <summary>
-        /// Runs the sentences queue for when the slimes are cleared (Room clear)
+        /// Runs GameStartDialogue for first Room
         /// </summary>
-        private void RoomClearedSlimes()
+        /// <param name="loadedRoom">Room that was Loaded</param>
+        private void RunGameStartDialogue(Room loadedRoom)
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.SlimeRoomCleared]);
-            Room.clearedRoom -= RoomClearedSlimes;
-            Room.clearedRoom += BookKilledDialogue; //Adds the listener, which checks for the room cleared, to the book room
+            if (loadedRoom.name != StartRoomName)
+                return;
+            // Remove Listener from RoomLoad
+            FloorManager.Instance.RemoveRoomLoadListener(RunGameStartDialogue);
+            // Lock Movement & Casting
+            PlayerManager.Instance.MovementManager.enabled = false;
+            PlayerManager.Instance.CastingManager.enabled = false;
+            // Lock Current Room
+            FloorManager.Instance.CurrentRoom.CloseDoors();
+            // Display dialogue after 1 second
+            StartCoroutine(CoroutineMethods.RunDelayed(() =>
+            {
+                // Prevent opening Menu during Dialogue
+                GameUIManager.Instance.enabled = false;
+                // Run Dialogue
+                DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.GameStart],
+                    EndGameStartDialogue);
+            }
+            , 1f));
         }
-
         /// <summary>
-        /// Runs the sentences queue when the book is killed
+        /// Disposes GameStartDialogue, initializes next step in Tutorial
         /// </summary>
-        private void BookKilledDialogue()
+        private void EndGameStartDialogue()
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.BookKilled]);
-            Room.clearedRoom -= BookKilledDialogue;
-        }
-
-        /// <summary>
-        /// Runs Dialogue after picking up Page
-        /// </summary>
-        /// <param name="page">Page that was picked up</param>
-        private void PickedUpPageDialogue(SpellPage page)
-        {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.PickedUpPage]);
-            PlayerManager.Instance.MovementManager.SetStunned(true);
-            PlayerManager.Instance.Inventory.RemovePageListener(PickedUpPageDialogue);
-            //enable GameUIManager to allow pausing
+            // Unlock Casting
+            PlayerManager.Instance.CastingManager.enabled = true;
+            // Unlock Menu
             GameUIManager.Instance.enabled = true;
-            DialogueManager.Instance.ShowInstructionPrompt(true);
+            // Show Instruction Prompt
+            DialogueManager.Instance.ShowInstructionPrompt("Left Click to Cast a Spell");
+            // Initialize next step
+            InitFirstCastDialogue();
         }
+        #endregion
 
+        #region FirstCastBookerang
         /// <summary>
-        /// Runs Dialogue after entering PauseMenu
+        /// Initializes Listeners for FirstCastDialogue
         /// </summary>
-        private void EnteredMenuDialogue()
+        private void InitFirstCastDialogue()
         {
-            //disable GameUIManager to disallow pausing
+            // Attach Listener to Casting
+            PlayerManager.Instance.CastingManager.AddCastListener(RunFirstCastDialogue);
+        }
+        /// <summary>
+        /// Runs FirstCastDialogue
+        /// </summary>
+        /// <param name="index">Index in EquippedSpells for Cast</param>
+        /// <param name="cooldown">Cooldown for cast Spell</param>
+        private void RunFirstCastDialogue(ushort index, float cooldown)
+        {
+            // Hide Instruction Prompt
+            DialogueManager.Instance.HideInstructionPrompt();
+            // Remove Listener from Casting
+            PlayerManager.Instance.CastingManager.RemoveCastListener(RunFirstCastDialogue);
+            // Prevent opening Menu during Dialogue
             GameUIManager.Instance.enabled = false;
-            DialogueManager.Instance.ShowInstructionPrompt(false);
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredMenu]);
-            SceneManager.sceneLoaded -= LoadMainMenu;
+            // Display Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FirstCastBookerang], 
+                EndFirstCastDialogue);
         }
-
         /// <summary>
-        /// Runs Dialogue after Entering SpellList
+        /// Disposes FirstCastDialogue, initializes next step in Tutorial
         /// </summary>
-        private void EnteredSpellListDialogue()
+        private void EndFirstCastDialogue()
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellList]);
-
-            Transform spellUTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
-            Button btn = spellUTF.GetComponent<Button>();
-            btn.onClick.RemoveListener(EnteredSpellListDialogue);
-            StartCoroutine(AttachToButtonUnlock());
+            // Unlock Movement
+            PlayerManager.Instance.MovementManager.enabled = true;
+            // Unlock Current Room
+            FloorManager.Instance.CurrentRoom.OpenDoors();
+            // Unlock Menu
+            GameUIManager.Instance.enabled = true;
+            // Initialize next step
+            FloorManager.Instance.AddRoomLoadListener(InitFirstSlimeKillDialogue);
         }
+        #endregion
 
+        #region KilledFirstSlime
         /// <summary>
-        /// Runs Dialogue for ...
+        /// Initializes Listeners for FirstSlimeKillDialogue
         /// </summary>
-        private void EnteredNewSpellDialogue()
+        /// <param name="loadedRoom">Room that was Loaded</param>
+        private void InitFirstSlimeKillDialogue(Room loadedRoom)
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredNewSpell]);
-            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page").GetChild(1);  // Spell Tab for new Spell
-            Button btn = buttonunlock.GetComponent<Button>();
-            btn.onClick.RemoveListener(EnteredNewSpellDialogue);
-            StartCoroutine(AttachToSpellCrafting());
+            if (loadedRoom.name != FirstSlimeRoomName)
+                return;
+            // Remove RoomLoad-Listener
+            FloorManager.Instance.RemoveRoomLoadListener(InitFirstSlimeKillDialogue);
+            // Add Listener to Enemy-Death
+            IReadOnlyList<AEnemy> enemies = FloorManager.Instance.CurrentRoom.Enemies;
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].AddDeathListener(RunFirstSlimeKillDialogue);
         }
-
         /// <summary>
-        /// Runs Dialogue for Entering Puzzle
+        /// Runs FirstSlimeKillDialogue
         /// </summary>
-        private void EntersPuzzleDialogue()
+        /// <param name="deadSlime">Slime that was killed</param>
+        private void RunFirstSlimeKillDialogue(GameObject deadSlime)
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EntersPuzzle]);
-            Transform spellcrafting = MenuManager.Instance.SpellCanvas.transform.Find("Book/Page Right/Spell Unlock Button"); // Unlock Button for Spell
-            Button btn = spellcrafting.GetComponent<Button>();
-            btn.onClick.RemoveListener(EntersPuzzleDialogue);
+            // Remove Listeners from remaining Enemies
+            IReadOnlyList<AEnemy> enemies = FloorManager.Instance.CurrentRoom.Enemies;
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].RemoveDeathListener(RunFirstSlimeKillDialogue);
+            // Pause GamePlay
+            GameManager.Instance.PauseGame();
+            // Prevent opening Menu during Dialogue
+            GameUIManager.Instance.enabled = false;
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.KilledFirstSlime],
+                EndFirstSlimeKillDialogue);
         }
-
         /// <summary>
-        /// Runs Dialogue after finishing Puzzle
+        /// Disposes FirstSlimeKillDialogue, initializes next step in Tutorial
         /// </summary>
-        private void FinishPuzzleDialogue(SpellPage spellPage)
+        private void EndFirstSlimeKillDialogue()
         {
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishPuzzle]);
-            PlayerManager.Instance.MovementManager.SetStunned(false);
-            PlayerManager.Instance.Inventory.spellunlocked -= FinishPuzzleDialogue;
-            //enable GameUIManager to allow pausing
+            // Unlock Menu
+            GameUIManager.Instance.enabled = true;
+            // Resume Game
+            GameManager.Instance.ResumeGame();
+            // Initialize next step
+            FloorManager.Instance.AddRoomLoadListener(InitFirstBookKillDialogue);
+        }
+        #endregion
+
+        #region KilledFirstBook
+        /// <summary>
+        /// Initializes Listeners for FirstBookKillDialogue
+        /// </summary>
+        /// <param name="loadedRoom">Room that was Loaded</param>
+        private void InitFirstBookKillDialogue(Room loadedRoom)
+        {
+            if (loadedRoom.name != FirstBookRoomName)
+                return;
+            // Remove RoomLoad-Listener
+            FloorManager.Instance.RemoveRoomLoadListener(InitFirstBookKillDialogue);
+            // Add Death-Listener to Book
+            FloorManager.Instance.CurrentRoom.Enemies.OfType<BookEnemy>().First()?.AddDeathListener(RunFirstBookKillDialogue);
+        }
+        /// <summary>
+        /// Runs FirstBookKillDialogue
+        /// </summary>
+        /// <param name="deadBook">Book that was killed</param>
+        private void RunFirstBookKillDialogue(GameObject deadBook)
+        {
+            // Close Room, so Player cannot leave
+            FloorManager.Instance.CurrentRoom.CloseDoors();
+            // Initialize Page-Pickup (Done here because player is allowed to move during Dialogue)
+            InitPagePickupDialogue();
+            // Prevent opening of Menu during Dialogue
+            GameUIManager.Instance.enabled = false;
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.KilledFirstBook],
+                EndFirstBookKillDialogue);
+        }
+        /// <summary>
+        /// Disposes FirstBookKillDialogue
+        /// </summary>
+        private void EndFirstBookKillDialogue()
+        {
+            // Unlock Menu
             GameUIManager.Instance.enabled = true;
         }
+        #endregion
 
+        #region PagePickup
         /// <summary>
-        /// Runs the StartTutorial Dialogue
+        /// Initializes Listeners for PagePickupDialogue
         /// </summary>
-        private void StartTutorialDialogue()
+        private void InitPagePickupDialogue()
         {
-            // Find the Dialogue Manager and start dialogue with given Dialogue variable
-            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.Start]);
+            // Add Listener for Page-Pickup
+            PlayerManager.Instance.Inventory.AddPageListener(RunPagePickupDialogue);
         }
-
         /// <summary>
-        /// Attaches delegate after Menu-Scene loads
+        /// Runs PagePickupDialogue
         /// </summary>
-        /// <param name="loadedScene">Scene that was loaded</param>
-        /// <param name="loadMode">Mode in which Scene was loaded</param>
-        private void LoadMainMenu(Scene loadedScene, LoadSceneMode loadMode)
+        /// <param name="pickedUp">Page that was picked up</param>
+        private void RunPagePickupDialogue(SpellPage pickedUp)
+        {
+            // Remove Listener from Page-Pickup
+            PlayerManager.Instance.Inventory.RemovePageListener(RunPagePickupDialogue);
+            // Pause Game
+            GameManager.Instance.PauseGame();
+            // Prevent opening of Menu during Dialogue
+            GameUIManager.Instance.enabled = false;
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.PagePickup],
+                EndPagePickupDialogue);
+        }
+        /// <summary>
+        /// Disposes PagePickupDialogue, initializes next step in Tutorial
+        /// </summary>
+        private void EndPagePickupDialogue()
+        {
+            // Unlock Menu
+            GameUIManager.Instance.enabled = true;
+            // Display Instruction Prompt
+            DialogueManager.Instance.ShowInstructionPrompt("Please press \"ESC\" to open Greg");
+            // Initialize next step
+            InitEnterPauseMenuDialogue();
+        }
+        #endregion
+
+        #region EnteredPauseMenu
+        /// <summary>
+        /// Initializes Listeners for PauseMenuDialogue
+        /// </summary>
+        private void InitEnterPauseMenuDialogue()
+        {
+            // Add Listener for Scene-Load
+            SceneManager.sceneLoaded += RunEnterPauseDialogue;
+        }
+        /// <summary>
+        /// Runs PauseMenuDialouge
+        /// </summary>
+        /// <param name="loadedScene">Scene that was Loaded</param>
+        /// <param name="loadMode">Load-Mode for Scene</param>
+        private void RunEnterPauseDialogue(Scene loadedScene, LoadSceneMode loadMode)
         {
             if (loadedScene.name != Constants.MainMenuSceneName)
                 return;
-            EnteredMenuDialogue();
-            StartCoroutine(AttachToButtonSpell());
+            // Remove Listener from Scene-Load
+            SceneManager.sceneLoaded -= RunEnterPauseDialogue;
+            // Hide Instruction-Prompt
+            DialogueManager.Instance.HideInstructionPrompt();
+            // Prevent closing of Menu
+            GameUIManager.Instance.enabled = false;
+            // Resume after Scene has Initialized
+            StartCoroutine(WaitForSceneLoadPauseDialogue());
         }
-
         /// <summary>
-        /// Attaches delegate to Spell-Button
+        /// Waits for MenuManager.Awake to run before starting Dialogue
         /// </summary>
-        private IEnumerator AttachToButtonSpell()
+        private IEnumerator WaitForSceneLoadPauseDialogue()
         {
-            // Wait until there's a MenuManager (race condition)
             yield return new WaitUntil(() => MenuManager.Exists);
-
-            Transform spellTF = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
-            Button btn = spellTF.GetComponent<Button>();
-            btn.onClick.AddListener(EnteredSpellListDialogue);
+            // Initialize next step in Tutorial
+            InitEnterSpellListDialogue();
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredPauseMenu]);
         }
+        #endregion
 
+        #region EnteredSpellList
         /// <summary>
-        /// Attaches delegate to Unlock
+        /// Initializes Listeners for EnterSpellListDialogue
         /// </summary>
-        private IEnumerator AttachToButtonUnlock()
+        private void InitEnterSpellListDialogue()
         {
-            // Wait until there's a MenuManager (race condition)
-            yield return new WaitUntil(() => MenuManager.Exists);
-            Transform buttonunlock = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page").GetChild(1); // Spell Tab for new Spell
-            Button btn = buttonunlock.GetComponent<Button>();
-            btn.onClick.AddListener(EnteredNewSpellDialogue);
+            // Add Listener to SpellList-Button in Main Menu
+            Transform spellTransform = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
+            Button btn = spellTransform.GetComponent<Button>();
+            btn.onClick.AddListener(RunEnterSpellListDialogue);
+            // Disable all other displayed Buttons
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Monster Manual").GetComponent<Button>().interactable = false;
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Trinket Catalog").GetComponent<Button>().interactable = false;
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Settings").GetComponent<Button>().interactable = false;
         }
-
         /// <summary>
-        /// Attaches delegate to SpellCrafting-Menu
+        /// Runs EnterSpellListDialogue, initializes next step in Tutorial
         /// </summary>
-        private IEnumerator AttachToSpellCrafting()
+        private void RunEnterSpellListDialogue()
         {
-            // Wait until there's a MenuManager (race condition)
-            yield return new WaitUntil(() => MenuManager.Exists);
-            Transform spellcrafting = MenuManager.Instance.SpellCanvas.Find("Book/Page Right/Spell Unlock Button"); // Unlock Button for Spell
-            Button btn = spellcrafting.GetComponent<Button>();
-            btn.onClick.AddListener(EntersPuzzleDialogue);
+            // Remove Listener from SpellList-Button
+            Transform spellTransform = MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Spell List");
+            Button btn = spellTransform.GetComponent<Button>();
+            btn.onClick.RemoveListener(RunEnterSpellListDialogue);
+            // Re-Enable disabled Buttons
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Monster Manual").GetComponent<Button>().interactable = true;
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Trinket Catalog").GetComponent<Button>().interactable = true;
+            MenuManager.Instance.PauseMenuPanel.Find("Menu-Items/Settings").GetComponent<Button>().interactable = true;
+            // Initialize next step in Tutorial
+            InitEnterSpellDetailsDialogue();
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellList]);
         }
+        #endregion
+
+        #region EnteredSpellDetails
+        /// <summary>
+        /// Initializes Listeners for EnterSpellDetailsDialogue
+        /// </summary>
+        private void InitEnterSpellDetailsDialogue()
+        {
+            Transform leftPage = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page");
+            // Add Listener to Details-Button in SpellList
+            leftPage.GetChild(1).GetComponent<Button>().onClick.AddListener(RunEnterSpellDetailsDialogue);
+            // Disable all other displayed Buttons
+            leftPage.GetChild(0).GetComponent<Button>().interactable = false;
+            MenuManager.Instance.SpellListCanvas.Find("Book/Back Button").GetComponent<Button>().interactable = false;
+        }
+        /// <summary>
+        /// Runs EnterSpellDetailsDialogue, initializes next step in Tutorial
+        /// </summary>
+        private void RunEnterSpellDetailsDialogue()
+        {
+            Transform leftPage = MenuManager.Instance.SpellListCanvas.Find("Book/Left Page");
+            // Remove Listener from Details-Button in SpellList
+            leftPage.GetChild(1).GetComponent<Button>().onClick.RemoveListener(RunEnterSpellDetailsDialogue);
+            // Re-Enable disabled Buttons
+            leftPage.GetChild(0).GetComponent<Button>().interactable = false;
+            MenuManager.Instance.SpellListCanvas.Find("Book/Back Button").GetComponent<Button>().interactable = true;
+            // Initialize next step in Tutorial
+            InitEnterSpellPuzzleDialogue();
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellDetails]);
+        }
+        #endregion
+
+        #region EnteredSpellPuzzle
+        /// <summary>
+        /// Initializes Listeners for EnterSpellPuzzleDialogue
+        /// </summary>
+        private void InitEnterSpellPuzzleDialogue()
+        {
+            // Add Listener to Puzzle-Button on Details-Page
+            MenuManager.Instance.SpellCanvas.Find("Book/Page Right/Spell Unlock Button").GetComponent<Button>().onClick.AddListener(RunEnterSpellPuzzleDialogue);
+            // Disable Back-Button on Details-Page
+            MenuManager.Instance.SpellCanvas.Find("Book/Back Button").GetComponent<Button>().interactable = false;
+        }
+        /// <summary>
+        /// Runs EnterSpellPuzzleDialogue, initializes next step in Tutorial
+        /// </summary>
+        private void RunEnterSpellPuzzleDialogue()
+        {
+            // Remove Listener from Puzzle-Button on Details-Page
+            MenuManager.Instance.SpellCanvas.Find("Book/Page Right/Spell Unlock Button").GetComponent<Button>().onClick.RemoveListener(RunEnterSpellPuzzleDialogue);
+            // Re-Enable Back-Button Details-Page
+            MenuManager.Instance.SpellCanvas.Find("Book/Back Button").GetComponent<Button>().interactable = true;
+            // Initialize next step in Tutorial
+            InitFinishSpellPuzzleDialogue();
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.EnteredSpellPuzzle]);
+        }
+        #endregion
+
+        #region FinishedSpellPuzzle
+        /// <summary>
+        /// Initializes FinishSpellPuzzleDialogue
+        /// </summary>
+        private void InitFinishSpellPuzzleDialogue()
+        {
+            // Add Listener to Spell-Unlock
+            PlayerManager.Instance.Inventory.AddUnlockListener(RunFinishSpellPuzzleDialogue);
+            // Disable Back-Button on Puzzle-Page
+            MenuManager.Instance.ResearchCanvas.Find("Back Button").GetComponent<Button>().interactable = false;
+        }
+        /// <summary>
+        /// Runs FinishSpellPuzzleDialogue
+        /// </summary>
+        /// <param name="unlockedSpell">Spell that was Unlocked</param>
+        private void RunFinishSpellPuzzleDialogue(SpellPage unlockedSpell)
+        {
+            // Remove Listener from Spell-Unlock
+            PlayerManager.Instance.Inventory.RemoveUnlockListener(RunFinishSpellPuzzleDialogue);
+            // Re-Enable Back-Button on Puzzle-Page
+            MenuManager.Instance.ResearchCanvas.Find("Back Button").GetComponent<Button>().interactable = true;
+            // Run Dialogue
+            DialogueManager.Instance.StartDialogue(dialogues[(int)TutorialSteps.FinishedSpellPuzzle],
+                EndFinishSpellPuzzleDialogue);
+        }
+        /// <summary>
+        /// Ends final step in Tutorial, relinquishing control to Player
+        /// </summary>
+        private void EndFinishSpellPuzzleDialogue()
+        {
+            // Allow closing of Menu
+            GameUIManager.Instance.enabled = true;
+            // Unlock Room, so Player can advance
+            Room currRoom = FloorManager.Instance.CurrentRoom;
+            if (currRoom.Enemies.Count == 0)
+                currRoom.OpenDoors();
+            // Destroy TutorialManager
+            Destroy(gameObject);
+        }
+        #endregion
         #endregion
         #endregion
     }

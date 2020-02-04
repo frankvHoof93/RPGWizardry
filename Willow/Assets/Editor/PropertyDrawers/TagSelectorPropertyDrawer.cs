@@ -60,10 +60,7 @@ namespace nl.SWEG.Willow.Editor.PropertyDrawers
                     //Draw the popup box with the current selected index
                     index = EditorGUI.Popup(position, label.text, index, tagList.ToArray());
                     //Adjust the actual string value of the property based on the selection
-                    if (index < 1)
-                        property.stringValue = "";
-                    else
-                        property.stringValue = tagList[index];
+                    property.stringValue = index < 1 ? string.Empty : tagList[index];
                 }
                 EditorGUI.EndProperty();
             }

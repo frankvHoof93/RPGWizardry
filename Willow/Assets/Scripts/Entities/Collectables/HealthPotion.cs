@@ -10,12 +10,14 @@ namespace nl.SWEG.Willow.Entities.Collectables
     public class HealthPotion : ACollectable
     {
         #region Variables
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Amount of Health to add from this Potion
         /// </summary>
         [SerializeField]
         [Tooltip("Amount of Health to add from this Potion")]
         private ushort healAmount;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods

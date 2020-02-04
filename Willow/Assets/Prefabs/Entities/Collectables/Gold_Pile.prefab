@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7295321308355197159}
   - component: {fileID: -4833950533955187618}
   m_Layer: 16
-  m_Name: GoldPile
+  m_Name: Gold_Pile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,4 +122,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opacityRadius: 40
   opacityOffset: {x: 0, y: 0}
-  Amount: 5
+  amount: 5

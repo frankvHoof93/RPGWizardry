@@ -15,11 +15,12 @@ namespace nl.SWEG.Willow.UI.Spells
     {
         #region Variables
         #region Editor
-        [Header("Spell-Details")]
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         #region SpellDetails
         /// <summary>
         /// Prefab for Spell-Info
         /// </summary>
+        [Header("Spell-Details")]
         [SerializeField]
         [Tooltip("Prefab for Spell-Info")]
         private GameObject spellInfo;
@@ -28,14 +29,14 @@ namespace nl.SWEG.Willow.UI.Spells
         /// </summary>
         [SerializeField]
         [Tooltip("Menu for Spell-Details")]
-        private SpellPageManager SpellCanvas;
+        private SpellPageManager spellCanvas;
         #endregion
 
-        [Header("List")]
         #region List
         /// <summary>
         /// Left Page for List
         /// </summary>
+        [Header("List")]
         [SerializeField]
         [Tooltip("Left Page for List")]
         private Transform leftPage;
@@ -59,15 +60,16 @@ namespace nl.SWEG.Willow.UI.Spells
         private GameObject nextPageButton;
         #endregion
 
-        [Header("Equipping")]
         #region Equipping
         /// <summary>
         /// UI for currently selected Spells
         /// </summary>
+        [Header("Equipping")]
         [SerializeField]
         [Tooltip("UI for currently selected Spells")]
-        private SpellHUD[] currSpells;
+        private SpellHUD[] currentSpells;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
@@ -86,7 +88,7 @@ namespace nl.SWEG.Willow.UI.Spells
         /// <summary>
         /// Current Selection for Equipping
         /// </summary>
-        private int? equipSelection = null;
+        private int? equipSelection;
         /// <summary>
         /// UI-Objects in List
         /// </summary>
@@ -122,8 +124,8 @@ namespace nl.SWEG.Willow.UI.Spells
         /// <param name="index">Index for Target</param>
         public void SelectEquipTarget(int index)
         {
-            if (index < 0 || index >= currSpells.Length)
-                throw new ArgumentOutOfRangeException("index", "Invalid Index");
+            if (index < 0 || index >= currentSpells.Length)
+                throw new ArgumentOutOfRangeException(nameof(index), "Invalid Index");
 
             if (equipSelection.HasValue)
             {
@@ -132,7 +134,7 @@ namespace nl.SWEG.Willow.UI.Spells
                 DeselectEquipTarget();
             }
             equipSelection = index;
-            currSpells[index].Select();
+            currentSpells[index].Select();
         }
 
         /// <summary>
@@ -141,8 +143,8 @@ namespace nl.SWEG.Willow.UI.Spells
         public void DeselectEquipTarget()
         {
             equipSelection = null;
-            for (ushort i = 0; i < currSpells.Length; i++)
-                currSpells[i].Deselect();
+            for (ushort i = 0; i < currentSpells.Length; i++)
+                currentSpells[i].Deselect();
         }
         #endregion
 
@@ -181,10 +183,7 @@ namespace nl.SWEG.Willow.UI.Spells
                 SpellTab newSpellInfo = Instantiate(spellInfo).GetComponent<SpellTab>();
                 newSpellInfo.SetController(this);
                 newSpellInfo.Populate(page);
-                if (i >= (currentPage - 1) * 16 + 8)
-                    newSpellInfo.transform.SetParent(rightPage);
-                else
-                    newSpellInfo.transform.SetParent(leftPage);
+                newSpellInfo.transform.SetParent(i >= (currentPage - 1) * 16 + 8 ? rightPage : leftPage);
                 spellTabs.Add(newSpellInfo);
             }
             // Set Page-Switch Buttons
@@ -219,8 +218,8 @@ namespace nl.SWEG.Willow.UI.Spells
         /// <param name="page">SpellPage to display details for</param>
         private void OpenDetails(SpellPage page)
         {
-            SpellCanvas.gameObject.SetActive(true);
-            SpellCanvas.SetSelectedSpell(page);
+            spellCanvas.gameObject.SetActive(true);
+            spellCanvas.SetSelectedSpell(page);
             transform.gameObject.SetActive(false);
         }
 
@@ -230,10 +229,10 @@ namespace nl.SWEG.Willow.UI.Spells
         private void UpdateSpellHUD()
         {
             CastingManager mgr = PlayerManager.Instance.CastingManager;
-            for (ushort i = 0; i < currSpells.Length; i++)
-                currSpells[i].SetSpell(mgr.GetSpell(i));
+            for (ushort i = 0; i < currentSpells.Length; i++)
+                currentSpells[i].SetSpell(mgr.GetSpell(i));
             if (equipSelection.HasValue)
-                currSpells[equipSelection.Value].Select();
+                currentSpells[equipSelection.Value].Select();
         }
         #endregion
         #endregion

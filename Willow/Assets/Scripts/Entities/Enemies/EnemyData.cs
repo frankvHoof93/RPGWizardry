@@ -22,13 +22,13 @@ namespace nl.SWEG.Willow.Entities.Enemies
             /// </summary>
             [SerializeField]
             [Tooltip("Loot-Values for Dust-Pile")]
-            public LootSpawn dust;
+            public LootSpawn Dust;
             /// <summary>
             /// Loot-Values for Gold-Pile
             /// </summary>
             [SerializeField]
             [Tooltip("Loot-Values for Gold-Pile")]
-            public LootSpawn gold;
+            public LootSpawn Gold;
             //[SerializeField] // Removed, as Pages require Spells to spawn (not every enemy has a spell)
             //public LootSpawn page;
             /// <summary>
@@ -36,7 +36,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
             /// </summary>
             [SerializeField]
             [Tooltip("Loot-Values for Health-Potion(s)")]
-            public LootSpawn potion;           
+            public LootSpawn Potion;           
         }
         /// <summary>
         /// Chance-Value for spawning Loot
@@ -49,14 +49,14 @@ namespace nl.SWEG.Willow.Entities.Enemies
             /// </summary>
             [SerializeField]
             [Tooltip("Amount for spawned Loot")]
-            public uint amount;
+            public uint Amount;
             /// <summary>
             /// Chance for spawning Loot (0-1)
             /// </summary>
             [SerializeField]
             [Range(0, 1)]
             [Tooltip("Chance for spawning Loot (0-1)")]
-            public float chance;
+            public float Chance;
         }
         #endregion
 
@@ -77,6 +77,10 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// Base Speed for this Enemy
         /// </summary>
         public float Speed => enemySpeed;
+        /// <summary>
+        /// Base Knockback for this Enemy
+        /// </summary>
+        public int Knockback => knockback;
         /// <summary>
         /// Cooldown after Spawning for this Enemy (time until its AI and attacks are enabled)
         /// </summary>
@@ -100,11 +104,12 @@ namespace nl.SWEG.Willow.Entities.Enemies
         #endregion
 
         #region Editor
-        [Header("Stats")]
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         #region Stats
         /// <summary>
         /// Name of this Enemy
         /// </summary>
+        [Header("Stats")]
         [SerializeField]
         [Tooltip("Name of this Enemy")]
         private string enemyName;
@@ -126,33 +131,39 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [SerializeField]
         [Tooltip("Base Speed for this Enemy")]
         private float enemySpeed;
+        /// <summary>
+        /// Base Knockback for this Enemy
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Base Speed for this Enemy")]
+        private int knockback;
         #endregion
 
-        [Header("Spawning")]
         #region Spawning
         /// <summary>
         /// Cooldown after Spawning for this Enemy (time until its AI and attacks are enabled)
         /// </summary>
+        [Header("Spawning")]
         [SerializeField]
         [Tooltip("Cooldown after Spawning for this Enemy (time until its AI and attacks are enabled)")]
         protected FloatRange spawnCooldown;
         #endregion
 
-        [Header("Loot")]
         #region Loot
         /// <summary>
         /// Loot that can be dropped by this Enemy
         /// </summary>
+        [Header("Loot")]
         [SerializeField]
         [Tooltip("Loot that can be dropped by this Enemy")]
         private LootTable droppedLoot;
         #endregion
 
-        [Header("Opacity")]
         #region Opacity
         /// <summary>
         /// Priority for rendering Opacity
         /// </summary>
+        [Header("Opacity")]
         [SerializeField]
         [Range(1, 10000)]
         [Tooltip("Priority for rendering Opacity")]
@@ -170,6 +181,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         [Tooltip("Opacity-Offset from Transform (in World-Space)")]
         private Vector2 opacityOffset;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
     }
 }

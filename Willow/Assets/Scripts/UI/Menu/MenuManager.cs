@@ -37,6 +37,7 @@ namespace nl.SWEG.Willow.UI.Menu
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Background for Menu. Only shown if Game is not running
         /// </summary>
@@ -45,10 +46,10 @@ namespace nl.SWEG.Willow.UI.Menu
         private GameObject background;
 
         #region MainMenu
-        [Header("Main Menu")]
         /// <summary>
         /// Panel with MainMenu-Options
         /// </summary>
+        [Header("Main Menu")]
         [SerializeField]
         [Tooltip("Panel with MainMenu-Options")]
         private GameObject mainMenuPanel;
@@ -61,19 +62,19 @@ namespace nl.SWEG.Willow.UI.Menu
         #endregion
 
         #region GameMenu
-        [Header("Game Menu")]
         /// <summary>
         /// Panel with PauseMenu-Options
         /// </summary>
+        [Header("Game Menu")]
         [SerializeField]
         private GameObject pauseMenuPanel;
         #endregion
 
         #region Spell Canvases
-        [Header("Spell Canvases")]
         /// <summary>
         /// Transform for Canvas holding Spell-List
         /// </summary>
+        [Header("Spell Canvases")]
         [SerializeField]
         [Tooltip("Transform for Canvas holding Spell-List")]
         private Transform spellListCanvas;
@@ -90,6 +91,7 @@ namespace nl.SWEG.Willow.UI.Menu
         [Tooltip("Transform for Canvas for Research-MiniGame")]
         private Transform researchCanvas;
         #endregion
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 
@@ -102,7 +104,7 @@ namespace nl.SWEG.Willow.UI.Menu
         public void Init(bool loadPauseMenu)
         {
             background.SetActive(!loadPauseMenu);
-            if (CameraManager.Exists)
+            if (CameraManager.Exists && CameraManager.Instance.AudioListener.enabled)
                 CameraManager.Instance.ToggleAudio();
             if (!loadPauseMenu)
                 InitMainMenu();

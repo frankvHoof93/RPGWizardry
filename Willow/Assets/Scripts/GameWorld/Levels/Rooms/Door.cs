@@ -26,10 +26,12 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// The place where the player spawns when they enter the room through this Door
         /// </summary>
-        public Transform Spawn { get { return spawn; } }
+        public Transform Spawn => spawn;
+
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Tag for Player
         /// </summary>
@@ -62,11 +64,12 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         [SerializeField]
         [Tooltip("Sprite displayed when Door is Closed")]
         private GameObject closedSprite;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Private
         /// <summary>
-        /// The trigger which teleports the player to the other room.
+        /// The trigger which moves the player to the other room
         /// </summary>
         private Collider2D coll;
         /// <summary>

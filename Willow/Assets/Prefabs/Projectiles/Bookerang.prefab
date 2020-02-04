@@ -178,7 +178,7 @@ MonoBehaviour:
   opacityPriority: 2
   opacityRadius: 35
   opacityOffset: {x: 0, y: 0}
-  SpinSpeed: 1500
+  spinSpeed: 1500
   hangTime: 0.3
   spriteTransform: {fileID: 2378370442992230203}
   returnSound: {fileID: 8300000, guid: c0f8e3a9639de9049b00754b82de4735, type: 3}

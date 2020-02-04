@@ -22,11 +22,11 @@ namespace nl.SWEG.Willow.Sorcery
         /// <summary>
         /// Name of Spell
         /// </summary>
-        public string SpellTitle { get => spell.Name; }
+        public string SpellTitle => spell.Name;
         /// <summary>
         /// Description of Spell
         /// </summary>
-        public string SpellDescription { get => spell.Description; }
+        public string SpellDescription => spell.Description;
         /// <summary>
         /// Whether the Spell on this Page has been Unlocked
         /// </summary>
@@ -34,16 +34,18 @@ namespace nl.SWEG.Willow.Sorcery
         /// <summary>
         /// Dust-Cost for unlocking Spell  
         /// </summary>
-        public uint DustCost { get => spell.SpellCost; }
+        public uint DustCost => spell.SpellCost;
         #endregion
 
         #region Editor
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// Data for Spell
         /// </summary>
         [SerializeField]
         [Tooltip("Data for Spell")]
         private SpellData spell;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
         #endregion
 

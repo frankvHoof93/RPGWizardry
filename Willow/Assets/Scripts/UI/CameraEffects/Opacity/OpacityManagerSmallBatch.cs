@@ -21,23 +21,23 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
         /// <summary>
         /// ID for _UseSeeThrough-Property
         /// </summary>
-        private int useSeeThroughID = Shader.PropertyToID("_UseSeeThrough");
+        private readonly int useSeeThroughID = Shader.PropertyToID("_UseSeeThrough");
         /// <summary>
         /// ID for _SeeThroughLength-Property
         /// </summary>
-        private int seeThroughLengthID = Shader.PropertyToID("_SeeThroughLength");
+        private readonly int seeThroughLengthID = Shader.PropertyToID("_SeeThroughLength");
         /// <summary>
         /// ID for _SeeThroughRadii-Property
         /// </summary>
-        private int seeThroughRadiiID = Shader.PropertyToID("_SeeThroughRadii");
+        private readonly int seeThroughRadiiID = Shader.PropertyToID("_SeeThroughRadii");
         /// <summary>
         /// ID for _SeeThroughCenter1-Property
         /// </summary>
-        private int seeThroughCenter1ID = Shader.PropertyToID("_SeeThroughCenter1");
+        private readonly int seeThroughCenter1ID = Shader.PropertyToID("_SeeThroughCenter1");
         /// <summary>
         /// ID for _SeeThroughCenter2-Property
         /// </summary>
-        private int seeThroughCenter2ID = Shader.PropertyToID("_SeeThroughCenter2");
+        private readonly int seeThroughCenter2ID = Shader.PropertyToID("_SeeThroughCenter2");
         #endregion
 
         #region Methods
@@ -70,7 +70,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
             for (int i = 0; i < amount; i++)
             {
                 OpacityObject obj = objects[i];
-                Vector3 screenPos = cam.WorldToScreenPoint(obj.transform.position + (Vector3)obj.opacity.OpacityOffset);
+                Vector3 screenPos = cam.WorldToScreenPoint(obj.Transform.position + (Vector3)obj.Opacity.OpacityOffset);
                 Vector4 v = i < 2 ? vec : vec2;
                 if (i % 2 == 0) // Even indices
                 {
@@ -86,7 +86,7 @@ namespace nl.SWEG.Willow.UI.CameraEffects.Opacity
                     vec = v;
                 else
                     vec2 = v;
-                radius[i] = ResolutionMath.ConvertForWidth(obj.opacity.OpacityRadius);
+                radius[i] = ResolutionMath.ConvertForWidth(obj.Opacity.OpacityRadius);
             }
             for (int i = 0; i < renderers.Length; i++)
             {

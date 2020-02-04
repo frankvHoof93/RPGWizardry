@@ -15,16 +15,18 @@ namespace nl.SWEG.Willow.Entities.Collectables
         /// </summary>
         internal SpellPage Page
         {
-            get { return page; }
-            set { page = value; }
+            get => page;
+            set => page = value;
         }
 
+        #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// SpellPage in Object
         /// </summary>
         [SerializeField]
         [Tooltip("SpellPage in Object")]
         private SpellPage page;
+        #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
         #endregion
 
         #region Methods
@@ -40,7 +42,7 @@ namespace nl.SWEG.Willow.Entities.Collectables
         {
             bool value = target.AddPage(page);
             if (!value)
-                Destroy(gameObject); // Player already has this spell. Destroy gameobject
+                Destroy(gameObject); // Player already has this spell. Destroy GameObject
             return value; // Destroying of GameObject handled by base-class
         }
         #endregion

@@ -3,7 +3,7 @@
     /// <summary>
     /// TODO: Elements add different effects to Spells
     /// </summary>
-    public enum Element : int
+    public enum Element : byte
     {
         /// <summary>
         /// No Element
