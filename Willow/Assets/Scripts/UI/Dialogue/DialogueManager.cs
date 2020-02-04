@@ -59,6 +59,7 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// Begins dialogue queue
         /// </summary>
         /// <param name="dialogue">Data for Dialogue</param>
+        /// <param name="performOnComplete">Action to perform on completion of Dialogue</param>
         public void StartDialogue(DialogueData dialogue, UnityAction performOnComplete = null)
         {
             enabled = true;
