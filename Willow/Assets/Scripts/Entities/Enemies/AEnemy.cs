@@ -87,14 +87,16 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             return false; // Enemies cannot heal
         }
+
         /// <summary>
         /// Damages this Enemy
         /// </summary>
         /// <param name="amount">Amount of Damage to inflict</param>
-        public void Damage(ushort amount)
+        /// <returns>True if Damage was inflicted</returns>
+        public bool Damage(ushort amount)
         {
             if (Health == 0)
-                return; // Already Dead. Hit while animating death
+                return false; // Already Dead. Hit while animating death
             if (amount >= Health)
             {
                 Health = 0;
@@ -107,7 +109,9 @@ namespace nl.SWEG.Willow.Entities.Enemies
             enemyRenderer.SetSpriteColor(Color.red);
             PopupFactory.CreateDamageUI(transform.position, amount, enemyRenderer, Color.red);
             StartCoroutine(CoroutineMethods.RunDelayed(() => enemyRenderer.SetSpriteColor(Color.white), .1f));
+            return true;
         }
+
         /// <summary>
         /// Adds Listener to Death-Event
         /// </summary>

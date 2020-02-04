@@ -87,19 +87,20 @@ namespace nl.SWEG.Willow.Entities.Enemies
             StartCoroutine(DieAnimation());
         }
         #endregion
-
         #region Unity
         /// <summary>
         /// If it touches an object in the target layer, it damages it
         /// </summary>
         /// <param name="collision">Collision that occurred</param>
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (attackCollisionMask.HasLayer(collision.gameObject.layer))
             {
-                collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f));
-                Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
-                body?.AddForce(movement * (big ? data.Knockback : (data.Knockback * 0.75f)));
+                if (collision.gameObject.GetComponent<IHealth>()?.Damage(big ? data.Attack : (ushort)(data.Attack * 0.5f)) ?? false)
+                {
+                    Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
+                    body?.AddForce(movement * (big ? data.Knockback : (data.Knockback * 0.75f)));
+                }
             }
         }
         #endregion

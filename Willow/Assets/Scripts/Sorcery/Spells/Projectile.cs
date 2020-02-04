@@ -137,7 +137,8 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collisionLayer.HasLayer(collision.gameObject.layer))
-                Effect(collision);
+                if (collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage) ?? false)
+                    Effect(collision);
         }
         #endregion
 
@@ -167,8 +168,6 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             //apply knockback
             Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
             body.AddForce(transform.up * data.Knockback);
-            //oh man i can feel the effect
-            collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage);
             Destroy(gameObject); // TODO: Animation?
         }
         #endregion

@@ -135,10 +135,10 @@ namespace nl.SWEG.Willow.Player
         /// Damages Player
         /// </summary>
         /// <param name="amount">Amount of Damage to inflict</param>
-        public void Damage(ushort amount)
+        public bool Damage(ushort amount)
         {
             if (Health == 0)
-                return; // Already Dead
+                return false; // Already Dead
             if (!isInvincible)
             {
                 isInvincible = true;
@@ -156,7 +156,9 @@ namespace nl.SWEG.Willow.Player
                 ScreenShake.Instance.Shake(0.5f, 0.2f);
                 // Stun Player
                 MovementManager.Stun(0.2f);
+                return true;
             }
+            return false;
         }
 
         /// <summary>
