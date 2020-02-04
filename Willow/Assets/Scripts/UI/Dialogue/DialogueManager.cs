@@ -2,6 +2,7 @@
 using nl.SWEG.Willow.Utils.Functions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace nl.SWEG.Willow.UI.Dialogue
 {
@@ -45,6 +46,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// Text-Object in InstructionPrompt
         /// </summary>
         private TextMeshProUGUI promptText;
+        /// <summary>
+        /// Action performed when Dialogue is completed
+        /// </summary>
+        private UnityAction onComplete;
         #endregion
         #endregion
 
@@ -54,9 +59,10 @@ namespace nl.SWEG.Willow.UI.Dialogue
         /// Begins dialogue queue
         /// </summary>
         /// <param name="dialogue">Data for Dialogue</param>
-        public void StartDialogue(DialogueData dialogue)
+        public void StartDialogue(DialogueData dialogue, UnityAction performOnComplete = null)
         {
             enabled = true;
+            onComplete = performOnComplete;
             HideInstructionPrompt(); //Turn off the TextBox
             dialogueUI.StartDialogue(dialogue);
             animator.SetBool("IsOpen", true);
@@ -112,6 +118,8 @@ namespace nl.SWEG.Willow.UI.Dialogue
         {
             // Closes dialogue box
             animator.SetBool("IsOpen", false);
+            onComplete?.Invoke();
+            onComplete = null;
             StartCoroutine(CoroutineMethods.RunDelayed(() => dialogueUI.ClearDialogue(), .25f));
             enabled = false;
         }

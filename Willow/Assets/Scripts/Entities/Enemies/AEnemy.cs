@@ -120,6 +120,15 @@ namespace nl.SWEG.Willow.Entities.Enemies
         {
             death += listener;
         }
+
+        /// <summary>
+        /// Removes Listener from Death-event
+        /// </summary>
+        /// <param name="listener">Listener to Remove</param>
+        public void RemoveDeathListener(Die listener)
+        {
+            death -= listener;
+        }
         #endregion
 
         #region Unity
@@ -197,7 +206,7 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// </summary>
         private void OnDestroy()
         {
-            death?.Invoke();
+            death?.Invoke(gameObject);
         }
         #endregion
         #endregion

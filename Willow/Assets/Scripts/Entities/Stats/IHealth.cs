@@ -12,7 +12,7 @@ namespace nl.SWEG.Willow.Entities.Stats
     /// <summary>
     /// Delegate for Death
     /// </summary>
-    public delegate void Die();
+    public delegate void Die(GameObject obj);
 
     /// <summary>
     /// Interface for Entities with Health

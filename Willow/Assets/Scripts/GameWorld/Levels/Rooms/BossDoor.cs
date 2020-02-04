@@ -25,8 +25,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         private IEnumerator LoadScene()
         {
             //Make sure the game is paused
-            if (!GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause();
+            GameManager.Instance.PauseGame();
 
             //Fade the screen out
             CameraManager.Instance.Fade(1, 0);

@@ -1,5 +1,6 @@
 ﻿using nl.SWEG.Willow.Entities.Enemies;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
@@ -44,11 +45,11 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// Whether the Room has been Cleared (No more Enemies)
         /// </summary>
-        public bool Cleared => enemyHolder.transform.childCount == 0;
+        public bool Cleared => enemies.Count == 0;
         /// <summary>
-        /// RoomCleared event
+        /// List of Enemies in Room
         /// </summary>
-        public static event RoomClear clearedRoom; // TODOCLEAN:
+        public IReadOnlyList<AEnemy> Enemies => enemies.AsReadOnly();
         #endregion
 
         #region Editor
@@ -80,17 +81,35 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// Whether this Room has spawned its enemies (prevents duplicate spawning when re-entering Room)
         /// </summary>
         private bool hasSpawnedEnemies;
+        /// <summary>
+        /// RoomCleared event
+        /// </summary>
+        private event RoomClear clearedRoom;
+        /// <summary>
+        /// Enemies in Room (Instances)
+        /// </summary>
+        private readonly List<AEnemy> enemies = new List<AEnemy>();
         #endregion
         #endregion
 
         #region Methods
         #region Public
         /// <summary>
-        /// Opens/Closes Doors based on whether there are Enemies in the Room
+        /// Adds Listener to RoomClear-Event for this Room
         /// </summary>
-        public void CheckDoors()
+        /// <param name="listener">Listener to add</param>
+        public void AddRoomClearListener(RoomClear listener)
         {
-            CheckRoomClear();
+            clearedRoom += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from RoomClear-Event for this Room
+        /// </summary>
+        /// <param name="listener">Listener to remove</param>
+        public void RemoveRoomClearListener(RoomClear listener)
+        {
+            clearedRoom -= listener;
         }
         #endregion
 
@@ -138,11 +157,10 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
         /// <summary>
         /// Checks if the room still has enemies. if it doesn't, the doors open.
         /// </summary>
-        protected virtual void CheckRoomClear()
+        protected virtual void CheckRoomClear(GameObject deadEnemy)
         {
-            if (enemyHolder == null)
-                return;
-            if (Cleared)
+            enemies.Remove(deadEnemy.GetComponent<AEnemy>());
+            if (GameManager.Exists && GameManager.Instance.State != GameManager.GameState.GameOver && Cleared)
             {
                 clearedRoom?.Invoke(); //Runs event when room is cleared
                 OpenDoors();
@@ -163,7 +181,9 @@ namespace nl.SWEG.Willow.GameWorld.Levels.Rooms
                 enemy.transform.SetParent(enemyHolder.transform);
                 enemy.transform.localPosition = template.SpawnPosition;
                 enemy.transform.rotation = Quaternion.Euler(0, 0, template.SpawnRotation);
-                enemy.GetComponent<AEnemy>().AddDeathListener(CheckRoomClear);
+                AEnemy script = enemy.GetComponent<AEnemy>();
+                enemies.Add(script);
+                script.AddDeathListener(CheckRoomClear);
             }
             hasSpawnedEnemies = true;
         }

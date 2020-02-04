@@ -15,7 +15,20 @@ namespace nl.SWEG.Willow.GameWorld.Levels
     /// </summary>
     public class FloorManager : SingletonBehaviour<FloorManager>
     {
+        #region InnerTypes
+        /// <summary>
+        /// Delegate for Event when a Room is Loaded/Unloaded
+        /// </summary>
+        /// <param name="room">Room that was Loaded/Unloaded</param>
+        public delegate void OnRoomLoad(Room room);
+        #endregion
+
         #region Variables
+        /// <summary>
+        /// Currently Loaded Room
+        /// </summary>
+        public Room CurrentRoom { get; private set; }
+
         #pragma warning disable 0649 // Hide Null-Warning for Editor-Variables
         /// <summary>
         /// All Rooms on the Floor
@@ -26,9 +39,13 @@ namespace nl.SWEG.Willow.GameWorld.Levels
         #pragma warning restore 0649 // Restore Null-Warning after Editor-Variables
 
         /// <summary>
-        /// Currently Loaded Room
+        /// Event fired when Room is Loaded. Event is fired AFTER Room is Enabled
         /// </summary>
-        private Room activeRoom;
+        private event OnRoomLoad onRoomLoad;
+        /// <summary>
+        /// Event fired when Room is Unloaded. Event is fired BEFORE Room is Disabled
+        /// </summary>
+        private event OnRoomLoad onRoomUnload;
         #endregion
 
         #region Methods
@@ -50,19 +67,65 @@ namespace nl.SWEG.Willow.GameWorld.Levels
         {
             return rooms.OfType<StartingRoom>().First()?.SpawnPoint.position ?? Vector3.zero;
         }
+
+        #region EventListeners
+        /// <summary>
+        /// Adds Listener to RoomLoad-Event
+        /// </summary>
+        /// <param name="listener">Listener to add</param>
+        public void AddRoomLoadListener(OnRoomLoad listener)
+        {
+            onRoomLoad += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from RoomLoad-Event
+        /// </summary>
+        /// <param name="listener">Listener to remove</param>
+        public void RemoveRoomLoadListener(OnRoomLoad listener)
+        {
+            onRoomLoad -= listener;
+        }
+
+        /// <summary>
+        /// Adds Listener to RoomUnload-Event
+        /// </summary>
+        /// <param name="listener">Listener to add</param>
+        public void AddRoomUnloadListener(OnRoomLoad listener)
+        {
+            onRoomUnload += listener;
+        }
+
+        /// <summary>
+        /// Removes Listener from RoomUnload-Event
+        /// </summary>
+        /// <param name="listener">Listener to remove</param>
+        public void RemoveRoomUnloadListener(OnRoomLoad listener)
+        {
+            onRoomUnload -= listener;
+        }
+        #endregion
         #endregion
 
         #region Unity
         /// <summary>
-        /// Loads first Room
+        /// Disables all Rooms in Floor
         /// </summary>
         protected override void Awake()
         {
             base.Awake();
             for (int i = 0; i < rooms.Length; i++)
                 rooms[i].Disable();
-            activeRoom = rooms[0];
-            activeRoom.Enable();
+        }
+
+        /// <summary>
+        /// Enables first Room
+        /// </summary>
+        private void Start()
+        {
+            CurrentRoom = rooms[0];
+            CurrentRoom.Enable();
+            onRoomLoad?.Invoke(CurrentRoom);
         }
         #endregion
 
@@ -74,21 +137,22 @@ namespace nl.SWEG.Willow.GameWorld.Levels
         private IEnumerator SwitchRoom(Door destination)
         {
             // Make sure the game is paused
-            if (!GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause();
+            GameManager.Instance.PauseGame();
             // Fade the screen out
             CameraManager.instance.Fade(1, 0);
             while (CameraManager.instance.Fading)
                 yield return null;
             // Disable the previous room
-            activeRoom?.Disable();
+            onRoomUnload?.Invoke(CurrentRoom);
+            CurrentRoom?.Disable();
             // Clear Loot from old Room
             LootSpawner.Instance.ClearLoot();
             // Move the player to new room
             PlayerManager.Instance.transform.position = destination.Spawn.position;
             // Enable the new room
-            activeRoom = destination.Room;
-            activeRoom.Enable();
+            CurrentRoom = destination.Room;
+            CurrentRoom.Enable();
+            onRoomLoad?.Invoke(CurrentRoom);
             // Move Camera to Player
             CameraManager.Instance.transform.position = PlayerManager.Instance.transform.position;
             // Fade the screen back in
@@ -96,10 +160,7 @@ namespace nl.SWEG.Willow.GameWorld.Levels
             while (CameraManager.instance.Fading)
                 yield return null;
             // Make sure the player can move again
-            if (GameManager.Instance.Paused)
-                GameManager.Instance.TogglePause();
-            // Close doors in new Room if necessary
-            activeRoom.CheckDoors();
+            GameManager.Instance.ResumeGame();
         }
         #endregion
         #endregion
