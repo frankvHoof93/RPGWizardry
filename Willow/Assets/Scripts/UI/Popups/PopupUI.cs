@@ -121,7 +121,8 @@ namespace nl.SWEG.Willow.UI.Popups
         /// </summary>
         private void Update()
         {
-            transform.Translate(Vector3.up * movementSpeed * Time.deltaTime);
+            if (!GameManager.Instance.Paused)
+                transform.Translate(Vector3.up * movementSpeed * Time.deltaTime);
         }
         #endregion
         #endregion
