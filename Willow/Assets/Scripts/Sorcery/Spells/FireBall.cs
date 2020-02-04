@@ -27,5 +27,14 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             splash.transform.localScale = transform.localScale; // Scale relative to Fireball-size
             base.Effect(collision);
         }
+
+        /// <summary>
+        /// Called when Projectile hits a Wall
+        /// </summary>
+        /// <param name="collision">Wall that was hit</param>
+        protected override void HitWall(Collider2D collision)
+        {
+            Effect(collision);
+        }
     }
 }

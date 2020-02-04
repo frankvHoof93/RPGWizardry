@@ -134,6 +134,15 @@ namespace nl.SWEG.Willow.Sorcery.Spells
                 Return();
             }
         }
+
+        /// <summary>
+        /// Called when Bookerang hits a Wall. Returns to Player
+        /// </summary>
+        /// <param name="collision">Wall that was hit</param>
+        protected override void HitWall(Collider2D collision)
+        {
+            Return();
+        }
         #endregion
 
         #region Private

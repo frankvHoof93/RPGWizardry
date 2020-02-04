@@ -136,9 +136,14 @@ namespace nl.SWEG.Willow.Sorcery.Spells
         /// <param name="collision">Collision that occurred</param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collisionLayer.HasLayer(collision.gameObject.layer))
-                if (collision.gameObject.GetComponent<IHealth>()?.Damage(data.Damage) ?? false)
+            if (collisionLayer.HasLayer(collision.gameObject.layer))
+            {
+                IHealth health = collision.gameObject.GetComponent<IHealth>();
+                if (health == null || collision.gameObject.layer == wallLayer)
+                    HitWall(collision);
+                else if (health.Damage(data.Damage))
                     Effect(collision);
+            }
         }
         #endregion
 
@@ -166,10 +171,16 @@ namespace nl.SWEG.Willow.Sorcery.Spells
                 AudioManager.Instance.PlaySound(data.ImpactClip);
             coll.enabled = false;
             //apply knockback
-            Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
-            body.AddForce(transform.up * data.Knockback);
+            Rigidbody2D body = collision?.gameObject.GetComponent<Rigidbody2D>();
+            body?.AddForce(transform.up * data.Knockback);
             Destroy(gameObject); // TODO: Animation?
         }
+
+        /// <summary>
+        /// Called when Projectile hits a Wall
+        /// </summary>
+        /// <param name="collision">Wall that was hit</param>
+        protected abstract void HitWall(Collider2D collision);
         #endregion
         #endregion
     }

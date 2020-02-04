@@ -54,5 +54,13 @@ namespace nl.SWEG.Willow.Sorcery.Spells
             // Attack complete; destroy self after displaying for a short time
             Destroy(gameObject,0.1f);
         }
+        /// <summary>
+        /// Called when LightningBolt hits a wall
+        /// </summary>
+        /// <param name="collision">Wall that was hit</param>
+        protected override void HitWall(Collider2D collision)
+        {
+            Effect(collision);
+        }
     }
 }
