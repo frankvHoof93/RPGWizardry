@@ -9,7 +9,7 @@ namespace nl.SWEG.Willow.GameWorld
     /// <summary>
     /// Manages Camera within the GameWorld
     /// </summary>
-    [RequireComponent(typeof(Camera), typeof(AudioListener), typeof(ScreenFade))]
+    [RequireComponent(typeof(Camera), typeof(ScreenFade))]
     public class CameraManager : SingletonBehaviour<CameraManager>
     {
         #region Variables
@@ -18,10 +18,6 @@ namespace nl.SWEG.Willow.GameWorld
         /// Camera-Component for Camera
         /// </summary>
         public Camera Camera { get; private set; }
-        /// <summary>
-        /// Listener for Audio in Scene
-        /// </summary>
-        public AudioListener AudioListener { get; private set; }
         /// <summary>
         /// Whether the Camera is currently Fading In or Out
         /// </summary>
@@ -61,14 +57,6 @@ namespace nl.SWEG.Willow.GameWorld
         #region Methods
         #region Public
         /// <summary>
-        /// Toggles AudioListener on Camera
-        /// </summary>
-        public void ToggleAudio()
-        {
-            AudioListener.enabled = !AudioListener.enabled;
-        }
-
-        /// <summary>
         /// Fades the camera visibility between 2 values
         /// </summary>
         /// <param name="from">Starting Value for Fade</param>
@@ -103,7 +91,6 @@ namespace nl.SWEG.Willow.GameWorld
             base.Awake();
             Camera = GetComponent<Camera>();
             screenFader = GetComponent<ScreenFade>();
-            AudioListener = GetComponent<AudioListener>();
         }
 
         /// <summary>

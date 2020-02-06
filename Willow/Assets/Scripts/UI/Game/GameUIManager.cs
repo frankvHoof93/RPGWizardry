@@ -118,8 +118,6 @@ namespace nl.SWEG.Willow.UI.Game
                 {
                     SceneLoader.Instance.LoadGameScene();
                     SetCursor(CursorType.Crosshair);
-                    if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
-                        CameraManager.Instance.ToggleAudio();
                     if (GameManager.Instance.Paused)
                         GameManager.Instance.TogglePause(); // Unpause Game
                 }

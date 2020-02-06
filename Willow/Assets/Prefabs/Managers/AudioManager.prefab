@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1900070539473347661}
   - component: {fileID: 1900070539473347659}
   - component: {fileID: 1900070539473347658}
+  - component: {fileID: 1243723030410189818}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -142,3 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasRootObject: 0
   musicSource: {fileID: 1900070539473347659}
+--- !u!81 &1243723030410189818
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900070539473347660}
+  m_Enabled: 1

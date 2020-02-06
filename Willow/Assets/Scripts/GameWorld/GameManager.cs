@@ -140,8 +140,6 @@ namespace nl.SWEG.Willow.GameWorld
                 return;
             SceneManager.sceneUnloaded -= OnExitMenu;
             Paused = false;
-            if (CameraManager.Exists && !CameraManager.Instance.AudioListener.enabled)
-                CameraManager.Instance.ToggleAudio();
         }
         #endregion
 
@@ -164,8 +162,6 @@ namespace nl.SWEG.Willow.GameWorld
             // TODO: Animation
             // TODO: Delete save game
             yield return new WaitForSeconds(2f);
-            if (CameraManager.Exists && CameraManager.Instance.AudioListener.enabled)
-                CameraManager.Instance.ToggleAudio();
             SceneLoader.Instance.LoadGameOverScene();
         }
         #endregion
