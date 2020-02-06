@@ -139,7 +139,7 @@ namespace nl.SWEG.Willow.UI.Spells
                 TextMeshProUGUI symbol = symbolInstance.GetComponentInChildren<TextMeshProUGUI>(true);                
                 symbol.SetText($"<sprite={r.Next(0, 6)}>"); // Set Symbol
                 Vector3 pos = symbol.transform.localPosition;
-                pos.y = (float)r.NextDouble() * 150f - 75f; // Set to random Y-pos between lower & upper bound of rect
+                pos.y = (float)r.NextDouble() * 120f - 60f; // Set to random Y-pos between lower & upper bound of rect
                 symbol.transform.localPosition = pos; // Set y-position
             }
         }
