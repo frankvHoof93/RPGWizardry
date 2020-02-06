@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using nl.SWEG.Willow.Utils.Functions;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace nl.SWEG.Willow.Research.Data
@@ -14,6 +15,10 @@ namespace nl.SWEG.Willow.Research.Data
         /// Texture data for the image
         /// </summary>
         public readonly float[] ImgData;
+        /// <summary>
+        /// Index of Data before Shuffling (Shuffling occurs in Constructor)
+        /// </summary>
+        public readonly int[] OriginalIndices;
         /// <summary>
         /// Original position of the fragment in the fragment bin.
         /// <para>
@@ -45,6 +50,7 @@ namespace nl.SWEG.Willow.Research.Data
         /// <param name="data">Data for Fragment</param>
         public Fragment(float[] data)
         {
+            OriginalIndices = data.Shuffle();
             ImgData = data;
         }
         /// <summary>

@@ -32,7 +32,7 @@ namespace nl.SWEG.Willow.Utils.Functions
         /// <param name="list">List to Shuffle</param>
         public static void Shuffle<T>(this IList<T> list)
         {
-            Random rng = new Random();
+            Random rng = new Random(list.GetHashCode());
             int n = list.Count;
             while (n > 1)
             {

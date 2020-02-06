@@ -39,5 +39,31 @@ namespace nl.SWEG.Willow.Utils.Functions
 
             return result;
         }
+        /// <summary>
+        /// Shuffles Objects in Array, returning an array of indices for the original order
+        /// </summary>
+        /// <typeparam name="T">Type of Objects in Array</typeparam>
+        /// <param name="array">Array to Shuffle</param>
+        /// <returns>Array of indices, which correspond to the index of an object before the shuffle</returns>
+        public static int[] Shuffle<T>(this T[] array)
+        {
+            int[] indices = new int[array.Length];
+            for (int i = 0; i < indices.Length; i++)
+                indices[i] = i;
+            Random rng = new Random(array.GetHashCode());
+            int n = array.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = array[k];
+                array[k] = array[n];
+                array[n] = value;
+                int index = indices[k];
+                indices[k] = indices[n];
+                indices[n] = index;
+            }
+            return indices;
+        }
     }
 }
