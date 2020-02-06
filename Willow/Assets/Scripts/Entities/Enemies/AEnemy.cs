@@ -206,7 +206,8 @@ namespace nl.SWEG.Willow.Entities.Enemies
         /// </summary>
         private void OnDestroy()
         {
-            death?.Invoke(gameObject);
+            if (GameManager.Exists && GameManager.Instance.State == GameManager.GameState.GamePlay)
+                death?.Invoke(gameObject);
         }
         #endregion
         #endregion
