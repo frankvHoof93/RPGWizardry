@@ -1,0 +1,1519 @@
+fileFormatVersion: 2
+guid: 14c128eda78304542a7d4617a971a388
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8243611193821306365
+    second: spritesheetv2_0
+  - first:
+      213: -3445229862805539300
+    second: spritesheetv2_1
+  - first:
+      213: -4094480032038852782
+    second: spritesheetv2_2
+  - first:
+      213: -1681056615339736507
+    second: spritesheetv2_3
+  - first:
+      213: -6272107083346056968
+    second: spritesheetv2_4
+  - first:
+      213: -6553646801860333560
+    second: spritesheetv2_5
+  - first:
+      213: 274239925569425024
+    second: spritesheetv2_6
+  - first:
+      213: 4852624740814986224
+    second: spritesheetv2_7
+  - first:
+      213: 7784758239752609427
+    second: spritesheetv2_8
+  - first:
+      213: -2998444702587374503
+    second: spritesheetv2_9
+  - first:
+      213: 7267543134057472703
+    second: spritesheetv2_10
+  - first:
+      213: -6691432477385707522
+    second: spritesheetv2_11
+  - first:
+      213: -8196899473910529815
+    second: spritesheetv2_12
+  - first:
+      213: 649853793192206429
+    second: spritesheetv2_13
+  - first:
+      213: 8982798797103618393
+    second: spritesheetv2_14
+  - first:
+      213: -496299765660652786
+    second: spritesheetv2_15
+  - first:
+      213: -7478424706047244869
+    second: spritesheetv2_16
+  - first:
+      213: -1947974846103509216
+    second: spritesheetv2_17
+  - first:
+      213: 1874032957390026503
+    second: spritesheetv2_18
+  - first:
+      213: 4184303582193433314
+    second: spritesheetv2_19
+  - first:
+      213: 6545269402115196333
+    second: spritesheetv2_20
+  - first:
+      213: -3086586101748511002
+    second: spritesheetv2_21
+  - first:
+      213: 462173607430727841
+    second: spritesheetv2_22
+  - first:
+      213: -8846954114414845340
+    second: spritesheetv2_23
+  - first:
+      213: 6214299306120698034
+    second: spritesheetv2_24
+  - first:
+      213: 4238806962062054033
+    second: spritesheetv2_25
+  - first:
+      213: -5021496922804981735
+    second: spritesheetv2_26
+  - first:
+      213: -5806300338677324516
+    second: spritesheetv2_27
+  - first:
+      213: -3937146353249304706
+    second: spritesheetv2_28
+  - first:
+      213: -5906183839639397505
+    second: spritesheetv2_29
+  - first:
+      213: -4506174617019392386
+    second: spritesheetv2_30
+  - first:
+      213: 6761458129328095551
+    second: spritesheetv2_31
+  - first:
+      213: -8592007883920851871
+    second: spritesheetv2_32
+  - first:
+      213: -5379734292997153975
+    second: spritesheetv2_33
+  - first:
+      213: 377610270884687125
+    second: spritesheetv2_34
+  - first:
+      213: 4030304628257967249
+    second: spritesheetv2_35
+  - first:
+      213: 3980822547130288328
+    second: spritesheetv2_36
+  - first:
+      213: 973555409639743917
+    second: spritesheetv2_37
+  - first:
+      213: -4797914082510019413
+    second: spritesheetv2_38
+  - first:
+      213: -8985411101149119318
+    second: spritesheetv2_39
+  - first:
+      213: -4274680004594861784
+    second: spritesheetv2_40
+  - first:
+      213: 5721090905226362412
+    second: spritesheetv2_41
+  - first:
+      213: -6182037413217477412
+    second: spritesheetv2_42
+  - first:
+      213: -3584999155280401172
+    second: spritesheetv2_43
+  - first:
+      213: 3871034570157530862
+    second: spritesheetv2_44
+  - first:
+      213: 3925954274163758612
+    second: spritesheetv2_45
+  - first:
+      213: -5546817004190601649
+    second: spritesheetv2_46
+  - first:
+      213: 6260548073966926098
+    second: spritesheetv2_47
+  - first:
+      213: -1749388535831120919
+    second: spritesheetv2_48
+  - first:
+      213: -3054156310334291314
+    second: spritesheetv2_49
+  - first:
+      213: 5191135808194522131
+    second: Carpet_Corner
+  - first:
+      213: 7632301718608991310
+    second: Background
+  - first:
+      213: -437481316057356824
+    second: Environment 1_2
+  - first:
+      213: -649650174840223395
+    second: Environment 1_3
+  - first:
+      213: 1037468800836791079
+    second: Environment 1_4
+  - first:
+      213: -8419619635163078548
+    second: Environment 1_5
+  - first:
+      213: 1378039022988459522
+    second: Environment 1_6
+  - first:
+      213: 3320175387786479541
+    second: Environment 1_7
+  - first:
+      213: 1122235858067147950
+    second: Carpet_Edge
+  - first:
+      213: 4645664339591357710
+    second: Carpet_Center_Motif
+  - first:
+      213: 2623616011748377771
+    second: Carpet_Center_Clear
+  - first:
+      213: 5191135808194522131
+    second: Floor_Tile_Small
+  - first:
+      213: 2509696935364642779
+    second: Floor_Tile_Large_Clear
+  - first:
+      213: 6967961974503540815
+    second: Floor_Tile_Large_Motif
+  - first:
+      213: -5470906199272739189
+    second: Floor_Tile_Corner_1
+  - first:
+      213: 5425981393197179040
+    second: Floor_Tile_Corner_0
+  - first:
+      213: -1585590745476335621
+    second: Floor_Tile_Medium
+  - first:
+      213: 7197325568975060260
+    second: Floor_Tile_Corner_2
+  - first:
+      213: 8768930033323660377
+    second: Floor_Tile_Edge_Clear
+  - first:
+      213: -9009834507662495740
+    second: Floor_Tile_Edge_Motif
+  - first:
+      213: -1436317480202010013
+    second: Floor_Tile_Corner_3
+  - first:
+      213: 4794825534428923502
+    second: Floor_Tile_Center_Clear
+  - first:
+      213: -5522770881262184871
+    second: Floor_Tile_Center_Motif_0
+  - first:
+      213: 5191135808194522131
+    second: Floor_Tile_Center_Motif_1
+  - first:
+      213: -7228342220003534883
+    second: Wall_Front_Clear
+  - first:
+      213: 2871942817773721998
+    second: Wall_Front_Motif
+  - first:
+      213: -6701399062766275538
+    second: Wall_Side_0
+  - first:
+      213: 4194308244654700842
+    second: Wall_Side_1
+  - first:
+      213: -3593890047950178006
+    second: Wall_Side_2
+  - first:
+      213: -8762610738273194808
+    second: Wall_Side_3
+  - first:
+      213: 8251322873277067185
+    second: Floor_Door_Open_Shadow
+  - first:
+      213: 2285446046023988210
+    second: Door_Dual_Top
+  - first:
+      213: 1685653679344758197
+    second: Door_Left_Side
+  - first:
+      213: -5129958085129962503
+    second: Door_Right_Side
+  - first:
+      213: -3906338511387225222
+    second: Door_Right_Front
+  - first:
+      213: 6708751267368334194
+    second: Door_Left_Front
+  - first:
+      213: -7472293895197479623
+    second: Door_Dual_Front
+  - first:
+      213: 8210600143017303746
+    second: Ceiling_Edge_Horizontal_Bottom
+  - first:
+      213: 5916099241596310770
+    second: Ceiling_Edge_Horizontal_Top
+  - first:
+      213: 3298698882169344466
+    second: Ceiling_Edge_Vertical_Right
+  - first:
+      213: -884615505569360170
+    second: Ceiling_Edge_Vertical_Left
+  - first:
+      213: -2967193542468925066
+    second: Ceiling_Corner_Small_Bottom_Right
+  - first:
+      213: 8789737451071636804
+    second: Ceiling_Corner_Small_Bottom_Left
+  - first:
+      213: -543629045809084201
+    second: Ceiling_Corner_Small_Top_Left
+  - first:
+      213: 5584524721813511013
+    second: Ceiling_Corner_Small_Top_Right
+  - first:
+      213: 9042317634224387140
+    second: Ceiling_Corner_Medium_Left_Top
+  - first:
+      213: -5461864283451748972
+    second: Ceiling_Corner_Medium_Right_Top
+  - first:
+      213: -2107866560372977901
+    second: Ceiling_Corner_Medium_Right_Bottom
+  - first:
+      213: -241022480589418388
+    second: Ceiling_Corner_Medium_Left_Bottom
+  - first:
+      213: -6287136655611918320
+    second: Ceiling_Corner_Medium_Top_Left
+  - first:
+      213: 1947616309908307190
+    second: Ceiling_Corner_Medium_Top_Right
+  - first:
+      213: 2222407323172505660
+    second: Ceiling_Corner_Medium_Bottom_Left
+  - first:
+      213: 3339756522653008414
+    second: Ceiling_Corner_Medium_Bottom_Right
+  - first:
+      213: 3360784977083574902
+    second: Ceiling_Corner_Large_Top_Left
+  - first:
+      213: -3725718998792167162
+    second: Ceiling_Corner_Large_Top_Right
+  - first:
+      213: 1312361561166004445
+    second: Ceiling_Corner_Large_Bottom_Left
+  - first:
+      213: 1282193020919352856
+    second: Ceiling_Corner_Large_Bottom_Right
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Carpet_Corner
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983a8ed1bb9efc54fbbd1d964f28e667
+      internalID: 5191135808194522131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Carpet_Edge
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1b189b1efc16bd4b804f43e67a1f428
+      internalID: 1122235858067147950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Carpet_Center_Motif
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c3ba27ae630062438527970bc6b6151
+      internalID: 4645664339591357710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Carpet_Center_Clear
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1505cab2ba0d89e4c8d373b12b0926ef
+      internalID: 2623616011748377771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Small
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9799365ea950334bb629b144c4850d8
+      internalID: 5191135808194522131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Large_Clear
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17bb030e5e8d13741a2a6b03dacb9727
+      internalID: 2509696935364642779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Large_Motif
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf7a7fd4694d7a48bd93d8dd7e5dd59
+      internalID: 6967961974503540815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Corner_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf6939a24cf65124a8fbc3a54df83d49
+      internalID: -5470906199272739189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Corner_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45fa9358615818249a89bdcca5f1af2a
+      internalID: 5425981393197179040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Medium
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02149b1669ec2c642b862cc5ff52bdaf
+      internalID: -1585590745476335621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Corner_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 465f6e2efaf69e6439b015a7c35d067f
+      internalID: 7197325568975060260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Edge_Clear
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80f5e9d937bd26140b0b3b425771c733
+      internalID: 8768930033323660377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Edge_Motif
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dffaf76eda52a14aa50351359c57753
+      internalID: -9009834507662495740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Corner_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1e2f4b780ea674c8fe771cc78d0015
+      internalID: -1436317480202010013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Center_Clear
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ee6a1b7d37f8b478775c2dce8f90c4
+      internalID: 4794825534428923502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Center_Motif_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1529d31972d76a24f9079f9535b41a52
+      internalID: -5522770881262184871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Tile_Center_Motif_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fa1c1b0d1970c241819fc223e22a7b4
+      internalID: 5191135808194522131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32813d0c1a5eb4e4897f50d2b633b36a
+      internalID: 7632301718608991310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Front_Clear
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716e35ad48e272d4f8ec20c854a94f03
+      internalID: -7228342220003534883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Front_Motif
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d7ae3ba4ed721b40bbc5902d03e8ab4
+      internalID: 2871942817773721998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Side_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87db210a00f45114492bc6de35877278
+      internalID: -6701399062766275538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Side_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d08ee2f86ed799b44a5936b4465c9dcd
+      internalID: 4194308244654700842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Side_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dde94765ad8b8304a97bb6e6e8d95c74
+      internalID: -3593890047950178006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Side_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23048a058cc3fdc4eafb0c15bb8b4dbd
+      internalID: -8762610738273194808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_Door_Open_Shadow
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 22
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d43348ad7e0012b489c7382b7c71bb46
+      internalID: 8251322873277067185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Dual_Top
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 222
+        width: 7
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b14774993a98bbb46be7d093a3d1a90f
+      internalID: 2285446046023988210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Left_Side
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 206
+        width: 9
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce7bb127fa6e1c84e92e0069d1eccfe8
+      internalID: 1685653679344758197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Right_Side
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 206
+        width: 9
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc711f125f8bdc64b88add53a152af44
+      internalID: -5129958085129962503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Right_Front
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 95
+        width: 18
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc3fa9454cb8996408f399d9b7ed5ca6
+      internalID: -3906338511387225222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Left_Front
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 53
+        width: 18
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddf043f34f7993a4a83654ffb6963b90
+      internalID: 6708751267368334194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_Dual_Front
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 165
+        width: 34
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c6c26f4a6472e148a99a4d8f5585f24
+      internalID: -7472293895197479623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Edge_Horizontal_Bottom
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd6e297950682c642bb0701ea0a3e0ca
+      internalID: 8210600143017303746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Edge_Horizontal_Top
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 201
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcfc58c04a30cba44901df3d513523a9
+      internalID: 5916099241596310770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Edge_Vertical_Right
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5647845f8c74eb94f92b55aa3d959ed1
+      internalID: 3298698882169344466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Edge_Vertical_Left
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 160
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e9a460c4e15414189b4b646bb04695
+      internalID: -884615505569360170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Small_Bottom_Right
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 213
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b65677cfda765d40b8baa95d72454dc
+      internalID: -2967193542468925066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Small_Bottom_Left
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 213
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 795a9320f00d84a4ab2ba5359fbec6ed
+      internalID: 8789737451071636804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Small_Top_Left
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 223
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e616456a03cf949ac9bcbae1590a4f
+      internalID: -543629045809084201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Small_Top_Right
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 223
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae72c454e0af08b49850ff05788ba992
+      internalID: 5584524721813511013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Left_Top
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98da4a63a54c783408aa54bac641ea59
+      internalID: 9042317634224387140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Right_Top
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a644adf71aecc4d4c9d2bb59fce5e0ae
+      internalID: -5461864283451748972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Right_Bottom
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 63
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66401d5740e3b204e87b69f39e2617f0
+      internalID: -2107866560372977901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Left_Bottom
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 63
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 321f4188b236bc241a0dc206793ccf4d
+      internalID: -241022480589418388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Top_Left
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 942987cd9379012449b5a9dcf882b47b
+      internalID: -6287136655611918320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Top_Right
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fa3876fb42576419824e9fb8bb3c86
+      internalID: 1947616309908307190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Bottom_Left
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 63
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8493230deb719964c9f41436656d12b9
+      internalID: 2222407323172505660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Medium_Bottom_Right
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 63
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 872f06154d8d4514eb6a9e3b73b05035
+      internalID: 3339756522653008414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Large_Top_Left
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 896f5c11d5b790748943b7a790a3b90c
+      internalID: 3360784977083574902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Large_Top_Right
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd43e3cd5b80d84ab7fc61584f72a10
+      internalID: -3725718998792167162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Large_Bottom_Left
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1042e314a025bd44a405ef1079233ec
+      internalID: 1312361561166004445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ceiling_Corner_Large_Bottom_Right
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf5df949ae8adf4687d714fa6ff9785
+      internalID: 1282193020919352856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ece8c01c835614942b26f40a1d5314c8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
